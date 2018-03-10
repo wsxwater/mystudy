@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+          var map=new Map();
+          //map.set(name,value);
+
+          map.set('a','apple');
+          map.set('b','banana');
+          map.set('c','cat');
+
+          console.log(map);   //{"a" => "apple", "b" => "banana", "c" => "cat"}
+
+          console.log(map.a);   //undefined  不可以这样获取
+          console.log(map.get('a'));
+          
+
+          map.delete('c'); 
+          console.log(map);   //{"a" => "apple", "b" => "banana"}
+
+
+          for (var name of map) {
+               console.log(name)
+          }
+
+          for (var name of map.entries()) {
+               console.log(name)
+          }
+
+          for (var [key,value] of map) {
+               console.log(key,value)
+          }
+
+          //只循环key
+          for (var k of map.keys()) {
+               console.log(k)
+          }
+
+          //只循环value
+          for (var val of map.values()) {
+             console.log(val)
+          }
+
+
+
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

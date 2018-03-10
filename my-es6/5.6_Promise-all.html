@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+	    var p1=Promise.resolve(3);
+	    var p2=Promise.reject(555);
+
+	    Promise.all([true,p1,p2]).then(function (val) {
+	    	console.log('成功了'+val)
+	    },function (val) {
+	    	console.log('错误了'+val)
+	    });
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,91 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        .container{width:500px;height: 250px;background-color: #eee;margin: 0 auto; }
+        path{stroke: rgb(240, 160, 106);stroke-width: 2px;fill: none;}
+
+        path.domain ,
+        .tick line {
+          fill: none;
+          stroke: #333;
+          stroke-width: 1px;
+          shape-rendering: crispEdges;
+        }
+        .text {
+          font: 14px sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+	<script type="text/javascript" src="d3.min.js"></script>
+
+	<script>
+	    var width=500,height=250,
+          margin={left:50,top:30,right:50,bottom:20},
+          g_width=width-margin.left-margin.right,
+          g_height=height-margin.top-margin.bottom;
+
+      var svg=d3.select('.container')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height);
+      var data=[1,3,5,7,8,4,3,7];          
+      var scale_x = d3.scaleLinear() 
+              .domain([0, data.length-1])
+              .range([0,g_width]);   
+      var scale_y = d3.scaleLinear() 
+              .domain([0,d3.max(data)])
+              .range([g_height,0]);   
+      
+
+      var g=svg.append('g').attr('transform', 'translate('+margin.left+','+(margin.top)+')');  
+      
+
+      var line=d3.line()
+                 .x(function (d,i) {
+                   return scale_x(i);
+                 })
+                 .y(function (d) {
+                   return scale_y(d);
+                 }).curve(d3.curveCardinal);
+
+      var path=g.append('path').attr('d', line(data));    
+
+
+      //var x_axis = d3.svg.axis().scale(scale_x),
+      //y_axis = d3.svg.axis().scale(scale_y).orient("left")
+      
+      
+      //g.call(x_axis)
+      //.attr("transform","translate(0,"+g_height+")")
+
+      
+      /*g.call(y_axis)
+      .append("text")
+      .text("price(￥)")
+      .attr("transform","rotate(-90)")//text旋转-90°
+      .attr("text-anchor","end")//字体尾部对齐
+      .attr("dy","1em")//沿y轴平移一个字体的大小  */ 
+
+      var x_axis=d3.axisBottom(scale_x);
+      var y_axis=d3.axisLeft(scale_y);
+
+
+      svg.append("g").attr('transform', 'translate('+margin.left+','+(g_height+6)+')').call(x_axis); 
+      svg.append("g").attr('transform', 'translate('+margin.left+',6)').call(y_axis).append("text")
+                     .text("price($)")
+                     .attr("transform","rotate(-90)")//text旋转-90°
+                     .attr("text-anchor","end")//字体尾部对齐
+                     .attr("dy","20")//沿y轴平移一个字体的大小; 
+                     .attr('class', 'text')
+                     .attr('fill', '#000');
+
+
+      
+  </script> 
+</body>
+</html>

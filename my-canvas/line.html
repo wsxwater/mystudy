@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>线条</title>
+</head>
+<body>
+	<canvas id="canvas" style="border:1px solid #CCC;display: block;margin:30px auto;">当前浏览器不支持canvas，请更换浏览器再试 >o< 。</canvas>
+    <script type="text/javascript">
+    	window.onload=function(){
+			var canvas=document.getElementById('canvas');
+			var context=canvas.getContext('2d');
+            canvas.width=1024;
+            canvas.height=768;
+            
+            context.lineWidth=10;
+            context.strokeStyle="#3a9999";
+
+            context.beginPath();
+            context.moveTo(100,100);
+            context.lineTo(700,100);
+            context.lineTo(900,220);
+            context.lineTo(700,340);
+            context.lineTo(100,340);
+            //context.lineCap="round" //square butt(default)==>线头图形
+            context.closePath();
+            context.stroke();
+
+            context.beginPath();
+            context.fillStyle="#ddd";
+            context.rect(150,150,100,100);
+            context.fill();
+            context.stroke();
+
+            context.beginPath();
+            context.fillStyle="rgba(255,255,0,0.5)";
+            context.rect(200,200,100,100);
+            context.fill();
+            context.stroke();
+
+
+            context.beginPath();
+            context.strokeStyle = 'red';
+            context.beginPath();
+            //context.setLineDash([10, 20, 30, 40]);
+            context.setLineDash([10]);
+            //context.setLineDash([0]);
+            context.moveTo(20, 420);
+            context.lineTo(380, 420);
+            context.stroke();
+            
+            
+    	}
+    </script>
+</body>
+</html>

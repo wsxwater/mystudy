@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>自制贝塞尔曲线拉伸</title>
+        <style type="text/css">
+            *{
+                padding: 0;
+                margin: 0;
+            }
+            #canvas{
+                border: 1px solid saddlebrown;
+                box-shadow: 2px 3px 4px 4px gray;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="600" height="700">
+            您的浏览器版本太低,请升级后在使用
+        </canvas>
+        <canvas id="canvasWater" style="display: none;" width="300" height="200"></canvas>
+    </body>
+    <script type="text/javascript">
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var canvasWater = document.getElementById('canvasWater');
+        var contextWater = canvasWater.getContext('2d');
+        var x1Sb = 0;//用于鼠标移动时的x值
+        var y1Sb = 0;//用于鼠标移动时的y值
+        var x2Sb = 0;//用于鼠标移动时的x值
+        var y2Sb = 0;//用于鼠标移动时的y值
+//      红色小球
+        var redBall = {
+            x:100,
+            y:200,
+            r:15,
+            draw:function(){
+                context.beginPath();
+                context.arc(this.x,this.y,this.r,0,Math.PI*2,false);
+                context.fillStyle ='red';
+                context.fill();
+            }
+        }
+//      青色小球
+        var cyanBall = {
+            x:500,
+            y:600,
+            r:15,
+            draw:function(){
+                context.beginPath();
+                context.arc(this.x,this.y,this.r,0,Math.PI*2,false);
+                context.fillStyle ='darkcyan';
+                context.fill();
+            }
+        }
+        function noChange (){
+            context.beginPath();
+            context.moveTo(100,600);
+            context.lineTo(100,200);
+            context.closePath();
+            context.lineWidth = 1;
+            context.strokeStyle = 'black';
+            context.stroke();
+    //      -------------------
+            context.beginPath();
+            context.moveTo(100,600);
+            context.lineTo(500,600);
+            context.closePath();
+            context.lineWidth = 1;
+            context.strokeStyle = 'black';
+            context.stroke();
+    //      ----------------------
+            context.beginPath();
+            context.arc(100,600,15,0,2*Math.PI,false);
+            context.closePath();
+            context.fillStyle = 'white';
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = 'gray';
+            context.stroke();
+    //      ------------
+            context.beginPath();
+            context.arc(500,200,15,0,2*Math.PI,false);
+            context.closePath();
+            context.fillStyle = 'white';
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = 'gray';
+            context.stroke();
+        }
+        function longLine (){
+//      ----------------------
+            context.beginPath();
+            context.moveTo(100,600);
+            context.lineTo(500,200);
+            context.closePath();
+            context.lineWidth = 5;
+            context.lineCap = 'round';
+            context.strokeStyle = 'lightgray';
+            context.stroke();
+        }
+//      ------------------
+        noChange();
+        redBall.draw();
+        cyanBall.draw();
+//      建立画红线的函数
+        function drawRed (xR,yR){
+            context.beginPath();
+            context.moveTo(100,600);
+            context.lineTo(xR,yR);
+            context.closePath();
+            context.strokeStyle = 'lightgray';
+            context.stroke();
+        }
+//      建立画青线的函数
+        function drawCyan (xC,yC){
+            context.beginPath();
+            context.moveTo(500,200);
+            context.lineTo(xC,yC);
+            context.closePath();
+            context.strokeStyle = 'lightgray';
+            context.stroke();
+        }
+//      建立画贝塞尔曲线的函数
+        function drawbsr (x1,y1,x2,y2){
+            context.beginPath();
+            context.moveTo(100,600);
+            context.bezierCurveTo(x1,y1,x2,y2,500,200);
+//          context.closePath();
+            context.lineWidth = 8;
+            context.strokeStyle = 'black';
+            context.stroke();
+            console.log(4);
+        }
+
+        noChange();
+        var xB1S = 100;
+        var yB1S = 200;
+        var xB2S = 500;
+        var yB2S = 600;
+        canvas.onmousedown = function(e){
+            var event = window.event  e;
+            var xd = event.clientX;
+            var yd = event.clientY;
+//          如果点击的是红色圆
+            if(xd>=redBall.x-redBall.r&&xd<=redBall.x+redBall.r&&yd>=redBall.y-redBall.r&&yd<=redBall.y+redBall.r){
+                canvas.onmousemove = function(e){
+                    context.clearRect(0,0,canvas.width,canvas.height);
+                    var event = window.event  e;
+                    x1Sb = event.clientX;
+                    y1Sb = event.clientY;
+                    redBall.x = x1Sb;
+                    redBall.y = y1Sb;
+                    xB1S = x1Sb;
+                    yB1S = y1Sb;
+                    drawRed(x1Sb,y1Sb);
+
+                    drawCyan(xB2S,yB2S);
+
+                    longLine();
+                    drawbsr(x1Sb,y1Sb,xB2S,yB2S);
+                    noChange();
+                    redBall.draw();
+                    cyanBall.draw();
+                    context.drawImage(canvasWater,0,0,300,200,200,550,300,200);
+//                  console.log(x1Sb,y1Sb,xB2S,yB2S);
+//                  console.log(1);
+                }
+            }
+//          如果点击的是青色圆
+        if(xd>=cyanBall.x-cyanBall.r&&xd<=cyanBall.x+cyanBall.r&&yd>=cyanBall.y-cyanBall.r&&yd<=cyanBall.y+cyanBall.r){
+            canvas.onmousemove = function(e){
+                context.clearRect(0,0,canvas.width,canvas.height);
+                var event = window.event  e;
+                x2Sb = event.clientX;
+                y2Sb = event.clientY;
+                cyanBall.x = x2Sb;
+                cyanBall.y =y2Sb;
+                xB2S = x2Sb;
+                yB2S = y2Sb;
+                drawRed(xB1S,yB1S);
+                drawCyan(x2Sb,y2Sb);
+                longLine();
+                drawbsr(xB1S,yB1S,x2Sb,y2Sb);
+                noChange();
+                redBall.draw();
+                cyanBall.draw();
+//              console.log(x2Sb,y2Sb,xB1S,yB1S);
+                context.drawImage(canvasWater,0,0,300,200,200,550,300,200);
+                }
+            }
+        }
+//      鼠标松开事件
+        canvas.onmouseup = function(e){
+                    canvas.onmousemove = null;
+            }   
+//添加水印
+        contextWater.beginPath();
+//      创建线性渐变
+        var linear = contextWater.createLinearGradient(100,100,300,100);
+//      设置过程和颜色
+        linear.addColorStop(0,'blue');
+        linear.addColorStop(0.5,'purple');
+        linear.addColorStop(1,'cyan');
+        contextWater.font = 'italic 30px 行楷';
+
+        contextWater.strokeStyle = linear;
+        contextWater.strokeText('-o-小涛涛作品-.-',100,100);
+        context.drawImage(canvasWater,0,0,300,200,200,550,300,200);
+    </script>
+</html>

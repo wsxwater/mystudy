@@ -1,0 +1,116 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    	*{margin: 0;padding: 0;}
+        .container{width: 660px;margin:0 auto;}
+        table{border-collapse: collapse;border:1px solid #CCC;text-align: center;width: 100%;table-layout:fixed;word-wrap:break-word;}
+        table tr td,table tr th{border-right: 1px solid #CCC;border-bottom: 1px solid #CCC;padding: 10px 5px;}
+        table tr td:last-child{border-right: none;}
+        table tr:last-child td{border-bottom: none;}
+        table tr.odd{background: #EFEFEF;}
+        table tr.even{background: #FCFCFC;}
+        table tr.selected{background: #5DCB0C;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>姓名</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" name="checks" checked="checked" /></td>
+                        <td>张01</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="checks" /></td>
+                        <td>张02</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="checks" /></td>
+                        <td>张03</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="checks" /></td>
+                        <td>张04</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="checks" /></td>
+                        <td>张05</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="checks" /></td>
+                        <td>张06</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="checks" /></td>
+                        <td>张07</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="checks" /></td>
+                        <td>张08</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div id="list"></div>
+    </div>
+    
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+        ;(function ($) {
+        	$.fn.extend({
+        		'alertBgColor':function (options) {
+                        //设置默认值
+                        options=$.extend({
+                            odd:'odd',
+                            even:'even',
+                            selected:'selected',
+                        },options);
+
+                        $('tbody tr:odd',this).addClass(options.odd);
+                        $('tbody tr:even',this).addClass(options.even);
+                        $('tbody',this).on('click','tr',function () {
+                            var hasSelected=$(this).hasClass(options.selected);
+                            $(this)[hasSelected?'removeClass':'addClass'](options.selected)
+                                   .find(':checkbox').prop('checked',!hasSelected);
+                        });
+                        $('tbody tr:has(:checked)',this).addClass(options.selected);
+                        return this;  
+                }  
+        	});
+        })(jQuery);
+
+
+        $(function () {
+            $('table').alertBgColor();
+            /*$('table tr:odd').addClass('odd');
+            $('table tr:even').addClass('even');
+
+            $('table tbody tr').on('click',function () {
+                var hasSelected=$(this).hasClass('selected');
+                $(this)[hasSelected?'removeClass':'addClass']('selected')
+                       .find(':checkbox').prop('checked',!hasSelected);
+            });
+
+            $('table tr:has(:checked)').addClass('selected');*/
+
+
+            var arr=[];
+            for (var i = 0; i < 1000; i++) {
+                arr[i]='<li>'+i+'</li>';
+            }
+
+            $('#list').html(arr.join(''));
+        })
+    </script>
+</body>
+</html>

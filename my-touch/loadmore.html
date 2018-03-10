@@ -1,0 +1,103 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;} 
+		#items{position:absolute; z-index:1;top:0; bottom:0; left:0;right: 0;width:100%;background:#555;overflow-y:auto;}
+		li{list-style: none;}
+		#items li{font-size: 16px;line-height: 1;padding: 10px;border-bottom: 1px solid #CCC;background-color: #eee;position: relative;overflow: hidden;height:40px;line-height:40px;}
+	</style>
+</head>
+<body>
+    <ul id="items">
+    	<li>我是列表01</li>
+    	<li>我是列表02</li>
+    	<li>我是列表03</li>
+    	<li>我是列表04</li>
+    	<li>我是列表05</li>
+    	<li>我是列表06</li>
+    	<li>我是列表07</li>
+    	<li>我是列表08</li>
+    	<li>我是列表09</li>
+    	<li>我是列表10</li>
+    	<li>我是列表11</li>
+    	<li>我是列表12</li>
+    	<li>我是列表13</li>
+    	<li>我是列表14</li>
+    	<li>我是列表15</li>
+    	<li>我是列表16</li>
+    	<li>我是列表17</li>
+    	<li>我是列表18</li>
+    	<li>我是列表19</li>
+    	<li>我是列表20</li>
+    </ul>
+
+    <script type="text/javascript" src="jQuery2.1.1.js"></script>
+	<script type="text/javascript">
+		/**
+		 * Created by libtop on 17/3/14.
+		 */
+
+		// 加载刷新。
+		/*function refresh(refresh,loadmore) {
+		  $(window).scroll(function(){
+		    console.log('正在滑动f');
+
+		    var scrollTop = $(this).scrollTop();    //滚动条距离顶部的高度
+		    var scrollHeight = $(document).height();   //当前页面的总高度
+		    var clientHeight = $(this).height();    //当前可视的页面高度
+		    // console.log("top:"+scrollTop+",doc:"+scrollHeight+",client:"+clientHeight);
+		    if(scrollTop + clientHeight >= scrollHeight){   //距离顶部+当前高度 >=文档总高度 即代表滑动到底部 count++;         //每次滑动count加1
+		      // filterData(serviceTypeId,industryId,cityId,count); //调用筛选方法，count为当前分页数
+		      console.log('下拉');
+
+		      if(loadmore){
+		        loadmore();
+		      }
+		    }else if(scrollTop<=0){
+		      //滚动条距离顶部的高度小于等于0 TODO
+		      //alert("下拉刷新，要在这调用啥方法？");
+		      
+		      console.log('上拉');
+		      if(refresh){
+		        refresh();
+		      }
+
+		    }
+
+		  });
+
+		}
+
+
+		//调用
+		refresh(fn1,fn2);*/
+
+$(function () {
+	
+		$("#items").scroll(function(){  
+			var $this =$(this),  
+			viewH =$(this).height(),//可见高度  
+			contentH =$(this).get(0).scrollHeight,//内容高度  
+			scrollTop =$(this).scrollTop();//滚动高度 
+			//if(contentH - viewH - scrollTop <= 100) { //到达底部100px时,加载新内容  
+			if(scrollTop/(contentH -viewH)>=0.95){ //到达底部100px时,加载新内容  
+			   // 这里加载数据..  
+			   $this.append('<li>我是加载列表</li>');
+			   /*$(this).load('loadMoreData.html');*/
+			}  
+		});  
+
+});
+
+	</script>
+</body>
+</html>

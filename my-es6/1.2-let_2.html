@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+		/**
+         *let封闭空间 
+         */
+        (function(){
+           var a=10;
+           console.log(a);  //10
+        })();
+        //console.log(a);  //Uncaught ReferenceError: a is not defined
+
+
+
+        {
+            let a=12;
+            console.log(a)
+        }
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

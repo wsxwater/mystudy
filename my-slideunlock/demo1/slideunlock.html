@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+    <title>jQuery拖拽滑动验证码插件 slideunlock.js </title>
+
+    <!-- <link href="jquery.slideunlock/slide-unlock.css" rel="stylesheet"> -->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body { overflow-x: hidden;font-family: 'Microsoft Yahei', serif;}
+        .container{margin: 0 auto;min-width: 320px;max-width: 640px;}
+        .card {position: relative;background-color: #fff;user-select: none;-moz-user-select: none;-webkit-user-select: none;}
+        .card .card-image {position: relative;}
+        .card .card-image img {display: block;position: relative;left: 0;right: 0;top: 0;bottom: 0;width: 100%;}
+        
+        
+        .slide-list{position: absolute;top:64.8%;bottom: 27%;right: 9.0625%;left: 9.0625%;}
+        .slide-item{position: absolute;top: 0;bottom: 0;width: 19.46564885496183%;background:url('img/slide_pt.png') center center /100% 100% no-repeat;}
+        #slider {border-radius: 20px;
+          background-color: #dae2d0;text-align: center;position: absolute;right: 9.0625%;left: 9.0625%;height: 40px;bottom: 20px;}
+
+        #slider_bg {position: absolute;left: 0;top: 0;height: 100%;background-color: #7AC23C;z-index: 4;border-radius:20px 0 0  20px;}
+
+        #label {width: 50px;height: 50px;position: absolute;left: 0;top: -5px;background: #fff;z-index: 6;cursor: move;background: url('img/btn_slide2.png') center center /100% 100% no-repeat;}
+
+        #labelTip {position: absolute;left: 0;width: 100%;height: 100%;font-size: 13px;color: #787878;line-height: 38px;text-align: center;z-index: 5;}
+
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="card">
+      <div class="card-image">
+          <img src="img/qb_slide171213_2_03.jpg">
+          
+              <div class="slide-list">
+                  <div class="slide-item"></div>
+              </div>
+
+              <div id="slider">
+                  <div id="slider_bg"></div>
+                  <span id="label"></span>
+                  <span id="labelTip">拖动滑块验证</span> 
+              </div>
+          
+      </div>
+    </div>
+</div>
+
+
+  <script src="../jquery/jquery.min.js"></script>
+  <script src="jquery.slideunlock/my.slideunlock.js"></script> 
+  <script>
+    $(function () {
+        var slider = new SliderUnlock("#slider",
+          {successLabelTip : "验证成功"
+        },function(){
+    				//alert("验证成功,即将跳转至百度");
+            //window.location.href="http://www.baidu.com"
+          }
+        );
+
+        slider.init();
+
+        $("#reset-btn").on('click', function(){
+            slider.reset();
+        });
+    });
+
+    /*$(function () {
+           var slider = new SliderUnlock(".slideunlock-slider", {
+               labelTip: "滑动解锁",
+               successLabelTip: "解锁成功",
+               duration: 200   // 动画效果执行时间，默认200ms
+           }, function(){
+               alert('success');
+           }, function(){
+               $(".warn").text("index:" + slider.index + "， max:" + slider.max + ",lableIndex:" + slider.lableIndex + ",value:" + $(".slideunlock-lockable").val() + " date:" + new Date().getUTCDate());
+           });
+           slider.init();
+           $("#reset-btn").on('click', function(){
+               slider.reset();
+           });
+       })*/
+</script> 
+
+
+</body></html>

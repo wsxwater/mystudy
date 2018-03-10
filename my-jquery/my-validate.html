@@ -1,0 +1,190 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+	<style type="text/css">
+	    .input-field .field-control{} 
+		.input-field.has-error .field-control{border-color: #F44336;}
+		.input-field.has-success .field-control{border-color: #0b9e24;}
+		.input-field.has-error .help-block{color:#F44336;}
+		.input-field.has-success .help-block{color: #0b9e24;}
+
+        
+        .modal-alert .close-alert{float: right;font-size: 20px;position: relative;top:-4px;}
+        .modal-alert .modal-title{padding: 10px;border-bottom: 1px solid #CCC;min-height: 18px;}
+        .modal-alert{width: 280px;height: 110px;border: 1px solid #CCC;background-color:#FFF;position: absolute;top:50%;left: 50%;-webkit-box-shadow:0 0 5px #999;box-shadow:0 0 5px #999;-webkit-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);display: none;z-index: 1000;}
+        .modal-alert .modal-body{padding: 10px;}
+
+	</style>
+</head>
+<body>
+    <form>
+    	<div class="input-field">
+    	  <label class="control-label">反馈类型:</label>
+          <select check-type="required" class="field-control">
+            <option value="" disabled selected>反馈类型</option>
+            <option value="1">新功能</option>
+            <option value="2">界面意见</option>
+            <option value="3">操作意见</option>
+            <option value="4">功能意见</option>
+            <option value="5">其他</option>
+          </select>
+        </div><!-- input-field end -->
+        <div class="input-field" group-check-type="required" group-element="checkbox" group-relation="or" required-message="请选择销售模式">
+            <div class="control-label">销售模式</div>
+            <div>
+                <input type="checkbox" id="filled3" />
+                <label for="filled3">零售</label>
+            </div>
+            <div>
+                <input type="checkbox"  id="filled4" />
+                <label for="filled4">批发/加工</label>
+            </div>
+        </div>
+        	
+        <div class="input-field" group-check-type="required" group-element="radio" group-relation="or">
+            <div class="control-label">性别</div>
+            <div>
+                <input type="radio" name="sex" id="male" />
+                <label for="male">男</label>
+            </div>
+            <div>
+                <input type="radio" name="sex" id="female" />
+                <label for="female">女</label>
+            </div>
+        </div>
+        
+        <div class="input-field">
+            <label class="control-label">时间：</label>
+            <select class="field-control" name="selHour" id="selectHour" check-type="required" required-message="请选择时间">
+                <option value="时" disabled selected>时</option>
+                <option value="00">00</option>
+                <option value="01">01</option>
+            </select>
+            <select class="field-control" name="selMinutes" id="selectMinutes" check-type="required" required-message="请选择时间">
+                <option value="分" disabled selected>分</option>
+                <option value="00">00</option>
+                <option value="01">01</option>
+            </select>
+        </div>
+
+        <div class="input-field">
+          <label class="control-label" for="textarea1">意见描述：</label>
+          <textarea id="textarea1" class="field-control" check-type="required"></textarea>
+        </div><!-- input-field end -->
+        <div class="input-field">
+            <label class="control-label" for="email">邮箱：</label>
+            <input type="text" id="email" class="field-control" check-type="required mail" required-message="请输入内容">
+        </div>
+    	<div class="input-field">
+    	    <label class="control-label" for="phone">手机：</label>
+    	    <input type="text" id="phone" class="field-control" check-type="required mobile">
+    	</div>
+    	<div class="input-field">
+    		<a href="#" class="nav-btn" onclick="Save()">提交</a>
+    	</div>
+    </form>
+
+    <div id="modalAlert1" class="modal-alert">
+        <div class="modal-shadow"></div>  
+        <div class="modal-title">
+            <span class="titcon"></span><span class="close-alert">&otimes;</span>
+        </div>
+        <div class="modal-body"></div>
+    </div>
+
+    
+
+    <script src="jQuery2.1.1.js"></script>
+	<script type="text/javascript" src="my-validate.js"></script>
+	<script type="text/javascript">
+        ;(function ($) {
+            $.fn.extend({
+                'alertModal':function (options) {
+                        options=$.extend({
+                            title:undefined,
+                            msg:undefined
+                        },options);
+
+                        var $modal=$(this);
+                        $modal.slideDown()
+                               .find('.titcon').html(options.title)
+                               .parent().parent().find('.modal-body').html(options.msg);
+
+                        $modal.on('click','.close-alert',function() {
+                            $(this).parent().parent().slideUp();
+                        });
+
+                        return this;  
+                }  
+            });
+            $.fn.extend({
+                'closeModal':function () {
+                        var $modal=$(this);
+                        $modal.slideUp();
+                        return this;  
+                }  
+            });
+        })(jQuery);    
+
+        $(function(){
+        	    $("form").validation();//表单验证
+
+        	    /*$('#selectMinutes').hide();
+                $('#selectHour').change(function () {
+                	if($(this).find('option').not(':first-child').is(':selected')){
+                        $('#selectMinutes').show();
+                	}
+                })*/
+
+
+        	    /*window.alert = function (id,title,msg) {
+                    $(id).slideDown().find('.titcon').html(title).parents(id).find('.modal-body').html(msg);
+
+                    $(id).on('click','.close-alert',function() {
+                        $(this).parents(id).slideUp();
+                    });
+
+                }
+                alert('#modalAlert1','标题吖标题吖标题吖','成功');*/
+
+                $('#modalAlert1').alertModal({
+                    title:'标题吖标题吖标题吖',
+                    msg:'成功'
+                }); 
+
+                /*setTimeout(function () {
+                    $('#modalAlert1').closeModal()
+                },3000)*/
+        })
+
+        /*光标定位*/
+        function focusOnFirst(){
+            for (var i = 0; i < document.forms[0].elements.length; i++) {
+                var oField=document.forms[0].elements[i];
+                if(oField.type!="hidden" && (oField.type=="textarea" || oField.type=="text")){
+                      oField.focus();
+                      return;
+                } 
+            } 
+        }
+        /*光标定位*/
+
+        function Save(){
+          if($("form").valid({firstErrorElem:true})){//表单验证成功
+            $('#modalAlert1').alertModal({
+                title:'标题吖标题吖标题吖',
+                msg:'成功'
+            }); 
+          }
+        } 
+	</script>
+</body>
+</html>

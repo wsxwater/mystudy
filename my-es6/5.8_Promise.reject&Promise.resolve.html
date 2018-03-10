@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+	    
+	    Promise.reject('这是错误信息').then(function() {
+	    	
+	    },function (err) {
+	    	console.log(err)
+	    });
+
+
+	    Promise.resolve('这是正确信息').then(function(val){
+	    	console.log(val);
+	    },function (err) {
+	    	console.log(err)
+	    });
+
+
+	    var p1=Promise.resolve(3);
+	    var p2=Promise.resolve(p1);
+
+	    p2.then(function(val){
+	    	console.log(val);
+	    });
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

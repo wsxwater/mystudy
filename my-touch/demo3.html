@@ -1,0 +1,144 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>touch</title>
+	<style type="text/css">
+	    *{margin: 0;padding: 0;} 
+	    li{list-style: none;}
+	    a{text-decoration: none;}
+		.touchpad{width: 100%;height: 300px;background-color: #eee;border: 1px solid #ccc;line-height: 300px;font-size: 30px;text-align: center;position: relative;}
+        .ball{width: 20px;height: 20px;border-radius: 50%;background-color: #36C5F0;-webkit-box-shadow: 0 0 5px #ccc;
+        box-shadow: 0 0 5px #ccc;position: absolute;display: none;}   
+        #desc{margin:10px 0;height: 30px;}
+	</style>
+</head>
+<body>
+	<p id="desc"></p>
+	<div class="touchpad" id="touchPad">触摸板</div>
+	<div id="ball" class="ball"></div>
+	<script type="text/javascript" src="zepto.js"></script>
+	<script type="text/javascript">
+		var touchPad=document.querySelector('#touchPad'),
+			ball=document.querySelector('#ball'),
+			desc=document.querySelector('#desc');
+
+        /*获取touch的点（兼容mouse）*/
+        var getPos=function (e) {
+            var touches=e.touches;
+            if (touches && touches[0]) {
+                return {x:e.touches[0].clientX,
+                        y:e.touches[0].clientY};
+            }
+            return {x:e.clientX,
+                    y:e.clientY};
+        }
+
+        /**
+         * 计算两点的距离:
+         * Math.sqrt(4)=2;
+         * p1,p2两点坐标分别记为(p1.x-p1.y),(p2.x-p2.y)
+         * 公式：p1p2的绝对值=Math.sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y))
+         */
+        var getDist=function (p1,p2) {
+            if (!p1 || !p2) return 0;
+            return Math.sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
+        }; 
+
+        /**
+         * 计算两点所成的角度
+         * 设直线AB的角度为C,tanC=(y2-y1)/(x2-x1),求出tanC,然后算tan的反函数就得到C了.
+         * atan2(y,x)   返回从 x 轴到点 (x,y) 的角度（介于 -PI/2 与 PI/2 弧度之间）。
+         */
+        var getAngle=function (p1,p2) {
+            var r=Math.atan2((p2.y-p1.y),(p2.x-p1.x));
+            var a=r*180/Math.PI;
+            return a;
+        };
+
+        /*获取swipe的方向*/
+        var getSwipeDirection=function (p2,p1) {
+            var dx=p2.x-p1.x;
+            var dy=-p2.y+p1.y;
+            var angle=Math.atan2(dy,dx)*180/Math.PI;
+            if (angle<45 && angle>-45) return 'right';
+            if (angle>=45 && angle<135) return 'top';
+            if (angle>=135 || angle<-135) return 'left';
+            if (angle>=-135 && angle<=-45) return 'bottom';
+        };
+
+        /**
+         * 记录touchstart开始时间和位置
+         * Date.now(),返回1970-01-01午夜到现在的时间间隔，用毫秒表述
+         */
+        var startEvtHandler=function (e) {
+            var pos=getPos(e);
+            ball.style.display='block';
+
+            ball.style.left=pos.x+'px';
+            ball.style.top=pos.y+'px';
+            desc.innerHTML=e.type+'(clientX:'+pos.x+'，clientY:'+pos.y+')';
+
+            var touches=e.touches;
+            if (!touches || touches.length==1) {/*touches为空，代表鼠标点击*/
+                point_start=getPos(e);
+                time_start=Date.now();    
+            }
+        };
+
+        var moveEvtHandler=function (e) {
+            var pos=getPos(e);
+            ball.style.left=pos.x+'px';
+            ball.style.top=pos.y+'px';
+
+            point_end=getPos(e);
+            e.preventDefault();
+        };
+
+        /*touchend的touches和targetTouches为空，只偶有changeTouches获取上一次的touchTlist*/
+        var endEvtHandler=function () {
+            ball.style.display='none';
+            time_end=Date.now();
+
+            /*距离和时间都符合*/
+            if (getDist(point_start,point_end)>SWIPE_DISTANCE &&
+                time_start-time_end<SWIPE_TIME) {
+                var dir=getSwipeDirection(point_end,point_start);
+                touchPad.innerHTML='swipe'+dir;
+            }
+        };
+
+
+
+        var SWIPE_DISTANCE=30;  /*移动30px才认为是swipe事件 */
+        var SWIPE_TIME   =500;  /*swipe最大经历时间*/
+        var point_start,
+            point_end,
+            time_start,
+            time_end;
+
+        /*判断是pc或者移动设备*/
+        var startEvt,moveEvt,endEvt;
+        if ('ontouchstart' in window) {
+            startEvt='touchstart';
+            moveEvt ='touchmove';
+            endEvt  ='touchend'; 
+        } else {
+        	startEvt='mousedown';
+        	moveEvt ='mousemove';
+        	endEvt  ='mouseup'; 
+        }
+
+        touchPad.addEventListener(startEvt,startEvtHandler); 
+        touchPad.addEventListener(moveEvt,moveEvtHandler); 
+        touchPad.addEventListener(endEvt,endEvtHandler); 
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+          var arr=['apple','banana','orange','pear'];
+
+          for(let i in arr){
+          	console.log(i);   //1 2 3 4 索引
+          }
+
+          //只循环值
+          for (let i of arr) {
+               console.log(i);   //apple banana orange pear
+          }
+          //循环值和key
+          for (let i of arr.entries()) {
+               console.log(i);   //[0, "apple"]...
+          }
+          //只循环key 
+          for (let i of arr.keys()) {
+          	console.log(i);   //0 1 2 3
+          }
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

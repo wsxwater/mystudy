@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scaleY=1.0, maximum-scaleY=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+	<style type="text/css">
+	 *{margin:0;padding: 0;}
+		.loading{width: 100%;height: 100%;position: fixed;top:0;right: 0;bottom: 0;left: 0;z-index: 100;background: #F5F5F5;}
+		.loading .pic{width: 60px;height: 60px;position: absolute;top:0;right: 0;bottom: 0;left: 0;margin: auto;}
+		.loading .pic i{display:block;background-color: #289664;height: 60px;width: 6px;margin:0 2px;float: left;
+			transform: scaleY(0.4);
+			animation: ani 1.2s ease-out infinite;
+		}
+		.loading .pic i:nth-child(2){animation-delay:0.1s;-webkit-animation-delay:0.1s;}
+		.loading .pic i:nth-child(3){animation-delay:0.2s;-webkit-animation-delay:0.2s;}
+		.loading .pic i:nth-child(4){animation-delay:0.3s;-webkit-animation-delay:0.3s;}
+		.loading .pic i:nth-child(5){animation-delay:0.4s;-webkit-animation-delay:0.4s;}
+		@keyframes ani{
+			0%,40%,100%{transform: scaleY(0.4);-webkit-transform: scaleY(0.4);}
+			60%{transform: scaleY(1);}
+		}
+		@-webkit-keyframes ani{
+			0%,40%,100%{transform: scaleY(0.4);-webkit-transform: scaleY(0.4);}
+			60%{transform: scaleY(1);-webkit-transform: scaleY(1);}
+		}
+
+		img{margin:0;padding: 0;display: block;width:100%;}
+	</style>
+</head>
+<body>
+    <div class="loading">
+    	<div class="pic">
+    		<i></i>
+    		<i></i>
+    		<i></i>
+    		<i></i>
+    		<i></i>
+    	</div>
+    </div>
+	<img src="http://t1.niutuku.com/960/10/10-192927.jpg">
+	<img src="http://t1.niutuku.com/960/10/10-192922.jpg">
+	<img src="http://t1.niutuku.com/960/10/10-192933.jpg">
+    
+
+    <script src="jQuery2.1.1.js"></script>
+    <script type="text/javascript">
+    	document.onreadystatechange=function () {
+    		if(document.readyState=="complete"){
+    			$(".loading").fadeOut();
+    		}
+    	}
+
+
+    	var name="the window";
+
+
+    	var obj={
+    		name:'my object',
+    		getf:function () {
+    			return function () {
+    				var that=this;
+    				return that.name;
+
+    				alert(that)
+    			}
+    			
+    		}
+    	}
+
+    	alert(obj.getf()())
+    </script>
+</body>
+</html>

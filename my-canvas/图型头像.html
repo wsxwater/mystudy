@@ -1,0 +1,76 @@
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>图型头像</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.container{margin: 0 auto;width: 100%;max-width: 640px;min-width: 320px;}
+		canvas{display: block;margin:0 auto;}
+	</style>
+</head>
+<body style="background-color: #000;">
+	<div class="container"><canvas id="canvas">请更换浏览器！</canvas></div>
+	
+	<script type="text/javascript">
+		window.onload=function () {
+			var canvas=document.getElementById('canvas');
+			var context=canvas.getContext('2d');
+			var wrapW=140/*document.querySelector('.container').offsetWidth*/;
+			
+
+			var ratio =2;
+			context.scale(ratio,ratio);
+			canvas.width=wrapW;
+			canvas.height=wrapW;
+			canvas.setAttribute('width',canvas.width*ratio);
+			canvas.setAttribute('height',canvas.height*ratio);
+			canvas.style.cssText='width:'+wrapW+'px;height:'+wrapW+'px';
+            
+
+			var img=new Image();
+			img.src='50c3267364742.jpg';
+
+
+			img.addEventListener('load',function (e) {
+				//console.log(img.width,img.height);
+				var dx=0,
+				    dy=0,
+				    dw=canvas.width,
+				    dh=canvas.height,
+				    uw=img.width,
+				    uh=img.height;
+
+				if (uw/uh<1) {
+				   sx=0;
+				   sy=uh/2-uw/2;
+				   sw=uw;
+				   sh=sw*dh/dw;  
+				} else if(uw/uh>1) {
+				   sy=0;
+				   sx=uw/2-uh/2;
+				   sh=uh;
+				   sw=sh*dw/dh;
+				} else if(uw/uh==1) {
+				   sx=0;
+				   sy=0;
+				   sh=uh;
+				   sw=uw;
+				}
+
+	            //context.drawImage(img, dx, dy, dw, dh);
+				context.drawImage(img,sx,sy,sw,sh,dx,dy, dw, dh);
+			},false);
+
+			context.arc(canvas.width/2,canvas.width/2,canvas.width/2,0,Math.PI*2);
+			context.fill();
+			context.clip();
+		}
+	</script>
+</body>
+</html>

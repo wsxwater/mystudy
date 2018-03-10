@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+		var p=new Promise(function (resolve,reject) {
+			resolve(1);
+		});
+
+		p.then(function (value) {
+			alert('成功了'+value)
+		},function () {
+			alert('失败了')
+		});
+
+		var p1=new Promise(function (resolve,reject) {
+			reject(2);
+		});
+
+		p1.then(function (value) {
+			alert('成功了'+value)
+		},function (value) {
+			alert('失败了'+value)
+		});
+
+		var p2=new Promise(function (resolve,reject) {
+			resolve(1);
+		});
+
+		p2.then(function (value) {
+			console.log(value);
+			return value+1
+		},function () {
+			alert('失败了')
+		}).then(function (value) {
+			console.log(value);
+		});
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

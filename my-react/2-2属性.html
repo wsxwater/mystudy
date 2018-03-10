@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<script type="text/babel">
+	    class Comp extends React.Component{
+            render(){
+                return  <div>
+		                	<h1>hello，ReactJS!</h1><h2>{this.props.name}</h2>
+		                </div>;
+            }
+	    }
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+			ReactDOM.render(
+                <Comp name='s1' />, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <h1 id="div1">
+       	
+       </h1>
+</body>
+</html>

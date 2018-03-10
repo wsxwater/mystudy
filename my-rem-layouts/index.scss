@@ -1,0 +1,105 @@
+@function px2rem($px){
+	$rem:37.5px;
+	@return ($px/$rem)+rem;
+}
+html{background-color: #f8f8f8;}
+.header{
+	height: px2rem(40px);
+	width: 100%;
+	box-sizing: border-box;
+	background-color: #249F87/* red */;
+	padding-left: px2rem(23px);
+	.header-item{
+		font-size: px2rem(16px);
+		/* color: #FFCDCE; */
+		color: #c1ded8;
+		float: left;
+		margin-right: px2rem(20px);
+		line-height: px2rem(40px);
+
+		&:nth-child(2){
+			font-size: px2rem(17px);
+			color: #FFF;
+			font-weight: bold;
+		}
+	}
+}
+
+.banner-content{
+	position: relative;
+	.banner{
+		display: block;
+		width: 100%;
+	    height: px2rem(250px);
+	}
+    .banner-title{
+    	font-size: px2rem(16px);
+    	color: #FFF;
+    	position: absolute;
+    	left: px2rem(15px);
+    	bottom: px2rem(15px);
+    }
+}
+
+.list{
+	/* position: relative; */
+	.list-item{
+		width: 100%;
+		height: px2rem(90px);
+		box-sizing: border-box;
+		padding-left: px2rem(15px);
+		padding-right: px2rem(15px);
+	}
+	.list-item-inner{
+		position: relative;
+		height: 100%;
+		overflow: hidden;
+		border-bottom: px2rem(1px) solid #eee;
+	}
+	.item-img{
+		display: block;
+		float: left;
+		height: px2rem(70px);
+		width: px2rem(95px);
+        object-fit: cover;
+        margin-top: px2rem(10px);
+        margin-right: px2rem(15px);
+	}
+	.item-title{
+		margin-top: px2rem(16px);
+		font-size: px2rem(16px);
+		color: #404040;
+		line-height: px2rem(20px);
+        display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+	}
+
+	.time{
+		position: absolute;
+		font-size: px2rem(12px);
+		left: px2rem(105px);
+		bottom: px2rem(15px);
+		color: #888;
+	}
+	.num{
+		position: absolute;
+		font-size: px2rem(12px);
+		color: #888;
+		right: px2rem(4px);
+		bottom: px2rem(15px);
+        &:before{
+        	content:' ';
+        	display: block;
+        	position: absolute;
+            background-image: url('./imgs/read.png');
+            -webkit-background-size: contain;
+            background-size: contain;
+            width: px2rem(16px);
+            height: px2rem(16px);
+            top:px2rem(-2px);
+            left: px2rem(-23px);
+        }
+	}
+}

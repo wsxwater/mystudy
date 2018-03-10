@@ -1,0 +1,13 @@
+module.exports={
+	entry:'./index.js',
+	output:{
+		filename:'js/[name].bundle.js'
+	},
+	devtool:'source-map',
+	module:{
+		loaders:[
+            {test:/\.css$/,loader:'style-loader!css-loader'}, 
+            {test:/\.js$/,loader:'babel-loader',exclude:/node_modules/}, 
+		]
+	}
+}

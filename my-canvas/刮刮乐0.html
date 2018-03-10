@@ -1,0 +1,142 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+</head>
+<body>
+	<div id="div" style="width:100%;min-height:360px;background-repeat:no-repeat;">
+		<img id="img1" style="display: block;width:30px;position: absolute;top:-999px;left: -999px;" src="http://pic1.win4000.com/wallpaper/f/51c3bb99a21ea.jpg">
+	</div>
+
+
+	<script type="text/javascript">
+		window.onload=function () {
+			
+			function init() {
+			    if (!document.getElementById("myCanvas")) {
+			        var width = "";
+			        var height = "";
+			        var canvas = document.createElement("canvas");
+			        width = document.getElementById("div").offsetWidth;
+			        height = document.getElementById("div").offsetHeight;
+			        canvas.setAttribute("width", width + "px");
+			        canvas.setAttribute("height", height + "px");
+			        canvas.setAttribute("style", "border:1px solid green");
+			        canvas.id = "myCanvas";
+			        document.getElementById("div").appendChild(canvas);
+			    }
+
+			    var myCanvasObject = document.getElementById("myCanvas");
+			    var ctx = myCanvasObject.getContext("2d");
+
+			    //绘制黑色矩形    
+			    ctx.beginPath();
+			    ctx.fillStyle = "#939393";
+			    ctx.rect(0, 0, width, height);
+			    ctx.closePath();
+			    ctx.fill();
+
+			    var isDown = false; //鼠标是否按下标志
+			    var pointerArr = []; //鼠标移动坐标数组
+			    var xPointer = 0;//鼠标当前x坐标
+			    var yPointer = 0;//鼠标当前y坐标
+
+
+			    //pc，移动事件兼容写法
+			    var hastouch = "ontouchstart" in window ? true : false,
+			    tapstart = hastouch ? "touchstart" : "mousedown",
+			    tapmove = hastouch ? "touchmove" : "mousemove",
+			    tapend = hastouch ? "touchend" : "mouseup";
+
+
+			    //鼠标按下
+			    myCanvasObject.addEventListener(tapstart, function(event) {
+			        var e=window.event||event;//2017-12-06
+			        this.style.cursor = "move";
+			        isDown = true;
+			        xPointer = hastouch ? e.targetTouches[0].pageX : e.clientX - this.offsetLeft;
+			        yPointer = hastouch ? e.targetTouches[0].pageY : e.clientY - this.offsetTop;;
+			        pointerArr.push([xPointer, yPointer]);
+			        circleReset(ctx);
+			    });
+
+
+			    //鼠标按下后拖动
+			    myCanvasObject.addEventListener(tapmove, function(event) {
+			        var e=window.event||event;//2017-12-06
+			        if (isDown) {
+			        xPointer = hastouch ? e.targetTouches[0].pageX : e.clientX - this.offsetLeft;;
+			        yPointer = hastouch ? e.targetTouches[0].pageY : e.clientY - this.offsetTop;;
+			        pointerArr.push([xPointer, yPointer]);
+			        circleReset(ctx);
+			        }
+			    });
+
+
+			    //鼠标抬起取消事件
+			    myCanvasObject.addEventListener(tapend, function(event) {
+			        isDown = false;
+			        pointerArr = [];
+			    });
+
+
+			    //圆形橡皮檫
+			    function circleReset(ctx) {
+			        ctx.save();
+			        ctx.beginPath();
+			        ctx.moveTo(pointerArr[0][0], pointerArr[0][1]);
+			        ctx.lineCap = "round";　　 //设置线条两端为圆弧
+			        ctx.lineJoin = "round";　　 //设置线条转折为圆弧
+			        ctx.lineWidth = 60;
+			        ctx.globalCompositeOperation = "destination-out";
+			        if (pointerArr.length == 1) {
+			            ctx.lineTo(pointerArr[0][0] + 1, pointerArr[0][1] + 1);
+			        } else {
+			            for (var i=1;i<pointerArr.length;i++) {
+			                ctx.lineTo(pointerArr[i][0], pointerArr[i][1]);
+			                ctx.moveTo(pointerArr[i][0], pointerArr[i][1]);
+			            }
+			        }
+			        ctx.closePath();
+			        ctx.stroke();
+			        ctx.restore();
+			    }
+			}
+            
+            
+            /*img1.onload=function () {
+            	var imgSrc=img1.getAttribute('src');
+            	console.log(imgSrc);
+            	div1.style.backgroundImage=imgSrc;
+            	init();
+            }*/
+            /*img1.onreadystatechange =function() {
+		            if(img1.readyState=="complete"||img1.readyState=="loaded"){
+		            	var imgSrc=img1.getAttribute('src');
+		            	console.log(imgSrc);
+		            	div.style.backgroundImage=imgSrc;
+		            	init();
+		            }
+		    }*/
+			init();
+        
+		}
+
+		var img1=document.getElementById('img1'); 
+		var div1=document.getElementById("div");
+		img1.onload=function () {
+        	var imgSrc=img1.getAttribute('src');
+        	console.log(imgSrc);
+        	div1.style.backgroundImage='url('+imgSrc+')';
+        }
+
+	</script>
+</body>
+</html>

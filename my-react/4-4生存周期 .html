@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<script type="text/babel">
+	    class ChildComp extends React.Component{
+	    	componentWillReceiveProps(){
+	    		console.log('参数更新了');
+	    	}
+            render(){
+                return  <div>
+		                	<h1>{this.props.name}</h1>
+		                </div>;
+            }
+	    }
+	    class ParentComp extends React.Component{
+	    	constructor(...args){
+	    		super(...args);
+	    		this.state={i:0};
+	    	}
+
+	    	fn(){
+	    		this.setState({
+	    			i:this.state.i+1
+	    		});
+	    	}
+            render(){
+                return  <div><input type="button" onClick={this.fn.bind(this)} value="点击" /><ChildComp name={this.state.i} /></div>;
+            }
+	    }
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+
+			ReactDOM.render(
+                <ParentComp />, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <h1 id="div1"></h1>
+</body>
+</html>

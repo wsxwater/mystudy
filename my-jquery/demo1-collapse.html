@@ -1,0 +1,75 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+	<style type="text/css">
+		*{padding: 0;margin: 0;}
+		li{list-style: none;}
+		a{text-decoration: none;}
+        dl{margin:0 0px 10px 0;}
+		dl,dt,dd{line-height: 14px;display: block;}
+        
+		dt{padding: 10px;border: 1px solid #ccc;background: #EEE;position: relative;margin-top: -1px;}
+		dt>span{position: absolute;top:15px;right: 30px;display: inline-block;width: 0;height: 0;border: 5px solid transparent;border-top-color: #333;}
+		dt.active>span{border-top-color: transparent;border-bottom-color: #333;top: 10px;}
+		
+        dd{-webkit-margin-start: 0px;border: 1px solid #ccc;border-top:none;display: none;}
+        dd div{padding: 10px;border-top: 1px solid #ccc;position: relative;top:-1px;text-indent: 10px;}
+
+	</style>
+</head>
+<body>
+
+    <dl>
+    	<dt class="active">数学<span></span></dt>
+        <dd>
+        	<div>数学01</div>
+        	<div>数学02</div>
+        	<div>数学03</div>
+        </dd>
+
+    	<dt>语文<span></span></dt>
+    	<dd>
+        	<div>语文01</div>
+        	<div>语文02</div>
+        	<div>语文03</div>
+        </dd>
+
+    	<dt>英语<span></span></dt>
+    	<dd>
+    		<div>英语01</div>
+    		<div>英语02</div>
+    		<div>英语03</div>
+    	</dd>
+    </dl>
+
+
+    <div id="my#[1]." style="width: 100px;background: red;height: 100px;"></div>
+	<script src="jQuery2.1.1.js"></script>
+	<script>
+		$(function () {
+			$('dd:first').show();
+			$('dl').on('click','dt',function(){
+                    $(this).toggleClass('active')  /*给dt添加class="active"*/
+                           .next().slideToggle()   /*将dt的下一个节点显示"*/
+                           .siblings('dt').not($(this)).removeClass('active')   /*将除了$(this)的dt的其它兄弟元素删除active"*/
+                           .siblings('dd').not($(this).next()).slideUp();     /*将除了$(this).next()的dd的其它兄弟元素收起"*/
+			});
+
+
+
+            console.log($('#my\\#\\[1\\]\\.').css('background'));
+			console.log($('#my#[1].'))   //id带有特殊字符，需要转义
+
+		});
+	</script>
+
+</body>
+</html>

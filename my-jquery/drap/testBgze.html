@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+        html,body{height: 100%;background-color: #fedb01;overflow: hidden;}
+		.container{height: 100%;margin: 0 auto;min-width: 320px;max-width: 640px;background-color: #fedb01;}
+        .bg{background-repeat: no-repeat;-webkit-background-size: contain;background-size: contain;background-position: center center;}
+		.box-v{display: -webkit-box;-webkit-box-orient: vertical;-webkit-box-align: center;-webkit-box-pack: center;}
+		.box-h{display: -webkit-box;-webkit-box-orient: horizontal;-webkit-box-align: center;-webkit-box-pack: center;}
+		.box{width: 100%;height: 100%;background-image: url('imgs/bg1.jpg');position: relative;}
+
+		.ani1{background-image: url('imgs/ani_03.png');height: 23%;width: 100%;position: relative;}
+		.ani1_wrap{position: absolute;top:0;left: 0;right: 0;bottom: 0;}
+		.ani1_box{width: 100%;height: 43.47826086956522%;}
+		.empty11{width: 100%;height: 20.434782608695652%;}
+		.empty12{width: 100%;height: 36.95652173913043%;}
+
+		.ani1_cell{width: 46.71875%;height: 100%;}
+		.empty21{width: 26.5625%;height: 100%;}
+		.empty22{width: 26.875%;height: 100%;}
+
+		.ani1_cell1{width: 25.75250836120401%;height: 100%;background-image: url('imgs/ani_01_01.png');}
+		.ani1_cell2{width: 47.491638795986624%;height: 100%;}
+		.ani1_cell3{width: 27.424749163879596%;height: 100%;background-image: url('imgs/ani_01_02.png');}
+		.ani1_cell21{width: 100%;height: 50%;background-image: url('imgs/ani_2017_01.png');}
+		.ani1_cell22{width: 100%;height: 50%;background-image: url('imgs/ani_2017_02.png');}
+
+		.empty0{height: 4.6%;width: 100%;}
+		.ani2{background-image: url('imgs/ani_text.png');height: 12.5%/* 27.5% */;width: 100%;}
+		.empty1{height: 42.8%;width: 100%;}
+		.ani3{background-image: url('imgs/ani_04.png');height: 9.3%;width: 100%;}
+		.empty2{width: 100%;height: 6.5%;}
+
+		@media screen and (orientation: portrait) {    
+		  /*竖屏 css*/   
+		  
+		}     
+
+	</style>
+	
+</head>
+<body>
+    
+	<div class="container">
+		<div class="box bg box-v">
+			<div class="ani1 bg box-v">
+				<div class="ani1_wrap">
+				    <div class="empty11"></div>
+                    <div class="ani1_box box-h">
+                        <div class="empty21"></div>
+
+						<div class="ani1_cell box-h">
+							<div class="ani1_cell1 bg"></div>
+							<div class="ani1_cell2 box-v">
+								<div class="ani1_cell21 bg"></div>
+								<div class="ani1_cell22 bg"></div>
+							</div>
+							<div class="ani1_cell3 bg"></div>
+						</div>
+
+						<div class="empty22"></div>
+                    </div>
+					<div class="empty12"></div>
+				</div>
+			</div>
+
+			<div class="empty0"></div>
+			<div class="ani2 bg box-v"></div>
+			<div class="empty1"></div>
+			<div class="ani3 bg box-v"></div>
+			<div class="empty2"></div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	    var result;
+	    //result=230/1000*100+'%';
+	    //result=275/1000*100+'%';
+	    //result=46/1000*100+'%';
+	    //result=428/1000*100+'%';
+	    //result=93/1000*100+'%';
+	    //result=65/1000*100+'%';
+	    //result=47/230*100+'%';
+	    //result=100/230*100+'%';
+	    result=85/230*100+'%';
+		console.log(result);
+
+		//console.log(window);
+		
+			//if ("ontouchstart" in window) {var orientationStyle=document.createElement('style');orientationStyle.setAttribute('type','text/css');orientationStyle.innerHTML='@media screen and (orientation: landscape) {.ani1_cell{width: 18%;height: 100%;}}';document.getElementsByTagName('head')[0].appendChild(orientationStyle);}
+          
+	</script>
+</body>
+</html>

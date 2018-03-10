@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>React事件.html</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<script type="text/babel">
+	    class Comp extends React.Component{
+	        constructor(...args){
+                super(...args); //超类、父类
+                this.state={value:''};
+	        }
+
+	        /*fn(ev){
+	            //alert('121');
+	            this.setState({
+		            value:ev.target.value
+	            }); 
+	        }*/
+	        fn(){
+	            this.setState({
+		            value:this.refs['input'].value
+	            }); 
+	        }
+
+            render(){
+                return <div>
+                	<input type="text" ref="input" onChange={this.fn.bind(this)} />
+                	<span>{this.state.value}</span>
+                </div>;
+            }
+	    }
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+			ReactDOM.render(
+                <Comp/>, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <h1 id="div1"></h1>
+       <h2>笔记</h2>
+
+       <h3>React事件</h3>
+       <h4>1、状态是活的</h4>
+       <div>constructor里面——this.state={}；其它方法——this.setState({})。</div>
+       <h4>2、事件大小写不能乱</h4>
+       <div>onChange、onClick等等</div>
+       <h4>3、绑定事件</h4>
+       <div>onChange={fn}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//fn是方法，不是函数</div>
+       <div>onChange={this.fn}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//不对，需要bind</div>
+       <div>onChange={this.fn.bind(this)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//OK</div>
+       <h4>4、使用constructor的时候，必须用super()	</h4>
+      
+</body>
+</html>

@@ -1,0 +1,141 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.card {position: relative;background-color: #fff;}
+		.card .card-image {position: relative;}
+		.card .card-image img {display: block;position: relative;left: 0;right: 0;top: 0;bottom: 0;width: 100%;}
+		.card-box{position: absolute;top:10%;bottom: 10%;left: 10%;right: 10%;overflow: hidden;}
+		.card-box img#canvasImg{visibility:hidden;object-fit: cover;}
+		.card-box canvas{display: block;position: absolute;top:0;bottom: 0;left: 0;right: 0;z-index: 3;}
+	</style>
+</head>
+<body>
+
+    <div class="card">
+    	<div class="card-image">
+    		<img src="28.jpg">
+    		<div class="card-box"><!-- http://pic1.win4000.com/wallpaper/f/51c3bb99a21ea.jpg -->
+    		    <img src="50c3267364742.jpg" id="canvasImg">
+				<canvas id="myCanvas">请更换浏览器。</canvas>
+    		</div>
+    	</div>
+    </div> 
+
+    <script type="text/javascript" src="jQuery2.1.1.js"></script>
+	<script type="text/javascript">
+		$(function () {
+            
+
+            function drawCanvas() {
+            		var canvas=document.getElementById("myCanvas");
+            	    var ctx=canvas.getContext('2d');
+            	    canvas.width=Math.floor($('.card-box').outerWidth()); 
+            	    canvas.height=Math.floor($('.card-box').outerHeight()); 
+
+            	    canvas.setAttribute("width", canvas.width-2 + "px");
+            	    canvas.setAttribute("height", canvas.height-2 + "px");
+                    canvas.setAttribute("style", "border:1px solid green");
+            	    
+
+            	    //绘制黑色矩形    
+            	    ctx.beginPath();
+            	    ctx.fillStyle = "#939393";
+            	    ctx.rect(0, 0, canvas.width, canvas.height);
+            	    ctx.closePath();
+            	    
+            	    ctx.fill();
+            	    var isDown = false; //鼠标是否按下标志
+            	    var pointerArr = []; //鼠标移动坐标数组
+            	    var xPointer = 0;//鼠标当前x坐标
+            	    var yPointer = 0;//鼠标当前y坐标
+
+
+            	    //pc，移动事件兼容写法
+            	    var hastouch = "ontouchstart" in window ? true : false,
+            	    tapstart = hastouch ? "touchstart" : "mousedown",
+            	    tapmove = hastouch ? "touchmove" : "mousemove",
+            	    tapend = hastouch ? "touchend" : "mouseup";
+
+
+            	    //鼠标按下
+            	    canvas.addEventListener(tapstart, function(event) {
+            	        var e=window.event||event;//2017-12-06
+            	        this.style.cursor = "move";
+            	        isDown = true;
+            	        xPointer = (hastouch ? e.targetTouches[0].pageX : e.clientX)-canvas.getBoundingClientRect().left;
+            	        yPointer = (hastouch ? e.targetTouches[0].pageY : e.clientY)-canvas.getBoundingClientRect().top;
+                      
+                        pointerArr.push([xPointer, yPointer]);
+                       
+            	        circleReset(ctx);
+            	    });
+
+
+            	    //鼠标按下后拖动
+            	    canvas.addEventListener(tapmove, function(event) {
+            	        var e=window.event||event;//2017-12-06
+            	        if (isDown) {
+    	                    xPointer = (hastouch ? e.targetTouches[0].pageX : e.clientX)-canvas.getBoundingClientRect().left;
+                            yPointer = (hastouch ? e.targetTouches[0].pageY : e.clientY)-canvas.getBoundingClientRect().top;
+                          
+                            pointerArr.push([xPointer, yPointer]);
+                	        circleReset(ctx);
+            	        }
+            	    });
+
+
+            	    //鼠标抬起取消事件
+            	    canvas.addEventListener(tapend, function(event) {
+            	        isDown = false;
+            	        pointerArr = [];
+            	    });
+
+
+            	    //圆形橡皮檫
+            	    function circleReset(ctx) {
+            	        ctx.save();
+            	        ctx.beginPath();
+            	        ctx.moveTo(pointerArr[0][0], pointerArr[0][1]);
+            	        ctx.lineCap = "round";　　 //设置线条两端为圆弧
+            	        ctx.lineJoin = "round";　　 //设置线条转折为圆弧
+            	        ctx.lineWidth = 60;
+            	        ctx.globalCompositeOperation = "destination-out";
+            	        if (pointerArr.length == 1) {
+            	            ctx.lineTo(pointerArr[0][0] + 1, pointerArr[0][1] + 1);
+            	        } else {
+            	            for (var i=1;i<pointerArr.length;i++) {
+            	                ctx.lineTo(pointerArr[i][0], pointerArr[i][1]);
+            	                ctx.moveTo(pointerArr[i][0], pointerArr[i][1]);
+            	            }
+            	        }
+            	        ctx.closePath();
+            	        ctx.stroke();
+            	        ctx.restore();
+            	    }
+            }
+            
+
+            $('.card-image img').on('load', function() {
+                drawCanvas();
+                setTimeout(function () {
+	            	$('#canvasImg').css('visibility','visible');
+            	},300)
+            });
+
+        
+		});
+
+
+	</script>
+</body>
+</html>

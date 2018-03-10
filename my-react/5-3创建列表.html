@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>创建列表</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<script type="text/babel">
+	    class Item extends React.Component{
+	    	constructor(...args){
+	    		super(...args);
+
+	    	}
+            render(){
+                return <li>{this.props.value}</li>;
+            }
+	    }
+	    class List extends React.Component{
+	    	constructor(...args){
+	    		super(...args);
+            
+            	this.state={arr:[4,66,20,11]};
+	    	}
+
+	    	fn(){
+	    		this.setState({
+                    arr:this.state.arr.concat([Math.random()])
+	    		});
+	    	}
+
+            render(){
+
+            	var result=[];
+
+            	for (var i = 0; i < this.state.arr.length; i++) {
+            		result.push(<Item key={i} value={this.state.arr[i]} />)
+            	}
+
+                return <ul><li><button type="button" onClick={this.fn.bind(this)}>按钮</button></li><li>{result}</li></ul>;
+            }
+	    }
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+			ReactDOM.render(
+                <List/>, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <h1 id="div1">
+       	
+       </h1>
+</body>
+</html>

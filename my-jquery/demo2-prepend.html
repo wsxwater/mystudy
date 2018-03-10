@@ -1,0 +1,44 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>prepend</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		ul{width: 100%;height: 106px;overflow: hidden;}
+		ul>li{display: block;padding:10px;line-height: 14px;font-size: 14px;border:1px solid #CCC;background: #EEE;position: relative;margin-top: -1px;}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>我是01号</li>
+		<li>我是02号</li>
+		<li>我是03号</li>
+		<li>我是04号</li>
+		<li>我是05号</li>
+		<li>我是06号</li>
+		<li>我是07号</li>
+		<li>我是08号</li>
+	</ul>
+
+
+	<script src="jQuery2.1.1.js"></script>
+	<script>
+		$(function () {
+            var liHeight=$("ul li").height();
+            setInterval(function(){
+	            $("ul").prepend($("ul li:last").css("height","0px").animate({
+	            	height:liHeight+"px"
+	            },"slow"));
+            },3000);
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<style type="text/css">
+		.box{background:gold;width:200px;height:200px;line-height:200px;font-size:40px;color:#FFF;position:absolute;text-align:center;}
+	</style>
+	<script type="text/babel">
+
+	    class Comp extends React.Component{
+	    	constructor(...args){
+	    		super(...args);
+	    		this.state={x:0,y:0}
+	    	}
+
+	    	fn(ev){
+	    		
+	    		var disX=ev.pageX-this.state.x;
+	    		var disY=ev.pageY-this.state.y;
+	    		var winWidth;
+	    		var winHeight;
+
+
+	    		var _this=this;
+
+
+	    		if (window.innerWidth){
+		    		winWidth = window.innerWidth;
+	    		}
+	    		else if ((document.body) && (document.body.clientWidth)){
+		    		winWidth = document.body.clientWidth;
+		        }
+	    		// 获取窗口高度
+	    		if (window.innerHeight){
+		    		winHeight = window.innerHeight;
+	    		}
+	    		else if ((document.body) && (document.body.clientHeight)){
+		    		winHeight = document.body.clientHeight;
+	    		}
+	    		// 通过深入 Document 内部对 body 进行检测，获取窗口大小
+	    		if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth)
+	    		{
+		    		winHeight = document.documentElement.clientHeight;
+		    		winWidth = document.documentElement.clientWidth;
+	    		}
+
+	    		document.onmousemove=function (ev) {
+	    			
+		    		_this.setState({
+                       x:ev.pageX-disX,
+                       y:ev.pageY-disY,
+		    		});
+		    		if (_this.state.x<=0) {
+                       _this.setState({x:0});
+		    		}else if(_this.state.x>=winWidth-_this.refs['box1'].offsetWidth){
+                       _this.setState({x:winWidth-_this.refs['box1'].offsetWidth});
+		    		}
+		    		if (_this.state.y<=0) {
+                       _this.setState({y:0});
+		    		}else if(_this.state.y>=winHeight-_this.refs['box1'].offsetHeight){
+                       _this.setState({y:winHeight-_this.refs['box1'].offsetHeight});
+		    		} 
+	    		}
+    			document.onmouseup=function (ev) {
+    				document.onmousemove=null;
+    				document.onmouseup=null;
+    			}
+	    	}
+
+
+            render(){
+                return <div className="box" ref="box1" style={{left:this.state.x+'px',top:this.state.y+'px'}} onMouseDown={this.fn.bind(this)}>拖拽</div>;
+            }
+	    }
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+			ReactDOM.render(
+                <Comp />, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <h1 id="div1"></h1>
+</body>
+</html>

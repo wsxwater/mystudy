@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+          var arr=['apple','banana','orange','pear'];
+
+          for(let i in arr){
+          	console.log(i);   //1 2 3 4 索引
+          }
+          for (let i of arr) {
+          	console.log(i);   //apple banana orange pear
+          }
+
+
+          var json={'a':'apple','b':'banana','c':'cat','d':'dog'};
+          for(let name in json){
+          	console.log(name);   //a b c d
+          }
+          for (let name of json) {
+          	console.log(name);   //报错，for...of循环不可以循环json
+          }
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

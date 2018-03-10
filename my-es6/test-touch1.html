@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<style type="text/css">
+	    *{margin:0;padding: 0;}
+		html,body{width: 100%;height: 100%;overflow: hidden;}
+		div{width: 1000%;height: 200%;margin:0 auto;background: red;font-size:700px;position: absolute;top:0;left:0;}
+	</style>
+</head>
+<body>
+    <div id="div">测试测试测</div>
+	<script type="text/javascript">
+		window.onload=function () {
+			var startX=startY=0;
+			isScrolling = 0; //这个参数判断是垂直滚动还是水平滚动
+			function touchSatrtFunc(e) {  
+				e.preventDefault(); //阻止触摸时浏览器的缩放、滚动条滚动等  
+				var touch = e.targetTouches[0]; //获取第一个触点  
+				var x = Number(touch.pageX); //页面触点X坐标  
+				var y = Number(touch.pageY); //页面触点Y坐标  
+				startX = x;  
+				startY = y; 
+			}  
+			//touchmove事件 
+			function touchMoveFunc(e) {  
+				    e.preventDefault(); //阻止触摸时浏览器的缩放、滚动条滚动等  
+
+					var touch = e.touches[0];
+					var x = touch.pageX - startX,
+						y = touch.pageY - startY;
+					var text = 'Move：（' + (x) + ', ' + y + '）';  
+
+					isScrolling = Math.abs(x) < Math.abs(y) ? 1:0; //isScrolling为1时，表示纵向滑动，0为横向滑动
+                    console.log(isScrolling) 
+					if(isScrolling === 0){
+						event.preventDefault(); //阻止触摸事件的默认行为，即阻止滚屏
+						
+						this.style.left =  x + 'px';
+					}
+					document.title = text;
+
+			}  
+
+			//touchend事件 
+			function toucheEndFunc(e) {  
+				e.preventDefault(); //阻止触摸时浏览器的缩放、滚动条滚动等  
+				var touch = e.changedTouches[0]; //获取第一个触点  
+
+				var x = touch.pageX; //页面触点X坐标	  
+				var y = Number(touch.pageY); //页面触点Y坐标  
+				var text = 'end：（' + x + ', ' + y + '）';  
+				document.title = text;
+			}
+
+			document.getElementById('div').addEventListener('touchstart',touchSatrtFunc,false);
+			document.getElementById('div').addEventListener('touchmove',touchMoveFunc,false);
+			document.getElementById('div').addEventListener('touchend',toucheEndFunc,false);
+
+		}
+	</script>
+</body>
+</html>

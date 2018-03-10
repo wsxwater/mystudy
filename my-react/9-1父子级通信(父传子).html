@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子级通信(父-->子)</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<script type="text/babel">
+	    class Child extends React.Component{
+	    	constructor(...args){
+	    		super(...args);
+	    	}
+            render(){
+                return <div>{this.props.a}</div>;
+            }
+	    }
+
+	    class Parent extends React.Component{
+	    	constructor(...args){
+	    		super(...args);
+	    		this.a=12;
+	    	}
+            render(){
+                return <div>
+	                <div>aaa</div>
+                	<Child a={this.a} />
+	                <div>bbb</div>
+                </div>;
+            }
+	    }
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+			ReactDOM.render(
+                <Parent />, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <div id="div1">
+       	
+       </div>
+</body>
+</html>

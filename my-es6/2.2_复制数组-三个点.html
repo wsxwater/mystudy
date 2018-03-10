@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+        {/*function show(){
+           //console.log(arguments);
+
+           arguments.pop();
+           console.log(arguments);  //报错，因为arguments是有点类似数组，但并不是数组
+        }
+
+        show(1,2,3,4);*/}
+
+
+
+        function show1(...args){
+           //console.log(args);
+
+           args.pop();
+           console.log(args);  
+        }
+
+        show1(1,2,3,4);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

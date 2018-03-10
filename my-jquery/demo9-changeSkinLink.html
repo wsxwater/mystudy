@@ -1,0 +1,47 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>通过修改link的href的值来更换皮肤</title>
+    <link rel="stylesheet" type="text/css" href="skin/skin_0.css" id="cssfile">
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        li{list-style: none;}
+        img{border: none;}
+        a{text-decoration: none;color: #333;}
+         hr{margin:30px auto;}
+        .container{width: 660px;margin:0 auto;} 
+        .skinBox{overflow: hidden;}
+        .skinBox li{display: block;float: left;width: 60px;height: 60px;margin:10px;line-height: 60px;text-align: center;font-size: 40px;color: #FFF;font-weight: bold;cursor: pointer;border:1px solid #FFF;} 
+        /* .skinBox li:hover, */.skinBox li.active{-webkit-box-shadow: 1px 1px 5px #000;box-shadow: 1px 1px 5px #000;border-color: #000;}
+        .skinBox li span{display: none;text-shadow: 0 0 2px #000;}
+        .skinBox li.active span{display: inline-block;}
+        .skinBox li:nth-of-type(1){background: grey;}
+        .skinBox li:nth-of-type(2){background: orange;}
+        .skinBox li:nth-of-type(3){background: yellow;}
+        .skinBox li:nth-of-type(4){background: green;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>请选择皮肤：</h1>
+    <ul class="skinBox">
+        <li title="灰色" id="skin_0" class="active"><span>&radic;</span></li>
+        <li title="橙色" id="skin_1"><span>&radic;</span></li>
+        <li title="黄色" id="skin_2"><span>&radic;</span></li>
+        <li title="绿色" id="skin_3"><span>&radic;</span></li>
+    </ul>
+</div>
+    
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+        $(function () {
+            $('.skinBox li').click(function () {
+                $(this).addClass('active').siblings().removeClass('active');
+                $('#cssfile').attr('href','skin/'+(this.id)+'.css');
+            });
+
+
+        })
+    </script>
+</body>
+</html>

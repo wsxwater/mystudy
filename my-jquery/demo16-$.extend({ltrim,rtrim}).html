@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>$.extend({ltrim,rtrim}),扩展$.trim()</title>
+    <style type="text/css">
+    	*{margin: 0;padding: 0;}
+        .container{width: 660px;margin:0 auto;}
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <textarea name="trimTest" id="trimTest" cols="20" rows="5"></textarea>
+        
+
+
+
+        <br>
+      <br>
+      <br>
+      <br>
+      <br>  
+        <svg xmlns="http://www.w3.org/2000/svg">
+          <foreignObject width="120" height="50">
+              <body xmlns="http://www.w3.org/1999/xhtml">
+                <p style="font-size:12px;margin:0;">一段需要word wrap的文字。</p>
+              </body>
+            </foreignObject>
+        </svg>
+    </div>
+    
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+        ;(function ($) {
+        	$.extend({
+        		ltrim:function (text) {
+                       return (text||'').replace(/^\s+$/g,'');
+                }, 
+                rtrim:function (text) {
+                       return (text||'').replace(/\s+$/g,'');
+                } 
+        	});
+        })(jQuery);
+
+
+        $(function () {
+            
+           $('#trimTest').val(
+                 jQuery.trim('    test     ')+'\n'+
+                 jQuery.ltrim('    test    ')+'\n'+
+                 jQuery.rtrim('    test    ')
+            );
+        })
+    </script>
+</body>
+</html>

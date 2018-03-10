@@ -1,0 +1,103 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>touch</title>
+	<style type="text/css">
+	    *{margin: 0;padding: 0;} 
+	    li{list-style: none;}
+	    a{text-decoration: none;}
+		.btn{display: inline-block;line-height: 1;font-size:30px;padding:10px;margin:10px 5px;color: #FFF;width: 140px;text-align: center;}
+		#clickBtn{background-color: #f00;}
+		#tapBtn{background-color: green;}
+		.time{font-size: 30px;}
+
+
+		
+        #items{margin:10px 0;}
+		#items li{font-size: 16px;line-height: 1;padding: 10px;border-bottom: 1px solid #CCC;background-color: #eee;position: relative;overflow: hidden;
+			transition: all 0.32s;-webkit-transition: all 0.32s;-moz-transition: all 0.32s;-o-transition: all 0.32s;
+			transform: translateX(0px);-webkit-transform: translateX(0px);
+		}
+		#items li:last-child{border-bottom: none;}
+		
+
+		#items li .delete {/*  display: none; */display: inline-block;width: 30px;position: absolute;top: 0;right: 0;bottom: 0px;font-size: 12px;background-color: #f00;color: #fff;text-align: center;line-height: 37px;
+		transform:translateX(30px);transition: all 0.35s;
+		-webkit-transform:translateX(30px);-webkit-transition: all 0.35s; }
+
+		#items li.active{transform: translateX(-30px);-webkit-transform: translateX(-30px);}
+        #items li.active .delete{transform: translateX(0px);-webkit-transform: translateX(0px);}
+	</style>
+</head>
+<body>
+	<div>
+		<a href="javascript:;" class="btn" id="clickBtn">click me</a>
+		<span class="time" id="clickTime"></span>
+	</div>
+	<div>
+		<a href="javascript:;" class="btn" id="tapBtn">tap me</a>
+		<span class="time" id="tapTime"></span>
+	</div>
+
+
+	<ul id="items">
+	  <li>List item 1 <span class="delete">删除</span></li>
+	  <li>List item 2 <span class="delete">删除</span></li>
+	  <li>List item 3 <span class="delete">删除</span></li>
+	  <li>List item 4 <span class="delete">删除</span></li>
+	</ul>
+	<script type="text/javascript" src="zepto.js"></script>
+	<script type="text/javascript" src="event.js"></script>
+	<script type="text/javascript" src="touch.js"></script>
+	<script type="text/javascript">
+		
+			var clickBtn =document.querySelector('#clickBtn'),
+			    clickTime=document.querySelector('#clickTime'),
+			    tapBtn =document.querySelector('#tapBtn'),
+			    tapTime=document.querySelector('#tapTime');
+			var start=0,end=0;
+			clickBtn.addEventListener('touchstart',function () {
+				start=new Date();
+			}); 
+			tapBtn.addEventListener('touchstart',function () {
+				start=new Date();
+			});
+
+			tapBtn.addEventListener('touchend',function (e) {
+				//e.preventDefault();
+				//e.stopPropagation();
+			});  
+
+			clickBtn.addEventListener('click',function () {
+				end=new Date();
+				clickTime.innerHTML=(end-start)+'/ms';
+			});    
+
+			$('#tapBtn').on('tap',function () {
+				end=new Date();
+				tapTime.innerHTML=(end-start)+'/ms';
+			});
+
+
+			$('#items').on('swipeLeft','li',function(e){
+				/*$('.delete').hide();$('.delete', this).show();*/
+                $(this).addClass('active').siblings().removeClass('active');
+			});
+			$('#items').on('swipeRight','li',function(e){
+                $(this).removeClass('active');
+			});
+			// delete row on tapping delete button
+			$('.delete').tap(function(){
+				$(this).parent('li').removeClass('active').remove();
+			})
+
+	</script>
+</body>
+</html>

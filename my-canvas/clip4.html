@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>clip</title>
+</head>
+<body>
+	<canvas id="canvas" style="display: block;margin:0 auto;">亲！你该换个高版本的浏览器了。。。</canvas>
+	<script type="text/javascript">
+				window.onload=function () {
+					var canvas=document.getElementById('canvas');
+					var context=canvas.getContext('2d');
+		            canvas.width=600;
+		            canvas.height=600;
+
+
+					var img=new Image();
+					img.src='50c3267364742.jpg';
+		            
+
+		            img.onload=function(){
+		                context.drawImage(img,0,0,960/800*canvas.height,canvas.height);
+		            }
+
+		            context.beginPath();
+		            context.shadowColor="rgba(0,0,0,1)";
+		            //context.shadowOffsetX=10;
+		            //context.shadowOffsetY=10;
+		            context.shadowBlur=20;
+
+		            context.arc(canvas.width/2,canvas.width/2,(canvas.width-20)/4,0,2*Math.PI,false);
+		            context.arc(canvas.width/2,canvas.width/2,(canvas.width-20)/2,0,2*Math.PI,true);
+					context.fill();
+		            context.closePath();
+
+		            context.clip();
+
+		            context.globalCompositeOperation='source-over';
+
+				}
+	</script>
+</body>
+</html>

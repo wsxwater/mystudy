@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Canvas时钟</title>
+</head>
+<body>
+	<canvas id="canvas" style="display: block;margin:30px auto;"></canvas>
+	<canvas id="canvas1" style="display: none;margin:30px auto;"></canvas>
+	<script type="text/javascript">
+		window.onload=function () {
+			var canvas=document.getElementById('canvas');
+			var context=canvas.getContext('2d');
+
+			var canvasMask=document.querySelector('#canvas1');		
+			var ctxMask=canvasMask.getContext('2d');		
+			canvasMask.width=150;		
+			canvasMask.height=80;	
+	        
+
+			var defaultW=450;
+            canvas.width=defaultW;
+            canvas.height=defaultW;
+
+			var width=canvas.width;
+			var height=canvas.height;
+			var r=width/2;
+			var rem=500/width;
+
+            canvas.setAttribute('width',width);
+            canvas.setAttribute('height',height);
+            
+            canvas.style.width=width+'px';
+            canvas.style.height=height+'px';
+
+			function drawBackground() {
+				context.save();
+				context.translate(r,r);
+				context.beginPath();
+
+				context.lineWidth=20*rem;
+				context.arc(0,0,r-context.lineWidth/2,0,2*Math.PI,false);
+
+                context.shadowColor="#000";
+                context.shadowOffsetX=0;
+                context.shadowOffsetY=0;
+                context.shadowBlur=2; 
+                context.stroke(); 
+                var hourNum=[3,4,5,6,7,8,9,10,11,12,1,2];
+                //绘制刻度数字
+                hourNum.forEach(function (num,i) {
+                	var rad=2*Math.PI/12*i;
+
+                	var x=Math.cos(rad)*(r-60*rem);
+                	var y=Math.sin(rad)*(r-60*rem);
+
+                	context.shadowColor="#000";
+                	context.shadowOffsetX=0;
+                	context.shadowOffsetY=0;
+                	context.shadowBlur=0; 
+    
+                	context.font=rem*30+'px Arial';
+                	context.fillStyle='#000';
+                	context.textAlign='center';
+                	context.textBaseline='middle';
+                	context.fillText(num,x,y);
+
+                }); 
+
+
+                for (var i = 0; i < 60; i++) {
+                	var rad=2*Math.PI/60*i;
+
+                	var x=Math.cos(rad)*(r-30*rem);
+                	var y=Math.sin(rad)*(r-30*rem);
+					context.beginPath();
+                	if (i%5===0) {
+                		context.fillStyle="#000"; 
+                        context.arc(x,y,4*rem,0,2*Math.PI);
+                	} else {
+	                	context.fillStyle="#CCC";
+	                	context.arc(x,y,4*rem,0,2*Math.PI);
+                	}
+                	context.fill();
+                }
+
+			}
+			
+			//绘制时针
+			function drawHour(hour,minute) {
+				context.save();
+				context.beginPath();
+				var rad=2*Math.PI/12*hour;
+				var mrad=2*Math.PI/12/60*minute;
+				context.rotate(rad+mrad);
+
+				context.lineWidth=12*rem;
+				context.lineCap='round'
+				context.moveTo(0,10*rem);
+				context.lineTo(0,-r/2);
+                
+				context.stroke();
+				context.restore();
+			}
+            //绘制分针
+			function drawMinute(minute) {
+				context.save();
+
+				context.beginPath();
+				var rad=2*Math.PI/60*minute;
+				context.rotate(rad);
+                context.strokeStyle="#333" ;
+				context.lineWidth=6*rem;
+				context.lineCap='round';
+				context.moveTo(0,10*rem);
+				context.lineTo(0,-r+72*rem);
+                
+				context.stroke();
+				context.restore();
+			}
+            
+            //绘制秒针
+			function drawSecond(Second) {
+				context.save();
+				context.beginPath();
+				var rad=2*Math.PI/60*Second;
+				context.rotate(rad);
+                context.fillStyle='#F00';
+				
+				context.moveTo(-2*rem,20*rem);
+				context.lineTo(2*rem,20*rem);
+				context.lineTo(1,-r+40*rem);
+				context.lineTo(-1,-r+40*rem);
+                
+				context.fill();
+				context.restore();
+			}
+            //绘制刻度圆点
+			function drawDot() {
+				context.beginPath();
+				context.fillStyle='#FFF';
+                context.arc(0,0,4*rem,0,2*Math.PI,false);
+				context.fill();
+			}
+
+			function draw() {
+				context.clearRect(0,0,width,height);
+				var now=new Date();
+
+				var h=now.getHours();
+				var m=now.getMinutes();
+				var s=now.getSeconds();
+				drawBackground(); 
+	            drawHour(h,m);
+	            drawMinute(m);
+	            drawSecond(s);
+	            drawDot();
+
+            	context.beginPath();
+
+        	    context.font='16px Arial';
+        	    context.fillStyle='orange';
+        		context.textAlign='center';
+        		context.textBaseline='middle';
+
+        		context.fillText(toDou(h)+':'+toDou(m)+':'+toDou(s),0,70);
+        		if (h>12) {
+                    context.font='14px Arial';
+                    context.fillText('下午',0,100);
+        		} else {
+        			context.font='14px Arial';
+                    context.fillText('上午',0,100);
+        		}
+
+                /*context.font='12px Arial';
+                context.fillStyle='rgba(255,255,255,0.4)';
+        		context.fillText('wsx',75,200);*/
+        		/*添加水印*/
+                ctxMask.clearRect(0,0,canvasMask.width,canvasMask.height);
+        		ctxMask.save();
+        		ctxMask.beginPath();
+		        ctxMask.translate(canvasMask.width/2,canvasMask.height/2+8);
+		        ctxMask.rotate(45*Math.PI/180)
+				ctxMask.font="bold 50px/50px Arial";
+				ctxMask.textAlign="center";
+				ctxMask.textBaseLine="middle";
+				ctxMask.fillStyle="rgba(0,0,0,0.05)";
+				ctxMask.fillText("wsx",0,0);
+    			var xx=canvas.width-canvasMask.width,
+    			    yy=canvas.height-canvasMask.height,
+    			    ww=canvasMask.width,
+    			    hh=canvasMask.height;
+    			    
+    			for (var nn = 2; nn < Math.ceil(canvas.width/ww); nn++) {
+    				for (var mm = 2; mm < Math.ceil(canvas.height/hh); mm++) {
+	    				context.drawImage(canvasMask,xx-(ww+50)*nn,yy-(hh+50)*mm);
+    				}	
+    			}
+    			ctxMask.restore();
+    			/*添加水印*/
+
+	            context.restore();
+			}
+
+			function toDou(n) {
+				if (n<10) {
+					return n='0'+n;
+				} else {
+					return n=' '+n;
+				}
+			}
+                  
+            draw();
+            setInterval(function () {
+            	draw();
+            },1000);
+
+
+
+		}
+	</script>
+</body>
+</html>

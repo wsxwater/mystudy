@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>星空</title>
+</head>
+<body>
+	<canvas id="canvas" style="border:1px solid #CCC;display: block;margin:30px auto;">当前浏览器不支持canvas，请更换浏览器再试 >o< 。</canvas>
+	    <script type="text/javascript">
+	    	window.onload=function(){
+				var canvas=document.getElementById('canvas');
+				var context=canvas.getContext('2d');
+	            canvas.width=1200;
+	            canvas.height=800;
+                
+
+                //var gradient=context.createLinearGradient(0,0,0,canvas.height);
+                
+                var gradient=context.createRadialGradient(canvas.width/2,canvas.height,0,canvas.width/2,canvas.height,canvas.height);
+                gradient.addColorStop(0.0,"#035")
+                gradient.addColorStop(1.0,"#000")
+                context.fillStyle=gradient;
+                context.fillRect(0,0,canvas.width,canvas.height); 
+
+
+	            for (var i = 0; i < 200; i++) {
+	            	var r=Math.random()*10;
+	            	var x=Math.random()*canvas.width;
+	            	var y=Math.random()*canvas.height*0.65;
+	            	var rot=Math.random()*360;
+	            	drawStar(context,r,x,y,rot);
+	            }
+
+	            fillMoon(context,2,900,200,100,30);
+	            drawLand(context);
+	            //drawHouse(context);
+	            //drawCat(context);
+	            context.save();
+	            context.beginPath();
+	            /*var bgImg1=new Image();
+	            bgImg1.src="cat.png";
+	            bgImg1.onload=function(){
+	            	var pattern=context.createPattern(bgImg1,"no-repeat");
+	            	context.fillStyle=pattern;
+	            	context.fillRect(700,410,94,128);
+	            }*/
+	            /*
+		          **fillText(String,x,y,max-length)
+		          **context.measureText(String).width//文本的度量
+		          **context.textAlign="center";
+		          **context.textBaseLine="top";//top,middle,bottom,alphabetic(default)(拉丁字母),ideographic(方块字),hanging(印度语)
+		        */
+	            context.lineWidth=1;
+	            var bgImg=new Image();
+                bgImg.src="level-bg.png";
+                bgImg.onload=function(){
+                	var pattern=context.createPattern(bgImg,"repeat")
+    	            context.fillStyle=pattern;
+    	            //context.fillRect(0,0,800,900);
+    	            context.shadowColor="#000";
+    	            context.shadowOffsetX=2;
+    	            context.shadowOffsetY=2;
+    	            context.shadowBlur=5;
+    	            context.font="bold 24px '叶根友毛笔行书2.0版'";
+    	            context.fillText("制作日期：2016/10/21",10,750,300);
+                }
+	            context.fillStyle="gold";
+	            context.font="bold 24px '叶根友毛笔行书2.0版'";
+	            //context.textAlign="center";
+	            //context.textBaseLine="middle";
+	            context.strokeStyle="gold";
+	            context.shadowColor="#000";
+	            context.shadowOffsetX=2;
+	            context.shadowOffsetY=2;
+	            context.shadowBlur=5;
+	            context.strokeText("制作人：王水霞",10,780,230);
+	            //var textWidth=context.measureText("制作人：王水霞").width;
+	            //context.fillText("字符串长度："+textWidth+"px",990,780,150)
+
+	            var bgImgCat=new Image();
+                bgImgCat.src="cat.png";
+                bgImgCat.onload=function(){
+                	var patternC=context.createPattern(bgImgCat,"no-repeat")
+    	            context.fillStyle=patternC;
+    	            context.fillRect(0,0,canvas.width,canvas.height);
+                }
+	            
+	    	}
+
+	    	function drawLand(ctx){
+	    		ctx.save();
+	    		ctx.beginPath();
+	    		ctx.moveTo(0,600);
+	    		ctx.bezierCurveTo(540,400,660,800,1200,600);
+	    		ctx.lineTo(1200,800);
+	    		ctx.lineTo(0,800);
+	    		ctx.closePath();
+	    		var gradient=ctx.createLinearGradient(0,0,0,canvas.height);
+	    		gradient.addColorStop(0.0,"#030");
+	    		gradient.addColorStop(1.0,"#580");
+	    		ctx.fillStyle=gradient;
+	    		ctx.fill();
+	    		ctx.restore();
+	    	}
+	    	function drawHouse(ctx){
+	    		ctx.save();
+	    		ctx.beginPath();
+				ctx.lineWidth=2;
+	    		ctx.moveTo(100,600);
+	    		ctx.lineTo(127,577);
+	    		ctx.lineTo(154,600);
+	    		ctx.lineTo(149,596);
+	    		ctx.lineTo(149,629);
+	    		ctx.lineTo(106,629);
+	    		ctx.lineTo(106,596);
+	    		ctx.rect(123,614,10,15);
+                ctx.moveTo(145,592);
+                ctx.lineTo(145,583)  
+	    		ctx.strokeStyle="#FFF";
+	    		ctx.stroke();
+
+	    		ctx.closePath();
+	    		//ctx.stroke();
+	    		ctx.restore();
+	    	}
+
+	    	function drawCat(ctx){
+                ctx.save();
+                ctx.beginPath();
+                var bgImg=new Image();
+                bgImg.src="cat.png"
+                bgImg.onload=function(){
+                	var pattern=ctx.createPattern(bgImg,"no-repeat");
+                	ctx.fillStyle=pattern;
+                	ctx.fillRect(700,410,94,128);
+                }
+                ctx.closePath();
+                ctx.restore();
+	    	}
+              
+	    	function drawStar(ctx,R,x,y,rot){
+	    		/**
+		    		 *MaxR:大圆的半径
+		    		 *MinR:小圆的半径
+		    		 *x,y:偏移值 
+		    		 *rot:旋转的角度 
+	    		 **/
+                ctx.save();
+	            ctx.translate(x,y);
+	            ctx.rotate(rot/180*Math.PI);
+	            ctx.scale(R,R);
+	    		savePath(ctx); 
+	            ctx.fillStyle="#fb3";
+	            //ctx.strokeStyle="#fd5";
+	            //ctx.lineJoin="round"; //round //miter //bevel
+	            //ctx.lineWidth=3;
+            	ctx.fill();
+            	//ctx.stroke();
+            	ctx.restore();
+	    	}
+
+	    	function savePath(ctx){
+                ctx.beginPath();
+                for (var i = 0; i < 5; i++) {
+                	ctx.lineTo(Math.cos((18+i*72)/180*Math.PI),-Math.sin((18+i*72)/180*Math.PI));
+                	ctx.lineTo(Math.cos((54+i*72)/180*Math.PI)*0.5,-Math.sin((54+i*72)/180*Math.PI)*0.5);
+                }
+                ctx.closePath();
+
+	    	}
+
+
+	        function fillMoon(cxt,d,x,y,R,rot,fillcolor){
+	            cxt.save();
+	            cxt.translate(x,y);
+	            cxt.rotate(rot/180*Math.PI);
+	            cxt.scale(R,R);
+	            pathMoon(cxt,d);
+	            cxt.fillStyle=fillcolor || "#fb5";
+	            cxt.fill();
+	            cxt.restore();
+	        } 
+
+	        function pathMoon(cxt,d){
+	        	cxt.beginPath();
+	            cxt.arc(0,0,1,Math.PI*0.5,Math.PI*1.5,true);
+	            cxt.moveTo(0,-1);
+	            cxt.arcTo(d,0,0,1,dis(0,-1,d,0)/d); 
+	        	cxt.closePath();
+
+	        }
+
+			function dis(x1,y1,x2,y2){
+				return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+			}
+	    </script>
+</body>
+</html>

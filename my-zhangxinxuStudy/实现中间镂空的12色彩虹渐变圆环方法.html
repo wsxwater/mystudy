@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		/* CSS3锥形渐变conic-gradient目前仅Chrome浏览器才支持，并且Chrome浏览器还是需要开启实验功能选项才能支持！ */
+		.circle1 {width: 300px; height: 300px;
+		    background: conic-gradient(#9ED110, #50B517, #179067, #476EAF, #9f49ac, #CC42A2, #FF3BA7, #FF5800, #FF8100, #FEAC00, #FFCC00, #EDE604);
+		    -webkit-mask-image: radial-gradient(transparent 110px, #000 110px);
+		    mask-image: radial-gradient(transparent 110px, #000 110px);
+		    border-radius: 50%;
+		    position: relative;
+		}
+        
+
+        /* 此方法的优点在于兼容性足够（仅IE不支持），在移动端可以无障碍使用。不足在于这个圆环的渐变并不是径向发散的，而是自上而下的，和真正意义上的圆环渐变还是有些差异的。 */
+        .part2{position: relative;width: 300px; height: 300px;}
+        .circle2{
+        	width: 300px; height: 300px;
+    	    border-radius: 50%;
+    	    -webkit-mask-image: radial-gradient(transparent 110px, #000 110px);
+    	    overflow: hidden;
+        }
+        .circle2 .circle-left {
+            width: 50%; height: 100%;
+            background: linear-gradient(to bottom, #EDE604, #FFCC00, #FEAC00, #FF8100, #FF5800, #FF3BA7, #CC42A2);
+            float: left;
+        }
+        .circle2 .circle-right {
+            width: 50%; height: 100%;
+            float: right;
+            background: linear-gradient(to bottom, #9ED110, #50B517, #179067, #476EAF, #9F49AC, #CC42A2);
+        }
+		.circle2 .circle-bottom {
+		    position: absolute; 
+		    height: 40px; width: 30px;
+		    bottom: 3px; left: 0; right: 0;
+		    margin: auto;
+		    /* 下面两个声明是补丁关键 */
+		    background: linear-gradient(to right, #DB3FA3, #C443A3);
+		    filter: blur(5px);
+		}
+
+		.seconds2 {
+			width: 300px; height: 300px;
+			line-height: 290px;
+			text-align: center;
+			font-size: 80px;
+			position: absolute;
+			top: 0;left: 0;right: 0;bottom: 0;
+			pointer-events: none;
+			color: #000;
+		}
+	</style>
+</head>
+<body>
+	<div class="circle1"></div>
+    <div class="part2">
+		<div class="circle2" id="circle2">
+		    <div class="circle-left"></div>
+		    <div class="circle-right"></div>
+		    <div class="circle-bottom"></div>
+		</div>
+		<div id="seconds2" class="seconds2"></div>
+    </div>
+
+	<script type="text/javascript">
+		
+		// 元素
+		var eleCircle = document.getElementById('circle2');
+		var eleSeconds = document.getElementById('seconds2');
+
+		// 圆环状态还原
+		var circleInit = function () {
+			eleCircle.style.clipPath = '';
+			
+			eleSeconds.innerHTML = '';
+		};
+
+		var timerTimeCount = null;
+		var fnTimeCount = function (seconds) {
+			if (timerTimeCount) {
+				return;	
+			}
+			// 倒计时方法
+			var seconds = seconds || 10;
+
+			var step = function () {
+				// 圆环匹配
+				var percent = seconds / 10;
+				
+				// clip-path严格来讲是个扇形
+				// 但polygon只能连接直线，因此，这个扇形半径就要处理的足够大，例如，500这样子
+				// 于是有公式
+				// x=a+rcosθ
+		        // y=b+rsinθ
+				var a = 150, b = 150, r = 500;
+				var angle = Math.PI / 180 * (360 * percent - 90);
+				var x = a + r * Math.cos(angle);
+				var y = b + r * Math.sin(angle);
+				
+				// 总共7个点
+				var p1 = p2 = p3 = p4 = p5 = p6 = p7 = [a, b];
+				
+				if (x < a) {
+					p2 = [a, b - r];
+					p3 = [a + r, b - r];
+					p4 = [a + r, b + r];
+					p5 = [a, b + r];
+					p6 = [a - r, b];
+					p7 = [x, y];
+					if (y > b) {
+						p6 = p7;
+					}
+				} else {
+					p2 = [a, b - r];
+					p3 = [a + r, b - r];
+					p4 = [a + r, b];
+					p5 = [x, y];
+					p6 = p5;
+					p7 = p5;
+					if (y < b) {
+						p4 = [x, y];
+					}
+				}
+				eleCircle.style.clipPath = 'polygon(' + (function () {
+					return [p1, p2, p3, p4, p5, p6, p7].map(function (arr) {
+						return arr.map(function (pos) {
+							return pos + 'px';
+						}).join(' ');
+					}).join();	
+				})() + ')';
+				
+				eleSeconds.innerHTML = seconds;
+
+				seconds--;
+
+				if (seconds < 0) {
+					clearInterval(timerTimeCount);
+					timerTimeCount = null;
+					// 显示弹框
+					console.log('时间到！');
+					// 圆环状态还原
+					circleInit();
+				}
+			};
+
+			step();
+
+			timerTimeCount = setInterval(step, 1000);
+		};
+
+		fnTimeCount();
+
+	</script>
+</body>
+</html>

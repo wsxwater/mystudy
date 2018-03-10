@@ -1,0 +1,229 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		a{text-decoration: none;}
+		.btn{display:inline-block;font-size: 20px;line-height: 1;padding: 6px 10px;background-color: orange;color: #fff;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);border:1px solid orange;}
+	    /* 虽然几乎所有浏览器都有模有样，但是，从效果上讲，还是有瑕疵的，IE10+以及FireFox浏览器下的点的边缘有些虚（参见下截图），虽然CSS代码并没有设置盒阴影模糊。这种羽化现象可以让IE以及FireFox在大数值盒阴影时候效果更接近photoshop的阴影效果；但是，在小尺寸阴影时候，并不是我们想要的。 */
+	    .dotting {
+	        display: inline-block; min-width: 2px; min-height: 2px;
+	        box-shadow: 2px 0 currentColor, 6px 0 currentColor, 10px 0 currentColor; 
+	        -webkit-animation: dot 3s infinite step-start both;
+	        animation: dot 3s infinite step-start both;
+	        *zoom: expression(this.innerHTML = '...'); /* IE7 */
+	    }
+	    .dotting:before { content: '...'; } /* IE8 */
+	    .dotting::before { content: ''; }
+	    :root .dotting { margin-right: 8px; } /* IE9+,FF,CH,OP,SF */
+	    @-webkit-keyframes dot {
+	        25% { box-shadow: none; }
+	        50% { box-shadow: 2px 0 currentColor; }
+	        75% { box-shadow: 2px 0 currentColor, 6px 0 currentColor; }
+	    }
+	    @keyframes dot {
+	        25% { box-shadow: none; }
+	        50% { box-shadow: 2px 0 currentColor; }
+	        75% { box-shadow: 2px 0 currentColor, 6px 0 currentColor; }
+	    }
+        
+         /* 改进 ：我们除了可以使用box-shadow生成三个点，还可以使用border + background-color实现等宽3点效果*/
+	    .dotting1 {
+	        display: inline-block; width: 10px; min-height: 2px;
+	        padding-right: 2px;
+	        border-left: 2px solid currentColor; border-right: 2px solid currentColor;
+	        background-color: currentColor; background-clip: content-box;
+	        box-sizing: border-box;
+	        -webkit-animation: dot1 3s infinite step-start both;
+	        animation: dot1 3s infinite step-start both;
+	        *zoom: expression(this.innerHTML = '...'); /* IE7 */
+	    }
+	    .dotting1:before { content: '...'; } /* IE8 */
+	    .dotting1::before { content: ''; }
+	    :root .dotting1 { margin-left: 2px; padding-left: 2px; } /* IE9+ */
+
+	    @-webkit-keyframes dot1 {
+	        25% { border-color: transparent; background-color: transparent; }
+	        50% { border-right-color: transparent; background-color: transparent; }
+	        75% { border-right-color: transparent; }
+	    }
+	    @keyframes dot1 {
+	        25% { border-color: transparent; background-color: transparent; }
+	        50% { border-right-color: transparent; background-color: transparent; }
+	        75% { border-right-color: transparent; }
+	    }
+
+ 
+        /* IE13+，Chrome，FireFox浏览器 */
+	    @supports (display:none) {
+	          dot {
+	            display: inline-block; 
+	            width: 3ch;
+	            text-indent: -1ch;
+	            vertical-align: bottom; 
+	            overflow: hidden;
+	            animation: dot2 3s infinite step-start both;
+	            font-family: Consolas, Monaco, monospace;
+	        }
+	    }
+
+	    @keyframes dot2 {
+	        33% { text-indent: 0; }
+	        66% { text-indent: -2ch; }
+	    }
+	    /*注意点：
+		    1.IE10+以及其他浏览器，点点点动画消失，IE6-IE9是普通的点点点文字。
+		    2.animate动画是连续的，但是我们这儿是一帧一帧的，一卡一卡的，不是那么连续的效果，用到step-start。
+		    3.上面代码还用到了css3的选择器:root。:root为IE9+以及其他现代浏览器Hack, IE6-7甚至IE8下，inline-block水平元素的vertical-align:bottom解析与inline水平是有差异的，会导致高度撑开，因此，display: inline-block要hack处理。
+	     */
+	    
+
+	    .dot{display: none;}
+	    .dot.on{display: inline;}
+
+	    #dot2{letter-spacing: 5px;font-size: 30px;}
+
+	</style>
+</head>
+<body>
+	<a href="javascript:;" class="btn">提交中<span class="dotting"></span></a>
+	<a href="javascript:;" class="btn">提交中<span class="dotting1"></span></a>
+	<a href="javascript:;" class="btn">提交中<dot>...</dot></a>
+    
+    <br> 
+    <br> 
+    <br> 
+    <h1>等宽字体</h1>
+	<div>iiii</div>
+	<div>mmmm</div>
+	<div style="width: 4ch;font-family: Consolas, Monaco, monospace;">iiii</div>
+	<div style="width: 4ch;font-family: Consolas, Monaco, monospace;">mmmm</div>
+
+	<br>
+
+	<span id="dottingbox">
+		<span class="dot on">*</span>
+		<span class="dot">**</span>
+		<span class="dot">***</span>
+		<span class="dot">****</span>
+		<span class="dot">*****</span>
+		<span class="dot">******</span>
+	</span><br>
+
+	<span id="dot1"><span>*</span></span><br>
+	<span id="dot2">&middot;</span><br>
+	<span id="dot"><span>*</span></span><br>
+	<span id="dot3">
+		<span class="dot">*</span>
+		<span class="dot">*</span>
+		<span class="dot">*</span>
+		<span class="dot">*</span>
+		<span class="dot">*</span>
+		<span class="dot">*</span>
+	</span><br>
+
+	<span id="dot4"></span>
+    
+
+    <script type="text/javascript" src="jQuery2.1.1.js"></script>
+    	<script type="text/javascript">
+    		window.onload=window.onresize=function () {
+                
+                var dot1=document.getElementById('dot1');
+                var timer1=null;
+                function dotAnim1() {
+                	var item=document.createElement('span');
+                	item.innerHTML="*";
+    	            dot1.appendChild(item);
+    	            if (dot1.childNodes.length>6) {
+    	            	dot1.innerHTML="<span>*</span>";
+    	            }
+                }
+                dotAnim1();
+                timer1=setInterval(function () {
+                	dotAnim1();
+                },500);
+               
+
+
+                var dot2=document.getElementById('dot2'),
+                    timer2=null,
+                    txt="&middot;";
+                function dotAnim2() {
+                	if (dot2.innerHTML.length>6) {
+                		dot2.innerHTML=txt;
+                	}
+                	dot2.innerHTML+=txt;
+                }
+                	dotAnim2();
+                	timer2=setInterval(function () {dotAnim2();},500);
+
+                var dot4=document.getElementById('dot4'),
+                    timer4=null;
+    			var arr=['******','*','**','***','****','*****'];
+    			var text='';
+                var timer4 = setInterval(function() {
+
+    				if(true) {
+    					arr.push(arr.shift());
+    				}else {
+    			 		arr.unshift(arr.pop());
+    			    }
+    				//console.log(arr[0]);
+    				text=arr[0];
+    				dot4.innerHTML=text;	
+
+    			}, 500);	 	
+
+
+    		}
+    	</script>  
+
+    	<script type="text/javascript">
+    		$(function(){
+    				(function(){
+    	   				    var i=0;
+    	   				    var timer = setInterval(function() {
+    	   				            if(i>$('#dottingbox .dot').length-1){          
+    	   				              i=0;
+    	   				            }else{
+    	   				              i++;
+    	   				            }
+    	   				            
+    	   				            $('#dottingbox .dot').eq(i).addClass('on').siblings().removeClass('on')
+    	   				    }, 500);
+    				})();
+
+    				(function(){
+    	   				    
+    	   				    var timer = setInterval(function() {
+    	   				            $('#dot').append('<span>*</span>');
+
+    	   				            if ($('#dot span').length>=6) {
+    	   				            	$('#dot span').remove();
+    	   				            }
+    	   				    }, 500);
+    				})();
+
+    				(function(){
+    						var timer = setInterval(function() {
+           							
+                                    $('#dot3 .dot').toggleClass('on');
+    						}, 500);
+    				})();
+
+    				
+    				
+
+    		})
+    	</script>
+</body>
+</html>

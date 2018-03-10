@@ -1,0 +1,51 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		html,body{width: 100%;height: 100%;overflow: hidden;}
+		canvas{display: block;margin: 0 auto;background-color: #f5f5f5;}
+	</style>
+</head>
+<body>
+	<canvas width="500" height="500" ></canvas>
+	<script type="text/javascript">
+		window.onload=function () {
+			var canvas=document.querySelector('canvas');
+			var context=canvas.getContext('2d');
+
+            canvas.width=window.innerWidth;
+            canvas.height=window.innerHeight;
+
+			drawGrid(context,'silver',10,10);
+
+			function drawGrid(cxt,color,stepX,stepY) {
+				cxt.lineWidth=0.5;
+				cxt.strokeStyle=color;
+
+				for (var i = stepX+0.5; i < cxt.canvas.width; i+=stepX) {
+					cxt.beginPath();
+					cxt.moveTo(i,0);
+					cxt.lineTo(i,cxt.canvas.height);
+					cxt.stroke();
+				}
+
+				for (var i = stepY+0.5; i < cxt.canvas.height; i+=stepY) {
+					cxt.beginPath();
+					cxt.moveTo(0,i);
+					cxt.lineTo(cxt.canvas.width,i);
+					cxt.stroke();
+				}
+			}
+		}
+	</script>
+</body>
+</html>

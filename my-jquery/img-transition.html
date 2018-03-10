@@ -1,0 +1,110 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Math</title>
+	<style type="text/css">
+	    body,html{width: 100%;height: 100%;}
+		*{margin: 0;padding: 0;}
+		img{border: none;}
+		li{list-style: none;}
+		ul{width: 100%;height: 100%;position: relative;overflow: hidden;}
+		ul li{width: 150px;position: absolute;top:0;left: 0;transform:perspective(0) rotateY(0);transition: transform 0.5s linear;}
+		ul li.on{transform:perspective(600px) rotateY(70deg);}
+		ul li img{display: block;width: 100%;}
+	</style>
+</head>
+<body>
+	<ul>
+		<li><img src="image/f1.jpg"></li>
+		<li><img src="image/f2.jpg"></li>
+		<li><img src="image/f3.jpg"></li>
+		<li><img src="image/f4.jpg"></li>
+		<li><img src="image/f5.jpg"></li>
+		<li><img src="image/f6.jpg"></li>
+		<li><img src="image/f7.jpg"></li>
+		<li><img src="image/f8.jpg"></li>
+		<li><img src="image/f9.jpg"></li>
+		<li><img src="image/f10.jpg"></li>
+		<li><img src="image/f11.jpg"></li>
+		<li><img src="image/f12.jpg"></li>
+		<li><img src="image/f13.jpg"></li>
+		<li><img src="image/f14.jpg"></li>
+	</ul>
+	<script src="jQuery2.1.1.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			var nums=[];
+			var $li=$('ul li');
+			var $width=$li.width();
+			var $height=$li.height();
+
+            
+			setInterval(function(){
+				$('ul li').each(function (i) {
+					$(this).animate({top:nums[i].y+'px',left:nums[i].x+'px'},100);
+					console.log(nums[i]);
+				})
+				update($(window).width(),$(window).height());
+
+
+			},50);
+
+			for (var i = 0; i < $li.length; i++) {
+				var num={
+					vw:$width,
+					vh:parseInt($('ul li').eq(i).height()),
+					x:Math.random() * $(window).width()+$width,
+					y:Math.random() * $(window).height()+parseInt($('ul li').eq(i).height()),
+					vx:(Math.random()*5+5)*Math.pow(-1,Math.floor(Math.random()*100)),
+					vy:(Math.random()*5+5)*Math.pow(-1,Math.floor(Math.random()*100))
+				}
+				nums.push(num);
+
+			}
+
+
+
+			$('ul li').each(function (i) {
+            	$(this).css({'top':nums[i].y+'px','left':nums[i].x+'px','z-index':i})
+            	       .removeClass('on')
+            	       .mouseover(function () {
+		            		$(this).css({'z-index':(i+20)}).addClass('on');
+		            	})
+            	       .mouseout(function () {
+		            		$(this).css({'z-index':i}).removeClass('on');
+		            	})
+            });
+
+
+
+			function update(width,height) {
+				for (var i = 0; i < nums.length; i++) {
+					nums[i].x+=nums[i].vx;
+					nums[i].y+=nums[i].vy;
+
+		            if(nums[i].x<=0){
+						nums[i].vx=-nums[i].vx;
+						nums[i].x=0/*nums[i].vw*/;
+						//console.log(nums[i].vw);
+					}
+					if (nums[i].x+nums[i].vw>=width) {
+		                nums[i].vx=-nums[i].vx;
+		                nums[i].x=width-nums[i].vw;
+					}
+					if(nums[i].y<=0){
+						nums[i].vy=-nums[i].vy;
+						nums[i].y=0/*nums[i].vh*/;
+						//console.log(nums[i].vh);
+					}
+					if (nums[i].y+nums[i].vh>=height) {
+		                nums[i].vy=-nums[i].vy;
+		                nums[i].y=height-nums[i].vh;
+					}
+					
+
+			    }
+			}
+		})
+	</script>
+</body>
+</html>

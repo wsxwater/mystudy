@@ -1,0 +1,50 @@
+var htmlWebpackPlugin=require('html-webpack-plugin');
+var path=require('path');
+
+module.exports={
+	entry:'./src/app.js',
+	output:{
+		path:__dirname+'/dist',
+		filename:'js/[name].bundle.js',
+	},
+	devtool:'source-map',
+    module:{
+    	loaders:[
+    	    {test:/\.css$/,loader:'style-loader!css-loader?importLoaders=1!postcss-loader'},
+            //{test:/\.js$/,loader:'babel-loader',exclude:/node_modules/,include:/src/},
+            {
+            	test:/\.js$/,
+            	loader:'babel-loader',
+            	exclude:path.resolve(__dirname,'node_modules'),
+            	include:path.resolve(__dirname,'src'),
+            },
+            /*{
+                test:/\.less$/,
+                loader:'style-loader!css-loader!postcss-loader!less-loader'
+            },*/
+            {
+                test:/\.html$/,
+                loader:'html-loader'
+            },
+            {
+                test:/\.(png|jpg|gif|svg)$/i,
+                //loader:'url-loader',
+                loaders:[
+                   'url-loader?limit=20000&name=assets/[name]-[hash:5].[ext]',
+                   'image-webpack-loader'
+                ], 
+                /*query:{
+                    limit:20000,
+                    name:'assets/[name]-[hash:5].[ext]'
+                }*/
+            },
+    	]
+    },
+    plugins:[
+        new htmlWebpackPlugin({
+        	filename:'index.html',
+        	template:'index.html',
+        	inject:'body'
+        })
+    ],
+}

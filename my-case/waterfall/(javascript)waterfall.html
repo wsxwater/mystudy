@@ -1,0 +1,227 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>瀑布流</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		img{outline: none;}
+        #main{position: relative;} 
+        #boxWrap{margin-left: -7px;position: relative;}
+        .box {padding:15px 0 0 15px;float: left;}
+        .pic{border: 1px solid #ccc;padding: 10px;border-radius: 5px;box-shadow: 0 0 5px #CCC;}
+        .pic img{display: block;width: 165px;height: auto;}
+        @media screen and (max-width: 330px) and (min-width: 320px){
+        	.pic img{width: 115px;}
+        }
+        @media screen and (max-width: 340px) and (min-width: 331px){
+        	.pic img{width: 120px;}
+        }
+        @media screen and (max-width: 360px) and (min-width: 341px){
+        	.pic img{width: 125px;}
+        }
+        @media screen and (max-width: 380px) and (min-width: 361px){
+        	.pic img{width: 130px;}
+        }
+        @media screen and (max-width: 400px) and (min-width: 381px){
+        	.pic img{width: 135px;}
+        }
+        @media screen and (max-width: 420px) and (min-width: 401px){
+        	.pic img{width: 140px;}
+        }
+        @media screen and (max-width: 440px) and (min-width: 421px){
+        	.pic img{width: 145px;}
+        }
+        @media screen and (max-width: 460px) and (min-width: 441px){
+        	.pic img{width: 150px;}
+        }
+        @media screen and (max-width: 480px) and (min-width: 461px){
+        	.pic img{width: 155px;}
+        }
+        @media screen and (max-width: 500px) and (min-width: 481px){
+        	.pic img{width: 160px;}
+        }
+        
+        
+	</style>
+</head>
+<body>
+	<div id="main" class="main">
+		<div id="boxWrap">
+			<div class="box">
+				<div class="pic"><img src="../image/f2.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f13.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f3.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f4.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f5.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f6.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f7.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f8.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f9.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f10.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f11.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f12.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f13.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f14.jpg" alt="瀑布流"></div>
+			</div>
+			<div class="box">
+				<div class="pic"><img src="../image/f1.jpg" alt="瀑布流"></div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		window.onload=window.onresize=function () {
+			waterfall('main','box');
+			var dataInt={"data":[
+				{"src":"../image/f10.jpg"},
+				{"src":"../image/f11.jpg"},
+				{"src":"../image/f12.jpg"},
+				{"src":"../image/f13.jpg"},
+			]};
+			window.onscroll=function () {
+				if (checkScrollSlide) {
+					var oParent=document.getElementById('main');
+					//将数据块渲染到当前页面的尾部
+					for (var i = 0; i < dataInt.data.length; i++) {
+						var oBox=document.createElement('div');
+						oBox.className='box';
+						var oPic=document.createElement('div');
+						oPic.className='pic';
+						var oImg=document.createElement('img');
+						oParent.appendChild(oBox);
+						oBox.appendChild(oPic);
+						oImg.src=dataInt.data[i].src;
+						oPic.appendChild(oImg);
+					}
+					waterfall('main','box');
+				}
+			}
+		}
+
+		function waterfall(parent,box) {
+			/*将#main下所有的.box的元素取出来 */
+			var oParent=document.getElementById(parent);
+			var oBoxs=getByClass(oParent,box);
+			console.log('.box的个数：'+oBoxs.length);
+
+			/*计算整个页面显示的列数(页面宽/box的宽)*/
+			var oBoxW=oBoxs[0].offsetWidth;
+			console.log('.box的宽度：'+oBoxW+':165+(border)2+(内边距)10*2+15'); 
+		
+			
+			var cols=Math.floor(document.documentElement.clientWidth/oBoxW);
+			console.log('.box列数：'+cols);
+			/*设置main的宽*/
+			oParent.style.cssText='width:'+(oBoxW*cols)+'px;margin:0 auto;';
+
+            var hArr=[];//存放每一列高度的数组
+            for (var i = 0; i < oBoxs.length; i++) {
+            	if (i<cols) {//第一行
+            		hArr.push(oBoxs[i].offsetHeight);
+            		var maxH=Math.max.apply(null,hArr);
+            		oParent.style.height=maxH+'px';
+            	}else{
+        		/**
+        		 * Function.apply(obj,args)方法能接收两个参数
+        		 * obj：这个对象将代替Function类里this对象
+        		 * args：这个是数组，它将作为参数传给Function（args-->arguments）
+        		 */
+                    var minH=Math.min.apply(null,hArr);
+                    var index=getMinIndex(hArr,minH);
+                    oBoxs[i].style.position='absolute';
+                    oBoxs[i].style.top=minH+'px';
+                    //oBoxs[i].style.left=oBoxW*index+'px';
+                    oBoxs[i].style.left=oBoxs[index].offsetLeft+'px';
+                    /*console.log('.box的高度的数组：'+hArr);
+                    console.log('.box的高度的数组最小高度：'+minH);
+                    console.log('.box的高度的数组最小高度的索引：'+index);*/
+                    hArr[index]+=oBoxs[i].offsetHeight;
+                    
+					var maxH=Math.max(hArr[index]);
+            	    oParent.style.height=maxH+'px';
+            	} 
+                 
+            }
+
+            console.log('.box的高度的数组：'+hArr);
+            console.log('.box的高度的数组最小高度：'+minH);
+            console.log('.box的高度的数组最小高度的索引：'+index);
+            
+		}
+
+		function getByClass(parent,sclass) {
+			if (parent.getElementsByClassName) {
+				return parent.getElementsByClassName(sclass);
+			} else {
+				var aEle=parent.getElementsByTagName('*');
+				var arr=[];
+				var re=new RegExp(' '+sclass+' ', 'i');
+				var i=0;
+				for(i=0;i<aEle.length;i++){
+				  //if(aEle[i].className==sclass)
+				  //if(aEle[i].className.search(sclass)!=-1)
+				  if(re.test(aEle[i].className)){
+				   arr.push(aEle[i]);
+				  }
+				}
+				 return arr;
+			}
+		}
+
+        /*获取索引*/
+		function getMinIndex(arr,val){
+			for (var i in arr) {
+				if (arr[i]==val) {
+					return i;
+				} 
+			}
+		}
+
+
+		/*检测是否具备了滚动条加载数据块的条件*/
+		function checkScrollSlide() {
+			var oParent=document.getElementById('main');
+			var oBoxs=getByClass(oParent,box);
+			var lastBoxH=oBoxs[oBoxs.length-1].offsetTop+Math.floor(oBoxs[oBoxs.length-1].offsetHeight/2);
+			var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+			var height=document.body.clientHeight||document.documentElement.clientHeight;
+			return (lastBoxH<(scrollTop+height))?true:false;
+		}
+
+
+	</script>
+</body>
+</html>

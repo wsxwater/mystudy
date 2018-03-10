@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    	*{margin: 0;padding: 0;}
+        div{height: 60px;line-height: 60px;text-indent: 20px;background: orange;font-weight: bold;border-bottom: 1px solid #FFF;}
+    	
+    	.a{color:#FFF;}
+    </style>
+</head>
+<body>
+    <div class="a">我是1</div>
+    <div style="color: red;">我是2</div>
+    <div style="color: blue;">我是3</div>
+    <div style="color: green;">我是4</div>
+    
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+        ;(function ($) {
+        	$.fn.extend({
+        		"color":function (value) {
+        			if (value==undefined) {
+        				return this.css("color");
+        			} else {
+        				return this.css("color",value);
+        			};
+        		}
+        	});
+        })(jQuery);
+
+
+        $(function () {
+            
+             alert($('.a').color());
+
+             console.log($('div').color('#f00'));
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>通过输入框的值筛选表格中的对应值</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+        img{border: none;}
+		a{text-decoration: none;color: #333;}
+		 hr{margin:30px auto;}
+         .container{width: 660px;margin:0 auto;}  
+
+         .input-group {
+             position: relative;
+             display: table;
+             border-collapse: separate;
+         }
+         .input-group .form-control{
+                position: relative;
+                z-index: 2;
+                float: left;
+                width: 100%;
+                padding: 10px 20px;
+                border:2px solid orange;
+                margin: 10px 0;
+                font-size: 16px;
+                outline: none;
+         }
+         .input-group .form-control, .input-group-addon, .input-group-btn {
+             display: table-cell;
+         }
+         .input-group-addon, .input-group-btn{
+                width: 1%;
+                white-space: nowrap;
+                vertical-align: middle;
+         }
+
+         #search{border-radius: 21px;text-align: center;}
+         table{width: 100%;text-align: center;border:1px solid #CCC;}
+         table th,table td{border-bottom:1px solid #CCC;border-right: 1px solid #CCC;padding:10px 5px;}
+         table th:last-child,table td:last-child{border-right:none;}
+         table tr.result{display: none;}
+         table tr.result>td{border-bottom:none;}
+
+         table tr.active{background: #DDEE96;}
+
+
+	</style>
+</head>
+<body>
+<div class="container">
+    <!-- <div>筛选：<input type="text" id="search" /></div> -->
+    <div class="input-group"><span class="input-group-addon">筛选：</span><input type="text" id="search" class="form-control"></div>
+    <table cellspacing="0">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>张三</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>李白</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <td>李梦</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>张思思</td>
+                <td>24</td>
+            </tr>
+            <tr>
+                <td>王与</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>欧冶子</td>
+                <td>26</td>
+            </tr>
+            <tr>
+                <td>区方</td>
+                <td>37</td>
+            </tr>
+            <tr>
+                <td>方子言</td>
+                <td>28</td>
+            </tr>
+            <tr>
+                <td>林琳</td>
+                <td>19</td>
+            </tr>
+            <tr>
+                <td>白心</td>
+                <td>32</td>
+            </tr>
+            <tr class="result">
+                <td colspan="2">亲，搜索不到哦~~~</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="width:100px;height:100px;background-color:red;" id="div" class="style-ban"></div>
+</div>
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+    	$(function () {
+           //$('.result').hide();
+           $('#search').keyup(function () {
+               this.myvalue=this.value;
+               console.log(this.myvalue);
+               $('table tbody tr').hide().filter(':contains('+this.myvalue+')').show();
+               if ($('table tbody tr').is(':contains('+this.myvalue+')')) {
+                   $('.result').hide();
+               } else {
+                   $('.result').show();
+               }
+           }).keyup();
+
+    	})
+    </script>
+</body>
+</html>

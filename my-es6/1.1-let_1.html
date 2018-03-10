@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+		let num=5;
+		console.log(num);
+
+        /**
+         * 代码块：{}包起来的代码，比如 if for while
+         */
+		{
+		   let a=2;
+		   console.log(a);
+		}
+        console.log(a);  //Uncaught ReferenceError: a is not defined
+
+
+        /**
+         * a). let具备块级作用域
+         * b). let不允许重复声明
+         */
+        {
+            var b=5;
+            var b=10;
+            console.log(b);
+
+            let c=10;
+            let c=4;
+            console.log(c);
+        }
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

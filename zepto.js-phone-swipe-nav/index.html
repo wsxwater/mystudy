@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+<head>
+<title>zepto.js手机端左右滑动导航菜单演示</title>
+
+<!--组件依赖css begin-->
+<link rel="stylesheet" type="text/css" href="css/widget/navigator/navigator.css" />
+<link rel="stylesheet" type="text/css" href="css/widget/navigator/navigator.iscroll.css" />
+<link rel="stylesheet" type="text/css" href="css/widget/navigator/navigator.default.css" /><!--皮肤文件，若不使用该皮肤，可以不加载-->
+<link rel="stylesheet" type="text/css" href="css/widget/navigator/navigator.iscroll.default.css" /><!--皮肤文件，若不使用该皮肤，可以不加载-->
+<!--组件依赖css end-->
+<!--组件依赖js begin-->
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/zepto.extend.js"></script>
+<script type="text/javascript" src="js/zepto.ui.js"></script>
+<script type="text/javascript" src="js/zepto.iscroll.js"></script>
+<script type="text/javascript" src="js/widget/navigator.js"></script>
+<script type="text/javascript" src="js/widget/navigator.iscroll.js"></script>
+<!--组件依赖js end-->
+<style type="text/css">
+	/* #nav-smartSetup {width: 540px; margin: 0 auto}*/
+    *{margin: 0;padding: 0;}
+    li {list-style: none;} 
+
+    #nav-smartSetup{width: 100%;}
+</style>
+    
+</head>
+<body>
+<!-- 代码开始 -->
+<div id="nav-smartSetup">
+    <ul>
+        <li><a href="#">JS代码</a></li>
+        <li><a href="#">PSD素材</a></li>
+        <li><a href="#">PSD素材</a></li>
+        <li><a href="#">图标素材</a></li>
+        <li><a href="#">网站模板</a></li>
+        <li><a href="#">FLASH素材</a></li>
+        <li><a href="#">工具源码</a></li>
+        <li><a href="#">教程中心</a></li>
+        <li><a href="#">经验学习</a></li>
+        <li><a href="#">淘宝素材</a></li>
+        <li><a href="#">快打包</a></li>
+        <li><a class="cur" href="#">大头网</a></li>
+        <li><a href="#">大头素材网</a></li>
+    </ul>
+</div>
+<br>
+<br>
+<br>
+<p style="text-align: center;">点击左右两侧的菜单试试</p>
+
+<script type="text/javascript">
+    (function () {
+        $('#nav-smartSetup').navigator();
+    })();
+</script>
+<!-- 代码结束 -->
+
+
+</body>
+</html>

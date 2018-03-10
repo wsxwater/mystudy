@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>复制数组</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+          var arr11=[1,2,3];
+          var arr12=arr11;
+          arr12.pop();   
+          console.log(arr11,arr12);  //这种方法不好，修改arr1会导致arr也改变
+
+
+          var arr21=[1,2,3];
+          var arr22=[];
+          for(var i=0;i<arr21.length;i++){
+               arr22[i]=arr21[i];
+          } 
+          arr22.pop();   
+          console.log(arr21,arr22);
+
+
+          var arr31=[1,2,3];
+          var arr32=Array.from(arr31);
+          arr32.pop();   
+          console.log(arr31,arr32);
+          
+
+          var arr41=[1,2,3];
+          var arr42=[...arr41];
+          arr42.pop();   
+          console.log(arr41,arr42);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

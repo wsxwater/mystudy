@@ -1,0 +1,165 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>放大镜</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		body{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+		.container{margin: 0 auto;min-width: 320px;max-width: 640px;}
+		canvas{display: block;}
+	</style>
+</head>
+<body>
+
+    <div class="container">
+		<canvas id="canvas">请更换浏览器！</canvas>
+    </div>
+	<canvas id="offCanvas" style="display: none;">请更换浏览器！</canvas>
+    <script type="text/javascript">
+		var can=document.querySelector('#canvas');
+		var offCan=document.querySelector('#offCanvas');
+		var ctx=can.getContext('2d');
+		var offCtx=offCan.getContext('2d');
+
+		var img=new Image();
+		var isMouseDown=false;
+
+		//var pointerArr = []; //鼠标移动坐标数组
+		var xPointer = 0;//鼠标当前x坐标
+		var yPointer = 0;//鼠标当前y坐标
+
+		var scale;
+
+		//pc，移动事件兼容写法
+		var hastouch = "ontouchstart" in window ? true : false,
+			tapstart = hastouch ? "touchstart" : "mousedown",
+			tapmove  = hastouch ? "touchmove" : "mousemove",
+			tapend   = hastouch ? "touchend" : "mouseup";
+         
+    	window.onload=window.onresize=window.onreset=function () {
+    		var wrapW=document.querySelector('.container').offsetWidth;
+    		can.width=/*768*/wrapW;
+    		can.height=/*640*/640*wrapW/768;
+
+
+    		img.src='50c3267364742.jpg';
+    		img.onload=function () {
+    			offCan.width=img.width;
+    			offCan.height=img.height;
+    			scale=offCan.width/can.width;
+
+    			ctx.drawImage(img,0,0,can.width,can.height);
+    			offCtx.drawImage(img,0,0)
+    		}
+            
+ 			//console.log(canvas.getBoundingClientRect());
+ 			/*if (wrapW==document.querySelector('.container').offsetWidth) {
+ 				window.location.reload()
+ 			}*/
+ 			//window.location.reload();
+ 			
+    	}
+
+        function windowToCanvas(x,y) {
+        	return {x:x-canvas.getBoundingClientRect().left,
+        		    y:y-canvas.getBoundingClientRect().top};
+        }
+
+		/*canvas.onmousedown=function (e) {
+			e.preventDefault();
+			var point=windowToCanvas(e.clientX,e.clientY);
+			console.log(point.x,point.y);
+			isMouseDown=true;
+			drawCanvasWithMagnifier(true,point);
+		}
+
+		canvas.onmousemove=function (e) {
+			e.preventDefault();
+			if(isMouseDown==true){
+				var point=windowToCanvas(e.clientX,e.clientY);
+				console.log(point.x,point.y);
+				drawCanvasWithMagnifier(true,point);
+			}
+		}
+
+		canvas.onmouseup=function (e) {
+			e.preventDefault();
+			isMouseDown=false;
+			drawCanvasWithMagnifier(false);
+		}*/
+		canvas.addEventListener(tapstart, function(e) {
+		    var e=window.event||event;
+		    isMouseDown=true;
+		    xPointer = hastouch ? e.targetTouches[0].pageX : e.clientX;
+		    yPointer = hastouch ? e.targetTouches[0].pageY : e.clientY;
+		    var point=windowToCanvas(xPointer,yPointer);
+		    drawCanvasWithMagnifier(true,point);
+		});
+
+		canvas.addEventListener(tapmove, function(e) {
+			var e=window.event||event;
+			e.preventDefault();
+			if (isMouseDown) {
+				xPointer = hastouch ? e.targetTouches[0].pageX : e.clientX;
+				yPointer = hastouch ? e.targetTouches[0].pageY : e.clientY;
+				var point=windowToCanvas(xPointer,yPointer);
+				drawCanvasWithMagnifier(true,point);
+			}
+		});
+
+		canvas.addEventListener(tapend, function(e) {
+			var e=window.event||event;
+			e.preventDefault();
+			isMouseDown=false;
+			drawCanvasWithMagnifier(false);
+		});
+
+		canvas.onmouseout=function () {
+			isMouseDown=false;
+			drawCanvasWithMagnifier(false);
+		}
+
+		function drawCanvasWithMagnifier(isShowMagnifer,point) {
+			ctx.clearRect(0,0,can.width,can.height);
+			ctx.drawImage(img,0,0,can.width,can.height);
+			if(isShowMagnifer){
+				drawMagnifier(point);
+			}
+		}
+
+		function drawMagnifier(point) {
+			var imgOff_cx=point.x*scale;
+			var imgOff_cy=point.y*scale;
+             
+			var mr=100;
+			var sx=imgOff_cx-mr;
+			var sy=imgOff_cy-mr;
+
+			var dx=point.x-mr;
+			var dy=point.y-mr;
+
+			ctx.lineWidth=hastouch?5:10;
+			ctx.strokeStyle='#069';
+
+			ctx.shadowColor="rgb(0,0,0)";
+			ctx.shadowOffsetX=0;
+			ctx.shadowOffsetY=0;
+			ctx.shadowBlur=mr/2;
+			ctx.save();
+			ctx.beginPath();
+			ctx.arc(point.x,point.y,mr,0,2*Math.PI);
+			ctx.clip();
+			ctx.drawImage(img,sx,sy,2*mr,2*mr,dx,dy,2*mr,2*mr);
+			ctx.stroke()
+			ctx.restore();
+		}
+    </script>
+</body>
+</html>

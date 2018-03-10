@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG路径描边动画与姓名笔画</title>
+  <style>
+  path,polygon,circle {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash 5s linear infinite;
+    animation: dash 5s linear infinite;
+  }
+
+  @-webkit-keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  </style>
+</head>
+
+<body>
+
+    <svg width="700" height="350" xmlns="http://www.w3.org/2000/svg">
+	    <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+      <g>
+        <title>Layer 1</title>
+        <polygon 
+          stroke-width="5" 
+          stroke="#000000" 
+          points="320,54.805450439453125 346.114013671875,129.93214416503906 425.6334228515625,131.55262756347656 362.25335693359375,179.6039581298828 385.2850341796875,255.73214721679688 320,210.30282592773438 254.7149658203125,255.73214721679688 277.74664306640625,179.6039581298828 214.3665771484375,131.55262756347656 293.885986328125,129.93214416503906 320,54.805450439453125 346.114013671875,129.93214416503906 " 
+          strokeWidth="5" 
+          strokecolor="#000000" 
+          fill="none" 
+          orient="point"
+          r2="44.427819"
+          r="111.069548" 
+          point="5" 
+          shape="star" 
+          id="svg_6" 
+          cy="165.875" 
+          cx="292.875" 
+          stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" />
+          <circle r="50" cx="100" cy="100" fill="none" stroke-width="5" stroke="#000000"></circle>
+      </g>
+    </svg>
+</body>
+</html>

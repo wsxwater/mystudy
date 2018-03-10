@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>抛物线小球</title>
+</head>
+<body>
+	<canvas id="canvas" style="border:1px solid #CCC;display: block;margin:30px auto;">当前浏览器不支持canvas，请更换浏览器再试 >o< 。</canvas>
+
+	<script type="text/javascript">
+	    var ball={x:512,y:100,r:20,g:2,vx:-4,vy:-10,colors:"#FF6600"};
+		window.onload=function(){
+			var canvas=document.getElementById('canvas');
+			var context=canvas.getContext('2d');
+            canvas.width=1024;
+            canvas.height=768;
+            /*context.beginPath();
+            context.arc(600,100,50,0,2*Math.PI);
+            context.fillStyle="#ff6600";
+            context.fill();
+            context.closePath();*/
+
+            setInterval(function(){
+            	render(context);
+            	update();
+            },50);
+		}
+
+		function update(){
+			ball.x+=ball.vx;
+			ball.y+=ball.vy;
+			//ball.vy+=ball.g;
+
+			/*if(ball.y>=768-ball.r){
+				ball.y=768-ball.r;
+				ball.vy=-ball.vy*0.5;
+			}
+			if(ball.x==ball.r){
+				ball.x=ball.r;
+				ball.vx=-ball.vx*0.5;
+			}
+			else if(ball.x==1024-ball.r){
+				ball.x=1024-ball.r;
+				ball.vx=-ball.vx*5;
+			}*/
+			if(ball.x-ball.r<=0){
+				ball.vx=-ball.vx;
+				ball.x=ball.r;
+			}
+			if (ball.x+ball.r>=1024) {
+                ball.vx=-ball.vx;
+                ball.x=1024-ball.r;
+			}
+			if(ball.y-ball.r<=0){
+				ball.vy=-ball.vy;
+				ball.y=ball.r;
+			}
+			if (ball.y+ball.r>=768) {
+                ball.vy=-ball.vy;
+                ball.y=768-ball.r;
+			}
+		}
+
+		function render(ctx){
+			ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height)
+			ctx.beginPath();
+
+	        ctx.arc(ball.x,ball.y,ball.r,0,2*Math.PI);
+	        ctx.fillStyle=ball.colors;
+	        ctx.fill();
+            ctx.closePath();
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<title>浏览器内核</title>
+<link href="images/icon.ico" rel="Shortcut Icon">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!--[if lt IE 9]> 
+  <script src="js/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+	  <div class="container">
+		
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#demo-navbar" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="index.html" target="_blank">现代浏览器博物馆</a><!--logo-->
+		</div><!--navbar-header结束-->
+	
+		<div class="collapse navbar-collapse" id="demo-navbar">
+		  <ul class="nav navbar-nav">	
+		    <li class="active"><a href="kernel.html">浏览器内核</a></li>
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">内核分类<span class="sr-only">(current)</span><span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+				<li><a href="#Trident">Trident</a></li>
+				<li><a href="#Gecko">Gecko</a></li>
+				<li><a href="#Presto">Presto</a></li>
+				<li><a href="#Webkit">Webkit</a></li>
+				<li><a href="#Blink">Blink</a></li>
+			  </ul><!--ul.dropdown-menu结束-->
+			</li><!--li.dropdown结束-->
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">排版引擎<span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+				<li><a href="#WebCore">WebCore</a></li>
+				<li><a href="#KHTML">KHTML</a></li>
+			  </ul><!--ul.dropdown-menu结束-->
+			</li><!--li.dropdown结束-->
+		  </ul><!--ul.nav navbar-nav结束-->
+		</div><!--div.navbar-collapse结束-->
+	  </div><!--div.container结束-->
+	</nav>
+	
+		
+		<div class="container">
+		  <div class="row">
+				<div class="col-md-3">
+				  <h1 id="kernel-browers-tit" class="museum-title">浏览器内核</h1>
+				</div>
+				<div class="col-md-9">
+				   <hr class="divider">
+				</div>	 
+		 </div>
+		   <div class="row">
+		      <div class="col-md-12">
+				 <p class="kernel-explain text-left">
+				 浏览器最重要或者说核心的部分是“Rendering Engine”，可大概译为“渲染引擎”，不过我们一般习惯将之称为“浏览器内核”。负责对网页语法的解释（如<a href="#" data-toggle="tooltip" data-placement="bottom" title="标准通用标记语言（以下简称“通用标言”），是一种定义电子文档结构和描述其内容的国际标准语言；通用标言为语法置标提供了异常强大的工具，同时具有极好的扩展性，因此在数据分类和索引中非常有用；是所有电子文档标记语言的起源，早在万维网发明之前“通用标言”就已存在。">标准通用标记</a>语言下的一个应用<a href="#" data-toggle="tooltip" data-placement="bottom" title="超文本标记语言，标准通用标记语言下的一个应用。“超文本”就是指页面内可以包含图片、链接，甚至音乐、程序等非文字元素。超文本标记语言的结构包括“头”部分（英语：Head）、和“主体”部分（英语：Body），其中“头”部提供关于网页的信息，“主体”部分提供网页的具体内容。">HTML</a>、<a href="#" data-toggle="tooltip" data-placement="bottom" title="JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。
+在1995年时，由Netscape公司的Brendan Eich，在网景导航者浏览器上首次设计实现而成。因为Netscape与Sun合作，Netscape管理层希望它外观看起来像Java，因此取名为JavaScript。但实际上它的语法风格与Self及Scheme较为接近。 
+为了取得技术优势，微软推出了JScript，CEnvi推出ScriptEase，与JavaScript同样可在浏览器上运行。为了统一规格，因为JavaScript兼容于ECMA标准，因此也称为ECMAScript。">JavaScript</a>）并渲染（显示）网页。 所以，通常所谓的浏览器内核也就是浏览器所采用的<a data-toggle="tooltip" data-placement="bottom" title="网页浏览器的排版引擎也被称为页面渲染引擎，它负责取得网页的内容（HTML、XML、图象等等）、整理信息（例如加入CSS等），以及计算网页的显示方式然后会输出至显示器或打印机。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要排版引擎。">渲染引擎</a>，渲染引擎决定了浏览器如何显示网页的内容以及页面的格式信息。不同的浏览器内核对网页编写语法的解释也有不同，因此同一网页在不同的内核的浏览器里的渲染（显示）效果也可能不同，这也是网页编写者需要在不同内核的浏览器中测试网页显示效果的原因。
+				 </p>
+			  </div><!--div.col-md-12结束-->
+		   </div><!--row结束-->
+		   <table class="table table-bordered">
+			  <tr class="active">
+			    <td rowspan="4" class="text-center">目录</td>
+			  </tr>
+			  <tr>
+			    <td class="info">
+				  <h4 class="museum-title"><span class="museum-title-num">1</span><a href="#kernel-classify-tit">内核分类</a></h4>
+				  <div class="row">   
+					<div class="col-md-4">
+					  <p>&bull;Trident</p>
+					  <p>&bull;Gecko</p>
+					  <p>&bull;Presto</p>
+					</div>
+					<div class="col-md-3">
+					  <p>&bull;Webkit</p>
+					  <p>&bull;Blink</p>
+					</div>
+				  </div><!--div.row结束-->
+			    </td>
+				<td class="success">
+				  <h4 class="museum-title"><span class="museum-title-num">2</span><a href="#kernel-layout-engine-tit">排版引擎</a></h4>
+			      <div class="row">   
+					<div class="col-md-12">
+					  <p>&bull;WebCore</p>
+					  <p>&bull;KHTML</p>
+					</div>
+				  </div><!--div.row结束-->
+			    </td>
+			  </tr>
+       </table>
+		   
+		   <hr class="divider">
+		   
+		  <div class="row">
+				<div class="col-md-3">
+				  <h2 id="kernel-classify-tit" class="museum-title"><span class="glyphicon glyphicon-education"></span>内核分类</h2>
+				</div>
+				<div class="col-md-9">
+				   <hr class="divider">
+				</div>	 
+		  </div> 
+		  <ul class="nav nav-pills" role="tablist" id="tab-list">
+				<li class="active"><a href="#Trident" role="tab" data-toggle="tab" class="text-warning">Trident</a></li>
+				<li><a href="#Gecko" role="tab" data-toggle="tab" class="text-primary">Gecko</a></li>
+				<li><a href="#Presto" role="tab" data-toggle="tab" class="text-danger">Presto</a></li>
+				<li><a href="#Webkit" role="tab" data-toggle="tab" class="text-info">Webkit</a></li>
+				<li><a href="#Blink"  role="tab" data-toggle="tab" class="text-success">Blink</a></li>
+		  </ul>
+		  <div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="Trident">
+			  <div class="row fearure">
+			    <div class="col-md-2"><img src="images/ie-logo-small.jpg" class="img-responsive kernel-classify-img" alt="Trident"></div>
+				<div class="col-md-10 text-left">
+					<h3 class="text-warning">Trident(IE内核)</h3>
+					<div class="kernel-classify">
+<p>Trident(IE内核)：该内核程序在1997年的IE4中首次被采用，是微软在Mosaic代码的基础之上修改而来的，并沿用到IE11，也被普遍称作”IE内核”。Trident实际上是一款开放的内核，其接口内核设计的相当成熟，因此才有许多采用IE内核而非IE的浏览器(壳浏览器)涌现。</p>
+<p>由于IE本身的“垄断性”（虽然名义上IE并非垄断，但实际上，特别是从Windows 95年代一直到XP初期，就市场占有率来说IE的确借助Windows的东风处于“垄断”的地位）而使得Trident内核的长期一家独大，微软很长时间都并没有更新Trident内核，这导致了两个后果——一是Trident内核曾经几乎与W3C标准脱节（2005年），二是Trident内核的大量 Bug等安全性问题没有得到及时解决，然后加上一些致力于开源的开发者和一些学者们公开自己认为IE浏览器不安全的观点，也有很多用户转向了其他浏览器，Firefox和Opera就是这个时候兴起的。非Trident内核浏览器的市场占有率大幅提高也致使许多网页开发人员开始注意网页标准和非IE浏览器的浏览效果问题。
+</p>
+<p class="text-warning">补充：IE从版本11开始，初步支持WebGL技术。IE8的JavaScript引擎是Jscript，IE9开始用Chakra，这两个版本区别很大，Chakra无论是速度和标准化方面都很出色。</p>
+<p>Trident内核的常见浏览器有：  　<a href="#" data-toggle="tooltip" data-placement="top" title="一般指Internet Explorer 6,2001年10月，微软发布Windows XP，包括Internet Explorer 6。这个版本介绍自动图象重量尺寸和打印预览。在Windows XP SP2里，IE6添加了阻止窗口弹出功能。">IE6</a>、<a  href="#" data-toggle="tooltip" data-placement="bottom" title="Internet Explorer 7.0，简称IE7。在2006年年尾，微软发布了rebranded代号的Internet Explorer 7，IE7被内置在2007年一月发布的微软新一代视窗操作系统Vista中，除更改新名字外，这个版本支持翻页浏览，RSS订阅，页面缩放，快速切换，Anti-Phishing过滤器和防冒网站筛选等动态安全，在一定程度上增加了Internet Explorer的安全性。">IE7</a>、<a href="#" data-toggle="tooltip" data-placement="top" title="北京时间2008年3月6日，微软发布了InternetExplorer 8的第一个公开测试版本(beta1)。本次测试第一次包涵简体中文（3月27日推出）版本。测试版本仍然是在IE7的架构下改进的。界面除了做一些细微的调整，增加少许实用功能外，并无改进。beta1版本推出了模拟IE7的模式、增加了在线邮件浏览功能、提高了兼容性、反钓鱼功能进一步增强，可以进行网页地址筛选。">IE8</a>（Trident 4.0）、<a href="#" data-toggle="tooltip" data-placement="top" title="Internet Explorer 9浏览器，简称IE9，该款浏览器由微软公司Windows部门高级副总裁史蒂文·西诺夫斯基（Steven Sinofsky）在2009年11月18日于美国洛杉矶市举行的“专业开发者大会”（PDC）上宣布研发，2011年3月21日，微软在中国发布IE9的正式版本，但该版本不支持Windows XP操作系统。">IE9</a>（Trident 5.0）、IE10（Trident 6.0）；<a href="#" data-toggle="tooltip" data-placement="bottom" title="360安全浏览器(360Safety Browser)是360安全中心推出的一款基于IE和Chrome双内核的浏览器，是世界之窗开发者凤凰工作室和360安全中心合作的产品。和360安全卫士、360杀毒等软件等产品一同成为360安全中心的系列产品。360安全浏览器拥有全国最大的恶意网址库，采用恶意网址拦截技术，可自动拦截挂马、欺诈、网银仿冒等恶意网址。独创沙箱技术，在隔离模式即使访问木马也不会感染。">360安全浏览器</a>（1.0-5.0为Trident，6.0为Trident+Webkit，7.0为Trident+Blink）<a href="#" data-toggle="tooltip" data-placement="bottom" title="猎豹极轻浏览器是一款由猎豹移动公司开发的轻量级浏览器，猎豹极轻浏览器采用全新防假死技术，顺畅稳定，拒绝卡顿，并重新设计了UI，0秒启动，极速上网，带来从未有过的清爽体验，浏览器采用了IE内核，实现了轻快，极速的特色，并在浏览器内部增加了广告过滤功能，让用户在浏览网页时不会弹出任何广告。猎豹极轻浏览器最突出的特色就是，能够帮助用户自动鉴定钓鱼网站，让用户不再担心网购被骗。">猎豹极轻浏览器</a>，<a href="#" data-toggle="tooltip" data-placement="top" title="360极速浏览器是一款极速、安全的无缝双核浏览器。它基于Chromium开源项目，具有闪电般的浏览速度、完备的安全特性及海量丰富的实用工具扩展。它继承了Chromium开源项目超级精简的页面和创新布局，并创新性地融入国内用户喜爱的新浪微博、人人网、天气预报、词典翻译、股票行情等等热门功能，在速度大幅度提升的同时，兼顾国内互联网应用。此外，为了更适合中国国内的用户使用，它加入了鼠标手势、超级拖拽、恢复关闭的标签、地址栏下拉列表等实用功能，配合原有Chromium的顺滑操作体验，让用户浏览网页时顺畅、安心。
+">360极速浏览器</a>（7.5之前为Trident+Webkit，7.5为Trident+Blink）<a href="#" data-toggle="tooltip" data-placement="bottom" title="猎豹安全浏览器，是由猎豹移动公司（原金山网络）推出的一款浏览器，主打安全与极速特性，采用Trident和WebKit双渲染引擎，并整合金山自家的BIPS进行安全防护。猎豹安全浏览器对Chrome的Webkit内核进行了超过100项的技术优化，访问网页速度更快。其具有首创的智能切换引擎，动态选择内核匹配不同网页，并且支持HTML5新国际网页标准，极速浏览的同时也保证兼容性。2012年12月，猎豹浏览器获得“2012年度最佳创新产品奖”。2013年6月19日，正式发布猎豹浏览器手机版。">猎豹安全浏览器</a>（1.0-4.2版本为Trident+Webkit，4.3及以后版本为Trident+Blink）<a href="#" data-toggle="tooltip" data-placement="top" title="猎豹极轻浏览器是一款由猎豹移动公司开发的轻量级浏览器，猎豹极轻浏览器采用全新防假死技术，顺畅稳定，拒绝卡顿，并重新设计了UI，0秒启动，极速上网，带来从未有过的清爽体验，浏览器采用了IE内核，实现了轻快，极速的特色，并在浏览器内部增加了广告过滤功能，让用户在浏览网页时不会弹出任何广告。猎豹极轻浏览器最突出的特色就是，能够帮助用户自动鉴定钓鱼网站，让用户不再担心网购被骗。">猎豹极轻浏览器</a>，傲游浏览器（傲游1.x、2.x为IE内核，3.x为IE与Webkit双核）、<a href="#" data-toggle="tooltip" data-placement="top" title="百度浏览器，是一款简洁轻快的浏览器。依靠百度强大的搜索平台，在满足浏览网页的基础上，以百度体系业务整合为优势，带给你更方便的浏览方式，更舒适的上网体验，为用户提供优质的具有百度特色的上网新体验。">百度浏览器（早期版本）</a>、<a href="#" data-toggle="tooltip" data-placement="top" title="世界之窗浏览器是一款快速、安全、功能细节丰富且强大的绿色多窗口浏览器，由凤凰工作室开发。最初的世界之窗采用IE内核开发，兼容微软IE浏览器，可运行于微软windows98/me/2000/xp/Vista/7/8系列操作系统上， 并且要求系统已经安装了IE。推荐运行在安装IE5.5或更高版本的系统上。2010年诞生了采用Chromium+IE内核的双核世界之窗。2013年，采用Chrome+IE内核的双核世界之窗6诞生。世界之窗的理念是“小巧、简约、快速”，以其极低的资源占用、流畅的速度、极高的稳定性赢得了用户口碑。">世界之窗浏览器</a>最初为IE内核，2013年采用Chrome+IE内核）、2345浏览器、<a href="#" data-toggle="tooltip" data-placement="top" title="腾讯TT是一款集多线程、黑白名单、智能屏蔽、鼠标手势等功能于一体的多页面浏览器，具有快速、稳定、安全的特点。Tencent Traveler 腾讯是中国最早的互联网即时通信软件开发商，是中国的互联网服务及移动增值服务供应商，并一直致力于即时通信及相关增值业务的服务运营。">腾讯TT</a>、<a href="#" data-toggle="tooltip" data-placement="top" title="2012年3月7日，阿里巴巴发布淘宝浏览器内测版，经一个月评测，公开发布了首个版本1.0.14.0。该浏览器由一淘技术部门开发，这是继阿里云浏览器后，阿里巴巴体系内出的第二款浏览器。">淘宝浏览器</a>、<a href="#" data-toggle="tooltip" data-placement="top" title="采编读浏览器，也称作家浏览器，它是一款可以分类自动做笔记，可以编辑，可以朗读的浏览器。">采编读浏览器</a>、<a href="#" data-toggle="tooltip" data-placement="top" title="搜狗浏览器由搜狗公司开发，基于谷歌chromium内核，力求为用户提供跨终端无缝的使用体验，让上网更简单、网页阅读更流畅。
+首创“网页关注”功能，将网站内容以订阅的方式提供给用户浏览。搜狗手机浏览器还具有WIFI预加载、收藏同步、夜间模式、无痕浏览、自定义炫彩皮肤、手势操作等众多易用功能。">搜狗高速浏览器</a>（1.x为Trident，2.0及以后版本为Trident+Webkit）、阿云浏览器（早期版本）、瑞星安全浏览器、Slim Browser、 GreenBrowser、爱帆浏览器（12 之前版本）、115浏览器、155浏览器、闪游浏览器、N氧化碳浏览器、糖果浏览器、彩虹浏览器、瑞影浏览器、勇者无疆浏览器、114浏览器、蚂蚁浏览器、飞腾浏览器、速达浏览器、佐罗浏览器、海豚浏览器（iPhone/iPad/Android）、UC浏览器（Blink内核+Trident内核）等。</p>
+<p>其中部分浏览器的新版本是“双核”甚至是“多核”，其中一个内核是Trident，然后再增加一个其他内核。国内的厂商一般把其他内核叫做“高速浏览模式”，而Trident则是“兼容浏览模式”，用户可以来回切换。</p>
+				   </div><!--div.kernel-classify结束-->
+				</div>
+			  </div><!--div.row.fearure结束-->
+			</div><!--div.tab-pane结束-->
+			<div role="tabpanel" class="tab-pane" id="Gecko">
+			  <div class="row fearure">
+			    <div class="col-md-2"><img src="images/firefox-logo-small.jpg" class="img-responsive kernel-classify-img" alt="Trident"></div>
+				<div class="col-md-10 text-left">
+					<h3 class="text-primary">Gecko(Firefox内核)</h3>
+					<div class="kernel-classify">
+<p>Gecko(Firefox内核)：Netscape6开始采用的内核，后来的<a href="#" data-toggle="tooltip" data-placement="bottom" title="Mozilla Firefox，中文俗称“火狐”（正式缩写为Fx或fx，非正式缩写为FF），是一个自由及开放源代码网页浏览器，使用Gecko排版引擎，支持多种操作系统，如Windows、Mac OS X及GNU/Linux[2]  等。该浏览器提供了两种版本，普通版和ESR（Extended Support Release，延长支持）版，ESR版本是 Mozilla 专门为那些无法或不愿每隔六周就升级一次的企业打造。Firefox ESR 版的升级周期为 42 周，而普通 Firefox 的升级周期为 6 周。据2013年8月浏览器统计数据，Firefox在全球网页浏览器市占率76%至81%，用户数在各网页浏览器中排名第三，全球估计有6450万位用户。在印度尼西亚、德国和波兰的占有率最高，分别为97.84%、86.41%和84.31%。自Firefox 29起，浏览器界面有很大程度改变 。由于该浏览器开放了源代码，因此还有一些第三方编译版供使用。如pcxFirefox，苍月浏览器等">Mozilla FireFox(火狐浏览器)</a> 也采用了该内核，Gecko的特点是代码完全公开，因此，其可开发程度很高，全世界的程序员都可以为其编写代码，增加功能。因为这是个开源内核，因此受到许多人的青睐，Gecko内核的浏览器也很多，这也是Gecko内核虽然年轻但市场占有率能够迅速提高的重要原因。</p>
+<p>事实上<a href="#" data-toggle="tooltip" data-placement="top" title="Gecko是由Mozilla基金会开发的布局引擎的名字。它原本叫作NGLayout。Gecko的作用是读取诸如HTML、CSS、XUL和JavaScript等的网页内容，并呈现到用户屏幕或打印出来。Gecko已经被许多应用程序所使用，包括若干浏览器，例如Firefox、Mozilla Suite、Camino等。">，Gecko引擎</a>的由来跟IE不无关系，前面说过IE没有使用W3C的标准，这导致了微软内部一些开发人员的不满；他们与当时已经停止更新了的 Netscape的一些员工一起创办了Mozilla，以当时的Mosaic内核为基础重新编写内核，于是开发出了Gecko。不过事实上，Gecko 内核的浏览器仍然还是Firefox (火狐) 用户最多，所以有时也会被称为Firefox内核。此外Gecko也是一个跨平台内核，可以在Windows、 BSD、Linux和Mac OS X中使用。</p>
+<p>补充：JavaScript引擎是SpiderMonkey。</p>
+<p>Gecko内核常见的浏览器：Mozilla Firefox、Mozilla SeaMonkey、Epiphany（早期版本）、Flock（早期版本）、K-Meleon</p>
+				   </div><!--div.kernel-classify结束-->
+				</div>
+			  </div><!--div.row.fearure结束-->
+			</div><!--div.tab-pane结束-->
+			<div role="tabpanel" class="tab-pane" id="Presto">
+			  <div class="row fearure">
+			    <div class="col-md-2"><img src="images/opera-logo-small.jpg" class="img-responsive kernel-classify-img" alt="Presto"></div>
+				<div class="col-md-10 text-left">
+					<h3 class="text-danger">Presto(Opera前内核)</h3>
+					<div class="kernel-classify">
+<p>Presto(Opera前内核) (已废弃)： Opera12.17及更早版本曾经采用的内核，现已停止开发并废弃，该内核在2003年的Opera7中首次被使用，该款引擎的特点就是渲染速度的优化达到了极致，然而代价是牺牲了网页的兼容性。</p>
+<p>实际上这是一个动态内核，与前面几个内核的最大的区别就在脚本处理上，Presto有着天生的优势，页面的全部或者部分都能够在回应脚本事件时等情况下被重新解析。此外该内核在执行Javascrīpt的时候有着最快的速度，根据在同等条件下的测试，Presto内核执行同等Javascrīpt所需的时间仅有Trident和Gecko内核的约1/3（Trident内核最慢，不过两者相差没有多大），本文的其中一个修改者认为上述测试信息过于老旧且不完整，因为他曾做过的小测试显示Presto部分快部分慢，各内核总体相当。那次测试的时候因为Apple机的硬件条件和普通PC机不同所以没有测试WebCore内核。只可惜Presto是商业引擎，使用Presto的除开Opera以外，只剩下NDSBrowser、Wii Internet Channle、Nokia 770网络浏览器等，这很大程度上限制了Presto的发展。</p>
+<p>Opera现已改用Google Chrome的Blink内核。</p>
+				   </div><!--div.kernel-classify结束-->
+				</div>
+			  </div><!--div.row.fearure结束-->
+			</div><!--div.tab-pane结束-->
+			<div role="tabpanel" class="tab-pane" id="Webkit">
+			  <div class="row fearure">
+			    <div class="col-md-2">
+				   <img src="images/safari-logo-small.jpg" class="img-responsive kernel-classify-img" alt="Webkit">
+				   <img src="images/chrome-logo-small.jpg" class="img-responsive kernel-classify-img" alt="Webkit">
+				</div>
+				<div class="col-md-10 text-left">
+					<h2 class="text-info">Webkit(Safari内核,Chrome内核原型)</h2>
+					<div class="kernel-classify">
+<p>Webkit(Safari内核,Chrome内核原型,开源):它是苹果公司自己的内核，也是苹果的<a href="#" data-toggle="tooltip" data-placement="top" title="Safari，是苹果计算机的最新操作系统Mac OS X中的浏览器，使用了KDE的KHTML作为浏览器的运算核心。">Safari</a>浏览器使用的内核。 Webkit引擎包含WebCore<a href="#" data-toggle="tooltip" data-placement="left" title="网页浏览器的排版引擎也被称为页面渲染引擎，它负责取得网页的内容（HTML、XML、图象等等）、整理信息（例如加入CSS等），以及计算网页的显示方式然后会输出至显示器或打印机。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要排版引擎。">排版引擎</a>及JavaScriptCore解析引擎，均是从KDE的KHTML及KJS引擎衍生而来，它们都是自由软件，在GPL条约下授权，同时支持BSD系统的开发。所以Webkit也是自由软件，同时开放源代码。在安全方面不受IE、Firefox的制约，所以Safari浏览器在国内还是很安全的。</p>
+<p>限于Mac OS X的使用不广泛和Safari浏览器曾经只是Mac OS X的专属浏览器，这个内核本身应该说市场范围并不大；但似乎根据最新的浏览器调查表明，该浏览器的市场甚至已经超过了Opera的Presto了——当然这一方面得益于苹果转到x86架构之后的人气暴涨，另外也是因为Safari 3终于推出了<a href="#" data-toggle="tooltip" data-placement="bottom" title="Microsoft Windows,是美国微软公司研发的一套操作系统，它问世于1985年，起初仅仅是Microsoft-DOS模拟环境，后续的系统版本由于微软不断的更新升级，不但易用，也慢慢的成为家家户户人们最喜爱的操作系统。">Windows</a>版的缘故吧。Mac下还有OmniWeb、Shiira等人气很高的浏览器。</p>
+<p>Google Chrome、360极速浏览器以及搜狗高速浏览器高速模式也使用Webkit作为内核(在脚本理解方面，Chrome使用自己研发的V8引擎)。WebKit 内核在手机上的应用也十分广泛，例如 Google 的手机 Gphone、 Apple 的iPhone， Nokia’s Series 60 browser 等所使用的 Browser 内核引擎，都是基于 WebKit。</p>
+<p>WebKit内核常见的浏览器：傲游浏览器3、<a href="#" data-toggle="tooltip" data-placement="top" title="Apple Safari是一款适用于Mac操作系统的软件。">Apple Safari</a>(Win/Mac/iPhone/iPad)、Symbian手机浏览器、Android 默认浏览器.</p>
+				   </div><!--div.kernel-classify结束-->
+				</div>
+			  </div><!--div.row.fearure结束-->
+			</div><!--div.tab-pane结束-->
+			<div role="tabpanel" class="tab-pane" id="Blink">
+			  <div class="row fearure">
+			    <div class="col-md-2">
+				   <img src="images/opera-logo-small.jpg" class="img-responsive kernel-classify-img" alt="Blink">
+				   <img src="images/chrome-logo-small.jpg" class="img-responsive kernel-classify-img" alt="Blink">
+				</div>
+				<div class="col-md-10 text-left">
+					<h3 class="text-success">Blink(Google内核和Opera内核)</h3>
+					<div class="kernel-classify">
+<h4 class="text-success">产品简介</h4>
+<p>Blink是一个由Google和Opera Software开发的浏览器排版引擎，Google计划将这个渲染引擎作为Chromium计划的一部分，并且在2013年4月的时候公布了这一消息。这一渲染引擎是开源引擎WebKit中WebCore组件的一个分支，并且在Chrome（28及往后版本）、Opera（15及往后版本）和Yandex浏览器中使用。</p>
+<h4 class="text-success">相关新闻</h4>
+<p>2013年4月3日，谷歌在Chromium Blog上发表博客，称将与苹果的开源浏览器核心Webkit分道扬镳，在Chromium项目中研发Blink渲染引擎（即浏览器核心），内置于<a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Chrome，又称Google浏览器，是一个由Google（谷歌）公司开发的网页浏览器。该浏览器是基于其他开源软件所撰写，包括WebKit，目标是提升稳定性、速度和安全性，并创造出简单且有效率的使用者界面。软件的名称是来自于称作Chrome的网络浏览器图形使用者界面（GUI）。软件的beta测试版本在2008年9月2日发布，提供50种语言版本，有Windows、Mac OS X、Linux、Android、以及iOS版本提供下载。">Chrome</a>浏览器之中。</p>
+<p>苹果在Safari中采用Webkit核心，并于2005年将Webkit公开为开源软件。谷歌当时采用苹果的Webkit核心打造了Chrome浏览器。Opera也宣布称将会转向Webkit核心，但是谷歌宣布此举后，Opera表示将会跟随谷歌采用其Blink浏览器核心，同时参与了Blink的开发。</p>
+<p><a href="#" data-toggle="tooltip" data-placement="top" title="Google（中文名：谷歌），是一家美国的跨国科技企业，致力于互联网搜索、云计算、广告技术等领域，开发并提供大量基于互联网的产品与服务，其主要利润来自于AdWords等广告服务。 Google由当时在斯坦福大学攻读理工博士的拉里·佩奇和谢尔盖·布卢姆共同创建，因此两人也被称为“Google Guys”。1998年9月4日，Google以私营公司的形式创立，设计并管理一个互联网搜索引擎“Google搜索”。Google网站则于1999年下半年启用。Google的使命是整合全球信息，使人人皆可访问并从中受益。Google是第一个被公认为全球最大的搜索引擎，在全球范围内拥有无数的用户。">谷歌</a>转向研发Blink浏览器内核意义重大，谷歌此举欲降低Webkit即苹果在浏览器市场的影响力。截止2012年底，Webkit浏览器内核占总浏览器市场份额约40%。谷歌解释称，Chromium多处理架构系统与其他Webkit浏览器很不相同。谷歌工程师Adam Barth在博客[3]  中表示，随着浏览器的发展，苹果的Webkit已经不能满足用户需求，同时也有碍浏览器技术的创新步伐。但是他也表示，谷歌自主研发Blink内核绝非易事，但是新内核将会提升整个开源网络生态系统的机能。谷歌做出此举之际，Mozilla与三星也达成合作协议开发“下一代”浏览器渲染引擎Servo。</p>
+				   </div><!--div.kernel-classify结束-->
+				</div>
+			  </div><!--div.row.fearure结束-->
+			</div><!--div.tab-pane结束-->
+		  </div><!--div.tab-content结束-->
+          
+		  <hr class="divider">
+		  
+		  <div class="row">
+				<div class="col-md-3">
+				  <h2 id="kernel-layout-engine-tit"class="museum-title"><span class="glyphicon glyphicon-education"></span>排版引擎</h2>
+				</div>
+				<div class="col-md-9">
+				   <hr class="divider">
+				</div>	 
+		  </div>
+		  <div class="row">
+		    <div class="col-md-6">
+			   <h3 id="WebCore"><span class="glyphicon glyphicon-star"></span>WebCore</h3>
+			   <div class="kernel-layout-engine">
+<p>WebCore是苹果公司开发的排版引擎，它是在另外一个排版引擎“KHTML”的基础上而来的。使用WebCore的主要有Safari，此外还有OmniWeb、Shiira、Swift等。Safari现支持Windows，但效果不如iOS上的。</p>
+               </div>
+			</div>
+			<div class="col-md-6">
+				<h3 id="KHTML"><span class="glyphicon glyphicon-star"></span>KHTML</h3>
+				<div class="kernel-layout-engine">
+<p>KHTML，是HTML网页排版引擎之一，由KDE所开发。</p>
+<p>KDE系统自KDE2版起，在档案及网页浏览器使用了KHTML引擎。该引擎以C++编程语言所写，并以LGPL授权，支援大多数网页浏览标准。由于微软的Internet Explorer的占有率相当高，不少以FrontPage制作的网页均包含只有IE才能读取的非标准语法，为了使KHTML引擎可呈现的网页达到最多，部分IE专属的语法也一并支援。</p>
+<p>KHTML拥有速度快捷的优点，但对错误语法的容忍度则比Mozilla产品所使用的Gecko引擎小。
+苹果电脑于2002年采纳了KHTML，作为开发Safari浏览器之用，并发布所修改的最新及过去版本源代码。后来发表了开放源代码的WebCore及WebKit引擎，它们均是KHTML的衍生产品，在开发网站列出引擎改变内容，并会传回至KDE计划。由于两个衍生产品各走不同路线，使两者源代码偏离，在与KDE交换更新会出现困难。其中一个原因，是苹果在对外公开源代码之前，以一年时间编修他们的KHTML。另外，苹果传送更新至KDE计划的方式，多是一口气把大量改动一起传送，KDE在整理资料也出现一定的困难，及后苹果表示会以CVS格式来传送。再者，苹果所作出的改动包括Mac OS X系统独有的事物，如Objective-C、KWQ等，在Linux及KHTML是没有的。但KDE方面仍透过这些改动，为KHTML加入新功能及加快其排版速度。</p>
+<p class="text-left">基于KHTML内核的内核：WebKit、WebCore。</p>
+               </div>
+			</div>
+		  </div>
+		  
+		  <hr class="divider">
+		  
+		  <footer>
+		    <p class="pull-right"><a href="#top" class="btn btn-default glyphicon glyphicon-arrow-up" data-toggle="tooltip" data-placement="top" title="回到顶部"></a></p>
+			<p class="pull-left">&copy;&nbsp;2015&nbsp;现代浏览器博物馆</p>
+		  </footer>		  
+		</div><!--div.container结束-->
+
+
+		<!--弹出框开始-->
+		<div class="modal fade" id="about">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">关于</h4>
+			  </div>
+			  <div class="modal-body">
+				<p>浏览器能够理解和支持HTML和XHTML，Cascading Style Sheets(CSS)，ECMAScript及W3C Document Object Model(DOM)标准。所有这些形成的标准，允许超越表现层的标记、不兼容的脚本语言，以及它们所造成的永久的淘汰怪圈。</p>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">了解了</button>
+			  </div>
+			</div><!-- div.modal-content结束 -->
+		  </div><!--div.modal-dialog结束 -->
+		</div><!-- div.modal结束 -->			      
+		<!--弹出框结束-->
+
+<script src="js/jquery-1.11.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+  $(function(){
+     $("#demo-navbar .dropdown-menu a").click(function(){
+	    var href=$(this).attr("href"); 
+		$("#tab-list a[href='"+href+"']").tab("show");
+	 });
+	
+  });
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+  
+  $(function(){
+     $(".navbar-nav").find("li").click(function(){
+	    $(this).addClass("active").siblings().removeClass("active");
+	 });
+  });
+</script>
+</body>
+</html>

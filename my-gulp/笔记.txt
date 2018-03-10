@@ -1,0 +1,38 @@
+1、安装nodejs，使用淘宝镜像；
+
+2、新建package.json文件；（注意如果有package.json，你可以cnpm install）
+   cnpm init  //创建package.json   （!!!注意入口文件要写gulpfile.js）
+   
+        2.1、使用npm卸载插件：npm uninstall <name> [-g] [--save-dev]  PS：不要直接删除本地插件包
+        2.2、删除全部插件：npm uninstall gulp-less gulp-uglify gulp-concat ……???太麻烦
+        2.3、借助rimraf：npm install rimraf -g 用法：rimraf node_modules
+        2.4、使用npm更新插件：npm update <name> [-g] [--save-dev]
+        2.5、更新全部插件：npm update [--save-dev]
+        2.6、查看npm帮助：npm help
+        2.7、当前目录已安装插件：npm list
+
+3、全局和本地安装gulp；
+   cnpm install gulp -g   //全局安装
+   cnpm install gulp --save-dev  //本地安装
+   （！！！注：全局安装gulp是为了执行gulp任务，本地安装gulp则是为了调用gulp插件的功能。）
+   
+4、安装gulp插件；
+   cnpm install 插件名字 --save-dev
+   
+5、新建gulpfile.js文件；
+   在新建的js文件里面要写的内容：
+   var gulp=require('gulp'),
+       imagemin = require('gulp-imagemin');
+   gulp.task('default',function(){
+       console.log('安装成功');
+   });
+   
+   gulp.task('testImagemin', function () {
+     gulp.src('src/img/*.{png,jpg,gif,ico}')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/img'));   
+   });
+   
+6、通过命令提示符运行gulp任务。
+   6.1、默认任务可以输入：gulp/gulp default;
+   6.2、要运行testImagemin任务可以输入：gulp testImagemin

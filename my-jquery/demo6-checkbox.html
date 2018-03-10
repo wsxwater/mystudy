@@ -1,0 +1,153 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>checkbox</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		a{text-decoration: none;color: #333;}
+		 hr{margin:30px auto;}
+
+         form p{margin:10px 0;}
+
+         .content{width: 180px;float: left;}
+         .content span{display: block;width: 140px;line-height: 24px;text-align: center;font-size: 14px;margin:5px 0;background: orange;color: #FFF;box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);-webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);cursor: pointer;}
+	</style>
+</head>
+<body>
+
+    <form style="width: 600px;margin:10px auto;">
+        <p>你爱好的运动是？<input type="checkbox" name="checkAll" id="checkAll"><label for="checkAll">全选/全不选</label></p>
+        <p>
+           <input type="checkbox" name="checkOne" id="test1"><label for="test1">足球</label>
+           <input type="checkbox" name="checkOne" id="test2"><label for="test2">篮球</label>
+           <input type="checkbox" name="checkOne" id="test3"><label for="test3">羽毛球</label> 
+           <input type="checkbox" name="checkOne" id="test4"><label for="test4">乒乓球</label>
+        </p>
+        
+        <hr>    
+
+        <p>你喜欢的饮料是？</p>
+        <p>
+            <input type="checkbox" name="checks" id="check1" value="可乐"><label for="check1">可乐</label>
+            <input type="checkbox" name="checks" id="check2" value="雪碧"><label for="check2">雪碧</label>
+            <input type="checkbox" name="checks" id="check3" value="牛奶"><label for="check3">牛奶</label>
+            <input type="checkbox" name="checks" id="check4" value="豆奶"><label for="check4">豆奶</label>
+        </p>
+        <p>
+            <button type="button" id="chbtn1">全选</button>
+            <button type="button" id="chbtn2">全不选</button>
+            <button type="button" id="chbtn3">反选</button>
+            <button type="button" id="send">提交</button></p>
+        </p>
+
+
+        <hr>
+
+        <div class="content">
+            <select id="select1" multiple style="width:100px;height: 160px;">
+                <option value="1">选项1</option>
+                <option value="2">选项2</option>
+                <option value="3">选项3</option>
+                <option value="4">选项4</option>
+                <option value="5">选项5</option>
+                <option value="6">选项6</option>
+                <option value="7">选项7</option>
+                <option value="8">选项8</option>
+            </select>
+            <div>
+                <span id="add">选中添加到右边&gt;&gt;</span>
+                <span id="add_all">全部添加到右边&gt;&gt;</span>
+            </div>
+        </div>
+        <div class="content">
+            <select id="select2" multiple style="width:100px;height: 160px;"></select>
+            <div>
+                <span id="remove">&lt;&lt;选中删除到左边</span>
+                <span id="remove_all">&lt;&lt;全部删除到左边</span>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+    	$(function () {
+    		$('#checkAll').click(function () {
+                   $('[name=checkOne]:checkbox').prop('checked',this.checked);
+             });
+
+            $('[name=checkOne]:checkbox').click(function () {
+                var flag=true;
+                $('[name=checkOne]:checkbox').each(function () {
+                    if (!this.checked) {
+                        flag=false;
+                    }
+                    $('#checkAll').prop('checked',flag);
+                });
+            });
+
+
+
+            /***************************************************************/
+            $('#chbtn1').click(function () {
+                $('[name=checks]:checkbox').prop('checked',true)
+            });
+            $('#chbtn2').click(function () {
+                $('[name=checks]:checkbox').prop('checked',false)
+            });
+            /*$('#chbtn3').click(function () {
+                $('[name=checks]:checkbox').each(function () {
+                   $(this).prop('checked',!$(this).prop('checked'));
+                });
+            });*/
+            $('#chbtn3').click(function () {
+                $('[name=checks]:checkbox').each(function () {
+                   this.checked=!this.checked;
+                });
+            });
+            
+            $('#send').click(function () {
+                var str='你选择的饮料是：\r\n';
+                $('[name=checks]:checkbox:checked').each(function () {
+                   str+=$(this).val()+'\r\n';
+                });
+                alert(str);
+            });
+
+
+
+            /***************************************************************/
+            $('#add').click(function () {
+                var $options=$('#select1 option:selected');
+                /*var $remove=$options.remove();
+                $remove.appendTo($('#select2'));*/
+                $options.appendTo($('#select2'));
+            });
+            $('#add_all').click(function () {
+                var $options=$('#select1 option');
+                $options.appendTo($('#select2'));
+            });
+            $('#select1').dblclick(function () {
+                var $options=$('option:selected',this);
+                $options.appendTo($('#select2'));
+            });
+
+            $('#remove').click(function () {
+                var $options=$('#select2 option:selected');
+                $options.appendTo($('#select1'));
+            });
+            $('#remove_all').click(function () {
+                var $options=$('#select2 option');
+                $options.appendTo($('#select1'));
+            });
+            $('#select2').dblclick(function () {
+                var $options=$('#select2 option:selected');
+                $options.appendTo($('#select1'));
+            });
+
+
+    	})
+    </script>
+</body>
+</html>

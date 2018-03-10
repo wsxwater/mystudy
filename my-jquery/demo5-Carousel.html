@@ -1,0 +1,90 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>轮播图片</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        li{list-style: none;}
+        img{border: none;}
+        a{text-decoration: none;color: #333;}
+         hr{margin:30px auto;}
+
+
+         .card{position: relative;border: 1px solid #CCC;width: 520px;margin:10px auto;background: #EEE;-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.2);box-shadow: 2px 2px 5px rgba(0,0,0,.2);}
+         
+         .card .btn{display: inline-block;padding: 10px 4px;background: #000;color: #FFF;font-size: 20px;font-weight: bold;position: absolute;top:50%;margin-top: -20px;}
+         .card .prev{left: 0;}
+         .card .next{right: 0;}
+
+         .card .card_body{margin: 20px;width: 480px;height: 100px;position: relative;overflow: hidden;}
+         .card ul{width:auto;height: 100px;position:absolute;top:0;left:0;overflow:auto;white-space:nowrap;font-size: 0;}
+         .card ul li{width:150px;height:90px;cursor:pointer;display: inline-block; padding:5px;}
+         .card ul li img{display:block;width:100%;height:100%;/* width:160px;height:100px; */}
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="card_body">
+            <ul>
+                <li><img src="image/f1.jpg" alt="f1.jpg"></li>
+                <li><img src="image/f2.jpg" alt="f2.jpg"></li>
+                <li><img src="image/f3.jpg" alt="f3.jpg"></li>
+                <li><img src="image/f4.jpg" alt="f4.jpg"></li>
+                <li><img src="image/f5.jpg" alt="f5.jpg"></li>
+                <li><img src="image/f6.jpg" alt="f6.jpg"></li>
+                <li><img src="image/f7.jpg" alt="f7.jpg"></li>
+                <li><img src="image/f8.jpg" alt="f8.jpg"></li>
+                <li><img src="image/f9.jpg" alt="f9.jpg"></li>
+                <li><img src="image/f10.jpg" alt="f10.jpg"></li>
+                <li><img src="image/f11.jpg" alt="f11.jpg"></li>
+            </ul>
+        </div>
+        <a href="javascript:;" class="btn prev">&lt;</a>
+        <a href="javascript:;" class="btn next">&gt;</a>
+    </div>
+    
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+        $(function () {
+            var page=1;
+            var i=3;   //每版放4张图片
+            var $prev=$('.prev');
+            var $next=$('.next');
+            var $parent=$('.card');
+            var $body=$('.card_body');
+            var $ul=$('.card_body ul');
+            var len=$('.card_body ul li').length;
+            var pageCount=Math.ceil(len/i);
+
+            //获取.card_body的宽度
+            var $width=$body.width();
+
+            $next.on('click',function () {
+                if (!$ul.is(':animated')) {
+                    if (page==pageCount) {
+                        page=1;
+                        $ul.animate({left:'0px'},'slow');
+                    } else {
+                        $ul.animate({left:'-='+$width},'slow');
+                        page++;
+                    }
+                }
+            });
+            $prev.on('click',function () {
+                if (!$ul.is(':animated')) {
+                    if (page==1) {
+                        page=pageCount;
+                        $ul.animate({left:'-='+$width*(pageCount-1)},'slow');
+                    } else {
+                        $ul.animate({left:'+='+$width},'slow');
+                        page--;
+                    }
+                }
+            });
+            
+
+        })
+    </script>
+</body>
+</html>

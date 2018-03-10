@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试1</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<!-- babel是转换编译器，ES6转换成可以在浏览器中运行的代码 -->
+	<script type="text/babel">
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+
+			ReactDOM.render(
+                <span>hello，ReactJS!</span>, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+
+       <div id="div1">
+       	
+       </div>
+	
+</body>
+</html>

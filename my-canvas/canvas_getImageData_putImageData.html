@@ -1,0 +1,658 @@
+﻿<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+
+		.container{min-width: 320px;max-width: 640px;margin: 0 auto;}
+		canvas{margin:0 auto;display: block;width: 320px;height: 266px;}
+        a{text-decoration: none;color:#000;background-color: #f5f5f5;border:1px solid #ccc;display: inline-block;padding:5px;font-size: 14px;line-height: 1;margin:2px 4px;}
+        a:first-child,a+a{margin-right: 0;}
+	</style>
+</head>
+<body>
+    <div class="container">
+		<canvas id="canvas1">请更换浏览器！</canvas>
+	    
+	    <div style="margin:10px 0;font-size: 0;">
+		    <a href="javascript:filter()">滤镜</a>
+		    <a href="javascript:greyEffect()">灰度滤镜</a>
+		    <a href="javascript:BlackAndWhiteEffect()">黑白滤镜</a>
+		    <a href="javascript:BlueEffect()">宝石蓝滤镜</a>
+		    <a href="javascript:pupleEffect()">紫色滤镜</a>
+		    <a href="javascript:oldPhotoEffect()">老照片滤镜</a>
+		    <a href="javascript:lightFilterEffect()">光照滤镜</a>
+		    <a href="javascript:ReverseEffect()">反色滤镜</a>
+		    <a href="javascript:blurEffect()">模糊滤镜</a>
+		    <a href="javascript:mosaicEffect()">马赛克滤镜</a>
+		    <a href="javascript:lomoEffect()">lomo滤镜</a>
+		    <a href="javascript:fireEffect()">熔铸滤镜</a>
+		    <a href="javascript:handleBlockEffect()">积木滤镜</a>
+		    <a href="javascript:handleComicEffect()">连环画滤镜</a>
+		    <a href="javascript:pinghuaEffect()">平滑滤镜</a>
+		    <a href="javascript:nihongEffect()">霓虹滤镜</a>
+		    <a href="javascript:carvingEffect()">浮雕滤镜</a>
+		    <a href="javascript:magnifierEffect()">放大镜滤镜</a>
+	    </div>
+
+		<canvas id="canvas2">请更换浏览器！</canvas>
+    </div>
+
+	<script type="text/javascript">
+	    var canvas1=document.getElementById('canvas1');
+	    var canvas2=document.getElementById('canvas2');
+	    var context1=canvas1.getContext('2d');
+	    var context2=canvas2.getContext('2d');
+        canvas1.width=320*2;
+        canvas1.height=266*2;
+        canvas2.width=320*2;
+        canvas2.height=266*2;  
+	    canvas1.style.cssText='width:320px;height:266px;';
+	    canvas2.style.cssText='width:320px;height:266px;';
+
+
+	    var image=new Image();
+		window.onload=function () {
+			context1.beginPath();
+			context1.fillStyle="#efefef";
+			context1.fillRect(0,0,canvas1.width,canvas1.height);
+			context1.fill();
+			context1.closePath();
+			context1.font="bold 40px/40px Arial";
+			context1.textAlign="center";
+			context1.textBaseLine="middle";
+			context1.fillStyle="#ff6600";
+			context1.fillText("加载中...",canvas1.width/2,canvas1.height/2);
+			console.log(context1.measureText("加载中..."));
+
+			image.src="50c3267364742.jpg";
+
+			image.onload=function () {
+				context1.clearRect(0,0,canvas1.width,canvas1.height);
+				context1.drawImage(image,0,0,canvas1.width,canvas1.height);
+			}
+		}
+
+
+		function filter() {
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+				pixelData[4*i+0]=0;   //r通道
+				//pixelData[4*i+1]=0; //g通道
+				//pixelData[4*i+2]=0; //b通道
+				//pixelData[4*i+3]=0; //a通道
+			}
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function greyEffect() {
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+				var r=pixelData[4*i+0];   //r通道
+				var g=pixelData[4*i+1];   //g通道
+				var b=pixelData[4*i+2];   //b通道
+				//var grey=Math.max(r,g,b);    //最大值法：这种方法处理后的图片看起来亮度值偏高。
+				//var grey=(r+g+b)/3;    //平均值法：这样处理的图片十分柔和
+				var grey=r*0.3+g*0.59+b*0.11;  //加权平均值法
+				pixelData[4*i+0]=grey;	
+				pixelData[4*i+1]=grey;	
+				pixelData[4*i+2]=grey;	
+			}
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function BlackAndWhiteEffect() {
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+				var r=pixelData[4*i+0];   //r通道
+				var g=pixelData[4*i+1];   //g通道
+				var b=pixelData[4*i+2];   //b通道
+				var grey=r*0.3+g*0.59+b*0.11;
+                
+				if (grey>255/2) {
+					v=255;
+				}else{
+					v=0;
+				}
+				pixelData[4*i+0]=v;	
+				pixelData[4*i+1]=v;	
+				pixelData[4*i+2]=v;	
+			}
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function BlueEffect() {
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+				var r=pixelData[4*i+0];   //r通道
+				var g=pixelData[4*i+1];   //g通道
+				var b=pixelData[4*i+2];   //b通道
+
+				//蓝色通道的值变为原来的1.6倍  
+		        var b1 = (0 * r + 0 * g + 1.6 * b);                         
+		          
+		        //检查蓝色通道值是否超出范围 
+		        b1=Math.min(255,b1); 
+
+				pixelData[4*i+0]=r;	
+				pixelData[4*i+1]=g;	
+				pixelData[4*i+2]=b1;	
+			}
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function pupleEffect() {
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+				var r=pixelData[4*i+0];   //r通道
+				var g=pixelData[4*i+1];   //g通道
+				var b=pixelData[4*i+2];   //b通道
+
+				//红色通道的值和绿色通道的值增加50（红色+绿色 =黄色）  
+		        var r1 = r + 50;  
+		        var b1 = b + 50;  
+
+		        //检查通道值是否超出范围
+		        r1=Math.min(255,r1);  
+		        b1=Math.min(255,b1);  
+				
+				pixelData[4*i+0]=r1;	
+				pixelData[4*i+1]=g;	
+				pixelData[4*i+2]=b1;	
+			}
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function oldPhotoEffect() {
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+				var r=pixelData[4*i+0];   //r通道
+				var g=pixelData[4*i+1];   //g通道
+				var b=pixelData[4*i+2];   //b通道
+
+				//老照片矩阵  
+		        var r1 = (0.393 * r + 0.769 * b + 0.189 * b);  
+		        var g1 = (0.349 * r + 0.686 * g + 0.168 * b);  
+		        var b1 = (0.272 * r + 0.534 * g + 0.131 * b);  
+		  
+		        //检查各像素值是否超出范围  
+		        r1=Math.min(255,r1);  
+		        g1=Math.min(255,g1);
+		        b1=Math.min(255,b1);
+				
+				pixelData[4*i+0]=r1;	
+				pixelData[4*i+1]=g1;	
+				pixelData[4*i+2]=b1;	
+			}
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function lightFilterEffect() {
+			var timageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var tpixelData=timageData.data;
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+
+			var width = canvas1.width;    
+		    var height = canvas1.height;    
+		      
+		    var pixR = 0, pixG = 0, pixB = 0, newR = 0, newG = 0, newB = 0;    
+		  
+		    var centerX = width / 2;    
+		    var centerY = height / 2;   
+		      
+		    //设置光照半径  
+		    var radius = Math.min(centerX, centerY);  
+		      
+		    var strength = 150.00;      
+		    
+		    for (var i = 1; i < height-1; i++)  {    
+		        for (var k = 1; k < width-1; k++)  {    
+		       
+		            var p=width*i+k;      
+		            pixR = tpixelData[4*p+0];    
+		            pixG = tpixelData[4*p+1];
+		            pixB = tpixelData[4*p+2];   
+		            newR = pixR;    
+		            newG = pixG;    
+		            newB = pixB;   
+		              
+		            var distance = (Math.pow((centerY - i), 2) + Math.pow((centerX - k), 2));    
+		            if(distance < radius*radius)  {      
+		                var result =(strength * ( 1.0 - Math.sqrt(distance) / radius));    
+		                newR = pixR + result;    
+		                newG = pixG + result;    
+		                newB = pixB + result;    
+		            }    
+		              
+		            //检查各点像素值是否超出范围  
+		            newR = Math.min(255, Math.max(0, newR));    
+		            newG = Math.min(255, Math.max(0, newG));    
+		            newB = Math.min(255, Math.max(0, newB)); 
+
+		            var p=width*i+k;      
+				    pixelData[4*p+0]=newR;
+				    pixelData[4*p+1]=newG;
+				    pixelData[4*p+2]=newB;
+		        }    
+		    }    
+			
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function ReverseEffect() {
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+				var r=pixelData[4*i+0];   //r通道
+				var g=pixelData[4*i+1];   //g通道
+				var b=pixelData[4*i+2];   //b通道
+				
+				pixelData[4*i+0]=255-r;	
+				pixelData[4*i+1]=255-g;	
+				pixelData[4*i+2]=255-b;	
+			}
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function blurEffect() {
+			var temImageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var temPixelData=temImageData.data;
+
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+
+			var blurR=5;
+			var totalnum=(2*blurR+1)*(2*blurR+1);
+			for (var i = /*1*/blurR; i < canvas1.height-/*1*/blurR; i++) {
+				for (var j = /*1*/blurR; j < canvas1.width-/*1*/blurR; j++) {
+
+					var totalr=0,totalg=0,totalb=0;
+					for (var dx = -/*1*/blurR; dx <= /*1*/blurR; dx++) {
+						for (var dy = -/*1*/blurR; dy <= /*1*/blurR; dy++) {
+							var x=i+dx;
+							var y=j+dy;
+							var p=x*canvas2.width+y;
+							totalr+=temPixelData[p*4+0];	
+							totalg+=temPixelData[p*4+1];	
+							totalb+=temPixelData[p*4+2];	
+						}
+					}		
+					var p=i*canvas2.width+j;
+					
+					pixelData[p*4+0]=totalr/totalnum/*9*/;
+					pixelData[p*4+1]=totalg/totalnum/*9*/;
+					pixelData[p*4+2]=totalb/totalnum/*9*/;
+				}
+			}	
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function mosaicEffect() {
+			var temImageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var temPixelData=temImageData.data;
+
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+
+			var size=16;
+			var totalnum=size*size;
+			for (var i = 0; i < canvas1.height; i+=size) {
+				for (var j = 0; j < canvas1.width; j+=size) {
+
+					var totalr=0,totalg=0,totalb=0;
+					for (var dx = 0; dx <= size; dx++) {
+						for (var dy = 0; dy <= size; dy++) {
+							var x=i+dx;
+							var y=j+dy;
+							var p=x*canvas1.width+y;
+							totalr+=temPixelData[p*4+0];	
+							totalg+=temPixelData[p*4+1];	
+							totalb+=temPixelData[p*4+2];	
+						}
+					}		
+					var p=i*canvas1.width+j;
+					var regr=totalr/totalnum;
+					var regg=totalg/totalnum;
+					var regb=totalb/totalnum;
+
+					for (var dx = 0; dx <= size; dx++) {
+						for (var dy = 0; dy <= size; dy++) {
+							var x=i+dx;
+							var y=j+dy;
+							var p=x*canvas1.width+y;
+							pixelData[p*4+0]=regr;
+							pixelData[p*4+1]=regg;
+							pixelData[p*4+2]=regb;	
+						}
+					}	
+
+					
+				}
+			}	
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function lomoEffect() {
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+            
+            for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+            	var r = pixelData[i*4+0];  
+    	        var g = pixelData[i*4+1];  
+    	        var b = pixelData[i*4+2];  
+    	        var a = pixelData[i*4+3];  
+    	  
+    	        var r1 = parseInt(1.7 * r + 0.1 * g + 0.1 * b - 73.1);  
+    	        var g1 = parseInt(0 * r + 1.7 * g + 0.1 * b - 73.1);  
+    	        var b1 = parseInt(0 * r + 0.1 * g + 1.6 * b - 73.1);            
+    	          
+    	        //检查各通道值是否超出范围  
+    	        r1=Math.min(255,r1);
+    	        g1=Math.min(255,g1);
+    	        b1=Math.min(255,b1);
+
+    	        pixelData[i*4+0]=r1;
+    	        pixelData[i*4+1]=g1; 
+    	        pixelData[i*4+2]=b1;
+    	        pixelData[i*4+3]=a; 
+            }
+          
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function fireEffect() {
+			var temImageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var temPixelData=temImageData.data;
+
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+            /*原理就是新的通道值 = 本通道值 * 128 / （其他通道值之和 + 1）*/
+            for (var i = 0; i < canvas1.height; i++) {
+            	for (var k = 0; k < canvas1.width; k++) {
+            		//获取前一个像素颜色  
+		            var p= canvas1.width * i + k;     
+		            var r = temPixelData[p*4+0];  
+		            var g = temPixelData[p*4+1];  
+		            var b = temPixelData[p*4+2];  
+		  
+		            //R 分量  
+		            var r1 = r * 128 / (g + b + 1);  
+		            //G 分量  
+		            var g1 = g * 128 / (b + r + 1);  
+		            //B 分量  
+		            var b1 = b * 128 / (r + g + 1);  
+		              
+		            //检查各点像素值是否超出范围  
+		            r1=Math.min(255,Math.max(0,r1));
+		            g1=Math.min(255,Math.max(0,g1));
+		            b1=Math.min(255,Math.max(0,b1));
+		            
+		            var p= canvas1.width * i + k;   
+		            pixelData[p*4+0]=r1;
+		            pixelData[p*4+1]=g1;
+		            pixelData[p*4+2]=b1;
+            	}
+            }
+          
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+
+		function handleBlockEffect() {
+
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+				
+			        var a = pixelData[4*i+3];
+			        var r = pixelData[4*i+0];
+			        var g = pixelData[4*i+1];
+			        var b = pixelData[4*i+2];
+
+			        var p = ((r + g + b) / 3)>127?255:0;
+
+			        pixelData[4*i+3]=a;
+			        pixelData[4*i+0]=p;
+			        pixelData[4*i+1]=p;
+			        pixelData[4*i+2]=p;
+			}
+
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function handleComicEffect() {
+
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 0; i < canvas1.width*canvas1.height; i++) {
+				
+			        var r = pixelData[4*i+0];
+			        var g = pixelData[4*i+1];
+			        var b = pixelData[4*i+2];
+
+			        r = Math.abs(g - b + g + r) * r / 255;
+	                g = Math.abs(b - g + b + r) * r / 255;
+	                b = Math.abs(b - g + b + r) * g / 255;
+	                
+                    r = Math.min(255, r);
+                    g = Math.min(255, g);
+                    b = Math.min(255, b);
+			        
+			        pixelData[4*i+0]=r;
+			        pixelData[4*i+1]=g;
+			        pixelData[4*i+2]=b;
+			}
+
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function pinghuaEffect() {
+
+			var timageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var tpixelData=timageData.data;
+
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 1; i < canvas1.height-1; i++) {
+				for (var j = 1; j < canvas1.width-1; j++) {
+
+                    var r1=0,b1=0,g1=0; 
+					for (var dx = -1; dx <= 1; dx++) {
+						for (var dy = -1; dy <= 1; dy++) {
+                            var x=i+dx;
+                            var y=j+dy;
+                            var p=canvas1.width*x+y;
+                            r1+=tpixelData[p*4+0];
+                            g1+=tpixelData[p*4+1];
+                            b1+=tpixelData[p*4+2];
+
+						}	
+					}	
+                    var p=canvas1.width*i+j;
+                    r1=Math.min(255,Math.max(0,parseInt(r1/9)));
+                    g1=Math.min(255,Math.max(0,parseInt(g1/9)));
+                    b1=Math.min(255,Math.max(0,parseInt(b1/9)));
+                    pixelData[p*4+0]=r1;
+                    pixelData[p*4+1]=g1;
+                    pixelData[p*4+2]=b1;
+
+				}
+			}
+
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+		function nihongEffect() {
+
+			var timageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var tpixelData=timageData.data;
+
+			var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+			var pixelData=imageData.data;
+			for (var i = 1; i < canvas1.height-1; i++) {
+				for (var j = 1; j < canvas1.width-1; j++) {
+					var p=canvas1.width*i+j;
+                    var r1=pixelData[p*4+0];
+                    var g1=pixelData[p*4+1];
+                    var b1=pixelData[p*4+2];
+                    var r=r1;
+                    var g=g1;
+                    var b=b1;
+
+                    var r3=0,b3=0,g3=0,r2=0,b2=0,g2=0; 
+					for (var dx = -1; dx <= 1; dx++) {
+						for (var dy = -1; dy <= 1; dy++) {
+                            if (dx==0 && dy==1) {
+	                            var x1=i+dx;
+	                            var y1=j+dy;
+	                            var p1=canvas1.width*x1+y1;
+	                            r2+=tpixelData[p1*4+0];
+	                            g2+=tpixelData[p1*4+1];
+	                            b2+=tpixelData[p1*4+2];
+                            } 
+                            if (dx==1 && dy==0) {
+	                            var x2=i+dx;
+	                            var y2=j+dy;
+	                            var p2=canvas1.width*x2+y2;
+	                            r3+=tpixelData[p2*4+0];
+	                            g3+=tpixelData[p2*4+1];
+	                            b3+=tpixelData[p2*4+2];
+                            } 
+
+
+						}	
+					}	
+
+                    var p=canvas1.width*i+j;	
+                    r=2*Math.sqrt((r1-r2)*(r1-r2)+(r1-r3)*(r1-r3));
+                    g=2*Math.sqrt((g1-g2)*(g1-g2)+(g1-g3)*(g1-g3));
+                    b=2*Math.sqrt((b1-b2)*(b1-b2)+(b1-b3)*(b1-b3));
+
+                    pixelData[p*4+0]=r;
+                    pixelData[p*4+1]=g;
+                    pixelData[p*4+2]=b;
+                   	
+
+				}
+			}
+
+			context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+		}
+
+        function carvingEffect() {
+        	var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+        	var pixelData=imageData.data;
+        	//当前点 - 下一个点 + 128
+        	for (var i = 0; i < canvas1.height-1; i++) {
+        		for (var j = 0; j < canvas1.width-1; j++) {
+        			var p=canvas1.width*i+j;
+        			var r = pixelData[4*p+0];  
+			        var g = pixelData[4*p+1];  
+			        var b = pixelData[4*p+2];
+			        var p=canvas1.width*(i+1)+(j+1);
+        			var r1 = pixelData[4*p+0];  
+			        var g1 = pixelData[4*p+1];  
+			        var b1 = pixelData[4*p+2];
+
+			        var p=canvas1.width*i+j;
+			        r=r-r1+128;
+			        g=g-g1+128;
+			        b=b-b1+128;
+                    var grey=r*0.3+g*0.59+b*0.11;
+
+                    grey=Math.min(255,Math.max(0,grey))
+                    /*if (grey>255) {
+                    	grey=255;
+                    }
+                    if (grey<0) {
+                    	grey=0;
+                    }*/
+
+			        pixelData[4*p+0]=grey;
+			        pixelData[4*p+1]=grey;
+			        pixelData[4*p+2]=grey;
+
+        		}
+        	}
+        	context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+        }
+
+        function magnifierEffect() {
+        	var timageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+        	var tpixelData=timageData.data;
+
+        	var imageData=context1.getImageData(0,0,canvas1.width,canvas1.height);
+        	var pixelData=imageData.data;
+        
+        	var xishu = 1.4;  
+        	var radius=120;
+    	    var real_radius = (radius / xishu); 
+    	    var centerX=canvas1.width/2; 
+    	    var centerY=canvas1.height/2; 
+    	   
+    	    
+    	    for (i = 0; i < canvas1.width; i++) {  
+    	        for (j = 0; j < canvas1.height; j++) {  
+    	            var p = canvas1.width*i+j;  
+    	   
+    	            var pixR = pixelData[4*p+0];  
+    	            var pixG = pixelData[4*p+1];  
+    	            var pixB = pixelData[4*p+2];  
+    	            var pixA = pixelData[4*p+3];  
+    	   
+    	            var newR = pixR;  
+    	            var newG = pixG;  
+    	            var newB = pixB;  
+    	            var newA = pixA;  
+    	   
+    	            var distance =parseInt((centerX - i) * (centerX - i) + (centerY - j) * (centerY - j));  
+    	            if (distance < radius * radius)  
+    	            {  
+    	                // 图像放大效果  
+    	                var src_x = parseInt(parseFloat(i - centerX) / xishu + centerX);  
+    	                var src_y = parseInt(parseFloat(j - centerY) / xishu + centerY);  
+    	   
+    	                var p = canvas1.width*src_x+src_y;    
+    	                newR = tpixelData[4*p+0];  
+    	                newG = tpixelData[4*p+1];  
+    	                newB = tpixelData[4*p+2];  
+    	                newA = tpixelData[4*p+3];  
+    	            }  
+    	   
+    	            newR = Math.min(255, Math.max(0, newR));  
+    	            newG = Math.min(255, Math.max(0, newG));  
+    	            newB = Math.min(255, Math.max(0, newB));  
+    	            newA = Math.min(255, Math.max(0, newA));  
+    	   
+    	            var p = canvas1.width*i+j;   
+    	            pixelData[4*p+0]=newR; 
+    	            pixelData[4*p+1]=newG; 
+    	            pixelData[4*p+2]=newB; 
+    	            pixelData[4*p+3]=newA; 
+
+    	        }  
+    	    }  
+        	context2.putImageData(imageData,0,0,0,0,canvas2.width,canvas2.height);
+        }
+
+
+        
+        
+	</script>
+</body>
+</html>

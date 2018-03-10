@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>阴影</title>
+</head>
+<body>
+	<canvas id="canvas" style="border:1px solid #CCC;display: block;margin:30px auto;">当前浏览器不支持canvas，请更换浏览器再试 >o< 。</canvas>
+
+	<script type="text/javascript">
+	    
+		window.onload=function(){
+			var canvas=document.getElementById('canvas');
+			var context=canvas.getContext('2d');
+            canvas.width=800;
+            canvas.height=800;
+            context.shadowColor="rgba(0,0,0,1)";
+            context.shadowOffsetX=10;
+            context.shadowOffsetY=10;
+            context.shadowBlur=3;
+            context.fillStyle="#ff6600"
+            context.fillRect(200,200,400,400);
+
+		}
+
+	</script>
+</body>
+</html>

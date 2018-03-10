@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+	    var p=new Promise(function (resolve,reject) {
+	    	resolve('成功了');
+	    });
+
+	    p.then(function (val) {
+	    	console.log(val);
+
+	    	throw '发生错误了';
+	    }).catch(function (e) {
+	    	console.log(e);
+	    });
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE"> -->
+	<title>水印</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		body{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+		canvas{display: block;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas width="960" height="800" id="canvas">请更换浏览器！</canvas>
+	<canvas id="canvasMask" style="display: none;border: 1px solid #000">请更换浏览器！</canvas>
+    <script type="text/javascript">
+    	window.onload=function () {
+    		var canvas=document.getElementById('canvas');
+    		var canvasMask=document.querySelector('#canvasMask');
+    		var ctx=canvas.getContext('2d');
+    		var ctxMask=canvasMask.getContext('2d');
+
+    		var img=new Image();
+    		img.src='50c3267364742.jpg';
+    		canvas.width=960;
+    		canvas.height=800;
+            canvasMask.width=150;
+            canvasMask.height=80;
+            
+            ctxMask.translate(canvasMask.width/2,canvasMask.height/2+8);
+            ctxMask.rotate(2*Math.PI/8);
+            console.log(45*Math.PI/180,2*Math.PI/8);
+    		ctxMask.font="bold 50px/50px Arial";
+    		ctxMask.textAlign="center";
+    		ctxMask.textBaseLine="middle";
+    		ctxMask.fillStyle="rgba(255,255,255,0.2)";
+    		ctxMask.fillText("wsx",0,0);
+    		img.onload=function () {
+    			ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    			ctx.drawImage(canvas,0,0,100,100);
+
+    			var x=canvas.width-canvasMask.width,
+    			    y=canvas.height-canvasMask.height,
+    			    w=canvasMask.width,
+    			    h=canvasMask.height;
+
+    			for (var i = 0; i < Math.ceil(canvas.width/w); i++) {
+    				for (var j = 0; j < Math.ceil(canvas.height/h); j++) {
+	    				ctx.drawImage(canvasMask,x-(w+50)*i,y-(h+50)*j);
+    				}	
+    			}
+    			
+    			
+                
+    		}
+
+
+
+    		
+    	}
+    </script>
+</body>
+</html>

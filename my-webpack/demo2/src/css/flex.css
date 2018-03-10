@@ -1,0 +1,7 @@
+.flex{
+	display: flex;
+	border-radius: 20px;
+	background-size: 20px 30px;
+	background-image: url(../../assets/bg.png);
+}
+

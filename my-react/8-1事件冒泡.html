@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件冒泡</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<script type="text/babel">
+
+
+	    class Test extends React.Component{
+	        componentDidMount(){
+	            document.onclick=this.two;
+	        }
+	        one(e){
+	            e.nativeEvent.stopImmediatePropagation();
+	            alert(1)
+	        }
+	        two(){
+	            alert(2)
+	        }
+	        render(){
+	            return(<div style={{height:150,width:150,backgroundColor:"#000"}} onClick={this.one}/>)
+	        }
+	    }
+
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+			ReactDOM.render(
+                <Test/>,
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>touch</title>
+	<style type="text/css">
+	    *{margin: 0;padding: 0;} 
+	    body,html{overflow-x: hidden;}
+	    li{list-style: none;}
+	    a{text-decoration: none;}
+		.touchpad{width: 100%;height: 300px;background-color: #eee;border: 1px solid #ccc;line-height: 300px;font-size: 30px;text-align: center;position: relative;}
+        .ball{width: 20px;height: 20px;border-radius: 50%;background-color: #36C5F0;-webkit-box-shadow: 0 0 5px #ccc;
+        box-shadow: 0 0 5px #ccc;position: absolute;display: none;}  
+        #desc{margin:10px 0;height: 30px;} 
+	</style>
+</head>
+<body>
+	<p id="desc"></p>
+	<div class="touchpad" id="touchPad">触摸板</div>
+	<div id="ball" class="ball"></div>
+	<script type="text/javascript" src="zepto.js"></script>
+	<script type="text/javascript" src="event.js"></script>
+	<script type="text/javascript" src="touch.js"></script>
+	<script type="text/javascript">
+		var touchPad=document.querySelector('#touchPad'),
+			ball=document.querySelector('#ball'),
+			desc=document.querySelector('#desc');
+
+        function touchHandler(e) {
+        	var type=e.type;
+            /*注意touchend的touches和targetTouches为空，只偶有changeTouches获取上一次的touchTlist*/
+        	if (type!=='touchend') {
+        		var pos={x:e.touches[0].clientX,y:e.touches[0].clientY};
+
+        		ball.style.left=pos.x+'px';
+        		ball.style.top=pos.y+'px';
+        		desc.innerHTML=e.type+'(clientX:'+pos.x+'，clientY:'+pos.y+')';
+        	} else {
+        		desc.innerHTML=type;
+        	}
+
+        	switch(type) {
+        		case 'touchstart':
+        			ball.style.display='block';
+        			break;
+        		case 'touchmove':
+        		/**
+        		 * android的4.4,4.0的bug：
+        		 * 只触发touchstart，和一次的touchmove，touchend不触发。
+        		 */
+        			event.preventDefault();
+        			break;
+        		case 'touchend':
+        			ball.style.display='none';
+        			break;
+        	}
+        }
+
+        touchPad.addEventListener('touchstart',touchHandler); 
+        touchPad.addEventListener('touchmove',touchHandler); 
+        touchPad.addEventListener('touchend',touchHandler); 
+
+	</script>
+</body>
+</html>

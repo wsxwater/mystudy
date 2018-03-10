@@ -1,0 +1,369 @@
+ES6:
+   ECMAScript6
+
+js:
+   组合部分：ECMA DOM BOM
+---------------------------------------------
+什么是ECMA？
+    ECMA是标准，js是实现
+          类似HTML5是标准，IE，chrome,FF都是实现。 
+          换而言之，将来也有可能其它xxxScript来实现ECMA
+
+ECMAScript简写ECMA或者ES
+        
+    目前版本：
+             低级浏览器：主要支持ES3.1
+             高级浏览器：正在从ES5过渡到ES6
+
+历史：
+     1996
+-------------------------------------------------------------------------
+兼容性：
+     目前为止ES5 ES6支持情况，凑合
+
+     nodeJS用的就是chrome内核，在node中可以使用ES5 ES6很多特性
+
+     ES5 ES6已经逐渐沦为后台语言
+
+----------------------------------------------------------------------------
+在浏览器里面如何使用？
+     需要用到编译工具
+
+     babel
+     --------
+     traceur ——由Google出的编译器，把ES6语法编译ES6
+     bootsrtap  引导程序，跟CSS里面认识的bootstrap
+
+    用法1：(注意，使用es6时先不用引入任何东西，如果失败就引入编译器)
+        <script src="browser.min.js"></script>
+        <script type="text/babel"></script>     
+    用法2：
+        直接在线编译——主要用于测试
+        http://babeljs.io/repl/
+        https://google.github.io/traceur-compiler/demo/repl.html
+    用法3：
+        直接在node里面使用
+        a). 直接用，需要添加'user strict'(js); 在node运行node xxx.js
+        b). 如果a)不好用就加上 node --harmony_destructuring  xxx.js
+
+----------------------------------------------------------------------------
+1、定义变量 
+     var a=12;
+
+     let ——用来定义变量
+     let a=12;   
+
+     代码块：{}包起来的代码，比如 if for while
+     特点：只能在代码块运行
+
+     var只有函数作用域
+
+     let
+     a). let具备块级作用域
+     b). 不允许重复声明
+         let c=10;
+         let c=4;   //错误
+     总结：其实let才接近其它语言的变量
+     
+     用处：封闭空间
+     （注意：封闭空间解决i问题，详见1.3-i问题（封闭空间解决i问题）.html） 
+     (function(){
+        var a=10;
+        console.log(a);  //10
+     })();
+              箭头       
+              箭头       
+              箭头       
+              箭头       
+          箭头箭头箭头       
+            箭头箭头 
+              箭头
+               头 
+      {
+        let a=12;
+        console.log(a); 
+      }       
+
+      总结：块级作用域，其实就是匿名函数立即调用。
+
+----------------------------------------------------------------------
+  const——用来定义常量
+         一旦被赋值，就不能改变了。也就是说它的指针指向不变。
+         var arr1=[11,1,2]
+         const arr=[...arr1];  //const:不可修改。实际是指向不变，所以可以修改arr1的值来修改arr的值。   
+   注意：const必须给初始值，因为以后再也没法赋值。与let同样也不能重复声明。
+
+   用途：为了防止意外修改变量。比如引入库名、组件名          
+----------------------------------------------------------------------
+字符串连接
+    反单引号： str=``;   字符串模板
+
+    之前：'a'+变量名+'b'; <====> es6：`a${变量名}b`     
+----------------------------------------------------------------------
+解构赋值：
+    例子1：var [a,b,c]=[1,2,3];
+    例子2：var {d,e,f}={d:1,f:3,e:6}   //与顺序无关
+    
+    1、模式匹配：(左侧的样子要与右侧一样)
+    例子：
+    var [i,j,k,l]=[33,[3,88],6];   //错误
+    var [i,[j,k],l]=[33,[3,88],6]; //正确 
+
+    2、可以给默认值
+    例子：var {time=12,a=7}={} <====> 之前：var json={};var time=json.time||12;
+
+----------------------------------------------------------------------
+复制数组：
+    1、循环
+    2、Array.from();  例如：var arr31=[1,2,3]; var arr32=Array.from(arr31);
+    3、var arr42=[...arr41];
+       function show1(...args){
+          //console.log(args);
+
+          args.pop();
+          console.log(args);  
+       }
+
+       show1(1,2,3,4);
+----------------------------------------------------------------------       
+循环：（新增循环for...of）
+     普通for
+     for in循环
+
+     for...of:可以循环数组，不可以循环json，它真正的目的是为了循环Map对象
+
+Map对象：
+    和json相似，也是一种key-value形式
+    它是与for of循环配合而生的
+    
+    var map=new Map();
+        设置：
+            map.set(name,value)
+        获取：
+            map.get(name)
+        删除：
+            map.delete(name);
+        遍历Map：
+            不能用for in   
+            for (var name of map) {
+                 console.log(name)   //b,banana
+            } 
+            for (var name of map.entries()) {
+                 console.log(name)   //b,banana
+            } 
+
+            for (var [key,value] of map) {
+                 console.log(key,value)   //key value
+            }
+
+            //只循环key
+            for (var k of map.keys()) {
+                 console.log(k)
+            }
+            //只循环value
+            for (var val of map.values()) {
+                 console.log(val)
+            }
+
+for of可以循环数组：
+    var arr=['apple','banana','orange','pear'];
+
+    //只循环值
+    for (let i of arr) {}
+
+    //循环值和key
+    for (let i of arr.entries()) {}
+
+    //只循环key 
+    for (let i of arr.keys()) {}
+
+----------------------------------------------------------------------  
+函数：
+    之前：
+    function show(){alert(1)}; show();
+    function show(a){alert(a)}; show(12);
+
+箭头函数：
+    =>
+
+    var show=a=>a              function show(a){return a;}
+    var show=(a,b)=>a+b        function show(a,b){return a+b;}
+    var show=()=>'welcome'     function show(){return 'welcome';} 
+    var show=()=>{alert(1)}    function show(){alert(1)}
+
+    注意：
+        this的问题，this指向了window。
+        arguments不能用
+
+----------------------------------------------------------------------
+对象：
+    对象语言简洁化
+    
+
+    单体模式:
+            var json={
+                   a,
+                   b,
+                   show(){
+                         alert(this.a);
+                   }
+            };    
+
+            json.show();
+
+面向对象：
+
+        function Person(name,age){   //类、构造函数
+          this.name=name;
+          this.age=age
+        }
+        Person.prototype.showName=function () {
+          return this.name; 
+        }
+        Person.prototype.showAge=function () {
+          return this.age; 
+        }
+
+
+        ES6：
+            类  class
+            构造函数   constructor    生成完实例以后，自己就执行的函数
+        class Person{
+          constructor(name,age){
+              this.name=name;
+              this.age=age;
+          }
+          showName(){
+            return this.name;
+          }
+        }
+
+        继承
+        之前：子类.prototype=new 父类
+        ES6：class Worker extends Person{
+                 constructor(){
+                     super();  //调用父级构造
+                 }
+             } 
+
+        队列类：
+             [1,2,3,4] 
+             var q1=new Queue([1,2,3,4]);
+             q1.shift();
+             q1._queue;                
+
+----------------------------------------------------------------------
+模块化：
+      seaJS   requireJS
+
+      ES6自带模块化
+        1、如何定义（导出）模块
+           const a=12;
+           export default a;
+        2、如何使用（引用）
+           import modA from './a.js'
+
+----------------------------------------------------------------------
+异步：多个操作可以同时进行（ajax）
+
+Promise——承诺
+     就是一个对象，用来传递异步操作数据
+
+     pending(等待、处理中)==>Resolve(完成、fullFilled)
+                          ==>Rejected (拒绝、失败) 
+
+使用：
+    var p=new Promise(function (resolve,reject) {
+          //resolve 成功了
+          //reject  失败了
+    });
+    var p=new Promise(function (resolve,reject) {
+          if(异步处理成功了){
+              resolve(成功数据)
+          }else{
+              reject(失败原因)
+          }
+    });
+
+    p.then(成功(resolve),失败(reject));
+
+    ------------
+    catch——用来捕获错误
+
+    ------------
+    Promise.all——全部，用来将多个promise对象组合，包装成一个全新的promise;
+         Promise.all([p1,p2,p3...])
+
+         所有的promise对象，都正确，才走成功;
+         否则，只要有一个错误，那就失败了。
+
+    ------------
+    Promise.race——返回也是一个promise对象
+          最先能执行的promise结果，哪个最快，就用哪个
+    
+
+    ------------
+    Promise.reject()       //生成一个错误的promise
+
+    ------------
+    Promise.resolve()      //生成一个正确的promise
+      语法：
+           Promise.resolve(value)
+           Promise.resolve(promise)
+
+----------------------------------------------------------------------
+Generrator(生成器)
+    是一个函数 
+    可以遍历，Generrator就是一个状态机 
+
+    语法：
+       function show{//普通函数
+          
+       }
+
+       function* show{//Generrator函数
+          yield xxx;
+       }
+
+    形式上：
+       a). 函数名字前面有个*号  
+       b). 函数内部使用yield语句  
+
+       function * show() {
+        yield 'Hello';
+        yield 'world';
+        yield 'ES6';
+        return 'well';
+       }
+       var res=show();
+       res.next();  //Object {value: "Hello", done: false}
+       res.next();  //Object {value: "world", done: false}
+       res.next();  //Object {value: "ES6", done: false}
+       res.next();  //Object {value: "well", done: false}
+       res.next();  //Object {value: undefined, done: true}
+
+       总结：每次返回一个value和done结果
+             value,每次yield定义的值
+             done,是一个布尔值，代表是否遍历结束
+       
+       yield是否有返回值？
+           yield本身并无返回值，或者每次返回undefined
+
+       next可传参数?    
+           给上一个yield值
+
+       for...of:可以循环generrator    
+
+       generrator函数放到对象里面：
+       var json={
+        *show1(){
+          yield 'a';
+          yield 'b';
+        }
+       }
+       var show1=json.show1();
+       console.log(show1.next());
+       console.log(show1.next());
+       console.log(show1.next());    
+
+

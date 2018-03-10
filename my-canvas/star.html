@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>星星</title>
+</head>
+<body>
+	<canvas id="canvas" style="border:1px solid #CCC;display: block;margin:30px auto;">当前浏览器不支持canvas，请更换浏览器再试 >o< 。</canvas>
+	    <script type="text/javascript">
+	    	window.onload=function(){
+				var canvas=document.getElementById('canvas');
+				var context=canvas.getContext('2d');
+	            canvas.width=800;
+	            canvas.height=800;
+
+	            /*context.beginPath();*/
+
+	            //drawStar(ctx,MaxR,MinR,x,y,bcolor,fcolor,linew);
+	            /*for (var i = 0; i < 5; i++) {
+	            	context.lineTo(Math.cos((18+i*72)/180*Math.PI)*300+400,-Math.sin((18+i*72)/180*Math.PI)*300+400);
+	            	context.lineTo(Math.cos((54+i*72)/180*Math.PI)*150+400,-Math.sin((54+i*72)/180*Math.PI)*150+400);
+	            }
+	            	context.closePath();
+		            context.lineWidth=10;
+		            context.fillStyle="gold";
+		            context.strokeStyle="#3a9999";
+	            	context.fill();
+	            	context.stroke();*/
+	            drawStar(context,300,150,400,400,"#3a9999","gold",10,30);	
+	            drawStar(context,300,150,400,400,"#3a9999","gold",10,-6);	
+	            drawStar(context,300,300,400,400,"#3a9999","rgba(255,255,255,0.5)",10,30);	
+	            //drawStar(context,300,400,400,400,"#3a9999","gold",10,30);	
+	    	}
+
+	    	function drawStar(ctx,MaxR,MinR,x,y,bcolor,fcolor,linew,rot){
+	    		/**
+		    		 *MaxR:大圆的半径
+		    		 *MinR:小圆的半径
+		    		 *x,y:偏移值 
+		    		 *bcolor:线条的颜色 
+		    		 *fcolor:填充的颜色 
+		    		 *linew:线条的宽度 
+		    		 *rot:旋转的角度 
+	    		 **/
+	            ctx.lineWidth=linew;
+	            //ctx.lineJoin="miter"; //round //miter //bevel
+	            //ctx.miterLimit=80;
+                ctx.beginPath();
+                for (var i = 0; i < 5; i++) {
+                	ctx.lineTo(Math.cos((18+i*72-rot)/180*Math.PI)*MaxR+x,-Math.sin((18+i*72-rot)/180*Math.PI)*MaxR+y);
+                	ctx.lineTo(Math.cos((54+i*72-rot)/180*Math.PI)*MinR+x,-Math.sin((54+i*72-rot)/180*Math.PI)*MinR+y);
+                }
+                	ctx.closePath();
+    	            ctx.fillStyle=fcolor;
+    	            ctx.strokeStyle=bcolor;
+                	ctx.fill();
+                	ctx.stroke();
+	    	}
+	    </script>
+</body>
+</html>

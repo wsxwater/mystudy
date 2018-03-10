@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>const</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+	    /*************一旦被赋值，就不能改变了*************/
+
+		let a='xxx';
+	        a=12;
+	    console.log(a);  //结果：12
+
+		{/*const b=12;
+		b=7;
+		console.log(b);  //报错*/}
+
+	    var arr1=[11,1,2]
+		const arr=[...arr1];  //const:不可修改。实际是指向不变，所以可以修改arr1的值来修改arr的值。
+		console.log(arr); 
+		/*************一旦被赋值，就不能改变了*************/
+
+
+
+        /****************const必须给初始值****************/
+        var c;
+        c=30;
+        console.log(c);  //结果：30
+
+		const d;
+		d=9;
+		console.log(d);  //结果报错 
+
+		/****************const必须给初始值****************/
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="../bootstrap/bootstrap.min.css">
+	<style type="text/css">
+		body{background:url(../28.jpg)no-repeat;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="panel">
+			<div class="panel-body text-warning h1"><input type="text" v-model="msg"><br>{{msg}} <br> {{*msg}}  <br> {{{msg}}}</div>
+		</div>
+
+		<div class="well">
+			{{'welcome'|uppercase}}
+			<br>
+			{{'WELCOME'|lowercase|capitalize}}
+			<br>
+			{{'welcome'|capitalize}}
+			<br>
+			{{12|currency '￥'}}
+		</div>
+
+		<ul class="list-group">
+			<li class="list-group-item" v-for="value in arr" >{{value}}&nbsp;{{$index}}</li>
+
+		</ul>
+
+		<ol class="list-group">
+			<li class="list-group-item" v-for="value in json">{{value}}&nbsp;{{$index}}&nbsp;{{$key}}</li>
+			<a href="javascript:;" class="list-group-item" v-for="(k,v) in json">{{k}}&nbsp;{{v}}&nbsp;{{$index}}&nbsp;{{$key}}</a>
+		</ol>
+
+		<div class="well">
+			<input type="button" class="btn btn-warning btn-lg" v-on:click="add()" value="给数组添加数据" />
+
+			<!--
+                事件  
+	      	    	    v-on:click/mouseover 
+	                    简写：@click/mouseover
+	                
+	                事件对象
+	                    @click="show($event)"
+
+	                事件冒泡
+	                    阻止冒泡： 
+	                          a). ev.cancelBubble = true;
+	                          b). @click.stop (注意事件不用写ev)
+
+	                默认行为(默认事件)
+	                    阻止事件默认行为： 
+	                         a). ev.preventDefault();
+	                         b). <input type="button" name="" value="按钮" @contextmenu.prevent="showxx()">
+
+	                键盘：  @keydown    $event.keyCode
+
+
+
+			-->
+			<button type="button" @click="showev($event)" class="btn btn-lg">$event按钮</button>
+			<div class="well" @click="show2()" >
+				<button type="button" @click="show1($event)" class="btn btn-lg">阻止冒泡ev</button>
+
+				<button type="button" @click.stop="show3()" class="btn btn-lg">阻止冒泡（无ev）</button>
+				<button type="button" @contextmenu="show4($event)">阻止事件默认行为</button>
+				<button type="button" @contextmenu.prevent="show5()">阻止事件默认行为（无ev）</button>
+			</div>
+			<div class="well">
+				<input type="text" @keydown="showKeyCode($event)">
+				<input type="text" @keyup="showKeyCode($event)">
+			</div>
+		</div>
+
+		<div class="well">
+	        <input type="button" class="btn btn-warning btn-lg" v-on:click="show=false" value="控制显隐" />
+			<div style="width: 200px;height: 200px;background: red;" v-show="show"></div>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+		    var app=new Vue({
+		    	el:'.container',
+		    	data:{
+		    		msg:'welcome to vueJS',
+		    		arr:['apple','banana','orange'],
+		    		json:{a:'cat',b:'dog',c:'pig'},
+		    		show:true
+		    	},
+		    	methods:{
+		    		add:function () {
+		    			//alert(122);
+		    			this.arr.push('pear');
+		    		},
+		    		showev:function (ev) {
+		    			alert(ev.clientY)
+		    		},
+		    		show1:function (ev) {
+		    			alert(1);
+		    			ev.cancelBubble=true;
+		    		},
+		    		show2:function () {
+		    			alert(2)
+		    		},
+		    		show3:function () {
+		    			alert(3);
+		    		},
+		    		show4:function (ev) {
+		    			alert(4);
+		    			ev.preventDefault();
+		    		},
+		    		show5:function (ev) {
+		    			alert(5);
+		    			
+		    		},
+		    		showKeyCode:function (ev) {
+
+		    			console.log(ev.keyCode);
+		    			ev.cancelBubble=true;
+		    		}
+
+		    	}
+		    });
+		}
+	</script>
+</body>
+</html>

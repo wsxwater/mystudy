@@ -1,0 +1,109 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>合成图片</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		body{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+		canvas{display: block;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1">请更换浏览器！</canvas>
+	<canvas id="canvas2" style="display: none;">请更换浏览器！</canvas>
+	<script type="text/javascript" src="jQuery2.1.1.js"></script>
+	<script type="text/javascript">
+		$(function () {
+             /**
+              * [json description]
+              * title:标题
+              * x:抠图的X轴
+              * y:抠图的Y轴
+              * w:抠图的宽度
+              * h:抠图的高度
+              * uw:用户上传图片的宽度
+              * uh:用户上传图片的高度
+              * bw:背景图片的宽度
+              * bh:背景图片的高度
+              * src:用户上传图片的路径
+              * bsrc:背景图片的路径
+              */
+            var json={
+            	'Calendar': 
+            				[{'title':'Cover' , 'x':168 , 'y':52 , 'w':260 , 'h':260 , 'uw':130 , 'uh':198 , 'bw':596 , 'bh':397 , 'src':'img/card-3.jpg', 'bsrc':'img/cover0.png'}]
+            };
+
+            var can1=document.getElementById('canvas1');
+            var can2=document.getElementById('canvas2');
+            var ctx1=can1.getContext('2d');
+            var ctx2=can2.getContext('2d');
+
+            can1.width=can2.width=json.Calendar[0].bw;
+            can1.height=can2.height=json.Calendar[0].bh;
+
+            var can1Img=new Image();
+            var can2Img=new Image();
+            can1Img.src=json.Calendar[0].src;
+            can2Img.src=json.Calendar[0].bsrc;
+
+            var getPixelRatio = function(context) {
+                var backingStore = context.backingStorePixelRatio ||
+                      context.webkitBackingStorePixelRatio ||
+                      context.mozBackingStorePixelRatio ||
+                      context.msBackingStorePixelRatio ||
+                      context.oBackingStorePixelRatio ||
+                      context.backingStorePixelRatio || 1;
+
+                return (window.devicePixelRatio || 1) / backingStore;
+            };
+
+            //调用
+            var ratio1 = getPixelRatio(ctx1);
+            var ratio2 = getPixelRatio(ctx2);
+            
+            var dx=json.Calendar[0].x,
+                dy=json.Calendar[0].y,
+                dw=json.Calendar[0].w,
+                dh=json.Calendar[0].h,
+                uw=json.Calendar[0].uw,
+                uh=json.Calendar[0].uh;
+
+            if (uw/uh<1) {
+               sx=0;
+               sy=uh/2-uw/2;
+               sw=uw;
+               sh=sw*dh/dw;  
+            } else if(uw/uh>1) {
+               sy=0;
+               sx=uw/2-uh/2;
+               sh=uh;
+               sw=sh*dw/dh;
+            } else if(uw/uh==1) {
+               sx=0;
+               sy=0;
+               sh=uh;
+               sw=uw;
+            }
+
+            ctx1.globalCompositeOperation="source-over";
+            can1Img.onload=function () {
+            	ctx1.drawImage(can1Img,sx,sy,sw,sh,dx,dy, dw, dh);
+            	ctx1.drawImage(can2,0,0,can1.width, can1.height);
+            }
+			can2Img.onload=function () {
+            	ctx2.drawImage(can2Img,0,0, can1.width, can1.height);  
+            	//ctx1.drawImage(can2Img,0,0, can1.width, can1.height);  
+            }
+			
+
+            
+
+
+
+
+
+		})
+	</script>
+
+</body>
+</html>

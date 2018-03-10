@@ -1,0 +1,73 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		a{text-decoration: none;color: #333;}
+		 hr{margin:30px auto;}
+	</style>
+</head>
+<body>
+
+    <div><a href="image/f1.jpg" title="这是提示内容" class="tooltip"  style="position: relative;font-size: 20px;"><img src="image/f1.jpg" alt="这是提示内容"></a></div>
+
+    <hr>
+
+
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+    	$(function () {
+    		var x=10;
+    		var y=20;
+    		$('a.tooltip').mouseover(function (e) {
+    			this.myTitle=this.title;
+
+    			this.title='';   //清空a标签自带的提示功能
+
+    			var imgTitle=this.myTitle?"<br />"+this.myTitle:"";
+    			/*if (this.myTitle) {
+    				imgTitle="<br />"+this.myTitle;
+    			} else {
+    				imgTitle="";
+    			}*/
+
+    			//创建div
+    			var $tooltip='<div id="tooltip"><img src="'+this.href+'" alt="图片预览" />'+imgTitle+'</div>';
+    		    $('body').append($tooltip);
+    		    $('#tooltip').css({
+    		    	'position':'absolute',
+    		    	'top':(e.pageY+y)+'px',
+    		    	'left':(e.pageX+x)+'px',
+    		    }).show('fast');
+
+    		}).mouseout(function () {
+    			this.title=this.myTitle;
+    			$('#tooltip').remove();
+    		}).mousemove(function (e) {
+    			$('#tooltip').css({
+    				'position':'absolute',
+    				'top':(e.pageY+y)+'px',
+    				'left':(e.pageX+x)+'px',
+    			})
+    		}); 
+
+
+    		$('body').keyup(function (e) {
+    			/**
+    			 * e.target：获取事件对象
+    			 * e.which：在鼠标单击事件中获取鼠标的左（1）、中（2）、右（3）键；在键盘事件中获取键盘的按键
+    			 * e.type：获取事件类型
+    			 * e.pageX,e.pageY：获取到光标相对于页面的x坐标和y坐标
+    			 */
+    			console.log(e.which,e.target,e.type);
+    			
+    		}).mousemove(function (e) {
+    			console.log(e.pageX,e.pageY);
+    		})   
+
+    	})
+    </script>
+</body>
+</html>

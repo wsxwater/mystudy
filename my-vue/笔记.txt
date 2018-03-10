@@ -1,0 +1,24 @@
+
+模板：
+    {{msg}}     //数据更新模板变化
+    {{*msg}}    //数据只绑定一次
+    {{{msg}}}   //HTML转义输出
+------------------------------------------------------------------    
+过滤器==>过滤模板数据
+         系统提供一些过滤器
+
+         {{msg|filterA}}
+         {{msg|filterA|filterB}}
+
+         uppercase  <=例子=> {{'welcome'|uppercase}}
+         lowercase  <=例子=> {{'WELCOME'|lowercase|capitalize}}
+         capitalize <=例子=> {{'welcome'|capitalize}}
+
+         currency  钱   {{12|currency '￥'}}
+
+------------------------------------------------------------------          
+交互
+    
+    $http  (ajax)
+
+    如vue想做交互，就要引入vue-resource

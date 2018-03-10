@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<style type="text/css">
+		.box{background:gold;width:200px;height:200px;line-height:200px;font-size:40px;color:#FFF;position:absolute;text-align:center;top:0;left:0;}
+	</style>
+	<script type="text/babel">
+
+	    class Comp extends React.Component{
+	    	constructor(...args){
+	    		super(...args);
+	    	}
+
+	    	componentDidMount(){
+                var oBox=this.refs['box1'];
+                var disX=0;
+                var disY=0;
+                oBox.onmousedown=function (ev) {
+
+                	disX=ev.clientX-oBox.offsetLeft;
+                    disY=ev.clientY-oBox.offsetTop;
+                	document.onmousemove=function(ev)
+                    {
+
+                		 var l=ev.clientX-disX;
+                		 var t=ev.clientY-disY;
+                	     
+                		 if(l<=0)
+                		 {
+                		     l=0;
+                		 }
+                		 else if(l>document.documentElement.clientWidth-oBox.offsetWidth)
+                		 {
+                		     l=document.documentElement.clientWidth-oBox.offsetWidth;
+                		 }
+                		 
+                		 if(t<=0)
+                		 {
+                		    t=0;
+                		 }
+                		 else if(t>document.documentElement.clientHeight-oBox.offsetHeight)
+                		 {
+                		    t=document.documentElement.clientHeight-oBox.offsetHeight;
+                		 }
+                		 
+                		 oBox.style.left=l+'px';
+                		 oBox.style.top=t+'px';	 
+
+                	}
+                	document.onmouseup=function()
+                    {
+                	    document.onmousemove=null;
+                		document.onmouseup=null;
+                	}
+
+                	return false;
+
+                };
+	    	}
+
+
+            render(){
+                return <div className="box" ref="box1">拖拽</div>;
+            }
+	    }
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+			ReactDOM.render(
+                <Comp />, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <h1 id="div1"></h1>
+</body>
+</html>

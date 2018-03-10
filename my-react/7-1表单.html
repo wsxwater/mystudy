@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<script type="text/babel">
+	    class Comp extends React.Component{
+            render(){
+                return <form action="post">
+                          用户名：<input type="text" defaultValue={this.props.a} name="username" /><br/>
+                          是否接收邮件：<input type="checkbox" defaultChecked="true" /><br/>
+                          <input type="button" value="提交" /><br/><br/><br/>
+                          <div>表单原件的问题</div>
+						  <div>1、用value，改成使用defaultValue；</div>
+						  <div>2、用checked，改成使用defaultChecked。</div>
+                </form>;
+            }
+	    }
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+			ReactDOM.render(
+                <Comp a="baidu"/>, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <div id="div1">
+       	
+       </div>
+</body>
+</html>

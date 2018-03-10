@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="time" width="800" height="600" style="background-color: mediumpurple;"></canvas>
+        <script type="text/javascript">
+            var time=document.getElementById("time");
+            var times=time.getContext("2d");
+            var timew=time.width, timeh=time.height;
+
+            times.fillStyle="#ffffff";
+            times.beginPath();
+            times.arc(timew/2,timeh/2,200,Math.PI*1.5,Math.PI/2,false);
+            times.closePath();
+            times.fill();
+
+            times.fillStyle="#ffffff";
+            times.beginPath();
+            times.arc(timew/2,timeh/2,200,Math.PI*1.5,Math.PI/2,false);
+            times.closePath();
+            times.fill();
+
+            times.fillStyle="#000000";
+            times.beginPath();
+            times.arc(timew/2,timeh/2,200,Math.PI/2,Math.PI*1.5,false);
+            times.closePath();
+            times.fill();
+
+            times.fillStyle="#000000";
+            times.beginPath();
+            times.arc(timew/2,400,100,0,Math.PI*2,false);
+            times.closePath();
+            times.fill();
+
+            times.fillStyle="#ffffff";
+            times.beginPath();
+            times.arc(timew/2,200,100,0,Math.PI*2,false);
+            times.closePath();
+            times.fill();
+
+            times.fillStyle="#000000";
+            times.beginPath();
+            times.arc(timew/2,200,15,0,Math.PI*2,false);
+            times.closePath();
+            times.fill();
+
+            times.fillStyle="#ffffff";
+            times.beginPath();
+            times.arc(timew/2,400,15,0,Math.PI*2,false);
+            times.closePath();
+            times.fill();
+        </script>
+    </body>
+</html>

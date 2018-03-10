@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+         function * show() {
+         	yield 'Hello';
+         	yield 'world,';
+         	yield 'ES6!!!';
+         }
+
+         var res=show();
+
+         res.next();
+         res.next();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

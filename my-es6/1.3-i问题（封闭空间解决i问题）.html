@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+         window.onload=function(){
+              var abtn=document.getElementsByTagName('input');
+              
+              /*for(var i=0;i<abtn.length;i++){
+                  abtn[i].onclick=function(){
+                     alert(i);    //都是3
+                  }
+              }*/
+              
+              
+
+              /*****************封闭空间******************/
+              /**
+               * 点击111按钮，可弹出数字0；
+               * 点击222按钮，可弹出数字1；
+               * 点击333按钮，可弹出数字2；
+               */ 
+              /*for(var i=0;i<abtn.length;i++){
+                  (function(i){
+                        abtn[i].onclick=function(){
+                           alert(i);    
+                        }
+                  })(i); 
+              }*/
+
+
+
+              for(let i=0;i<abtn.length;i++){
+                  abtn[i].onclick=function(){
+                     alert(i);    
+                  }
+              }
+              /*****************封闭空间******************/
+
+
+
+         }		
+  
+	</script>
+</head>
+<body>
+	<input type="button" value="111">
+    <input type="button" value="222">
+    <input type="button" value="333">
+</body>
+</html>

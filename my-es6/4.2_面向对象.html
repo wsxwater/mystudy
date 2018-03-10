@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+         {/*function Person(name,age){
+         	this.name=name;
+         	this.age=age
+         }
+
+         Person.prototype.showName=function () {
+         	return this.name; 
+         }
+
+         Person.prototype.showAge=function () {
+         	return this.age; 
+         }
+
+         function Worker(name,age){
+	           Person.apply(this,arguments)
+         }
+
+         Worker.prototype=new Person();
+
+         var p1=new Person('wsx',24);
+         var w1=new Person('www',20);
+
+         console.log(p1.showAge());
+         console.log(w1.showAge());*/}
+
+
+
+         class Person{
+         	constructor(name='品',age=12){
+               this.name=name;
+               this.age=age;
+         	}
+         	showName(){
+         		return this.name;
+         	}
+         	showAge(){
+         		return this.age;
+         	}
+         }
+         
+         var p1=new Person('wsx',24);
+
+         console.log(p1.name,p1.showName());
+
+
+         var p2=new Person('ggg',29);
+         console.log(p2.name,p2.showName());
+
+         alert(p2.showName()==p1.showName());
+
+
+         var p3=new Person();
+         console.log(p3.name,p3.showName());
+
+
+         //继承
+         class Worker extends Person{
+         	constructor(name,age,job){
+                super(name,age);
+                this.job=job;
+         	}
+         	showJob(){
+         		return this.job;
+         	}
+         }
+         var w1=new Worker('mmm',90,'IT');
+         console.log(w1.name,w1.showName(),w1.showJob());
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

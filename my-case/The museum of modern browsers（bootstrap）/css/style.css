@@ -1,0 +1,39 @@
+
+body{padding:50px 0;font-family: 'Damion', cursive,"Microsoft YaHei","Î¢ÈíÑÅºÚ",\5FAE\8F6F\96C5\9ED1;}
+
+/*×ÛÊö*/
+.carousel-indicators .active,.carousel-indicators li{background:#000;}
+.carousel{margin-bottom:60px;}
+.carousel,.carousel .item{height:550px;background-color:#000;}
+.carousel img{width:100%;opacity:0.8;filter:alpha(opacity=80);}
+.carousel-caption h1{text-shadow:2px 2px #000;font-weight:bold;}
+.carousel-caption p{font-size:2rem;line-height:4rem;}
+
+hr.divider{margin:40px 0;}
+
+.fearure{padding:30px 0;}
+.fearure-heading{margin-top:100px;}
+.fearure-heading .text-muted{padding-left:20px;font-size:18px;}
+
+/*ÄÚºËÒ³*/
+.kernel-explain{line-height:2rem;text-indent:20px;}
+.kernel-classify p,.kernel-layout-engine p{line-height:1.5rem;text-indent:20px;}
+.kernel-classify-img{margin-top:10%;float:left;}
+.kernel-classify h4{line-height:1.8rem;text-indent:20px;}
+
+.glyphicon-education{padding-right:10%;}
+.glyphicon-star{padding-right:2.5%;}
+
+.museum-title-num{padding-right:2%;color:#337ab7;font-size:1.6rem;}
+
+hr.divider{margin:40px 0;}
+
+.fearure{padding:30px 0;}
+@media (max-width:400px){
+  .museum-title{font-size:1.8rem;}
+  .kernel-explain{line-height:2rem;text-indent:20px;font-size:1rem;}
+  .kernel-classify p,.kernel-layout-engine p{line-height:1.5rem;text-indent:20px;font-size:1rem;}
+  .kernel-classify h4{line-height:1.8rem;text-indent:20px;font-size:1.2rem}
+  #WebCore,#KHTML{font-size:1.5rem;}
+   
+}

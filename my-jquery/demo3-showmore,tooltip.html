@@ -1,0 +1,131 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>精简/显示全部品牌,清空a标签自带的提示功能添加自定义提示功能</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		a{text-decoration: none;color: #333;}
+		.subCategoryBox ul{width: 100%;overflow: hidden;text-align: center;}
+		.subCategoryBox li{display: block;width: 33%;padding: 10px 0;line-height: 12px;font-size: 12px;float: left;}
+		.showmore{text-align: center;}
+        .showmore a{border: 1px solid #CCC;line-height: 14px;padding: 10px;display: inline-block;}
+        hr{margin:30px auto;}
+        form{text-align: center;width: 200px;margin:0px auto;}  
+        form input{display: block;width: 100%;line-height: normal;font-size: 14px;padding:10px;margin-bottom: 10px;}
+	</style>
+</head>
+<body>
+    <div class="subCategoryBox">
+    	<ul>
+    		<li><a href="#">佳能</a><i>101</i></li>
+    		<li><a href="#">索尼</a><i>102</i></li>
+    		<li><a href="#">三星</a><i>103</i></li>
+    		<li><a href="#">尼康</a><i>104</i></li>
+    		<li><a href="#">松下</a><i>105</i></li>
+    		<li><a href="#">卡西欧</a><i>106</i></li>
+    		<li><a href="#">富士</a><i>107</i></li>
+    		<li><a href="#">柯达</a><i>108</i></li>
+    		<li><a href="#">宾得</a><i>109</i></li>
+    		<li><a href="#">理光</a><i>110</i></li>
+    		<li><a href="#">奥林巴斯</a><i>111</i></li>
+    		<li><a href="#">明基</a><i>112</i></li>
+    		<li><a href="#">爱国者</a><i>113</i></li>
+    		<li><a href="#">三洋</a><i>113</i></li>
+    		<li><a href="#">通用(GE)</a><i>183</i></li>
+    		<li><a href="#">微米</a><i>523</i></li>
+    		<li><a href="#">广博</a><i>13</i></li>
+    		<li><a href="#">联想</a><i>193</i></li>
+
+    		<li><a href="#">其它品牌相机</a><i>114</i></li>
+    	</ul>
+    	<div class="showmore"><a href="#"><span>显示全部品牌</span></a></div>
+    </div>
+
+    <hr>
+    <div>
+    	<form>
+    	    <input type="text" name="address" id="address" value="请输入地址">
+    	</form>
+    </div>
+
+    <hr>
+    <div><a href="javascript:;" title="这是提示内容" class="tooltip"  style="position: relative;font-size: 20px;">提示</a></div>
+
+
+
+
+
+	<script src="jQuery2.1.1.js"></script>
+
+	<script>
+		$(function () {
+			var $category=$('.subCategoryBox ul li:gt(7):not(:last)');
+
+            $category.hide();
+
+            $('.showmore a').click(function () {
+                  $category.toggle();
+                  $(this).children().text('精简显示品牌');
+
+                  if ($category.is(':hidden')) {
+                  	$(this).children().text('显示全部品牌');
+                  }
+                  return false;
+            })
+
+        /**********************************************************************/
+
+            $('#address').focus(function () {
+            	var $val=$(this).val();
+            	if ($val==this.defaultValue) {//$val=='请输入地址'
+                   $(this).val('');
+            	}
+            });
+            $('#address').blur(function () {
+            	var $val=$(this).val();
+
+            	if ($val=='') {
+                    //$(this).val('请输入地址');
+                    $(this).val(this.defaultValue);
+            	}
+            });
+
+        /**********************************************************************/
+        var x=10;
+        var y=20;
+        $('a.tooltip').mouseover(function (e) {
+        	this.mytitle=this.title;
+        	this.title='';   //清空a标签自带的提示功能
+        	//创建div
+        	var $tooltip='<div id="tooltip" style="font-size:12px;background:#000;color:#FFF;padding:4px;line-height:12px;border-radius:4px;">'+this.mytitle+'</div>';
+            $('body').append($tooltip);
+            $('#tooltip').css({
+            	'position':'absolute',
+            	'top':(e.pageY+y)+'px',
+            	'left':(e.pageX+x)+'px',
+            }).show('fast');
+
+        }).mouseout(function () {
+        	this.title=this.mytitle;
+        	$('#tooltip').remove();
+        }).mousemove(function (e) {
+        	$('#tooltip').css({
+        		'position':'absolute',
+        		'top':(e.pageY+y)+'px',
+        		'left':(e.pageX+x)+'px',
+        	})
+        });    
+
+
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>touch</title>
+	<style type="text/css">
+	    *{margin: 0;padding: 0;} 
+	    li{list-style: none;}
+	    a{text-decoration: none;}
+		#items{width:auto;overflow-x:hidden;white-space:nowrap;font-size: 0;border-bottom: 1px solid #ccc;
+			-webkit-box-shadow: 1px 0px 5px rgba(0,0,0,0.5);box-shadow: 1px 0px 5px rgba(0,0,0,0.5);
+		}
+		#items li{display: inline-block;padding: 10px;font-size: 14px;border-left: 1px solid #eee;}
+	</style>
+</head>
+<body>
+
+
+	<ul id="items">
+	  <li>教育01</li>
+	  <li>教育02</li>
+	  <li>教育03</li>
+	  <li>教育04</li>
+	  <li>教育05</li>
+	  <li>教育06</li>
+	  <li>教育07</li>
+	  <li>教育08</li>
+	  <li>教育09</li>
+	</ul>
+	<script type="text/javascript" src="zepto.js"></script>
+	<script type="text/javascript" src="event.js"></script>
+	<script type="text/javascript" src="touch.js"></script>
+	<script type="text/javascript">
+		
+        $('#items').on('swipe',function(e){
+            console.log(e);
+        }); 
+		
+
+	</script>
+</body>
+</html>

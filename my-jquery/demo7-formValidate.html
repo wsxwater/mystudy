@@ -1,0 +1,302 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>自定义的表单验证</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		a{text-decoration: none;color: #333;}
+		 hr{margin:30px auto;}
+         form .int:not(.sub)>input{
+                background-color: transparent;
+                border: none;
+                border: 1px solid #9e9e9e;
+                border-radius: 6px;
+                outline: none;
+                padding: 0;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                -webkit-box-sizing: content-box;
+                box-sizing: content-box;
+                -webkit-transition: all 0.3s;
+                transition: all 0.3s;
+         }  
+         form .int:not(.sub)>input:focus{-webkit-box-shadow: 0 0 5px #b0cb33;box-shadow: 0 0 5px #b0cb33;border-color: #b0cb33;}
+         form p{margin:10px 0;}
+         form .int>label{width: 100px;text-align: right;display: inline-block;}
+
+         form .int{margin:10px 0;}
+         form .int:not(.sub)>input{width: 200px;line-height: normal;padding: 10px;}
+         .controlgroup input{}
+
+         .btn{display: inline-block;padding:10px 15px;line-height: 16px;border: 1px solid #CCC;border-radius: 4px;background: #FFF;font-size: 16px;}
+         
+         .error.tip{color: #F00;}
+         .success.tip{color:#198E09;}
+
+         span.icon{display: inline-block;background: orange;color:#FFF;/* font-weight: bold; */font-size: 1.6rem;line-height: 1;border-radius: 50%;;border: 2px solid #FFF;padding:6px;}
+
+	</style>
+</head>
+<body>
+
+    <form style="width: 660px;margin:10px auto;" id="form1">
+        <!-- <div class="int">
+            <label for="username">用户名：</label>
+            <input type="text" id="username" class="required username">
+        </div>
+        <div class="int">
+            <label for="email">邮箱：</label>
+            <input type="text" id="email" class="required email">
+        </div>
+        <div class="int">
+            <label for="phone">手机：</label>
+            <input type="text" id="phone" class="required phone">
+        </div> -->
+        <div class="int" reqd="1" typ="radio">
+            <label class="control-label">性别：</label>
+            <div class="controlgroup">
+                <div>
+                    <label><input class="rd fld" id="t14" type="radio" name="F3_radio" value="男">
+                    <label for="t14"></label> 男</label>
+                </div>
+                <div>
+                    <label><input class="rd fld" id="t15" type="radio" name="F3_radio" value="女">
+                    <label for="t15"></label> 女</label> 
+                </div>
+            </div>
+        </div>
+        <div class="int" reqd="1" typ="select">
+            <label class="control-label">时间：</label>
+            <select name="selHour" id="selectHour">
+                <option value="时" disabled selected>时</option>
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+            </select>
+            <select name="selMinutes" id="selectMinutes">
+                <option value="分" disabled selected>分</option>
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+            </select>
+        </div>
+        
+        <div class="int">
+            <label for="personinfo">个人资料：</label>
+            <input type="text" id="personinfo">
+        </div>
+        <div class="int sub">
+            <input type="submit" value="提交" id="send" class="btn">
+            <input type="reset" value="清空" id="res" class="btn">
+        </div>
+    </form>
+
+
+    <form style="width: 660px;margin:10px auto;" id="form2">
+        <div class="int">
+            <label for="username1">用户名：</label>
+            <input type="text" id="username1" class="required username">
+        </div>
+        <div class="int">
+            <label for="email1">邮箱：</label>
+            <input type="text" id="email1" class="required email">
+        </div>
+        <div class="int">
+            <label for="phone1">手机：</label>
+            <input type="text" id="phone1" class="required phone">
+        </div>
+        <div class="int">
+            <label for="personinfo">个人资料：</label>
+            <input type="text" id="personinfo">
+        </div>
+        <div class="int sub">
+            <input type="submit" value="提交" id="send2" class="btn">
+            <input type="reset" value="清空" id="res2" class="btn">
+        </div>
+    </form>
+
+    <span class="icon">&times;</span>
+
+
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+    	$(function () {
+               
+
+                $('form :input').blur(function () {
+                    var $parent=$(this).parent();
+                    $parent.find('.tip').remove();  //删除以前的提醒元素
+                    
+                    if ($(this).is('.username')) {
+                            var vals=this.value;
+                            if (vals=="" || vals.length<6) {
+                                var errorMsg='请输入至少6位的用户名' ; 
+                                $parent.append( '<span class="tip error">'+errorMsg+ '</span>'); 
+                            } else {
+                                var successMsg='输入正确' ; 
+                                $parent.append( '<span class="tip success">'+successMsg+ '</span>'); 
+                            }
+                    }
+                    if ($(this).is('.phone')) {
+                            var vals=this.value;
+                            if (!/^0?(13[0-9]|15[0-9]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(vals)) {
+                                var errorMsg='请输入正确的手机号码' ; 
+                                $parent.append( '<span class="tip error">'+errorMsg+ '</span>'); 
+                            } else {
+                                var successMsg='输入正确' ; 
+                                $parent.append( '<span class="tip success">'+successMsg+ '</span>'); 
+                            }
+                    }
+
+                    if ($(this).is('.email')) {
+                            var vals=this.value;
+                            if (vals=="" || vals!=="" && !/.+@.+\.[a-zA-Z]{2,4}/.test(vals)) {
+                                var errorMsg='请输入正确的Email地址';
+                                $parent.append('<span class="tip error">'+errorMsg+'</span>');
+                            } else {
+                                var successMsg='输入正确';
+                                $parent.append('<span class="tip success">'+successMsg+'</span>'); 
+                               
+                            }
+                    }
+                }).keyup(function () {
+                    $(this).triggerHandler('blur');
+                }).focus(function () {
+                    $(this).triggerHandler('blur');
+                });
+
+                $('form :input.required').each(function () {
+                    var $required='<strong style="color:#FF6600">* </strong>';
+                    $(this).parent().append($required);
+                });
+
+                /*给.int[reqd]的label添加星号*/ 
+                $('form .int[reqd]').each(function () {
+                    if($(this).prop('reqd',1)){
+                        $(this).children('label').append('<strong style="color:#FF6600">* </strong>') ;
+                    }
+                });
+                 /*给.int[reqd]的label添加星号*/ 
+                
+                /*radio 验证*/
+                $('form .int[reqd] input[type=radio]').change(function () {
+                    $('.tip').remove();//删除提示信息，如不删除就会append多个提示信息。
+
+                    if (!$(this).is(':checked')) {
+                        var errorMsg='请选择性别' ; 
+                        $(this).parents('.int[reqd]').append( '<span class="tip error">'+errorMsg+ '</span>'); 
+                    }else {
+                        var successMsg='输入正确' ; 
+                        $(this).parents('.int[reqd]').append( '<span class="tip success">'+successMsg+ '</span>'); 
+                    }
+                });
+                /*radio 验证*/
+
+                /*select 验证*/
+
+                $('form .int[reqd] select').each(function (i) {
+                    /*var item=$(this).find("option").not('option:first-child');
+                    console.log(item);*/
+                    $(this).change(function () {
+                         $('.tip').remove();//删除提示信息，如不删除就会append多个提示信息。
+                         if (!$(this).find("option").not('option:first-child').is(':selected')) {
+                             var errorMsg='请选择时间' ; 
+                             $(this).parents('.int[reqd]').append( '<span class="tip error">'+errorMsg+ '</span>'); 
+                         }else{
+                             var successMsg='输入正确' ; 
+                             $(this).parents('.int[reqd]').append( '<span class="tip success">'+successMsg+ '</span>'); 
+                         }
+                    });
+                });
+                /*select 验证*/
+
+
+                $('#send').click(function () {
+                    
+                    var inputType= $(this).parents('form').find('.int[reqd]').attr('typ');
+                    
+                    switch(inputType) {
+                        case 'radio':
+                            $(this).parents('form').find('.int[reqd] input[type=radio]').trigger('change');
+                        case 'select':
+                            $(this).parents('form').find('.int[reqd] select').trigger('change');
+                            break;
+                        /*case 'text':
+                            $(this).parents('form').find(':input.required').trigger('blur');
+                            break;*/
+                    }
+
+                    /*radio 点击验证*/
+                    
+                    /*radio 点击验证*/
+
+                    var numError=$(this).parents('form').find('.error').length;
+                    if (numError) {
+                        return false;
+                    }  
+                    alert('注册成功1！！！');
+                    
+                })
+                $('#send2').click(function () {
+                    $(this).parents('form').find(':input.required').trigger('blur');
+                    var numError=$(this).parents('form').find('.error').length;
+                    if (numError) {
+                        return false;
+                    }  
+                    alert('注册成功2！！！');
+                    
+                })
+
+
+                
+
+
+
+
+    	})
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生存周期</title>
+	<script src="js/react.min.js" charset="UTF-8"></script>
+	<script src="js/react-dom.min.js" charset="UTF-8"></script>
+	<script src="js/browser.min.js" charset="UTF-8"></script>
+	<script type="text/babel">
+	    class ChildComp extends React.Component{
+	    	componentWillReceiveProps(){
+	    		console.log('参数更新了！！！',this.refs['s1'])
+	    	}
+
+            componentDidMount(){
+                console.log()
+            }
+
+            render(){
+                return <span ref="s1">&nbsp;{this.props.name}</span>;
+            }
+	    }
+		class ParentComp extends React.Component{
+            constructor(...args){
+            	super(...args);
+            	this.state={i:0}
+            } 
+
+            fn(){
+            	this.setState({
+            		i:this.state.i+1
+            	});
+            }
+            render(){
+                return <div>
+                    <button type="button" onClick={this.fn.bind(this)}>增加</button>
+                	<ChildComp name={this.state.i} />
+                </div>;
+            }
+		}
+
+		window.onload=function(){
+		    var oDiv=document.getElementById('div1'); 
+			ReactDOM.render(
+                <ParentComp/>, 
+                oDiv
+			);
+		};
+	</script>
+</head>
+<body>
+       <h1 id="div1">
+       	
+       </h1>
+</body>
+</html>

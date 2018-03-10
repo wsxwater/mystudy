@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="browser.min.js"></script>
+	<script type="text/babel">
+	    function ajax(url,fnSucc,fnFail) {
+	    	var request=new XMLHttpRequest();
+
+	    	request.open('GET',url,true);
+	    	request.send();
+
+	    	request.onload=function () {
+	    		if (request.readyState==4 && request.status==200) {
+	    		     	fnSucc(request.responseText);
+	    		} else {
+	    		     	fnFail(request.status);
+	    		}
+	    	}
+	    }
+        window.onload=function(){
+            let obtn=document.getElementById('btn');
+            let obox=document.getElementById('box');
+            obtn.onclick=function () {
+               let p=new Promise(function (resolve,reject) {
+               	    ajax('笔记.txt',function(str){
+               	          resolve(str);
+               	    },function (str) {
+               	    	  reject(str);  
+               	    })
+               });
+
+               p.then(function (str) {
+               	     obox.innerHTML=str;
+               },function (str) {
+               	     obox.innerHTML=str;
+               });	
+          	   
+            }
+        }
+	</script>
+</head>
+<body>
+	<input type="button" id="btn" value="获取" />
+	<div id="box"></div>
+</body>
+</html>

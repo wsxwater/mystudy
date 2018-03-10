@@ -1,0 +1,68 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+
+    <style type="text/css">
+
+        *{margin: 0;padding: 0;}
+        li{list-style: none;}
+        img{border: none;}
+        a{text-decoration: none;color: #333;}
+         hr{margin:30px auto;}
+        .container{width: 660px;margin:0 auto;} 
+
+        li{padding: 10px;border-bottom: 1px solid #E5E5E5;}
+        
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="">
+        <div>你喜欢的运动是？</div>
+        <div>
+            <input type="checkbox" name="checks" id="checks1" value="乒乓球" checked="checked" /><label for="checks1">乒乓球</label>
+            <input type="checkbox" name="checks" id="checks2" value="羽毛球" checked="checked" /><label for="checks2">羽毛球</label>
+            <input type="checkbox" name="checks" id="checks3" value="排球" checked="checked" /><label for="checks3">排球</label>
+            <input type="checkbox" name="checks" id="checks4" value="篮球" /><label for="checks4">篮球</label>
+            <input type="checkbox" name="checks" id="checks5" value="足球" /><label for="checks5">足球</label>
+            <input type="checkbox" name="checks" id="checks6" value="橄榄球" /><label for="checks6">橄榄球</label>
+            <input type="checkbox" name="checks" id="checks7" value="游泳" /><label for="checks7">游泳</label>
+        </div>
+    </form>
+
+    <ul id="box"></ul>
+</div>
+    
+    <script src="jQuery2.1.1.js"></script>
+    <script>
+        $(function () {
+            /**
+             * serialize()：把复选框的值序列化为字符串的形式，只会将选中的值序列化。
+             * serializeArray()：该方法不返回字符串，而是将DOM元素序列化后，返回JSON格式的数据。
+             * $.param()：它是serialize()的核心，用来对一个数组或对象按照key/value进行序列化。
+             */
+
+                var val=$(':checkbox').serialize();
+                console.log(val);
+
+
+                var fields=$(':checkbox').serializeArray(); 
+                console.log(fields);
+                $.each(fields, function (i,field) {
+                       $('#box').append('<li>'+field.value+'</li>');
+                })
+
+
+                var obj={a:1,b:2,c:3}
+                var k=$.param(obj);
+                console.log(k);   //a=1&b=2&c=3
+
+
+
+
+
+        })
+    </script>
+</body>
+</html>
