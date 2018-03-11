@@ -1,0 +1,23 @@
+<!--page/index.wxml-->
+<view class='msg-box'>
+  <!--留言-->
+  <view class='send-box'>
+      <input class='input' type='text' placeholder='请留言......' bindinput='changeInputVal' value='{{inputVal}}'></input>
+      <view>
+          <button size='mini' type='primary' bindtap='addMsg'>添加</button>
+          <text class='text-warn' wx:if="{{showError}}">留言框不能为空！！！</text>
+      </view>
+  </view>
+
+  <text class='msg-info' wx:if="{{msgData.length==0}}">暂无留言...</text>
+
+  <!--留言列表-->
+  <view class='list-view'>
+      <view class='item clearfix' wx:for="{{msgData}}" wx:key="{{key}}">
+          <view class='mainarea'>
+              <view class='rightarea right'><icon type='cancel' class='close-btn' bindtap='cancelMsg' data-index='{{index}}'></icon></view>
+              <view class='leftarea'><text class='text1'>{{item.msg}}</text></view>
+          </view>
+      </view>
+  </view>
+</view>
