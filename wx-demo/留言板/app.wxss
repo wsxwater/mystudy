@@ -1,0 +1,19 @@
+.clearfix:before,
+.clearfix:after {
+	display: table;
+	content: " "
+}
+.clearfix:after {
+	clear: both
+}
+.clearfix{zoom:1;}
+
+.left{float: left;}
+.right{float: right;}
+.mainarea-wrap .leftarea{width: 70px;}
+.mainarea-wrap .leftarea img{display: inline-block;width: 60px;height: 60px;}
+.mainarea-wrap .rightarea{padding-left: 70px;}
+.mainarea .rightarea{width: 60px;}
+.mainarea .leftarea{padding-right: 60px;}
+.mainarea .leftarea .areabox .leftarea{width: 60px;padding-right: 0;}
+.mainarea .leftarea .areabox .rightarea{padding-left: 65px;width: auto;}
