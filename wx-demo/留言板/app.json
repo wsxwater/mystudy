@@ -1,6 +1,7 @@
 {
   "pages": [
-    "page/index"
+    "pages/index",
+    "component/index"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -8,4 +9,6 @@
     "navigationBarBackgroundColor": "#000000",
     "backgroundColor": "#000000"
   }
+  
+  
 }
