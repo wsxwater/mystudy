@@ -29,6 +29,7 @@
 }
 .item .mainarea .rightarea{width: 30px;}
 .item .mainarea .leftarea{padding-right: 32px;}
-.item .close-btn{margin-top: 5px;height: 30px;}
+.item .close-btn{position: absolute;right:0;top:50%;height: 22px;margin-top:-11px;}
 
 .text-warn{color: #ff0000;font-size: 12px;float: right}
+
