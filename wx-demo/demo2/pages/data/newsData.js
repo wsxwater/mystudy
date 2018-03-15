@@ -3,7 +3,7 @@ var initData=[
   {
     "newsId":0,
     "authorName":"wsx",
-    "authorImg":"https://wsxwater.github.io/mystudy/wx-demo/demo2/pages/images/head.png",
+    "authorImg":"https://wsxwater.github.io/mystudy/wx-demo/demo2/pages/images/avatar/a1.jpg",
     "authorDate":"2018/3/14",
     "detailTitle":"静夜思",
     "detailImg":"http://pic.makepolo.net/news/allimg/20170218/1487354424565681.jpg",
@@ -19,7 +19,7 @@ var initData=[
   {
     "newsId": 1,
     "authorName": "wsx",
-    "authorImg": "https://wsxwater.github.io/mystudy/wx-demo/demo2/pages/images/head.png",
+    "authorImg": "https://wsxwater.github.io/mystudy/wx-demo/demo2/pages/images/avatar/a1.jpg",
     "authorDate": "2018/3/14",
     "detailTitle": "黄鹤楼送孟浩然之广陵",
     "detailImg": "http://img2.imgtn.bdimg.com/it/u=3590635725,3000542679&fm=27&gp=0.jpg",
