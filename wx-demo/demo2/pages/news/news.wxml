@@ -8,7 +8,7 @@
             autoplay='{{autoplay}}'
             interval='{{interval}}'
             circular='{{circular}}'>
-        <swiper-item wx:for='{{swiperItem}}' wx:key='{{index}}'><image src='{{item.src}}'></image></swiper-item>    
+        <swiper-item wx:for='{{swiperItem}}' wx:key='{{index}}'><image src='{{item.src}}' background-size='cover'></image></swiper-item>    
     </swiper>
 
     <!-- <view class='articlelist' wx:for="{{unewsData}}" wx:key="{{index}}">

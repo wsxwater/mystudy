@@ -22,11 +22,11 @@ Page({
     //console.log(newsData);
     this.setData({
       swiperItem: [
-        { src: '../images/b1.jpg' },
-        { src: '../images/b2.jpg' },
-        { src: '../images/b3.jpg' },
-        { src: '../images/b4.jpg' },
-        { src: '../images/b5.jpg' }
+        { src: '../images/banner/b1.jpg' },
+        { src: '../images/banner/b2.jpg' },
+        { src: '../images/banner/b3.jpg' },
+        { src: '../images/banner/b4.jpg' },
+        { src: '../images/banner/b5.jpg' }
       ],
       unewsData: newsData.initData
     })
