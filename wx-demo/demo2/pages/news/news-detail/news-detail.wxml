@@ -7,7 +7,7 @@
               <image class='author-img' src='{{authorImg}}'></image> 
               <text class='author-name'>{{authorName}}</text>
               <text class='author-date'>{{authorDate}}</text>
-              <image class='music-player' catchtap='musicPlayerTap' src='{{isPlayer?"../../images/icon/earphone2.png":"../../images/icon/earphone1.png" }}'></image>
+              <image class='music-player' bindtap='musicPlayerTap' src='{{isPlayer?"../../images/icon/earphone2.png":"../../images/icon/earphone1.png" }}'></image>
           </view>
 
           <view class='article-detail'>

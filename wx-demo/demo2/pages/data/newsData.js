@@ -12,9 +12,9 @@ var initData=[
     "articleLikeCollect": "12",
     "articleLikeComment": "30",
     "newsDetailMusic":{
-      "url":"https://pan.baidu.com/s/16FAEf0QqHLGLN8dW_x255g",
-      "title":"My　Love　For　You",
-      "coverImg":""
+      "url":"http://fs.w.kugou.com/201803162124/87b319fbe14995d341ed6f2ecfd73ae3/G065/M07/13/11/gQ0DAFe_pWGAYwD5ACDvdjwgtHY085.mp3",
+      "title":"静夜思-胡婷婷",
+      "coverImg":"http://singerimg.kugou.com/uploadpic/softhead/400/20160826/20160826090420439747.jpg"
     }
   },
   {
@@ -29,9 +29,9 @@ var initData=[
     "articleLikeCollect": "12",
     "articleLikeComment": "30",
     "newsDetailMusic": {
-      "url": "https://pan.baidu.com/s/16FAEf0QqHLGLN8dW_x255g",
-      "title": "My　Love　For　You",
-      "coverImg": ""
+      "url": "http://fs.w.kugou.com/201803162121/f37c14bab5f446c78b0b91b43240109f/G027/M02/05/05/-5MEAFWjaq-AMSUNACa3GqJ1Eu0071.mp3",
+      "title": "黄鹤楼送孟浩然之广陵-皇家唱诗班",
+      "coverImg": "http://singerimg.kugou.com/uploadpic/softhead/400/20160107/20160107130738663842.jpg"
     }
   }
 ];

@@ -35,5 +35,9 @@ App({
   },
   globalData: {
     userInfo: null
+  },
+  globalUrlData:{
+    // movieUrl: 'https://apis.juhe.cn',
+    movieUrl:'https://api.douban.com'
   }
 })

@@ -41,6 +41,26 @@ Page({
         newsCollect[options.newsid]=false;
         wx.setStorageSync('newsCollect', newsCollect);
       }
+      
+
+      var that = this;
+      wx.onBackgroundAudioStop(function () {
+        that.setData({
+          isPlayer: false
+        });
+      });
+
+      wx.onBackgroundAudioPlay(function () {
+        that.setData({
+          isPlayer: true
+        });
+      });
+
+      wx.onBackgroundAudioPause(function () {
+        that.setData({
+          isPlayer: false
+        });
+      });
 
   },
 
@@ -68,58 +88,59 @@ Page({
   },
   musicPlayerTap:function(event){
     var that=this;
+    
     // wx.getBackgroundAudioPlayerState({
     //   success:function(res){
-    //     console.log(res.status)
+    //     var status = res.status;
+
+
+    //     if(status!=1 || status==''){
+          
+    //       wx.playBackgroundAudio({
+    //         dataUrl: newsData.initData[that.data.newsId].newsDetailMusic.url,
+    //         title: newsData.initData[that.data.newsId].newsDetailMusic.title,
+    //         coverImgUrl: newsData.initData[that.data.newsId].newsDetailMusic.coverImg
+    //       });
+    //       that.setData({
+    //         isPlayer: true
+    //       });
+    //     }else{
+    //       wx.pauseBackgroundAudio();
+
+    //       that.setData({
+    //         isPlayer: false
+    //       });
+    //     }
+
     //   }
     // })
+   
+    if (!that.data.isPlayer){
 
-    wx.playBackgroundAudio({
-      dataUrl: newsData.initData[that.data.newsId].newsDetailMusic.url,
-      title: newsData.initData[that.data.newsId].newsDetailMusic.title,
-      coverImgUrl: newsData.initData[that.data.newsId].newsDetailMusic.coverImg
-    })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
+      wx.playBackgroundAudio({
+        dataUrl: newsData.initData[that.data.newsId].newsDetailMusic.url,
+        title: newsData.initData[that.data.newsId].newsDetailMusic.title,
+        coverImgUrl: newsData.initData[that.data.newsId].newsDetailMusic.coverImg
+      });
+      that.setData({
+        isPlayer:true
+      });
+      
+    }else{
+      
+      wx.pauseBackgroundAudio();
+      that.setData({
+        isPlayer: false
+      });
+    }
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
+  onUnload:function(){
+    wx.stopBackgroundAudio();
+    this.setData({
+      isPlayer: false
+    });
   },
 
   /**
@@ -128,4 +149,6 @@ Page({
   onShareAppMessage: function () {
   
   }
+
+  
 })

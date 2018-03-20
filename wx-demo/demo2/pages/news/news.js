@@ -30,16 +30,21 @@ Page({
       ],
       unewsData: newsData.initData
     })
+
+    //console.log(newsData.initData)
+    
     
   },
 
   goNewsDetail:function(event){
     var newsID = event.currentTarget.dataset.newsid;
-    //console.log(newsID);
+    //console.log(event.currentTarget);
 
     wx.navigateTo({
       url: 'news-detail/news-detail?newsid='+newsID,
     })
+
+    //wx.stopBackgroundAudio();
   },
 
   /**

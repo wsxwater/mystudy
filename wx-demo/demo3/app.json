@@ -1,7 +1,9 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/detail/detail",
+    "pages/cart/cart"
+    
   ],
   "window":{
     "backgroundTextStyle":"light",

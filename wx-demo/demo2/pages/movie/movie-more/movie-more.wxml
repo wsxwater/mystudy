@@ -1,0 +1,23 @@
+ <import src='../star-template/star-template.wxml' />
+
+<!-- <template name='movieTemp'>
+    <view class='movie-container'>
+        <image class='movie-img' src='{{coverUrl}}' background-size='cover'></image> 
+        <text class='movie-title'>{{title}}</text>
+        <view>
+            <template is='starTemplate' data='{{average:average,stars:star}}' />
+        </view>
+    </view>
+</template>  -->
+
+
+<view class='clearfix'>
+  <view class='movie-container left' wx:for='{{moreMovies}}' wx:key='{{key}}'>
+      <image class='movie-img' src='{{item.coverUrl}}' background-size='cover'></image> 
+      <text class='movie-title'>{{item.title}}</text>
+      <view>
+          <template is='starTemplate' data='{{average:item.average,stars:item.star}}' />
+      </view>
+  </view>
+</view>
+

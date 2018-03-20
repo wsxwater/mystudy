@@ -9,7 +9,11 @@ Page({
   },
   //事件处理函数
   goNewsTab: function (event) {
-    wx.navigateTo({
+    // wx.navigateTo({
+    //   url: '../news/news'
+    // })
+
+    wx.switchTab({
       url: '../news/news'
     })
   },
