@@ -1,0 +1,9 @@
+<!--pages/movie/movie.wxml-->
+<import src='movie-list-temp/movie-list-temp.wxml' />
+<!-- <text>{{inTheaters}}</text>
+<text>{{Top250}}</text>  -->
+
+<template is='movieListTemp' data='{{...inTheaters}}' />
+<template is='movieListTemp' data='{{...Top250}}' />
+
+

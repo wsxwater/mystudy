@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index",
+    "component/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "留言板",
+    "navigationBarBackgroundColor": "#000000",
+    "backgroundColor": "#000000"
+  }
+  
+  
+}

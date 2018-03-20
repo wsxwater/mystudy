@@ -1,0 +1,17 @@
+<import src='../movie-template/movie-template.wxml'/>
+
+<template name='movieListTemp'>
+    <view class='movie-list-container-wrap'>
+      <view class='movie-list-container'>
+          <view class='movie-list-heading'>
+              <text class='movie-list-title'>{{categoryName}}</text>
+              <text class='more clearfix right' bindtap='goMovieMore' data-categoryname='{{categoryName}}'>更多</text>
+          </view>
+          <view class='movie-list-body'>
+              <block wx:for='{{movies}}' wx:key='{{key}}'>
+                  <template is='movieTemp' data='{{...item}}' />
+              </block>
+          </view>
+      </view>
+    </view>
+</template>

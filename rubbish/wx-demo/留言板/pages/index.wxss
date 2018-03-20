@@ -1,0 +1,35 @@
+/* page/index.wxss */
+.msg-box{
+  padding: 20px;
+}
+
+.input{
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  height: 15px;
+}
+
+.msg-info{
+  display: block;
+  margin: 10px 0 0 0;
+  color: #339999;
+}
+
+.list-view{
+  margin: 20px 0 0 0;
+  word-wrap:break-word;
+}
+.item{
+  border-bottom: 1px dashed #ccc;
+  line-height: 30px;
+  display: block;
+  position: relative;
+}
+.item .mainarea .rightarea{width: 30px;}
+.item .mainarea .leftarea{padding-right: 32px;}
+.item .close-btn{position: absolute;right:0;top:50%;height: 22px;margin-top:-11px;}
+
+.text-warn{color: #ff0000;font-size: 12px;float: right}
+

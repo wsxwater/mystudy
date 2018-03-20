@@ -1,0 +1,13 @@
+<!--component/index.wxml-->
+<view>
+  <icon size='30' type='success' color='#000000'></icon>
+  <icon size='30' type='success_no_circle'></icon>
+  <icon size='30' type='warn'></icon>
+  <icon size='30' type='download'></icon>
+  <icon size='30' type='info'></icon>
+  <icon size='30' type='waitting'></icon>
+  <icon size='30' type='cancel'></icon>
+  <icon size='30' type='search'></icon>
+  <icon size='30' type='clear'></icon>
+</view>
+
