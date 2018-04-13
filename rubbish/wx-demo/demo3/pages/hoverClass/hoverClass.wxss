@@ -1,0 +1,7 @@
+/* pages/hoverClass/hoverClass.wxss */
+
+.list-wrapper{background: #eee;}
+.list-top{display: flex;}
+
+.list-menu{padding: 20rpx 10rpx;text-align: center;}
+.list-menu.cur{background: orange;color: #fff;}

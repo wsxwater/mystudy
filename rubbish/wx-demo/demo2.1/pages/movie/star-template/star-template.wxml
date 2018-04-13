@@ -1,0 +1,17 @@
+<!--pages/movie/star-template/star-template.wxml-->
+
+<template name='starTemplate'>
+    <view class='star-container'>
+        <view class='stars'>
+            <!-- <image src='../images/icon/collect2.png'></image>
+            <image src='../images/icon/collect3.png'></image>
+            <image src='../images/icon/collect3.png'></image>
+            <image src='../images/icon/collect3.png'></image>
+            <image src='../images/icon/collect3.png'></image> -->
+            <image wx:for='{{stars}}' wx:key='{{key}}' src='{{item?"https://wsxwater.github.io/mystudy/wx-demo/demo2/pages/images/icon/collect2.png":"https://wsxwater.github.io/mystudy/wx-demo/demo2/pages/images/icon/collect3.png"}}'></image>
+            <text class='star-score'>{{average}}</text>
+        </view> 
+    </view>
+</template>
+
+
