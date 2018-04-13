@@ -1,0 +1,80 @@
+
+.articlelist {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+  padding: 10px;
+  padding-bottom: 5px;
+}
+
+.articlelist .author {
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.articlelist .author .author-img {
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.articlelist .author .author-name {
+  margin-left: 20rpx;
+}
+
+.articlelist .author .author-date {
+  margin-left: 20rpx;
+  vertical-align: middle;
+  margin-bottom: 5px;
+  font-size: 26rpx;
+}
+
+.article-detail .detail-title{
+  font-size: 34rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px; 
+}
+.article-detail .detail-img{
+  text-align: center;
+}
+.article-detail .detail-img image{
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.article-detail .detail-txt{
+  color: #666;
+  font-size: 26rpx;
+  margin-bottom: 20rpx;
+  letter-spacing: 2rpx;
+  line-height: 40rpx;
+}
+
+.article-detail .detail-txt{
+  margin-bottom: 20rpx;
+}
+
+.article-like{
+  font-size: 14px;
+  line-height: 20px;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.article-like image{
+  vertical-align: top;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.article-like image ~ image{
+  margin-left: 20px;
+  margin-top: 1px;
+}

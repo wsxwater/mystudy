@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    movieID:''
   },
 
   /**
@@ -14,6 +14,19 @@ Page({
    */
   onLoad: function (options) {
     console.log(options.movieid)
-    //console.log(movieData.initData[0])
+
+    this.setData({
+      movieID: options.movieid
+    });
+
+    //wx.hideNavigationBarLoading();
+  },
+  onReady:function(){
+    //wx.showNavigationBarLoading();
+    wx.setNavigationBarTitle({
+      title: this.data.movieID+'电影详情',
+    });
+    
   }
+  
 })

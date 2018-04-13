@@ -38,6 +38,7 @@ App({
   },
   globalUrlData:{
     // movieUrl: 'https://apis.juhe.cn',
-    movieUrl:'https://api.douban.com'
+    // movieUrl:'https://api.douban.com'
+    movieUrl:'http://t.yushu.im'
   }
 })

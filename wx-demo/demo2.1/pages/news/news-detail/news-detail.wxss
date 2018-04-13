@@ -1,0 +1,26 @@
+/* pages/news/news-detail/news-detail.wxss */
+
+@import '../news-template/news-template.wxss';
+
+.news-detail-container .detail-img image{
+  width: 100%;
+}
+.news-detail-container .articlelist{
+  border: none;
+  margin-top: 0;
+}
+
+.news-detail-container .detail-txt{
+  font-weight: bold;
+  font-size: 28rpx;
+}
+.news-detail-container .detail-txt-cell{
+  margin-top:10px;
+  font-weight: normal;
+  font-size: 26rpx;
+}
+.news-detail-container .detail-title{margin-bottom: 0;}
+
+.news-detail-container .article-like image{width:25px;height: 25px;}
+
+.music-player{vertical-align: middle;width: 60rpx;height: 60rpx;margin:0 10px;}

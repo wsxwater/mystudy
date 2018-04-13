@@ -35,7 +35,7 @@ Page({
 
     this.mycallback(movieData.initData[0],'inTheaters','正在热映');
     this.mycallback(movieData.initData[1],'Top250','排行榜');
-    wx.hideNavigationBarLoading();
+    //wx.hideNavigationBarLoading();
 
     // this.setData({
     //   inTheaters: movieData.initData.inTheaters
@@ -58,7 +58,17 @@ Page({
     //   inTheaters: movieData.initData[0].inTheaters,
     //   Top250: movieData.initData[1].Top250
     // })
-        
+
+    
+    wx.request({
+      url: app.globalUrlData.movieUrl + '/v2/movie/in_theaters?start=0&count=3',
+      header: {
+        'content-type': 'application/xml' // 默认值
+      },
+      success: function (res) {
+        callback(res)
+      }
+    })    
   },
   movieHttp: function (url, callback, category){
         wx.request({
@@ -112,7 +122,7 @@ Page({
           movies:movies
         }
 
-        console.log(readyData)
+        //console.log(readyData)
 
         this.setData(readyData);
 
@@ -129,7 +139,7 @@ Page({
     })
   },
   onReady:function(){
-    wx.showNavigationBarLoading();
+    //wx.showNavigationBarLoading();
   }
 
 

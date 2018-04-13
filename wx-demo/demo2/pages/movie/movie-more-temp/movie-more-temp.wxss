@@ -1,0 +1,3 @@
+@import '../movie-template/movie-template.wxss';
+
+.movie-more-temp-container .movie-container{float: left;}

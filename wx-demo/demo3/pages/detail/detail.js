@@ -1,5 +1,6 @@
 // pages/detail/detail.js
 var newsData = require('../data/data.js');
+var li=[];
 
 Page({
 
@@ -7,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-     NEWSID:[]
+     list:[],
+     mli:[]
   },
 
   /**
@@ -20,51 +22,55 @@ Page({
 
       this.setData({
         newsId: options.newsid
-      })
-
-      // var newsIDF = wx.getStorageSync('newsIDF');
-
-      // if (newsIDF) {
-      //   var newIDF = newsIDF[options.newsid];
-
-      // } else {
-      //   var newsIDF = {};
-      //   newsIDF[options.newsid] = 0;
-      //   wx.setStorageSync('newsIDF', newsIDF);
-      // }
+      });
+      
+ 
   },
-  goCart: function () {
+  goCart: function (event) {
+    
     wx.navigateTo({
-      url: '../cart/cart',
+      url: '../cart/cart?newsid=' + event.currentTarget.dataset.newsid + '&authorname=' + event.currentTarget.dataset.authorname,
     });
+
+    // wx.switchTab({
+    //   url: '../cart/cart'
+    // })
   },
   addCart:function (event) {
+    var n = event.currentTarget.dataset.newsid;
+    var num = newsData.initData[n].num | 0;
+    num = num + 1;
+    newsData.initData[n].num = num;
     
-    //console.log(this.data.newsId)
-    // var newsIDF = wx.getStorageSync('newsIDF');
-    // var newIDF = newsIDF[this.data.newsId] || 0;
-    // newIDF = newIDF+1;
-
-    // newsIDF[this.data.newsId] = newIDF;
-
-    // wx.setStorageSync('newsIDF', newsIDF);
     
-    var list=this.data.NEWSID;
-
-    list.push(this.data.newsId)
+    li.push(newsData.initData[n]);
     
     this.setData({
-      Id:list
+      list: this.unique(li, 'newsId')
     })
 
     wx.setStorage({
-      key: 'newsid',
-      data: list,
+      key: 'list',
+      data: this.data.list
     })
-
     
   },
-  onUnload:function(){
-    
+  unique:function(list,types){
+    var sum=list.length;
+    for (var i = 0; i < sum; ++i) {
+      for (var j = 0; j < sum; ++j) {
+        //要注意，不能自己跟自己比
+        if (i != j) {
+          if (list[i][types] == list[j][types]) {
+            list.splice(j, 1);
+            sum--;
+          }
+        }
+
+      }
+    } 
+
+    return list;
+
   }
 })

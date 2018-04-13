@@ -2,7 +2,10 @@
   "pages":[
     "pages/index/index",
     "pages/detail/detail",
-    "pages/cart/cart"
+    "pages/cart/cart",
+    "pages/address/address",
+    "pages/address/new-address/new-address",
+    "pages/hoverClass/hoverClass"
     
   ],
   "window":{

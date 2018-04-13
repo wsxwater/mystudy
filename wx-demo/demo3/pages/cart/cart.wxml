@@ -1,2 +1,11 @@
 <!--pages/cart/cart.wxml-->
-<view><text>rtrtrt</text></view>
+
+<rich-text nodes="{{nodes}}"></rich-text>
+
+
+<view hidden='{{list.length!=0}}'>
+   暂无数据
+</view>
+<view wx:for='{{list}}' wx:key='{{index}}' hidden='{{list.length==0}}'>
+   {{item.newsId+1}}、{{item.authorName}}，点击次数：{{item.num}}
+</view>

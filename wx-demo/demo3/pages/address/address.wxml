@@ -1,0 +1,34 @@
+<!--pages/address/address.wxml-->
+<view hidden='{{list.length!=0}}' class='tip'>暂无收货地址，请新增收货地址</view>
+
+<view class='address-container' >
+    <view class='list-group' wx:if='{{list.length>0}}'>
+        <view class='list-group-item' wx:for='{{list}}' wx:key='{{index}}' data-index='{{index}}' data-username='{{item.username}}' data-address='{{item.addressDetail}}' data-checked='{{item.checked}}'>
+                <view class=' mainarea clearfix'>
+                  <view class='rightarea right'>
+                      <view class='areabox'>
+                          <view class='modify' bindtap='modifyAddress' data-index='{{index}}' data-username='{{item.username}}' data-address='{{item.addressDetail}}' data-checked='{{item.checked}}' data-sign='modify'>修改</view>
+                      </view>
+                  </view>
+
+                  <view class='leftarea'>
+                      <view class='areabox'>
+                          <view class='leftarea left'>
+                               <label class="radio">
+                                  <radio data-checked='{{item.checked}}'/>
+                              </label>   
+                          </view>
+                          <view class='rightarea'>
+                              <view>{{item.username}}</view>
+                              <view>{{item.addressDetail}}</view>
+                          </view> 
+                      </view>
+                  </view> 
+                </view>  
+        </view>
+        
+    </view>
+
+    <button type='primary' class='address-add' bindtap='goAddressForm'>新增收货地址</button>
+</view>
+

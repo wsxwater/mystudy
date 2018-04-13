@@ -7,44 +7,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+     list:[],
+     nodes: [{
+       name: 'div',
+       attrs: {
+         class: 'div_class',
+         style: 'line-height: 60px; color: red;'
+       },
+       children: [{
+         type: 'text',
+         text: 'Hello&nbsp;World!'
+       }]
+     }]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log(options.idx)
-
-    //this.setData(newsData.initData[options.idx])
-
-    
-    // var newsIDF = wx.getStorageSync('newsIDF');
-
-    // wx.getStorageInfo({
-    //   success: function(res) {
-    //     console.log(res)
-    //   },
-    // })
+    var that=this;
 
     
 
-    // wx.getStorage({
-    //   key: 'newsIDF',
-    //   success: function (res) {
-    //     console.log(res.data[0])
-    //   }
-    // })
-    
-    //if (newsIDF) {
-      //console.log(newsIDF)
+    wx.getStorage({
+      key: 'list',
+      success: function(res) {
+        
+        that.setData({
+          list:res.data
+        })
 
-      
-
-
-      //console.log(newsData.initData[newsIDF])
-    //} 
-
+        
+      },
+    })
 
   }
 })

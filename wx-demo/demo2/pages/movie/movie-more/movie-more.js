@@ -20,22 +20,25 @@ Page({
   onLoad: function (options) {
       //console.log(options.categoryname)
       var categoryName=options.categoryname;
-      var that=this;
+      var movieDataArr;
       switch (categoryName) {
         case "正在热映":
           wx.setNavigationBarTitle({
             title: categoryName,
           });
-          that.mycallback(movieData.initData[0], 'inTheaters', categoryName);
+          movieDataArr = movieData.initData[0];
           
         break;
         case "排行榜":
           wx.setNavigationBarTitle({
             title: categoryName,
           });
-          that.mycallback(movieData.initData[1], 'Top250', categoryName);
+          movieDataArr = movieData.initData[1];
         break;
       }
+      
+      this.mycallback(movieDataArr, 'Top250', categoryName);
+      
   },
 
   mycallback: function (n, category, categoryName) {
@@ -72,25 +75,23 @@ Page({
       moreMovies: movies
     })
 
-    // var readyData = {};
+    //wx.hideNavigationBarLoading();
 
-    // readyData[category] = {
-    //   categoryName: categoryName,
-    //   movies: movies
-    // }
-
-    // console.log(readyData)
-
-    // this.setData(readyData);
-
-
+  },
+  goMovieDetail: function (event) {
+    wx.navigateTo({
+      url: '../movie-detail/movie-detail?movieid=' + event.currentTarget.dataset.movieid
+    })
+  },
+  onReachBottom: function () {
+    console.log(2222222222)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    //wx.showNavigationBarLoading();
   },
 
   /**

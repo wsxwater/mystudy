@@ -1,0 +1,47 @@
+<!--pages/news/news.wxml-->
+<import src='news-template/news-template.wxml' />
+
+<view class='news-container'>
+    <swiper indicator-dots='{{indicatorDots}}' 
+            indicator-color='{{indicatorColor}}' 
+            indicator-active-color='{{indicatorActiveColor}}'
+            autoplay='{{autoplay}}'
+            interval='{{interval}}'
+            circular='{{circular}}'>
+        <swiper-item wx:for='{{swiperItem}}' wx:key='{{index}}'><image src='{{item.src}}' background-size='cover'></image></swiper-item>    
+    </swiper>
+
+    <!-- <view class='articlelist' wx:for="{{unewsData}}" wx:key="{{index}}">
+        <view class='author'>
+            <image class='author-img' src='{{item.authorImg}}'></image>
+            <text class='author-name'>{{item.authorName}}</text>
+            <text class='author-date'>{{item.authorDate}}</text>
+        </view>
+
+        <view class='article-detail'>
+            <view class='detail-title'>{{item.detailTitle}}</view>
+            <view>
+                <view class='detail-img'><image src='{{item.detailImg}}'></image></view>
+                <view class='detail-txt'>
+                    {{item.detailTxt}}
+                </view>
+            </view>
+            <view class='article-like'> 
+                <image src='../images/star.png'></image>
+                <text>{{item.articleLikeCollect}}</text>
+                <image src='../images/ygyw.png'></image>
+                <text>{{item.articleLikeComment}}</text>
+            </view> 
+        </view>
+    </view> -->
+
+    <view class='articlelist' wx:for="{{unewsData}}" wx:key="{{index}}" bindtap='goNewsDetail' data-newsid='{{item.newsId}}'>
+         <template is='newsTemplate' data='{{...item}}' />
+    </view>
+
+   
+
+
+</view>
+
+
