@@ -45,4 +45,6 @@ Temporary Items
 
 ##ignore this file##
 node_modules/
-
+rubbish/
+*.zip
+*.rar
