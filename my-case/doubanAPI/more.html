@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>列表</title>
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./main.css">
+</head>
+<body>
+	<div class="comwid">
+		<div class="panel panel-default list-box">
+			<div class="panel-body">
+		    	<div class="tip">加载中...</div>
+		    	<div class="row row-list"></div>
+		    	<div class="text-center more"><span class="label label-default">加载更多</span></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="./utils.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			
+			var start=0;
+			var categoryName=getUrlParam('categoryName');
+			console.log('?id=3015245');
+            var allUrls='';
+            if (categoryName!=undefined) {
+		        switch (categoryName) {
+		            case "in_theaters":
+		              allUrls = 'https://api.douban.com/v2/movie/in_theaters';
+		            break;
+		            case "top250":
+		              allUrls = 'https://api.douban.com/v2/movie/top250';
+		            break;
+		        }
+            }else{
+            	allUrls='https://api.douban.com/v2/movie/in_theaters';
+            }
+		    
+		    httpGet(allUrls,callback);
+
+	        function callback(res) {
+	        	//console.log(res);
+	        	console.log(res.statuscode);
+	        	if(res){
+					$('.tip').hide();
+				    console.log(res);
+
+				    $.each(res.subjects,function (idx,val) {
+				    	var $content='<div class="col-xs-4">'+
+				    	  '<a href="detail.html?id='+val.id+'" class="thumbnail">'+
+				    	    '<img src="'+val.images.small+'" alt="'+val.title+'">'+
+				    	    '<div class="caption text-center">'+
+				    	      '<h6>'+val.title+'</h6>'+
+				    	    '</div>'+
+				    	  '</a>'+
+				    	'</div>';
+
+				    	$('.list-box .row-list').append($content);
+				    	$('.more').css('display','block');
+				    })
+
+
+
+			    	if (start<=res.total) {
+				    	start+=20;
+			    	}
+				}
+	        }
+
+
+	        $('.more').click(function () {
+	        	var nextUrls = allUrls + '?start=' + start + '&count=20';
+	        	httpGet(nextUrls,callback);
+	        })
+
+
+			// $.ajax({
+			// 	url:'https://api.douban.com/v2/movie/top250',
+			// 	type:'GET',
+			// 	dataType: 'jsonp',
+	  //           crossDomain: true,
+			// 	success:function (res) {
+	                
+			// 		if(res){
+			// 			$('.tip').hide();
+			// 		    console.log(res);
+
+			// 		    $.each(res.subjects,function (idx,val) {
+			// 		    	var $content='<div class="col-xs-6">'+
+			// 		    	  '<a href="detail.html?id='+val.id+'" class="thumbnail">'+
+			// 		    	    '<img src="'+val.images.small+'" alt="'+val.title+'">'+
+			// 		    	    '<div class="caption text-center">'+
+			// 		    	      '<h6>'+val.title+'</h6>'+
+			// 		    	    '</div>'+
+			// 		    	  '</a>'+
+			// 		    	'</div>';
+
+			// 		    	$('.list-box .row-list').append($content);
+			// 		    	$('.more').css('display','block');
+
+					    	
+			// 		    })
+			// 		}
+			// 	},
+			// 	error:function (res) {
+			// 		alert(res)
+			// 	},
+			// })
+
+			// $('.more').on('click','.label',function () {
+			// 	start+=20;
+			// })
+		})
+	</script>	
+</body>
+</html>
