@@ -1,8 +1,0 @@
-<!--index.wxml-->
-<view class="index-container">
-  <image src='../images/logo.jpg' class='logo'></image>
-  <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" size='mini'> 获取昵称 </button>
-  <text class='username'>hello,{{userInfo.nickName}}!!!</text>
-  <view class='btn' bindtap='goNewsTab'><text>和李白一起遨游诗的世界</text></view>
-  <!--<navigator url='../news/news'  hover-class="navigator-hover">和李白一起遨游诗的世界</navigator>-->
-</view>

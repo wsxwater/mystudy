@@ -1,7 +1,0 @@
-/* pages/address/new-address/new-address.wxss */
-
-.new-address-container{padding:10px;}
-.section input{margin-bottom: 15px;border:1px solid #ccc;padding:5px 10px;}
-
-.btn-area{text-align: center;margin: 15px 0;}
-.btn-area button{margin:0 5px;}

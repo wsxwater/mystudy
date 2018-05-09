@@ -1,5 +1,0 @@
-<import src='../movie-more-temp/movie-more-temp.wxml' />
-
-<template is='movieMoreTemp' data='{{moreMovies}}' /> 
-
-
