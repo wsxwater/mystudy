@@ -8,7 +8,8 @@ function httpGet(url,callback) {
 			callback(res)
 		},
 		error:function (res) {
-			alert('error')
+			alert('error');
+			window.location.href='list.html';
 		},
 	})
 }
