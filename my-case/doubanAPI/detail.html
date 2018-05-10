@@ -15,8 +15,36 @@
 </head>
 <body>
     <div class="comwid">
-        <div class="panel panel-default detail-box">
-            <div class="tip">加载中...</div>
+        <div class="tip list-tip">加载中...</div>
+        <div class="panel panel-default detail-box hide">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+                <div class="img-box"></div>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                  <div><span class="dtit">豆瓣评分</span></div>
+                  <div class="media-left">
+                    <span class="score"></span>
+                  </div>
+                  <div class="media-body">
+                    <div class="star-box"></div>
+                    <div><a href="javascript:;"><span class="ratings-count"></span>人评价</a></div>
+                  </div>
+                </div>
+                <div><span class="dtit">又名：</span><span class="akas"></span></div>
+                <div><span class="dtit">原名：</span><span class="oritit"></span></div>
+                <div><span class="dtit">导演：</span><a href="javascript:;" class="author"></a></div>
+                <div><span class="dtit">主演：</span><span class="casts"></span></div>
+                <div><span class="dtit">制片国家/地区：</span><span class="country"></span></div>
+                <div><span class="dtit">类型：</span><span class="genres"></span></div>
+                <div><div><span class="dtit">剧情简介：</span></div><div class="summary"></div></div>
+            </div>
+        </div>
+
+        <div class="text-center empty-box">
+            <div><img src="empty.png" alt="empty"></div>
+            <div>加载失败</div>
         </div>
     </div>
     <script src="./jquery.min.js"></script>
@@ -30,55 +58,70 @@
             var url='';
 
             if (movieId!=undefined) {
-                url='https://api.douban.com/v2/movie/subject/'+movieId;
-                httpGet(url,callback);
+                url=gobalurl+'/v2/movie/subject/'+movieId;
+                httpGet(url,callback,error);
                 $('.tip').text('加载中...')
             }else{
                 $('.tip').text('暂无数据')
             }
+
+            function error() {
+                $('.tip').hide();
+                $('.detail-box').addClass('hide');
+                $('.empty-box').show();
+            }
             
             function callback(res) {
 
-                    console.log(res.statuscode);
+                //console.log(res.code);
                 if(res){
                     $('.tip').hide();
+                    $('.detail-box').removeClass('hide');
                     console.log(res);
                     var title=res.title;
+                    var average=res.rating.average;
                     var img_url=res.images.small;
                     var aka=res.aka;
+                    var original_title=res.original_title;
                     var author=res.directors[0].name;
                     var year=res.year;
                     var countries=res.countries;
-                    // var genres=res.genres;
-
+                    var genres=res.genres;
+                    var casts=res.casts;
                     var summary=res.summary;
-                    var $content='<div class="panel-heading">'+title+'('+year+')'+'</div>'+
-                    '<div class="panel-body"><img src="'+img_url+'" alt="'+title+'" class="detail-img"></div>'+
-                    '<div class="panel-body">'+
-                        '<div><span class="detail-tit">又名：</span><span class="akas"></span></div>'+
-                        '<div><span class="detail-tit">导演：</span><a href="javascript:;">'+author+'</a></div>'+
-                        '<div><span class="detail-tit">主演：</span><span class="casts"></span></div>'+
-                        '<div><span class="detail-tit">制片国家/地区：</span>'+countries+'</div>'+
-                        '<div><span class="detail-tit">类型：</span><span class="genres"></span></div>'+
-                        '<div><div><span class="detail-tit">剧情简介：</span></div><div>'+summary+'</div></div>'+
-                    '</div>';
-                    $('.detail-box').append($content);
+                    var id=res.id;
+                    var star=starToArr(res.rating.stars);
+                    // console.log(star);
+                    summary=summary.replace(/\n/g,'<br/>');
+
+                    $('.img-box').append('<img src="'+img_url+'" alt="'+title+'" class="detail-img">');
+                    $('.panel-heading').html(title+'('+year+')')
+                    $('.score').html(average);
+                    $('.star-box').append('<div class="star" id="star'+id+'"></div>');
+                    $('.ratings-count').html(res.ratings_count);
+                    $('.country').html(countries);
+                    $('.author').html(author);
+                    $('.oritit').html(original_title);
+                    $('.summary').html(summary);
+
                     
-                    $.each(res.casts,function (idx,val) {
+                    $.each(casts,function (idx,val) {
                         $('.casts').append('<a href="javascript:;">'+val.name+'</a><span class="line">/</span>');
-                        console.log();
-                        $('.casts .line').eq(res.casts.length-1).remove();
+                        $('.casts .line').eq(casts.length-1).remove();
                     })
-                    $.each(res.genres,function (idx,val) {
+                    $.each(genres,function (idx,val) {
                         $('.genres').append('<span>'+val+'</span><span class="line">/</span>');
-                        console.log();
-                        $('.genres .line').eq(res.genres.length-1).remove();
+                        $('.genres .line').eq(genres.length-1).remove();
                     })
-                    $.each(res.aka,function (idx,val) {
+                    $.each(aka,function (idx,val) {
                         $('.akas').append('<span>'+val+'</span><span class="line">/</span>');
-                        console.log();
-                        $('.akas .line').eq(res.aka.length-1).remove();
-                    })
+                        $('.akas .line').eq(aka.length-1).remove();
+                    });
+                    if(aka.length==0){
+                        $('.akas').parent().hide();
+                    }
+
+                    appendStar(star,$('#star'+id));
                 }
             }
 

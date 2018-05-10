@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>列表</title>
+	<link href="bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<ul class="list-group"></ul>
+	</div>
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script type="text/javascript">
+
+		$(function () {
+
+			$.ajax({
+	            url:'http://localhost:3000/users?_start=1&_limit=10',
+	            dataType:'jsonp',
+	            // header: {
+	            //       'content-type': 'application/json' 
+	            //     },
+	            type:'GET',
+	            // data:{
+	            //     "id":4,
+	            //     "title":"css",
+	            //     "author":"authorX"
+	            // },
+	            success:function (res) {
+	            	console.log(res);
+					$.each(res,function (idx,val) {
+						console.log(val);
+						var $content='<a href="javascript:;" class="list-group-item">'+val.id+'&nbsp;'+val.name+'</a>';
+						$('.container .list-group').append($content)
+					})
+	            	 
+	            },
+	            error:function (res) {
+	            	 console.log(res);
+	            },
+	        })
+			// $.ajax({
+			// 	url: 'http://192.168.1.160:3000/posts',
+			// 	type: 'POST',
+			// 	data:{"id":3,"title":'测试',"author":'哈哈'},
+			// 	dataType: 'jsonp',
+			// 	success:function (res) {
+			// 		console.log(res);
+			// 		$.each(res,function (idx,val) {
+			// 			console.log(val);
+			// 			var $content='<a href="javascript:;" class="list-group-item">'+val.id+'&nbsp;'+val.title+'</a>';
+			// 			$('.container .list-group').append($content)
+			// 		})
+			// 	}
+			// });
+
+			// $.ajax({
+			// 	url: '/path/to/file',
+			// 	type: 'default GET (Other values: POST)',
+			// 	dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+			// 	data: {param1: 'value1'},
+			// })
+			// .done(function() {
+			// 	console.log("success");
+			// })
+			// .fail(function() {
+			// 	console.log("error");
+			// })
+			// .always(function() {
+			// 	console.log("complete");
+			// });
+			
+			
+		})
+	</script>
+</body>
+</html>
