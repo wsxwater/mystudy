@@ -225,7 +225,8 @@
                 httpGet(nextUrls,callback,error);
             });
             $('#returnBtn').click(function () {
-                error();
+                $('.result-box .row-list').empty();
+                $(".list-box").show();
             })
             function error() {
                 $('.result-box').hide();
