@@ -20,6 +20,9 @@
             <div class="search-box">
                 <form>
                     <div class="input-group">
+                      <span class="input-group-btn return-box">
+                        <button class="btn btn-default" type="button" id="returnBtn">返回</button>
+                      </span>  
                       <input type="text" class="form-control" placeholder="搜索功能未完善">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button" id="searchBtn">搜索</button>
@@ -221,16 +224,12 @@
                 var nextUrls = gobalurl+'/v2/movie/search?q='+$.trim($('.search-box .form-control').val()) + '&start=' + start + '&count=10';
                 httpGet(nextUrls,callback,error);
             });
+            $('#returnBtn').click(function () {
+                error();
+            })
             function error() {
                 $('.result-box').hide();
             }
-
-            $('.result-box').click(function () {
-                error();
-            })
-
-
-            
 
             
     	})
