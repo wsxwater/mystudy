@@ -23,7 +23,7 @@
 		$(function () {
 
 			$.ajax({
-	            url:'http://localhost:3000/users?_start=1&_limit=10',
+	            url:'http://localhost:3000/news?_start=0&_limit=10&_page=3',
 	            dataType:'jsonp',
 	            // header: {
 	            //       'content-type': 'application/json' 
@@ -38,7 +38,7 @@
 	            	console.log(res);
 					$.each(res,function (idx,val) {
 						console.log(val);
-						var $content='<a href="javascript:;" class="list-group-item">'+val.id+'&nbsp;'+val.name+'</a>';
+						var $content='<a href="javascript:;" class="list-group-item">'+val.id+'&nbsp;'+val.title+'</a>';
 						$('.container .list-group').append($content)
 					})
 	            	 

@@ -3,12 +3,12 @@
     { 
       "id": 1, 
       "title": "json-server", 
-      "author": "typicode" 
+      "author": "typicode"
     },
     { 
       "id": 2, 
       "title": "sss", 
-      "author": "wsx" 
+      "author": "wsx"
     }
   ],
   "comments": [

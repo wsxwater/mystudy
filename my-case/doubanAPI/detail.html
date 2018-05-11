@@ -91,6 +91,7 @@
                     var summary=res.summary;
                     var id=res.id;
                     var star=starToArr(res.rating.stars);
+                    var ratings_count=res.ratings_count;
                     // console.log(star);
                     summary=summary.replace(/\n/g,'<br/>');
 
@@ -98,7 +99,7 @@
                     $('.panel-heading').html(title+'('+year+')')
                     $('.score').html(average);
                     $('.star-box').append('<div class="star" id="star'+id+'"></div>');
-                    $('.ratings-count').html(res.ratings_count);
+                    $('.ratings-count').html(ratings_count);
                     $('.country').html(countries);
                     $('.author').html(author);
                     $('.oritit').html(original_title);
