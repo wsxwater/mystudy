@@ -27,10 +27,11 @@
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button" id="searchBtn">搜索</button>
                       </span>
-                    </div><!-- /input-group -->
+                    </div>
                 </form>
           </div>
         </nav>    
+
         <div class="content">
             <div class="result-box">
                 <div class="row row-list"></div>
@@ -217,6 +218,7 @@
 
             // });
             $('#searchBtn').click(function(event) {
+                $('.result-box .row-list').empty();
                 searchInfo();
             });
 
