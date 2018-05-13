@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>列表</title>
+	<link href="bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.delall{display: none;}
+	</style>
+</head>
+<body>
+	<!-- <div class="container" id="container">
+		<ul class="list-group"></ul>
+	</div> -->
+
+	<div class="container">
+		<form role="form">
+			<div class="form-group">
+				<label for="uname" class="control-label">用户名：</label>
+				<input type="text" class="form-control" id="uname">
+			</div>
+			<div class="form-group">
+				<label for="uage" class="control-label">年龄：</label>
+				<input type="text" class="form-control" id="uage">
+		    </div>
+		    <div class="form-group">
+		    	<input type="button" class="btn btn-primary" id="add" value="添加"/>
+		    	<input type="reset" class="btn btn-danger" value="重置"/>
+		    </div>
+		</form>
+
+
+		<table class="table table-bordered text-center table-hover">
+		    <caption class="h1 text-center">用户信息表</caption>
+			<thead>
+				<tr>
+					<th class="text-center">序号</th>
+					<th class="text-center">用户名</th>
+					<th class="text-center">年龄</th>
+					<th class="text-center">操作</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				<!-- <tr>
+					<td>1</td>
+					<td>张三</td>
+					<td>22</td>
+					<td><button type="button" data-toggle="modal" data-target="#layer" class="btn btn-primary btn-xs">删除</button></td>
+				</tr> -->
+			</tbody>
+			<tfoot>
+				<tr class="text-right delall">
+					<td colspan="4">
+						<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer" >删除全部</button>
+					</td>
+				</tr>
+				<tr class="tip">
+					<td colspan="4">
+						暂无数据哟，亲~
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script type="text/javascript">
+
+		$(function () {
+
+			// $.ajax({
+	  //           url:'http://localhost:3000/news?_start=0&_limit=10&_page=3',
+	  //           dataType:'jsonp',
+	  //           // header: {
+	  //           //       'Content-Type': 'application/json' 
+	  //           //     },
+	  //           type:'GET',
+	  //           success:function (res) {
+	  //           	console.log(res);
+			// 		$.each(res,function (idx,val) {
+			// 			console.log(val);
+			// 			var $content='<a href="javascript:;" class="list-group-item">'+val.id+'&nbsp;'+val.title+'</a>';
+			// 			$('#container .list-group').append($content)
+			// 		})
+	            	 
+	  //           },
+	  //           error:function (res) {
+	  //           	 console.log(res);
+	  //           },
+	  //       })
+			// $.ajax({
+			// 	url: 'http://192.168.1.160:3000/posts',
+			// 	type: 'POST',
+			// 	data:{"id":88,"title":'测试88',"author":'哈哈'},
+			// 	dataType: 'json',
+			// 	header: {
+	  //             'Content-Type': 'application/json' 
+	  //           },
+			// 	success:function (res) {
+			// 		console.log(res);
+			// 		// $.each(res,function (idx,val) {
+			// 		// 	console.log(val);
+			// 		// 	var $content='<a href="javascript:;" class="list-group-item">'+val.id+'&nbsp;'+val.title+'</a>';
+			// 		// 	$('.container .list-group').append($content)
+			// 		// })
+			// 	}
+			// });
+			
+
+			var id=0;
+			$('#add').click(function() {
+				id+=1;
+				if ($('#uname')!=""||$('#uage')!="") {
+					$.ajax({
+						url: 'http://localhost:3000/users',
+						type: 'POST',
+						dataType: 'json',
+						header:{
+							'Content-Type':'appplication/json'
+						},
+						data: {
+							'id':id,'name':$.trim($('#uname').val()),
+							'age':$.trim(parseInt($('#uage').val()))
+						},
+						success:function(res){
+							console.log(res);
+							if (res.id!=undefined) {
+								alert('提交成功')
+							}else{
+                                console.log(res.id);
+							}
+						},
+						error:function(res){
+							console.log('error');
+						}
+					});
+				}
+			});
+
+
+			$.ajax({
+				url:'http://localhost:3000/users',
+				dataType:'json',
+				success:function (res) {
+					console.log(res,res.length);
+					if (res.length>0) {
+						alert('提交成功')
+						$.each(res,function (idx,val) {
+                            var content='<tr class="user'+val.id+'">'+
+                            	'<td>'+val.id+'</td>'+
+                            	'<td>'+val.name+'</td>'+
+                            	'<td>'+val.age+'</td>'+
+                            	'<td><button type="button" data-toggle="modal" data-target="#layer" class="btn btn-primary btn-xs">删除</button></td>'+
+                            '</tr>';
+                            console.log(val.id,val.name,val.age);
+                            $('#tbody').append(content);
+						})
+                        $('.delall').show();
+                        $('.tip').hide();
+					}else{
+                        console.log(res.id);
+					}
+				},
+				error:function(res){
+                    alert('error');
+				}
+			})
+
+			
+			
+			
+		})
+	</script>
+</body>
+</html>
