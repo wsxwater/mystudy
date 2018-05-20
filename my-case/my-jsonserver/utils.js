@@ -1,15 +1,17 @@
-function httpGet(url,callback) {
+var globalUrl='http://localhost:3000';
+//var globalUrl='/base';
+
+function httpGet(url,callback,error) {
 	$.ajax({
 		url:url,
 		type:'GET',
-		dataType: 'jsonp',
-        crossDomain: true,
+		//dataType: 'json',
+        //crossDomain: true,
 		success:function (res) {
 			callback(res)
 		},
 		error:function (res) {
-			alert('error');
-			// window.location.href='list.html';
+			error()
 		},
 	})
 }
@@ -21,8 +23,8 @@ function getUrlParam(name) {
 
     if (r!=null) {
         return unescape(r[2]);
-        return null;
     }
+    return null;
 }
 
 
