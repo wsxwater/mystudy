@@ -15,12 +15,17 @@
 </head>
 <body>
 	<div class="comwid">
-		<div class="panel panel-default list-box">
+    	<div class="tip list-tip">加载中...</div>
+		<div class="panel panel-default list-box hide">
 			<div class="panel-body">
-		    	<div class="tip">加载中...</div>
 		    	<div class="row row-list"></div>
 		    	<div class="text-center more"><span class="label label-default">加载更多</span></div>
 			</div>
+		</div>
+
+		<div class="text-center empty-box">
+		    <div><img src="empty.png" alt="empty"></div>
+		    <div>加载失败</div>
 		</div>
 	</div>
 
@@ -32,55 +37,72 @@
 			
 			var start=0;
 			var categoryName=getUrlParam('categoryName');
-			console.log('?id=3015245');
             var allUrls='';
             if (categoryName!=undefined) {
 		        switch (categoryName) {
 		            case "in_theaters":
-		              allUrls = 'https://api.douban.com/v2/movie/in_theaters';
+		              allUrls = gobalurl+'/v2/movie/in_theaters';
 		            break;
 		            case "top250":
-		              allUrls = 'https://api.douban.com/v2/movie/top250';
+		              allUrls = gobalurl+'/v2/movie/top250';
 		            break;
 		        }
             }else{
-            	allUrls='https://api.douban.com/v2/movie/in_theaters';
+            	allUrls=gobalurl+'/v2/movie/in_theaters';
             }
 		    
-		    httpGet(allUrls,callback);
+		    httpGet(allUrls,callback,error);
+		    function error() {
+		    	$('.tip').hide()
+		        $('.list-box').addClass('hide');
+		        $('.empty-box').show()
+		    }
 
 	        function callback(res) {
-	        	//console.log(res);
-	        	console.log(res.statuscode);
+
 	        	if(res){
 					$('.tip').hide();
+					$('.list-box').removeClass('hide');
 				    console.log(res);
 
 				    $.each(res.subjects,function (idx,val) {
+				    	var star=starToArr(val.rating.stars);
+				    	var stars=val.rating.stars;
+				    	var average=val.rating.average;
+				    	var id=val.id;
+				    	var title=val.title;
+				    	var imgsrc=val.images.small;
 				    	var $content='<div class="col-xs-4">'+
-				    	  '<a href="detail.html?id='+val.id+'" class="thumbnail">'+
-				    	    '<img src="'+val.images.small+'" alt="'+val.title+'">'+
+				    	  '<a href="detail.html?id='+id+'" class="thumbnail">'+
+				    	    '<img src="'+imgsrc+'" alt="'+title+'">'+
 				    	    '<div class="caption text-center">'+
 				    	      '<h6>'+val.title+'</h6>'+
+				    	      '<div class="star-box">'+
+				    	          '<div class="star" star="'+stars+'" id="star'+id+'"></div>'+
+				    	          '<span class="score">'+average+'</span>'+
+				    	      '</div>'+
 				    	    '</div>'+
 				    	  '</a>'+
 				    	'</div>';
 
 				    	$('.list-box .row-list').append($content);
 				    	$('.more').css('display','block');
+
+				    	appendStar(star,$('#star'+id));
 				    })
-
-
 
 			    	if (start<=res.total) {
 				    	start+=20;
+			    	}else{
+			    		$('.more span').text('没有更多内容了。。。');
+			    		$('.more').unbind('click');
 			    	}
 				}
 	        }
 
 
 	        $('.more').click(function () {
-	        	var nextUrls = allUrls + '?start=' + start + '&count=20';
+	        	var nextUrls = allUrls + '?start=' + start + '&count=10';
 	        	httpGet(nextUrls,callback);
 	        })
 

@@ -1,27 +1,70 @@
-function httpGet(url,callback) {
-	$.ajax({
-		url:url,
-		type:'GET',
-		dataType: 'jsonp',
-        crossDomain: true,
-		success:function (res) {
-			callback(res)
-		},
-		error:function (res) {
-			alert('error')
-		},
-	})
+//var gobalurl='https://api.douban.com';//没有使用nginx
+var gobalurl='http://b.com';  //使用了nginx代理到豆瓣api，要使用gobalurl就要启动服务器start nginx,重启服务器nginx -s reload
+//var gobalurl='/base';  //隐藏跨域
+
+function httpGet(url,callback,error) {
+	var xhrs=$.ajax({
+			url:url,
+			type:'GET',
+			// dataType: 'jsonp',//没有使用nginx
+	        // crossDomain: true,//没有使用nginx
+			success:function (res) {
+				callback(res)
+			},
+			error:function (res) {
+				error();
+			},
+		});
+}
+
+function starToArr(stars){//将星星数字，转为数组，例如:50=>[1,1,1,1,1]
+    var arr=[];
+    var num=stars.substring(0,1);//截取数字第一位，例如：50=>5
+    // var num2=stars.substring(2,1);
+    // console.log(num2);
+
+    for(var i=1;i<=5;i++){
+      if(num<i){//如果5小于i，就添加数字0
+        arr.push(0);
+      }else{//如果5不小于i，就添加数字1
+        arr.push(1)
+      }
+    }
+    
+    return arr;
+}
+
+function appendStar(star,parent) {//将星星数组[1,1,1,1,1]插入对应颜色的星星字符
+    for (var i = 0; i < star.length; i++) {
+        var starArr=[];
+        var starImg='<span>★</span>';
+
+        if (star[i]==1) {
+            starImg='<span class="on">★</span>';
+        }else if (star[i]==0) {
+            starImg='<span>★</span>';
+        }
+        starArr.push(starImg);
+        parent.append(starArr);
+    }
 }
 
 
 function getUrlParam(name) {
+    /**
+     * window.location.search：设置或获取 href 属性中跟在问号后面的部分
+     * var test = window.location.search;
+         alert(test);
+        返回：?opt=1
+     */
+    
     var reg=new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
     var r=window.location.search.substr(1).match(reg);
 
     if (r!=null) {
         return unescape(r[2]);
-        return null;
     }
+    return null;
 }
 
 

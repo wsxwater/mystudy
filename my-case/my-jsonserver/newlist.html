@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>列表</title>
+	<link href="bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+	    .newlist{margin-bottom: 0;padding: 10px 0;}
+        .list-group-item{padding: 10px;}
+
+		.area{width: 100%;}
+		.leftarea{width: 100px;}
+		.leftarea img{width: 100%;display: block;height: 60px;object-fit: cover;}
+		.rightarea{padding-left: 110px;}
+        .area-heading{margin: 2px 0;font-size: 18px;height: 20px;line-height: 20px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+		.area-body{font-size: 14px;height: 37px;line-height: 19px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;}
+	</style>
+</head>
+<body>
+    <div class="container">
+    	<div class="list-group newlist"></div>
+    </div>
+    
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script src="utils.js"></script>
+	<script type="text/javascript">
+		$(function () {
+            httpGet(globalUrl+'/news?_start=0&_limit=6',callback,error);
+            
+
+            function callback(res) {
+            	console.log(res);
+
+            	$.each(res,function (idx,val) {
+            	  var content='<a href="newdetail.html?id='+val.id+'" class="list-group-item">'+
+    					'<div class="area clearfix">'+
+    						'<div class="leftarea pull-left"><img src="'+val.images[val.images.length-1]+'" alt="'+val.title+'"></div>'+
+    						'<div class="rightarea">'+
+    							'<div class="area">'+
+    		                        '<div class="area-heading">'+val.title+'</div>'+
+    		                        '<div class="area-body">'+val.desc+'</div>'+
+    							'</div>'+
+    						'</div>'+
+    					'</div>'+
+    				'</a>';
+            		$('.newlist').append(content);
+            	})
+            }
+            function error() {
+                console.log('error');
+            	console.log('要先启动服务器，在git cmd (文件目录： /e/study/mystudy/my-case/my-jsonserver )输入json-server index.js');
+            }
+
+            var a=['b','c','a'];
+            var b=a.sort().join('-');
+            console.log(a,b);
+		})
+	</script>
+</body>
+</html>

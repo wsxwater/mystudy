@@ -10,34 +10,60 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
     <title>列表</title>
-    <link href="./bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./main.css">
-
 </head>
 <body>
     <div class="comwid">
+        
+        <nav class="navbar navbar-default navbar-fixed-top comwid">
+            <div class="search-box">
+                <form>
+                    <div class="input-group">
+                      <span class="input-group-btn return-box">
+                        <button class="btn btn-default" type="button" id="returnBtn">返回</button>
+                      </span>  
+                      <input type="text" class="form-control" placeholder="搜索功能未完善">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="searchBtn">搜索</button>
+                      </span>
+                    </div>
+                </form>
+          </div>
+        </nav>    
 
-        <div class="list-box">
-	    	<div class="panel panel-default" id="inTheaters">
-	    		<div class="panel-heading"><span>正在热映</span><a href="javascript:;" class="btn-more pull-right">更多</a></div>
-	    		<div class="panel-body">
-			    	<div class="tip">加载中...</div>
-			    	<div class="row row-list"></div>
-	    		</div>
-	    	</div>
+        <div class="content">
+            <div class="result-box">
+                <div class="row row-list"></div>
+                <div class="text-center more"><span class="label label-default">加载更多</span></div>
+            </div>
 
-	    	<div class="panel panel-default" id="top250">
-	    		<div class="panel-heading"><span>排行榜</span><a href="javascript:;" class="btn-more pull-right">更多</a></div>
-	    		<div class="panel-body">
-			    	<div class="tip">加载中...</div>
-			    	<div class="row row-list"></div>
-	    		</div>
-	    	</div>
+            <div class="list-box">
+    	    	<div class="panel panel-default" id="inTheaters">
+    	    		<div class="panel-heading"><span>正在热映</span><a href="javascript:;" class="btn-more pull-right">更多</a></div>
+    	    		<div class="panel-body">
+    			    	<div class="tip">加载中...</div>
+    			    	<div class="row row-list"></div>
+    	    		</div>
+    	    	</div>
+
+    	    	<div class="panel panel-default" id="top250">
+    	    		<div class="panel-heading"><span>排行榜</span><a href="javascript:;" class="btn-more pull-right">更多</a></div>
+    	    		<div class="panel-body">
+    			    	<div class="tip">加载中...</div>
+    			    	<div class="row row-list"></div>
+    	    		</div>
+    	    	</div>
+            </div>
         </div>
 
+
+
+
     </div>
-    <script src="./jquery.min.js"></script>
-    <script src="./bootstrap.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="utils.js"></script>
     <script type="text/javascript">
     	$(function () {
     		// $.ajax({
@@ -70,39 +96,51 @@
     		// 	},
     		// })
     		// 
-    		movieRequest('https://api.douban.com/v2/movie/in_theaters?start=0&count=3',callback,'#inTheaters','in_theaters');
-    		movieRequest('https://api.douban.com/v2/movie/top250?start=0&count=3',callback,'#top250','top250');
+            
+          var start=0;
+    	  movieRequest(gobalurl+'/v2/movie/in_theaters?start=0&count=3',mcallback,'#inTheaters','in_theaters');
+    	  movieRequest(gobalurl+'/v2/movie/top250?start=0&count=3',mcallback,'#top250','top250');
 
-    		function movieRequest(url,callback,category,categoryName) {
+    		function movieRequest(url,mcallback,category,categoryName) {
     			$.ajax({
     				url:url,
     				type:'GET',
-    				dataType: 'jsonp',
-    		        crossDomain: true,
+    				// dataType: 'jsonp',//没有使用nginx
+    		        // crossDomain: true,//没有使用nginx
     				success:function (res) {
-    					callback(res,category, categoryName)
+    					mcallback(res,category, categoryName)
     				},
     				error:function (res) {
-    					alert(res)
+    					$('.tip').text('加载失败。。。');
     				},
     			})
     		}
 
-    		function callback(res,category, categoryName) {
+    		function mcallback(res,category, categoryName) {
     			if(res){
 					$('.tip').hide();
 				    console.log(res);
 				    $.each(res.subjects,function (idx,val) {
+                        var star=starToArr(val.rating.stars);
+                        var stars=val.rating.stars;
+                        var average=val.rating.average;
+                        var id=val.id;
+                        var title=val.title;
+                        var imgsrc=val.images.small;
 				    	var $content='<div class="col-xs-4">'+
-				    	  '<a href="detail.html?id='+val.id+'" class="thumbnail">'+
-				    	    '<img src="'+val.images.small+'" alt="'+val.title+'">'+
+				    	  '<a href="detail.html?id='+id+'" class="thumbnail">'+
+				    	    '<img src="'+imgsrc+'" alt="'+title+'">'+
 				    	    '<div class="caption text-center">'+
-				    	      '<h6>'+val.title+'</h6>'+
+                              '<h6>'+val.title+'</h6>'+
+				    	      '<div class="star-box">'+
+                                  '<div class="star" star="'+stars+'" id="star'+id+'"></div>'+
+                                  '<span class="score">'+average+'</span>'+
+                              '</div>'+
 				    	    '</div>'+
 				    	  '</a>'+
 				    	'</div>';
-
-				    	$(category+' .row-list').append($content)
+				    	$(category+' .row-list').append($content);
+                        appendStar(star,$('#star'+id));
 				    })
 				    $(category+' .btn-more').on('click',function () {
 				    	window.location.href='more.html?categoryName='+categoryName
@@ -111,6 +149,94 @@
 
 				}
     		}
+
+
+            var xhr=null;  
+            function callback(res) {
+                if (res.length != 0) {//检测返回的结果是否为空  
+                    $.each(res.subjects,function (idx,val) {
+                        var star=starToArr(val.rating.stars);
+                        var stars=val.rating.stars;
+                        var average=val.rating.average;
+                        var id=val.id;
+                        var title=val.title;
+                        var imgsrc=val.images.small;
+                        var $content='<div class="col-xs-4">'+
+                          '<a href="detail.html?id='+id+'" class="thumbnail">'+
+                            '<img src="'+imgsrc+'" alt="'+title+'">'+
+                            '<div class="caption text-center">'+
+                               '<h6>'+val.title+'</h6>'+
+                               '<div class="star-box">'+
+                                   '<div class="star" star="'+stars+'" id="star'+id+'"></div>'+
+                                   '<span class="score">'+average+'</span>'+
+                               '</div>'+
+                            '</div>'+
+                          '</a>'+
+                        '</div>';
+                        $(".result-box").show();
+                        $(".list-box").hide();
+                        $('.result-box .row-list').append($content);
+                        $('.more').css('display','block');
+                        appendStar(star,$('#star'+id));
+                    })
+
+                    if (start<=res.total) {
+                        start+=20;
+                    }else{
+                        $('.more span').text('没有更多内容了。。。');
+                        $('.more').unbind('click');
+                    }
+                
+                } else {  
+                    $(".result-box").hide();
+                    $('.result-box .row-list').empty();
+                    $(".list-box").show();
+                }  
+            }
+
+            
+            function searchInfo() {
+                if(xhr){  
+                    xhr.abort();//如果存在ajax的请求，就放弃请求  
+                }  
+                var inputText= $.trim($('.search-box .form-control').val());  
+                
+                if(inputText!=""){//检测键盘输入的内容是否为空，为空就不发出请求 
+                    xhr=httpGet(gobalurl+'/v2/movie/search?q='+inputText,callback,error);
+                }else{  
+                    //$("#searchBox").hide();//没有查询结果就隐藏搜索框  
+                    $(".result-box").hide();
+                    $('.result-box .row-list').empty();
+                    $(".list-box").show();
+                    inputText='';
+                }  
+            }
+            
+            // $('.search-box .form-control').keyup(function() { 
+            //     $('.result-box .row-list').empty(); 
+            //     searchInfo();
+            // }).blur(function(){  
+
+            // });
+            $('#searchBtn').click(function(event) {
+                $('.result-box .row-list').empty();
+                searchInfo();
+            });
+
+            $('.more').click(function () {
+                var nextUrls = gobalurl+'/v2/movie/search?q='+$.trim($('.search-box .form-control').val()) + '&start=' + start + '&count=10';
+                httpGet(nextUrls,callback,error);
+            });
+            $('#returnBtn').click(function () {
+                $('.result-box').hide();
+                $('.result-box .row-list').empty();
+                $(".list-box").show();
+            })
+            function error() {
+                $('.result-box').hide();
+            }
+
+            
     	})
     </script>	
 </body>

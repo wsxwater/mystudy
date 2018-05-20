@@ -1,19 +1,46 @@
 .comwid{max-width: 640px;min-width: 320px;margin-left: auto;margin-right: auto;}
 
-
+.list-box{padding-top: 10px;}
 .list-box .panel-body{padding:7px;}
 .row-list{margin-left: 0;margin-right: 0;}
 .row-list>div{padding:2px;}
 .row-list .thumbnail{margin-bottom: 0;padding-left: 0;padding-right: 0;}
+.row-list .thumbnail:hover{text-decoration: none;}
 .row-list .thumbnail .caption{padding-left: 2px;padding-right: 2px;}
 .row-list .thumbnail>img{height: 100px;max-width: 100%;}
-.row-list .thumbnail h6{font-weight: normal;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;margin: 0;}
+.row-list .thumbnail h6{line-height: 14px;font-size:12px;font-weight: normal;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;margin: 0;}
 
 .detail-box .panel-body>div{line-height: 20px;margin-bottom: 10px;}
 .detail-img{display: block;max-width: 100%;height: 180px;margin-left: auto;margin-right: auto;}
-.detail-tit{color: #666;}
-.tip{text-align: center;font-size: 12px;color: #999;width: 80px;margin-left: auto;margin-right: auto;}
-
+.dtit{color: #666;}
+.tip{text-align: center;font-size: 12px;color: #999;width: 200px;margin-left: auto;margin-right: auto;}
+.list-tip{font-size: 20px;}
 .more{display: none;}
 
 .line{margin: 0 5px;}
+.star-box{font-size: 0;}
+.star-box .star{display: inline-block;}
+.star-box .star span{color: #ccc;font-size: 12px;width: 12px;overflow: hidden;line-height: 1;height: 12px;display: inline-block;vertical-align: middle;}
+.star-box .star span.on{color: #d83b26;}
+.star-box img{display: inline-block;width: 12px;vertical-align: middle;}
+.star-box .score{display: inline-block;font-size: 12px;color: #1f3463;font-style: italic;margin-left: 2px;vertical-align: middle;line-height: 1;}
+
+.search-box{padding: 10px;}
+/* .search-box .input-group-btn .btn{line-height: 1.45;} */
+
+.result-box{padding:7px;display: none;}
+
+.btn-more:hover{text-decoration: none;}
+
+.detail-box .panel-body ~ .panel-body{padding-top: 0;}
+.detail-box .score{color: #333;font-size: 28px;margin-left: 0;display: block;line-height: 40px;font-style: italic;}
+.detail-box .star-box img{width: 16px;margin-top: -2px;position: relative;}
+.detail-box .star-box{height: 20px;}
+.detail-box .media{border:1px solid #ccc;padding:5px 10px;max-width: 200px;}
+.detail-box .star{height: 20px;overflow: hidden;}
+.detail-box .star span{font-size: 18px;height: 20px;width: 20px;}
+.content{margin-top: 55px;}
+
+.empty-box{padding-top:50%;display: none;}
+.empty-box img{width: 235px;display: inline-block;}
+
