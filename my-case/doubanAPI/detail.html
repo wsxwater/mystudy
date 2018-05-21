@@ -16,31 +16,58 @@
 <body>
     <div class="comwid">
         <div class="tip list-tip">加载中...</div>
-        <div class="panel panel-default detail-box hide">
-            <div class="panel-heading"></div>
-            <div class="panel-body">
-                <div class="img-box"></div>
-            </div>
-            <div class="panel-body">
-                <div class="media">
-                  <div><span class="dtit">豆瓣评分</span></div>
-                  <div class="media-left">
-                    <span class="score"></span>
-                  </div>
-                  <div class="media-body">
-                    <div class="star-box"></div>
-                    <div><a href="javascript:;"><span class="ratings-count"></span>人评价</a></div>
-                  </div>
+        <div class="detail-container">
+            <div class="detail-heading">
+                <img src="empty.png" class="head-bg">
+                <div class="detail-wrap">
+                    <div class="head-title">暂无</div>
+                    <div class="sub-title">暂无</div>
+                    <div class="like">
+                      <span class="highlight-font wish-count">
+                        0
+                      </span>
+                      <span class="plain-font">
+                        人喜欢
+                      </span>
+                      <span class="highlight-font comment-count">
+                        0
+                      </span>
+                      <span class="plain-font">
+                        条评论
+                      </span>
+                    </div>
+                    <div class="head-img"></div>
                 </div>
-                <div><span class="dtit">又名：</span><span class="akas"></span></div>
-                <div><span class="dtit">原名：</span><span class="oritit"></span></div>
-                <div><span class="dtit">导演：</span><a href="javascript:;" class="author"></a></div>
-                <div><span class="dtit">主演：</span><span class="casts"></span></div>
-                <div><span class="dtit">制片国家/地区：</span><span class="country"></span></div>
-                <div><span class="dtit">类型：</span><span class="genres"></span></div>
-                <div><div><span class="dtit">剧情简介：</span></div><div class="summary"></div></div>
+            </div>
+            <div class="detail-body">
+                <div class="detail-wrap">
+                    <div class="original-title">暂无</div>
+                    <div class="flex-row"><span class="dtit">评分</span><span class="star-box"></span><span class="score"></span></div>
+                    <div class="flex-row"><span class="dtit">导演</span><span class="director"></span></div>
+                    <div class="flex-row"><span class="dtit">影人</span><span class="casts"></span></div>
+                    <div class="flex-row"><span class="dtit">类型</span><span class="genres"></span></div>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="detail-body">
+                <div class="detail-wrap">
+                    <div class="flex-row"><span class="dtit">剧情简介</span></div>
+                    <div class="summary">暂无</div>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="detail-body scroll-box">
+                <div class="detail-wrap">
+                    <div class="flex-row"><span class="dtit">影人</span></div>
+                    <div class="cast-imgs">
+                        暂无
+                    </div>
+
+                </div>
             </div>
         </div>
+
+       
 
         <div class="text-center empty-box">
             <div><img src="empty.png" alt="empty"></div>
@@ -74,55 +101,70 @@
             function callback(res) {
 
                 //console.log(res.code);
+                if (!res) {
+                    return;
+                }
                 if(res){
                     $('.tip').hide();
-                    $('.detail-box').removeClass('hide');
-                    console.log(res);
-                    var title=res.title;
-                    var average=res.rating.average;
-                    var img_url=res.images.small;
-                    var aka=res.aka;
-                    var original_title=res.original_title;
-                    var author=res.directors[0].name;
-                    var year=res.year;
-                    var countries=res.countries;
-                    var genres=res.genres;
-                    var casts=res.casts;
-                    var summary=res.summary;
-                    var id=res.id;
-                    var star=starToArr(res.rating.stars);
-                    var ratings_count=res.ratings_count;
-                    // console.log(star);
-                    summary=summary.replace(/\n/g,'<br/>');
 
-                    $('.img-box').append('<img src="'+img_url+'" alt="'+title+'" class="detail-img">');
-                    $('.panel-heading').html(title+'('+year+')')
-                    $('.score').html(average);
-                    $('.star-box').append('<div class="star" id="star'+id+'"></div>');
-                    $('.ratings-count').html(ratings_count);
-                    $('.country').html(countries);
-                    $('.author').html(author);
-                    $('.oritit').html(original_title);
-                    $('.summary').html(summary);
+                    var director={
+                        img:'',
+                        name:''
+                    };
 
-                    
-                    $.each(casts,function (idx,val) {
-                        $('.casts').append('<a href="javascript:;">'+val.name+'</a><span class="line">/</span>');
-                        $('.casts .line').eq(casts.length-1).remove();
-                    })
-                    $.each(genres,function (idx,val) {
-                        $('.genres').append('<span>'+val+'</span><span class="line">/</span>');
-                        $('.genres .line').eq(genres.length-1).remove();
-                    })
-                    $.each(aka,function (idx,val) {
-                        $('.akas').append('<span>'+val+'</span><span class="line">/</span>');
-                        $('.akas .line').eq(aka.length-1).remove();
-                    });
-                    if(aka.length==0){
-                        $('.akas').parent().hide();
+                    if (res.directors[0]!=null) {
+                        if (res.directors[0].avatars!=null) {
+                            director.img=res.directors[0].avatars.large;
+                        }
+                        director.name=res.directors[0].name;
                     }
 
-                    appendStar(star,$('#star'+id));
+                    var temp={
+                        id:parseInt(res.id), 
+                        title:res.title,
+                        originalTitle:res.original_title,
+                        img:res.images.large?res.images.large:'',
+                        year:res.year,
+                        country:res.countries[0],
+                        directors:director,
+                        casts:addItalicLine(res.casts),
+                        castsInfo:res.casts,
+                        genres:addArrItalicLine(res.genres),
+                        wishCount:res.wish_count,
+                        commentCount:res.comments_count,
+                        average:res.rating.average,
+                        ratingsCount:res.ratings_count,
+                        star:starToArr(res.rating.stars),
+                        summary:res.summary.replace(/\n/g,'<br/>')
+                    }
+
+                    console.log(temp,temp.id);
+
+                    $('.head-bg').prop('src', temp.img);
+                    $('.head-img').append('<img src="'+temp.img+'" alt="movieimg" />');
+                    $('.sub-title').empty().append(temp.country + " · "+temp.year);
+                    $('.head-title').empty().append(temp.title);
+                    $('.original-title').empty().append(temp.originalTitle);
+                    $('.wish-count').empty().append(temp.wishCount);
+                    $('.comment-count').empty().append(temp.commentCount);
+                    $('.flex-row .director').append(temp.directors.name);
+                    $('.flex-row .casts').append(temp.casts);
+                    $('.flex-row .genres').append(temp.genres);
+                    $('.flex-row .star-box').append('<div class="star" id="star'+temp.id+'"></div>');
+                    appendStar(temp.star,$('#star'+temp.id));
+                    $('.flex-row .score').append(temp.average);
+                    $('.summary').empty().append(temp.summary);
+
+                    $('.cast-imgs').empty();
+                    $.each(res.casts,function (idx,val) {
+                       var $casts='<div class="cast-container" id="castCont'+val.id+'">'+
+                                     '<img src="'+val.avatars.large+'" class="cast-img" >'+
+                                     '<span class="cast-name">'+val.name+'</span>'+
+                                    '</div>';
+                       $('.cast-imgs').append($casts);
+                    })
+                    
+                    
                 }
             }
 

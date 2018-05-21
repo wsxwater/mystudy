@@ -34,6 +34,28 @@ function starToArr(stars){//将星星数字，转为数组，例如:50=>[1,1,1,1
     return arr;
 }
 
+function addItalicLine(object) {
+    var objectJoin='';
+    var objectFinal='';
+    for (prop in object) {
+       objectJoin=objectJoin+object[prop].name+' / ';
+    }
+    objectFinal=objectJoin.substring(0,objectJoin.length-3); 
+
+    return objectFinal;
+}
+
+function addArrItalicLine(arr) {
+    var arrJoin='';
+    var arrFinal='';
+    for (prop in arr) {
+        arrJoin=arrJoin+arr[prop]+' / ';
+    }
+    arrFinal=arrJoin.substring(0,arrJoin.length-3); 
+
+    return arrFinal;
+}
+
 function appendStar(star,parent) {//将星星数组[1,1,1,1,1]插入对应颜色的星星字符
     for (var i = 0; i < star.length; i++) {
         var starArr=[];
