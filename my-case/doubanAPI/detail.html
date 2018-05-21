@@ -101,6 +101,9 @@
             function callback(res) {
 
                 //console.log(res.code);
+                if (!res) {
+                    return;
+                }
                 if(res){
                     $('.tip').hide();
 
