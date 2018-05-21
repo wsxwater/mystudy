@@ -101,13 +101,12 @@
     background-color: #d9d9d9;
 }
 
-.scroll-box{overflow-x: auto;}
-
+.scroll-box{width: 100%;overflow-x: auto;}
 .cast-container{
-    display:inline-flex;
-    flex-direction: column;
+    /* display:inline-flex;
+    flex-direction: column; */
     margin-bottom: 25px;
-    /* float: left; */
+    float: left;
     margin-right: 20px;
     width: 85px;
     text-align:center;
@@ -116,6 +115,7 @@
 
 .cast-imgs{
     white-space: nowrap;
+    width: 420px;
 }
 
 .cast-img{
@@ -127,5 +127,5 @@
 .cast-name{
 	display: block;
     margin: 5px auto 0;
+    font-size: 12px;
 }
-
