@@ -94,12 +94,12 @@
 
             function error() {
                 $('.tip').hide();
-                $('.detail-box').addClass('hide');
+                //$('.detail-box').addClass('hide');
+                $('.detail-container').hide();
                 $('.empty-box').show();
             }
             
             function callback(res) {
-
                 //console.log(res.code);
                 if (!res) {
                     return;
