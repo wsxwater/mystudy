@@ -39,7 +39,7 @@
 .empty-box img{width: 235px;display: inline-block;}
 
 
-
+.detail-container{width: 100%;overflow-x: hidden;}
 .detail-heading{
     position: relative;
     padding-bottom: 50%;
