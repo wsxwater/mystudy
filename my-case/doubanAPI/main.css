@@ -20,11 +20,11 @@
 .line{margin: 0 5px;}
 .star-box{font-size: 0;}
 .star-box .star{display: inline-block;}
-.star-box .star span{color: #ccc;font-size: 12px;width: 12px;overflow: hidden;line-height: 12px;height: 12px;display: inline-block;vertical-align: middle;position: relative;top:-5px;}
+.star-box .star span{color: #ccc;font-size: 12px;width: 12px;overflow: hidden;line-height: 12px;height: 12px;display: inline-block;vertical-align: middle;}
 .star-box .star span.on{color: #d83b26;}
 .star-box img{display: inline-block;width: 12px;vertical-align: middle;}
 .star-box .score{display: inline-block;font-size: 12px;color: #1f3463;font-style: italic;margin-left: 2px;vertical-align: middle;line-height: 1;}
-
+.detail-container .star-box .star span{position: relative;top:-5px;}
 .search-box{padding: 10px;}
 /* .search-box .input-group-btn .btn{line-height: 1.45;} */
 
