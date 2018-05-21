@@ -1,4 +1,4 @@
-.comwid{max-width: 640px;min-width: 320px;margin-left: auto;margin-right: auto;}
+.comwid{max-width: 640px;min-width: 320px;margin-left: auto;margin-right: auto;overflow-x: hidden;}
 
 .list-box{padding-top: 10px;}
 .list-box .panel-body{padding:7px;}
