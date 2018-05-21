@@ -89,7 +89,7 @@
                 httpGet(url,callback,error);
                 $('.tip').text('加载中...')
             }else{
-                $('.tip').text('暂无数据')
+                $('.tip').hide()/*.text('暂无数据')*/
             }
 
             function error() {
@@ -158,7 +158,7 @@
                     $('.cast-imgs').empty();
                     $.each(res.casts,function (idx,val) {
                        var $casts='<div class="cast-container" id="castCont'+val.id+'">'+
-                                     '<img src="'+val.avatars.large+'" class="cast-img" >'+
+                                     '<img src="'+getImages(val.avatars.large)+'" class="cast-img" >'+
                                      '<span class="cast-name">'+val.name+'</span>'+
                                     '</div>';
                        $('.cast-imgs').append($casts);
