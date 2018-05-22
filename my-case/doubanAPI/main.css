@@ -43,15 +43,15 @@
     position: relative;
     padding-bottom: 50%;
     color: #fff;
-    text-shadow: 0 0 1px #000;
 }
 .head-bg{
-	background-color: #888;position: absolute;top:0;left: 0;right: 0;bottom: 0;display: block;width: 100%;height: 100%;-webkit-filter:blur(20px);
+    background-color: #888;position: absolute;top:0;left: 0;right: 0;bottom: 0;display: block;width: 100%;height: 100%;-webkit-filter:blur(20px);
 }
+/* .detail-heading svg{position: absolute;top:0;left: 0;right: 0;bottom: 0;display: block;width: 100%;height: 100%;} */
 .head-img{position: absolute;bottom: 0;right: 10px;padding:15.825% 10.148%;background-color: #fff;border:1px solid #ccc;}
 .head-img img{position: absolute;top:0;left: 0;right: 0;bottom: 0;display: block;width: 100%;height: 100%;}
 .head-title{font-size: 20px;line-height: 25px;}
-.detail-heading .head-title{max-height: 50px;overflow: hidden;margin-top: 20px;}
+.detail-heading .head-title{max-height: 50px;overflow: hidden;margin-top: 20px;background:#333;background: rgba(0, 0, 0, 0.5);}
 .detail-wrap{padding:0 10px;}
 .detail-heading .detail-wrap{position: absolute;top:0;left: 0;right: 0;bottom: 0;z-index: 2;}
 .detail-body .head-title{font-size: 16px;font-weight: bold;line-height: 20px;margin-bottom: 5px;}
@@ -61,11 +61,14 @@
     font-size: 14px;
     color:#fff;
     padding-top: 5%;
+    
 }
+.sub-title span{background:#333;background: rgba(0, 0, 0, 0.5);display: inline-block;padding:0 5px;}
 
 .like{
     padding-top: 5%;
     padding-right: 21.5%;
+
 }
 
 .highlight-font{
@@ -76,7 +79,7 @@
 
 .plain-font{
     font-size:12px;
-    margin-right: 15px;
+    margin-right: 15px;background:#333;background: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -115,7 +118,7 @@
 }
 
 .cast-imgs{
-   width:auto;/* position:absolute;top:0;left:0;bottom: 0; */overflow:auto;white-space:nowrap;font-size: 0;
+   width:auto;/* position:absolute;top:0;left:0;bottom: 0; */overflow:auto;white-space:nowrap;/* font-size: 0; */
 }
 
 .cast-img{
@@ -126,7 +129,7 @@
     margin: 0 auto;
 }
 .cast-name{
-	display: block;
+    display: block;
     margin: 5px auto 0;
     font-size: 12px;
 }
