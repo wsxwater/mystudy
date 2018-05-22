@@ -16,12 +16,22 @@
 <body>
     <div class="comwid">
         <div class="tip list-tip">加载中...</div>
+
         <div class="detail-container">
             <div class="detail-heading">
                 <img src="empty.png" class="head-bg">
+                <!--图片虚化成背景-->
+                <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink"  xmlns:ev="http://www.w3.org/2001/xml-events"  baseProfile="full" id="svgEle">
+                      <defs>
+                         <filter id="blur">
+                             <feGaussianBlur stdDeviation="4" />
+                         </filter>
+                     </defs>
+                     <image xlink:href="empty.png" x="0" y="0" width="100%" height="100%" filter="url(#blur)" />
+                </svg> -->
                 <div class="detail-wrap">
                     <div class="head-title">暂无</div>
-                    <div class="sub-title">暂无</div>
+                    <div class="sub-title"><span>暂无</span></div>
                     <div class="like">
                       <span class="highlight-font wish-count">
                         0
@@ -141,8 +151,10 @@
                     console.log(temp,temp.id);
 
                     $('.head-bg').prop('src', temp.img);
+                    //$('#svgEle image').attr('xlink:href',temp.img);
+
                     $('.head-img').append('<img src="'+temp.img+'" alt="movieimg" />');
-                    $('.sub-title').empty().append(temp.country + " · "+temp.year);
+                    $('.sub-title span').empty().append(temp.country + " · "+temp.year);
                     $('.head-title').empty().append(temp.title);
                     $('.original-title').empty().append(temp.originalTitle);
                     $('.wish-count').empty().append(temp.wishCount);
