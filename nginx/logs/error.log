@@ -81,8 +81,3 @@
 2018/05/20 11:24:47 [notice] 12360#16804: signal process started
 2018/05/20 11:26:20 [notice] 10208#7316: signal process started
 2018/05/20 11:28:33 [notice] 4140#17696: signal process started
-2018/05/22 11:03:12 [emerg] 16584#5184: CreateDirectory() "E:\study\mystudy\nginx/temp/client_body_temp" failed (3: The system cannot find the path specified)
-2018/05/22 11:03:29 [notice] 9840#1612: signal process started
-2018/05/22 11:10:31 [emerg] 6156#15168: CreateDirectory() "E:\study\mystudy\nginx/temp/client_body_temp" failed (3: The system cannot find the path specified)
-2018/05/22 11:14:13 [notice] 9688#17540: signal process started
-2018/05/22 11:17:43 [emerg] 10136#15136: CreateDirectory() "E:\study\mystudy\nginx/temp/client_body_temp" failed (3: The system cannot find the path specified)
