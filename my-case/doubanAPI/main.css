@@ -53,7 +53,7 @@
 .head-title{font-size: 20px;line-height: 25px;}
 .detail-heading .head-title{max-height: 50px;overflow: hidden;margin-top: 20px;background:#333;background: rgba(0, 0, 0, 0.5);}
 .detail-wrap{padding:0 10px;}
-.detail-heading .detail-wrap{position: absolute;top:0;left: 0;right: 0;bottom: 0;z-index: 2;}
+.detail-heading .detail-wrap{overflow-x: hidden;;position: absolute;top:0;left: 0;right: 0;bottom: 0;z-index: 2;}
 .detail-body .head-title{font-size: 16px;font-weight: bold;line-height: 20px;margin-bottom: 5px;}
 .detail-body .dtit{color: #999;margin-right: 10px;font-size: 12px;}
 
