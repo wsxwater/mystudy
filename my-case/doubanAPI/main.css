@@ -115,6 +115,7 @@
     width: 85px;
     text-align:center;
     white-space: normal;
+    vertical-align: top;
 }
 
 .cast-imgs{
