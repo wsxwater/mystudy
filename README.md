@@ -24,13 +24,14 @@
 <pre>
     ### my-case
     1   demo <code>文件名</code>
-    <div style="border:5px solid #FFF;padding: 10px;">
+    <div>
         <div>
-          <a href="my-case/demo/dist/Html/Index.html">my-case/demo/dist/Html/Index.html</a><code>经过gulp处理</code>
+          <a href="my-case/demo/dist/Html/Index.html" title="经过gulp处理">my-case/demo/dist/Html/Index.html</a> 
         </div>
         <div>
-          <a href="my-case/demo/src/Html/Index.html">my-case/demo/src/Html/Index.html</a><code>原始html</code>
+          <a href="my-case/demo/src/Html/Index.html" title="原始html">my-case/demo/src/Html/Index.html</a> 
         </div>
+        This is [an example](http://example.com/ "Title") inline link.
     </div>
     ***
     2   doubanAPI <code>文件名</code>
