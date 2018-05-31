@@ -23,7 +23,14 @@
 </pre>
 <pre>
     ### my-case
-    1   <a href="my-case/demo/dist/Html/Index.html">my-case/demo/dist/Html/Index.html</a>
+    1   my-case <code>文件名</code>
+    ---
+    2   doubanAPI <code>文件名</code>
+    ---
+    3   my-jsonserver <code>文件名</code>
+    4   Online Retailer <code>文件名</code>
+    5   The museum of modern browsers（bootstrap） <code>文件名</code>
+    6   waterfall <code>文件名</code>
     
 </pre>
 
