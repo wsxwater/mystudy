@@ -25,16 +25,16 @@
 ***
 ## my-case
 <pre>
-    *   demo 
+    > demo 
         <a href="my-case/demo/dist/Html/Index.html" title="经过gulp处理">dist/Html/Index.html</a> 
         <a href="my-case/demo/src/Html/Index.html" title="原始html">src/Html/Index.html</a> 
-    *   doubanAPI 
+    > doubanAPI 
         <a href="my-case/doubanAPI/list.html">list.html</a>
         <a href="my-case/doubanAPI/more.html">more.html</a>
         <a href="my-case/doubanAPI/detail.html">detail.html</a>
-    *   my-jsonserver 
-    *   Online Retailer 
-    *   The museum of modern browsers（bootstrap） 
-    *   waterfall 
+    > my-jsonserver 
+    > Online Retailer 
+    > The museum of modern browsers（bootstrap） 
+    > waterfall 
 </pre>
 
