@@ -237,10 +237,10 @@ zepto.js-phone-swipe-nav
 ### my-webpack
 <code>在cmd中运行命令webpack</code>
 <pre>
-> demo1
+demo1
     > <a href="my-webpack/demo1/webpack.config.js">webpack.config.js</a>
 
-> demo2    
+demo2    
     > <a href="my-webpack/demo1/webpack.config.js">webpack.config.js</a>
 </pre>
 
