@@ -32,7 +32,7 @@
         <a href="my-case/doubanAPI/list.html">list.html</a>
         <a href="my-case/doubanAPI/more.html">more.html</a>
         <a href="my-case/doubanAPI/detail.html">detail.html</a>
-    3   my-jsonserver [&gt]
+    3   my-jsonserver &gt;
     4   Online Retailer 
     5   The museum of modern browsers（bootstrap） 
     6   waterfall 
