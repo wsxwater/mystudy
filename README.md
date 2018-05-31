@@ -244,14 +244,6 @@ zepto.js-phone-swipe-nav
     > <a href="my-webpack/demo1/webpack.config.js">webpack.config.js</a>
 </pre>
 
-
-
-
-
-
-
-
-
-
-
+### wx-domo
+<pre>下载代码，然后在微信小程序的编辑器运行代码</pre>
 
