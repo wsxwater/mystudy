@@ -1,25 +1,24 @@
 # mystudy
 > this is my study!
 
+***
 # directory
 ## folder-name
 <code><a href="#my-canvas">my-canvas</a></code>
 <code><a href="#my-case">my-case</a></code>
-<code><a href="">my-d3JS</a></code>
-<code><a href="">my-es6</a></code>
-<code><a href="">my-gulp</a></code>
-<code><a href="">my-jquery</a></code>
-<code><a href="">my-loading</a></code>
-<code><a href="">my-plugins-study</a></code>
-<code><a href="">my-react</a></code>
-<code><a href="">my-rem-layouts</a></code>
-<code><a href="">my-touch</a></code>
-<code><a href="">my-vue</a></code>
-<code><a href="">my-webpack</a></code>
-<code><a href="">wx-domo(微信小程序)</a></code>
-
-***
-
+<code><a href="#my-d3JS">my-d3JS</a></code>
+<code><a href="#">my-es6</a></code>
+<code><a href="#">my-gulp</a></code>
+<code><a href="#">my-jquery</a></code>
+<code><a href="#">my-loading</a></code>
+<code><a href="#">my-plugins-study</a></code>
+<code><a href="#">my-react</a></code>
+<code><a href="#">my-rem-layouts</a></code>
+<code><a href="#">my-touch</a></code>
+<code><a href="#">my-vue</a></code>
+<code><a href="#">my-webpack</a></code>
+<code><a href="#">wx-domo(微信小程序)</a></code>
+___
 ## folder-show
 ### my-canvas
 <pre>
