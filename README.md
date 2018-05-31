@@ -18,6 +18,8 @@
 <code><a href="#my-vue">my-vue</a></code>
 <code><a href="#my-webpack">my-webpack</a></code>
 <code><a href="#wx-domo">wx-domo(微信小程序)</a></code>
+<code><a href="#my-spy-debugger">真机调试</a></code>
+<code><a href="#my-nginx">nginx</a></code>
 
 ***
 
@@ -72,6 +74,13 @@ my-jsonserver
     > <a href="my-case/my-jsonserver/newlist.html">newlist.html</a>
     > <a href="my-case/my-jsonserver/newdetail.html">newdetail.html</a>
     > <a href="my-case/my-jsonserver/test.html">test.html</a>
+    
+    要使my-jsonserver(模拟REST API)的链接能显示内容，就要在cmd运行命令json-server db.json或者json-server news.js。
+    
+    json-server安装(cmd)
+    * npm install json-server -g
+    * npm install json-server --save-dev
+    * npm install mockjs --save
 
 Online Retailer 
     > <a href="my-case/Online Retailer/html/index.html">index.html</a>
@@ -174,9 +183,8 @@ waterfall
 ### my-plugins-study
 <pre>
 slideunlock(滑动解锁)
-    > <a href="my-plugins-study/demo1/slideunlock.html" title="源码">slideunlock.html</a>
-    > <a href="my-plugins-study/demo2/index.html" title="修改源码">index.html</a>
-    > 
+    > <a href="my-plugins-study/slideunlock/demo1/slideunlock.html" title="源码">slideunlock.html</a>
+    > <a href="my-plugins-study/slideunlock/demo2/index.html" title="修改源码">index.html</a>
 
 spritespin(jQuery图片360度旋转插件)
     > <a href="my-plugins-study/spritespin/test-3d.html">test-3d.html</a>
@@ -248,3 +256,95 @@ demo2
 ### wx-domo
 <pre>下载代码，然后在微信小程序的编辑器运行代码</pre>
 
+### my-spy-debugger
+<pre>
+安装spy-debugger：
+npm install spy-debugger -g
+
+安装证书：
+第一步：生成证书
+spy-debugger initCA
+// 证书生成在用户根目录的node-mitmproxy文件夹下的
+// 如： /Users/wuchangming/node-mitmproxy
+第二步：安装证书
+把node-mitmproxy文件夹下的 node-mitmproxy.ca.crt 传到手机上，点击安装即可。
+
+使用步骤：
+第一步：手机和PC保持在同一网络下（比如同时连到一个Wi-Fi下）
+第二步：命令行输入spy-debugger，按命令行提示用浏览器打开相应地址。
+第三步：设置手机的HTTP代理，代理IP地址设置为PC的IP地址，端口为spy-debugger的启动端口(默认端口：9888)。
+Android设置代理步骤：设置 - WLAN - 长按选中网络 - 修改网络 - 高级 - 代理设置 - 手动
+iOS设置代理步骤：设置 - 无线局域网 - 选中网络 - HTTP代理手动
+第四步：手机安装证书。注：手机必须先设置完代理后再通过(非微信)手机浏览器访问http://s.xxx(地址二维码)安装证书（手机首次调试需要安装证书，已安装了证书的手机无需重复安装)。
+第五步：用手机浏览器访问你要调试的页面即可。
+
+自定义选项(cmd)
+默认端口：9888
+
+修改端口：
+spy-debugger -p 8888
+
+设置外部代理（默认使用AnyProxy）：
+spy-debugger -e http://127.0.0.1:8888
+spy-debugger内置AnyProxy提供抓包功能，但是也可通过设置外部代理和其它抓包代理工具一起使用，如：Charles、Fiddler。
+
+设置页面内容为可编辑模式，该功能使页面内容修改更加直观方便。 (默认： false)
+spy-debugger -w true
+内部实现原理：在需要调试的页面内注入代码：document.body.contentEditable=true。暂不支持使用了iscroll框架的页面。
+
+是否允许weinre监控iframe加载的页面(默认： false)
+spy-debugger -i true 
+
+是否只拦截浏览器发起的https请求(默认： true)
+spy-debugger -b false
+有些浏览器发出的connect请求没有正确的携带userAgent，这个判断有时候会出错，如UC浏览器。这个时候需要设置为false。大多数情况建议启用默认配置：true，由于目前大量App应用自身（非WebView）发出的请求会使用到SSL pinning技术，自定义的证书将不能通过app的证书校验。
+
+是否允许HTTP缓存(默认： false)
+spy-debugger -c true
+</pre>
+
+### my-nginx
+<code>使用nginx做反向代理</code>
+<pre>
+    1、下载nginx;
+    2、在C盘搜索hosts(C:\Windows\System32\drivers\etc\hosts);
+    3、将hosts文件复制到别处，然后打开hosts，编写你要代理的地址（该地址任意）
+    例如：127.0.0.1 b.com
+
+    4、将已修改的hosts覆盖回C盘;
+    5、定位到已经下载的nginx文件夹，打开cmd
+    6、定位到nginx/conf/，新建vhost(文件夹)，在vhost中新建b.com.conf(文件)
+       在b.com.conf编写内容
+       **被调用方解决跨域**
+       **如果80端口被占用，要先解除占用**
+       server{
+               listen 80; 
+               server_name b.com;
+
+               location / {       
+                   rewrite  ^/(.*)$ /$1 break;
+                   proxy_pass https://api.douban.com;
+
+                   #add_header Access-Control-Allow-Origin *;
+                   add_header Access-Control-Allow-Methods *;
+
+                   add_header Access-Control-Max-Age 3600;
+                   #这个响应首部表示 preflight request（预检请求）的返回结果
+                   #（即 Access-Control-Allow-Methods 和Access-Control-Allow-Headers 提供的信息）可以被缓存多久。
+
+                   add_header Access-Control-Allow-Credentials true;
+
+                   add_header Access-Control-Allow-Origin $http_origin;
+                   add_header Access-Control-Allow-Headers $http_access_control_request_headers;
+
+                   if ($request_method = OPTIONS){
+                       return 200;
+                   }
+               }
+       }
+    
+    7、最后在cmd（注意不要使用git cmd）运行命令
+       启动：start nginx          
+       重启：nginx -s reload         
+       停止：nginx -s stop         
+</pre>
