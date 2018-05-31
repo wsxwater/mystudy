@@ -159,7 +159,7 @@ waterfall
     <a href="my-jquery/dotting.html">dotting.html</a>
     <a href="my-jquery/my-validate.html">my-validate.html</a>
     <a href="my-jquery/validate.html">validate.html</a>
-    <img src="my-jquery/validate基本验证方法.png">
+<img src="my-jquery/validate基本验证方法.png">
 </pre>
 
 ### my-loading
@@ -224,8 +224,8 @@ zepto.js-phone-swipe-nav
     > <a href="my-touch/loadmore.html">loadmore.html</a>
     > <a href="my-touch/loadMoreData.html">loadMoreData.html</a>
     
-    <img src="my-touch/弹性滚动1.png">
-    <img src="my-touch/弹性滚动2.png">
+<img src="my-touch/弹性滚动1.png">
+<img src="my-touch/弹性滚动2.png">
 </pre>
 
 ### my-vue
