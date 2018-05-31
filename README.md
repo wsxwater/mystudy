@@ -23,10 +23,17 @@
 </pre>
 <pre>
     ### my-case
-    1   my-case <code>文件名</code>
-    ---
+    1   demo <code>文件名</code>
+    <pre>
+        <div>
+          <a href="my-case/demo/dist/Html/Index.html"></a><code>经过gulp处理</code>
+        </div>
+        <div>
+          <a href="my-case/demo/src/Html/Index.html"></a><code>原始html</code>
+        </div>
+    </pre>
+    ***
     2   doubanAPI <code>文件名</code>
-    ---
     3   my-jsonserver <code>文件名</code>
     4   Online Retailer <code>文件名</code>
     5   The museum of modern browsers（bootstrap） <code>文件名</code>
