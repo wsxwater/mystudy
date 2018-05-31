@@ -33,6 +33,7 @@
     > <a href="my-canvas/图形头像.html">图形头像.html</a>  
     > <a href="my-canvas/多边形.html">多边形.html</a>  
     > <a href="my-canvas/太极图.html">太极图.html</a>  
+    > <a href="my-canvas/放大镜.html">放大镜.html</a>  
     > <a href="my-canvas/橡皮筋式选取框.html">橡皮筋式选取框.html</a>  
     > <a href="my-canvas/水印.html">水印.html</a>  
     > <a href="my-canvas/ball.html">ball.html</a>  
