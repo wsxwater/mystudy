@@ -2,10 +2,26 @@
 > this is my study!
 
 # directory
+## folder-name
 <code>my-canvas</code>
 <code>my-case</code>
+<code>my-d3JS</code>
+<code>my-es6</code>
+<code>my-gulp</code>
+<code>my-jquery</code>
+<code>my-loading</code>
+<code>my-plugins-study</code>
+<code>my-react</code>
+<code>my-rem-layouts</code>
+<code>my-touch</code>
+<code>my-vue</code>
+<code>my-webpack</code>
+<code>wx-domo(微信小程序)</code>
 
-## my-canvas
+***
+
+## folder-show
+### my-canvas
 <pre>
     > <a href="my-canvas/刮刮乐0.html">刮刮乐0.html</a>  
     > <a href="my-canvas/刮刮乐1.html">刮刮乐1.html</a>  
@@ -38,8 +54,8 @@
     > <a href="my-canvas/shadow.html">shadow.html</a>  
     > <a href="my-canvas/star.html">star.html</a>  
 </pre>
-***
-## my-case
+
+### my-case
 <pre>
 demo
     > <a href="my-case/demo/dist/Html/Index.html" title="经过gulp处理">dist/Html/Index.html</a> 
