@@ -41,7 +41,7 @@
 ***
 ## my-case
 <pre>
-demo 
+\*demo\* 
     > <a href="my-case/demo/dist/Html/Index.html" title="经过gulp处理">dist/Html/Index.html</a> 
     > <a href="my-case/demo/src/Html/Index.html" title="原始html">src/Html/Index.html</a> 
 
