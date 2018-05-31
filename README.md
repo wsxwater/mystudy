@@ -306,12 +306,12 @@ spy-debugger -c true
 ### my-nginx
 <code>使用nginx做反向代理</code>
 <pre>
-    1、下载nginx;
-    2、在C盘搜索hosts(C:\Windows\System32\drivers\etc\hosts);
+    1、下载nginx；
+    2、在C盘搜索hosts(C:\Windows\System32\drivers\etc\hosts)；
     3、将hosts文件复制到别处，然后打开hosts，编写你要代理的地址（该地址任意）
     例如：127.0.0.1 b.com
 
-    4、将已修改的hosts覆盖回C盘;
+    4、将已修改的hosts覆盖回C盘；
     5、定位到已经下载的nginx文件夹，打开cmd
     6、定位到nginx/conf/，新建vhost(文件夹)，在vhost中新建b.com.conf(文件)
        在b.com.conf编写内容
@@ -343,8 +343,10 @@ spy-debugger -c true
                }
        }
     
-    7、最后在cmd（注意不要使用git cmd）运行命令
+    7、定位到conf（文件夹），打开nginx.conf，然后在其http{}里面添加 include vhost/*.conf;(分号不要忘记)；
+    8、最后在cmd（注意不要使用git cmd）运行命令
        启动：start nginx          
        重启：nginx -s reload         
-       停止：nginx -s stop         
+       停止：nginx -s stop    
+
 </pre>
