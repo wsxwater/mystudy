@@ -24,19 +24,19 @@
 ***
 ## my-case
 <pre>
-    **demo** 
-        > <a href="my-case/demo/dist/Html/Index.html" title="经过gulp处理">dist/Html/Index.html</a> 
-        > <a href="my-case/demo/src/Html/Index.html" title="原始html">src/Html/Index.html</a> 
-    **doubanAPI** 
-        > <a href="my-case/doubanAPI/list.html">list.html</a>
-        > <a href="my-case/doubanAPI/more.html">more.html</a>
-        > <a href="my-case/doubanAPI/detail.html">detail.html</a>
-    **my-jsonserver** 
-        > <a href="my-case/my-jsonserver/newlist.html">newlist.html</a>
-        > <a href="my-case/my-jsonserver/newdetail.html">newdetail.html</a>
-        > <a href="my-case/my-jsonserver/test.html">test.html</a>
-    **Online Retailer** 
-    **The museum of modern browsers（bootstrap）**
-    **waterfall** 
+demo 
+     > <a href="my-case/demo/dist/Html/Index.html" title="经过gulp处理">dist/Html/Index.html</a> 
+     > <a href="my-case/demo/src/Html/Index.html" title="原始html">src/Html/Index.html</a> 
+doubanAPI
+     > <a href="my-case/doubanAPI/list.html">list.html</a>
+     > <a href="my-case/doubanAPI/more.html">more.html</a>
+     > <a href="my-case/doubanAPI/detail.html">detail.html</a>
+my-jsonserver 
+     > <a href="my-case/my-jsonserver/newlist.html">newlist.html</a>
+     > <a href="my-case/my-jsonserver/newdetail.html">newdetail.html</a>
+     > <a href="my-case/my-jsonserver/test.html">test.html</a>
+Online Retailer 
+The museum of modern browsers（bootstrap）
+waterfall 
 </pre>
 
