@@ -26,10 +26,10 @@
     1   demo <code>文件名</code>
     <pre>
         <div>
-          <a href="my-case/demo/dist/Html/Index.html"></a><code>经过gulp处理</code>
+          <a href="my-case/demo/dist/Html/Index.html">my-case/demo/dist/Html/Index.html</a><code>经过gulp处理</code>
         </div>
         <div>
-          <a href="my-case/demo/src/Html/Index.html"></a><code>原始html</code>
+          <a href="my-case/demo/src/Html/Index.html">my-case/demo/src/Html/Index.html</a><code>原始html</code>
         </div>
     </pre>
     ***
