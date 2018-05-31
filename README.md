@@ -24,14 +24,14 @@
 <pre>
     ### my-case
     1   demo <code>文件名</code>
-    <pre>
+    <div style="border:5px solid #FFF;padding: 10px;">
         <div>
           <a href="my-case/demo/dist/Html/Index.html">my-case/demo/dist/Html/Index.html</a><code>经过gulp处理</code>
         </div>
         <div>
           <a href="my-case/demo/src/Html/Index.html">my-case/demo/src/Html/Index.html</a><code>原始html</code>
         </div>
-    </pre>
+    </div>
     ***
     2   doubanAPI <code>文件名</code>
     3   my-jsonserver <code>文件名</code>
