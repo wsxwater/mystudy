@@ -2,8 +2,8 @@
 > this is my study!
 
 # directory
-<code id="my-canvas">my-canvas</code>
-<code id="my-case">my-case</code>
+<code>my-canvas</code>
+<code>my-case</code>
 
 ## my-canvas
 <pre>
@@ -44,14 +44,17 @@
 demo 
     > <a href="my-case/demo/dist/Html/Index.html" title="经过gulp处理">dist/Html/Index.html</a> 
     > <a href="my-case/demo/src/Html/Index.html" title="原始html">src/Html/Index.html</a> 
+
 doubanAPI
     > <a href="my-case/doubanAPI/list.html">list.html</a>
     > <a href="my-case/doubanAPI/more.html">more.html</a>
     > <a href="my-case/doubanAPI/detail.html">detail.html</a>
+
 my-jsonserver 
     > <a href="my-case/my-jsonserver/newlist.html">newlist.html</a>
     > <a href="my-case/my-jsonserver/newdetail.html">newdetail.html</a>
     > <a href="my-case/my-jsonserver/test.html">test.html</a>
+
 Online Retailer 
     > <a href="my-case/Online Retailer/html/index.html">index.html</a>
     > <a href="my-case/Online Retailer/html/Agreement.html">Agreement.html</a>
@@ -62,10 +65,12 @@ Online Retailer
     > <a href="my-case/Online Retailer/html/ShopLogin.html">ShopLogin.html</a>
     > <a href="my-case/Online Retailer/html/ShopRegister.html">ShopRegister.html</a>
     > <a href="my-case/Online Retailer/html/ShopScreen.html">ShopScreen.html</a>
+
 The museum of modern browsers（bootstrap）
     > <a href="my-case/The museum of modern browsers（bootstrap）/index.html">index.html</a>
     > <a href="my-case/The museum of modern browsers（bootstrap）/develop.html">develop.html</a>
     > <a href="my-case/The museum of modern browsers（bootstrap）/kernel.html">kernel.html</a>
+
 waterfall 
     > <a href="my-case/waterfall/(css3)waterfall.html">(css3)waterfall.html</a>
     > <a href="my-case/waterfall/(javascript)waterfall.html">(javascript)waterfall.html</a>
