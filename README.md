@@ -216,6 +216,8 @@ zepto.js-phone-swipe-nav
     > <a href="my-react/9-1父子级通信(父传子).html">9-1父子级通信(父传子).html</a>
     > <a href="my-react/9-2父子级通信(子传父) .html">9-2父子级通信(子传父) .html</a>
     > <a href="my-react/test.html">test.html</a>
+    > <a href="my-react/test1.html">test.html</a>
+    > <a href="my-react/单页面Tab(路由).html">test.html</a>
     > <a href="my-react/webpack.config.js">webpack.config.js</a>
 </pre>
 
