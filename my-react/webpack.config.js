@@ -1,12 +1,12 @@
 module.exports={
-	entry:'./index.js',
+	entry:'./index1.js',
 	output:{
 		path:__dirname,
-		filename:'bundle.js'
+		filename:'bundle1.js'
 	},
 	devtool:'source-map',
 	module:{
-		loaders:[
+		rules:[
             {test: /\.css$/,loader:'style!css'},
             {test: /\.js$/,loader:'react-hot-loader!babel-loader',exclude: /node_modules/}
 		]

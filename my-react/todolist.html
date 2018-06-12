@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>todolist</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		li{list-style: none;}
+		a{text-decoration: none;}
+
+		body{background-color: #a4dca4;}
+        .container{max-width: 640px;margin-left: auto;margin-right: auto;}
+        .btn{font-size: 14px;line-height: 1;padding: 10px 20px;color: #FFF;background-color: #00CC00;display: inline-block;border: 1px solid #24A724;margin: 20px 0 10px 10px;}
+
+        input.btn{outline: none;padding: 10px;line-height: normal;color: #333;background-color: #FFF;border: 1px solid #ccc;width: 180px;}
+
+        .well{background-color: #fff;background-color: rgba(255, 255, 255, 0.5);padding: 10px;margin: 10px;font-size: 14px;border-radius:6px;}
+
+	</style>
+	<script src="js/react.min.js"></script>
+	<script src="js/react-dom.min.js"></script>
+	<script src="js/browser.min.js"></script>
+	
+	<!-- babel是转换编译器，ES6转换成可以在浏览器中运行的代码 -->
+	<script type="text/babel">
+        class Well extends React.Component{
+			render(){
+				return <div className="well">{this.props.val}</div>
+			}
+        }
+		class Todolist extends React.Component{
+		    constructor(...args){
+            	super(...args);
+            	this.state={val:[]}
+		    }
+
+		    fn(){
+	            var valArr=this.state.val;
+	            var value=this.refs['add-input'].value.replace(/(^\s*)|(\s*$)/g, "");
+
+                if (value.length>0) {
+		            valArr.push(value);
+		        	this.setState({
+		        		val:valArr
+		        	})
+					
+					this.refs['add-input'].value='';
+					this.refs['add-input'].focus();
+                }
+		    }
+	        render(){
+	            var result=[];
+	            
+	            for (var i = 0; i < this.state.val.length; i++) {
+	                result.push(<Well key={i} val={this.state.val[i]} />)
+	            }
+
+	        	return (
+	        		<div>
+	        			<form>
+	        				
+		        			<input type="text" className="btn" ref="add-input" placeholder="请输入一个任务" />
+		        			<a href="javascript:;" className="btn" onClick={this.fn.bind(this)}>添加</a>
+	        			</form>
+
+	        			<div className="well-group">
+	        				{result}
+	        			</div>
+	        		</div>
+	        	)
+	        }
+		}
+
+		
+	    var oContainer=document.getElementById('container'); 
+		ReactDOM.render(
+            <Todolist />, 
+            oContainer
+		);
+		
+	</script>
+</head>
+<body>
+
+       <div id="container" class="container">
+       	
+       </div>
+</body>
+</html>
