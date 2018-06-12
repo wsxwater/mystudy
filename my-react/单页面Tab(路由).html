@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>Simple SPA</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		li{list-style: none;}
+		a{text-decoration: none;}
+
+		body{background-color: #EEE;}
+        .container{max-width: 640px;margin-left: auto;margin-right: auto;}
+        .nav{background-color: #7CC463;}
+        .nav li{display: inline;}
+        .nav li a{display: inline-block;padding: 20px;font-size: 18px;color: #FFF;}
+        .nav li a.active{background-color: #fff;color: #333;}
+        
+        .tab-pane{background-color: #fff;padding: 20px;}
+        .tab-pane h3{margin: 15px 0;text-align: center;}
+        .tab-pane p{margin-bottom: 10px;text-align: center;}
+
+        h1{margin: 15px 0;text-align: center;}
+
+	</style>
+	<script src="js/react.min.js"></script>
+	<script src="js/react-dom.min.js"></script>
+	<script src="js/browser.min.js"></script>
+	<!--<script src="js/ReactRouter.min.js"></script>-->
+	<script src="https://cdn.bootcss.com/react-router/2.8.1/ReactRouter.min.js"></script>
+	
+	<!-- babel是转换编译器，ES6转换成可以在浏览器中运行的代码 -->
+	<!--  
+	    var Router = ReactRouter.Router;
+	    var Route = ReactRouter.Route;
+	    var IndexRoute = ReactRouter.IndexRoute;
+	    var Link = ReactRouter.Link;
+	    var IndexLink = ReactRouter.IndexLink;
+	    var hashHistory = ReactRouter.hashHistory;
+	-->
+	<script type="text/babel">
+	    //下面的相当于java的import或者c++的include
+	    var {
+    			Router,
+    			Route,
+    			IndexRoute,
+    			Link,
+    			IndexLink,
+    			hashHistory
+	    	}=ReactRouter;
+
+
+		class Home extends React.Component{
+	    	render(){
+	            return (
+	            	<div className="tab-pane">
+	            		<h3>望天门山</h3>
+	            		<p>天门中断楚江开，碧水东流至此回。</p>
+	                    <p>两岸青山相对出，孤帆一片日边来。</p>
+	            	</div>
+	            )
+	    	}
+		}
+
+		class DuFu extends React.Component{
+	    	render(){
+	            return (
+	            	<div className="tab-pane">
+	                    <h3>望岳</h3>
+						<p>岱宗夫如何？齐鲁青未了。</p>
+						<p>造化钟神秀，阴阳割昏晓。</p>
+						<p>荡胸生曾云，决眦入归鸟。</p>
+						<p>会当凌绝顶，一览众山小。</p>
+	            	</div>
+	            )
+	    	}
+		}
+
+		class LiSY extends React.Component{
+	    	render(){
+	            return (
+	            	<div className="tab-pane">
+	            		<h3>锦瑟</h3>
+	            		<p>锦瑟无端五十弦，一弦一柱思华年。</p>
+	                    <p>庄生晓梦迷蝴蝶，望帝春心托杜鹃。</p>
+	                    <p>沧海月明珠有泪，蓝田日暖玉生烟。</p>
+						<p>此情可待成追忆？只是当时已惘然。</p>
+	            	</div>
+	            )
+	    	}
+		}
+
+
+
+		class Tab extends React.Component{
+	        render(){
+	        	return (
+	        		<div className="tab-box">
+	        			<h1>Simple SPA</h1>
+		        		<div className="nav-box">
+	                    	<ul className="nav">
+	                        	<li><IndexLink to="/" activeClassName="active">李白</IndexLink></li>
+	                        	<li><Link to="/dufu" activeClassName="active">杜甫</Link></li>
+	                        	<li><Link to="/lisy" activeClassName="active">李商隐</Link></li>
+	                    	</ul>
+		        		</div>
+
+                    	<div className="tab-pane-box">
+                    		{this.props.children}
+                    	</div>
+	        		</div>
+	        	)
+	        }
+		}
+
+		
+	    var oContainer=document.getElementById('container'); 
+		ReactDOM.render(
+            <Router history={hashHistory}>
+            	<Route path="/" component={Tab}>
+            		<IndexRoute path="/" component={Home}></IndexRoute>
+            		<Route path="/dufu" component={DuFu}></Route>
+            		<Route path="/lisy" component={LiSY}></Route>
+            	</Route>
+            </Router>, 
+            oContainer
+		);
+		
+	</script>
+</head>
+<body>
+
+       <div id="container" class="container">
+       	
+       </div>
+	
+</body>
+</html>
