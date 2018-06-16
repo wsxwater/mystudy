@@ -253,7 +253,7 @@ demo1
     > <a href="my-webpack/demo1/webpack.config.js">webpack.config.js</a>
 
 demo2    
-    > <a href="my-webpack/demo1/webpack.config.js">webpack.config.js</a>
+    > <a href="my-webpack/demo2/webpack.config.js">webpack.config.js</a>
 </pre>
 
 ### wx-domo
