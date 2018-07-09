@@ -20,6 +20,8 @@
 <code><a href="#wx-domo">wx-domo(微信小程序)</a></code>
 <code><a href="#my-spy-debugger">真机调试</a></code>
 <code><a href="#my-nginx">nginx</a></code>
+<code><a href="#my-json-server">my-json-server</a></code>
+<code><a href="#my-javascript">my-javascript</a></code>
 
 ***
 
@@ -352,4 +354,13 @@ spy-debugger -c true
        重启：nginx -s reload         
        停止：nginx -s stop    
 
+</pre>
+
+
+### my-json-server
+<code>安装json-server，在cmd中运行命令json-server db.json或者json-server</code>
+
+### my-javascript
+<pre>
+    <a href="my-javascript/READMD.md">javascript</a>
 </pre>

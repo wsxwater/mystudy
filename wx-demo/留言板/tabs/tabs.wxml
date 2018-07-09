@@ -1,0 +1,12 @@
+<!--tabs/tabs.wxml-->
+<!-- <view class='nav-tabs'>
+      <view data-current='0' bindtap='tabsFun' class='{{currentIndex==0?"active":""}}'>娱乐</view>
+      <view data-current='1' bindtap='tabsFun' class='{{currentIndex==1?"active":""}}'>财经</view>
+      <view data-current='2' bindtap='tabsFun' class='{{currentIndex==2?"active":""}}'>休闲</view>
+      <view data-current='3' bindtap='tabsFun' class='{{currentIndex==3?"active":""}}'>小说</view>
+</view> -->
+
+<view class='nav-tabs'>
+      <view data-current='{{index}}' bindtap='tabsFun' class='{{currentIndex==index?"active":""}}' wx:for='{{tabArr}}' wx:key='key'>{{item}}</view>
+</view>
+

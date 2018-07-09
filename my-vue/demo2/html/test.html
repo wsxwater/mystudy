@@ -75,8 +75,15 @@
 		</div>
 
 		<div class="well">
-	        <input type="button" class="btn btn-warning btn-lg" v-on:click="show=false" value="控制显隐" />
-			<div style="width: 200px;height: 200px;background: red;" v-show="show"></div>
+	        <input type="button" class="btn btn-warning btn-lg" v-on:click="showToggle" value="控制显隐" />
+			<div style="width: 200px;height: 200px;background: red;" v-show="show" v-hide="!show"></div>
+		</div>
+
+		<div class="well">
+			<ul class="list-group">
+				<li class="list-group-item" v-for="item in groceryList" v-bind:key="item.id">{{item.text}}</li>
+				<todo-item class="list-group-item" v-for="item in groceryList" v-bind:key="item.id+10" v-bind:todo="item">{{item.text}}</todo-item>
+			</ul>
 		</div>
 
 	</div>
@@ -84,15 +91,27 @@
 	<script type="text/javascript" src="../js/vue.min.js"></script>
 	<script type="text/javascript">
 		window.onload=function () {
+			Vue.component('todo-item', {
+			  props: ['todo'],
+			  template: '<li>{{ todo.text }}</li>'
+			});
 		    var app=new Vue({
 		    	el:'.container',
 		    	data:{
 		    		msg:'welcome to vueJS',
 		    		arr:['apple','banana','orange'],
 		    		json:{a:'cat',b:'dog',c:'pig'},
-		    		show:true
+		    		show:true,
+		    		groceryList: [
+		    		      { id: 0, text: '蔬菜' },
+		    		      { id: 1, text: '奶酪' },
+		    		      { id: 2, text: '随便其它什么人吃的东西' }
+		    		]
 		    	},
 		    	methods:{
+		    		showToggle:function () {
+		    			this.show=!this.show;
+		    		},
 		    		add:function () {
 		    			//alert(122);
 		    			this.arr.push('pear');

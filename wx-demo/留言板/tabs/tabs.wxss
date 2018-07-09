@@ -1,0 +1,5 @@
+/* tabs/tabs.wxss */
+
+.nav-tabs{display: flex;}
+.nav-tabs view{width: 25%;padding:12rpx 0rpx;text-align: center;background: green;color: #FFF;font-size: 32rpx;}
+.nav-tabs view.active{background: #333;}

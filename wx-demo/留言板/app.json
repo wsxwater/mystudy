@@ -1,5 +1,6 @@
 {
   "pages": [
+    "tabs/tabs",
     "pages/index",
     "component/index"
   ],
