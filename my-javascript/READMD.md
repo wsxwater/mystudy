@@ -17,7 +17,7 @@
     改变某个文本节点的值。
 
     例如：
-    <code><p id="des"></p></code>
+    <code><p id=\"des\"></p></code>
     var des=document.getElementById('des');
     alert(des.nodeValue); //null。
     原因：p元素的属性节点是一个空值，而我们需要的是p元素的文本节点。换句话说，如果想要获取p元素的文本节点，就必须检索它的第一个子节点的nodeValue属性值。
