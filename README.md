@@ -362,5 +362,5 @@ spy-debugger -c true
 
 ### my-javascript
 <pre>
-    <a href="my-javascript/READMD.md">javascript</a>
+    <a href="my-javascript/READMD.md">READMD.md</a>
 </pre>
