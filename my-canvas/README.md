@@ -25,14 +25,11 @@
 
 
 ## 坐标变换所用的代数方程
-##### translate
-平移前的旧坐标记为(x,y)，平移后的坐标记为(x1,y1)，x轴平移距离记为dx，y轴平移距离记为dy。<code>公式：x1=x+dx;y1=y+dy</code>
+##### translate：平移前的旧坐标记为(x,y)，平移后的坐标记为(x1,y1)，x轴平移距离记为dx，y轴平移距离记为dy。<code>公式：x1=x+dx;y1=y+dy</code>
 
-##### scale
-缩放前的坐标记为(x,y)，缩放后的坐标记为(x1,y1)，坐标轴的横向缩放倍数记为sx，坐标轴的纵向缩放倍数记为sy。<code>公式：x1=x*sx;y1=y*sy</code>
+##### scale：缩放前的坐标记为(x,y)，缩放后的坐标记为(x1,y1)，坐标轴的横向缩放倍数记为sx，坐标轴的纵向缩放倍数记为sy。<code>公式：x1=x*sx;y1=y*sy</code>
 
-##### rotate
-旋转前的坐标记为(x,y)，旋转后的坐标记为(x1,y1)，旋转角度记为angle。<code>公式：x1=x*cos(angle)-(y*sin(angle));y1=y*cos(angle)+(x*sin(angle))</code>
+##### rotate：旋转前的坐标记为(x,y)，旋转后的坐标记为(x1,y1)，旋转角度记为angle。<code>公式：x1=x*cos(angle)-(y*sin(angle));y1=y*cos(angle)+(x*sin(angle))</code>
 
 ##### transform(a,b,c,d,e,f)、setTransform(a,b,c,d,e,f)
 通用公式：
