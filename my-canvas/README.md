@@ -42,15 +42,15 @@
         通用公式：
             x1=a*x+c*x+e;
             y1=b*x+d*y+f;
-        >> translate 
+        translate 
             如a=1,b=0,c=0且d=1。
             x1=1*x+0*x+e; => x1=x+e;
             y1=0*y+1*y+f; => y1=y+f;
-        >> scale 
+        scale 
             a,d参数分别设为x与y轴方向上的缩放倍数，其余设为0。
             x1=a*x+0*y+0; => x1=a*x;
             y1=0*x+d*y+0; => y1=d*y;
-        >> rotate 
+        rotate 
             如a=cos(angle),b=sin(angle),c=-sin(angle),d=cos(angle),e=0,f=0。
             x1=cos(angle)*x-sin(angle)*y+0; => x1=cos(angle)*x-sin(angle)*y; 
             y1=sin(angle)*x+cos(angle)*y+0; => y1=sin(angle)*x+cos(angle)*y;    
