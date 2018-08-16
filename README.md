@@ -20,6 +20,7 @@
 <code><a href="#wx-domo">wx-domo(微信小程序)</a></code>
 <code><a href="#my-spy-debugger">真机调试</a></code>
 <code><a href="#my-nginx">nginx</a></code>
+<code><a href="#my-javascript">my-javascript</a></code>
 
 ***
 
@@ -353,3 +354,18 @@ spy-debugger -c true
        停止：nginx -s stop    
 
 </pre>
+
+### my-javascript
+<pre>
+    > <a href="my-javascript/demo.html">demo.html</a>
+    > <a href="my-javascript/demo1.html">demo1.html</a>
+    > <a href="my-javascript/小数位数.html">小数位数.html</a>
+    > <a href="my-javascript/上传图片格式验证.html">上传图片格式验证.html</a>
+    > <a href="my-javascript/求字符串的长度.html">求字符串的长度.html</a>
+    > <a href="my-javascript/checkbox全选，全不选，反选.html">checkbox全选，全不选，反选.html</a>
+    > <a href="my-javascript/微博发布框.html">微博发布框.html</a>
+    > <a href="my-javascript/仿淘宝图片轮播.html">仿淘宝图片轮播.html</a>
+    > <a href="my-javascript/星星特效.html">星星特效.html</a>
+</pre>
+
+
