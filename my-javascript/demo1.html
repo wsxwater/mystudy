@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#target{width: 400px;margin-left: auto;margin-right: auto;background-color: #f2f2f2;padding: 10px 20px;border: 1px solid #CCC;}
+		h2{text-align: center;}
+		dt{padding:6px 10px;}
+	</style>
+</head>
+<body>
+	<div id="object">
+		<h1>What is the Document Object Model?</h1>
+		<p>The <abbr title="World Wide Web Consortium">W3C</abbr> defines the <abbr title="Document Object Model">DOM</abbr> as:</p>
+		<blockquote cite="http://www.w3.org/DOM/">
+			<p>A platform and language-neutral interface that will allow programs and scripts to dynamically access and update the content,structure and style of documents.</p>
+		</blockquote>
+		<p>It is an <abbr title="Application Programming Interface">API</abbr> that can be used to navigate <abbr title="HyperText Markup Language">HTML</abbr> and <abbr title="eXtensible Markup Language">XML</abbr> documents.</p>
+	</div>
+
+	<div id="target"></div>
+
+	<script type="text/javascript">
+		addLoadEvent(displayAbbrevations);
+		function addLoadEvent(func){
+		    if(typeof window.onload != 'function'){
+		        window.onload=func;
+		    }else{
+		        window.onload=function(){
+		            oldonload();
+		            func();
+		        }
+		    }
+		}
+
+		function displayAbbrevations() {
+			if (!document.getElementsByName||!document.createElement ||!document.createTextNode) {
+				return false;
+			}
+
+			var abbr=document.getElementsByTagName('abbr');
+			if (abbr.length<1) return false;
+			var defs=[];
+			for (var i = 0; i < abbr.length; i++) {
+				var cur_abbr=abbr[i];
+                var definition=cur_abbr.title;
+                var key=cur_abbr.lastChild.nodeValue;
+                defs[key]=definition;	
+			}
+
+            var header=document.createElement('h2');
+            var header_text=document.createTextNode('Abbreviations');
+            header.appendChild(header_text);
+            document.getElementById('target').appendChild(header); 
+
+			for (key in defs) {
+				//console.log(key,defs[key]);
+				var definition = defs[key];
+
+				var dtit=document.createElement('dt');
+				var dtit_tit=document.createTextNode(key);
+				dtit.appendChild(dtit_tit);
+
+				var ddesc=document.createElement('dd');
+				var ddesc_txt=document.createTextNode(definition);
+				ddesc.appendChild(ddesc_txt);
+
+				var dlist=document.createElement('dl');
+				dlist.appendChild(dtit);
+				dlist.appendChild(ddesc);
+
+				if (dlist.childNodes.length<1) return false;
+
+	            document.getElementById('target').appendChild(dlist); 
+			}
+
+		}
+	</script>
+
+	<script type="text/javascript">
+				function highlightPage() {
+					if (!document.getElementsByName || !document.getElementById || !document.getElementById('nav')) {
+						return false;
+					}
+
+					var nav=document.getElementById('nav');
+					var links=document.getElementsByTagName('a');
+
+					for (var i = 0; i < links.length; i++) {
+						var link_url=links[i].getAttribute('herf');
+						var cur_url =window.location.href;
+						if (cur_url.indexOf(link_url)!=-1) {
+							links[i].className='active';
+							var link_text=links[i].lastChild.nodeValue.toLowerCase();
+							document.body.id=link_text;
+						}
+
+					}
+				}
+		        
+		        //表单，点击label标签，让输入框获取焦点
+				function focusLabels() {
+					if (!document.getElementsByName) return false;
+					var labels=document.getElementsByTagName('label');
+					for (var i = 0; i < labels.length; i++) {
+						if (!labels[i].getAttribute('for')) continue;
+						labels[i].onclick=function () {
+							var id=this.getAttribute('for');
+							if(!document.getElementById(id)) return false;
+							var element=document.getElementById(id);
+							element.focus();
+						}
+					}
+				}
+
+				function resetFields(whichform) {
+				  for (var i=0; i<whichform.elements.length; i++) {
+				    var element = whichform.elements[i];
+				    if (element.type == "submit") continue;
+				    if (!element.defaultValue) continue;
+				    element.onfocus = function() {
+				    if (this.value == this.defaultValue) {
+				      this.value = "";
+				     }
+				    }
+				    element.onblur = function() {
+				      if (this.value == "") {
+				        this.value = this.defaultValue;
+				      }
+				    }
+				  }
+				}
+
+				function validateForm(whichform) {
+				  for (var i=0; i<whichform.elements.length; i++) {
+				    var element = whichform.elements[i];
+				    if (element.className.indexOf("required") != -1) {
+				      if (!isFilled(element)) {
+				        alert("Please fill in the "+element.name+" field.");
+				        return false;
+				      }
+				    }
+				    if (element.className.indexOf("email") != -1) {
+				      if (!isEmail(element)) {
+				        alert("The "+element.name+" field must be a valid email address.");
+				        return false;
+				      }
+				    }
+				  }
+				  return true;
+				}
+
+				function isFilled(field) {
+				  if (field.value.length < 1 || field.value == field.defaultValue) {
+				    return false;
+				  } else {
+				    return true;
+				  }
+				}
+
+				function isEmail(field) {
+				  if (field.value.indexOf("@") == -1 || field.value.indexOf(".") == -1) {
+				    return false;
+				  } else {
+				    return true;
+				  }
+				}
+
+				function prepareForms() {
+				  for (var i=0; i<document.forms.length; i++) {
+				    var thisform = document.forms[i];
+				    resetFields(thisform);
+				    thisform.onsubmit = function() {
+				      return validateForm(this);
+				    }
+				  }
+				}
+	</script>
+</body>
+</html>

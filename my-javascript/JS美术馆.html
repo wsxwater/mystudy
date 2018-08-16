@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js美术馆</title>
+</head>
+<body>
+	<ul id="gallery">
+		<li><a href="images/1.jpg" title="this is picture1">picture1</a></li>
+		<li><a href="images/2.jpg" title="this is picture2">picture2</a></li>
+		<li><a href="images/3.jpg" title="this is picture3">picture3</a></li>
+		<li><a href="images/4.jpg" title="this is picture4">picture4</a></li>
+		<li><a href="images/5.jpg" title="this is picture5">picture5</a></li>
+	</ul>
+	<!-- <img src="images/placeholder.jpg" id="placeholder">
+	<h1 id="description">Choose an image.</h1> -->
+
+	<p class="des" style="text-transform: uppercase;">xxx&nbsp;<em>yy</em>&nbsp;zzz</p>
+	
+
+
+	<script type="text/javascript">
+		window.onload=function () {
+            var des=document.querySelector('.des');
+            console.log(des.childNodes[0],des.childNodes[1],des.childNodes[2]);
+            
+            
+            preparePlaceholder()
+            parpareGallery();
+
+			function insertAfter(newElement,targetElement) {
+				var parent=targetElement.parentNode;
+				if (parent.lastChild == targetElement) {
+					parent.appendChild(newElement);
+				}else{
+					parent.insertBefore(newElement,targetElement.nextSibling);
+				}
+			}
+
+			function preparePlaceholder() {
+				if (!document.getElementById) return false;
+				if (!document.createElement) return false;
+				if (!document.createTextNode) return false;
+				if (!document.getElementById('gallery')) return false;
+				var gallery=document.getElementById('gallery');
+				var placeholder=document.createElement('img');
+				placeholder.src='images/placeholder.jpg';
+				placeholder.title='my image gallery';
+				placeholder.id='placeholder';
+				var description=document.createElement('h1');
+				description.id='description';
+				var destext=document.createTextNode('Choose An Image');
+				description.appendChild(destext);
+				insertAfter(placeholder,gallery);
+				insertAfter(description,placeholder);
+			}
+
+            function parpareGallery() {
+				if (!document.getElementById) return false;
+				if (!document.getElementsByName) return false;
+				if (!document.getElementById('gallery')) return false;
+				var gallery=document.getElementById('gallery');
+				var links=gallery.getElementsByTagName('a');
+				for (var i = 0; i < links.length; i++) {
+					links[i].onclick=function(){
+						return showPic(this);
+					}
+					links[i].onkeypress=links[i].onclick;
+				}
+            }
+
+            function showPic(whichpic) {
+            	var source=whichpic.getAttribute('href');
+            	if (!document.getElementById('placeholder')) return true;
+                var placeholder=document.getElementById('placeholder');
+                if (placeholder.nodeName!='IMG') return true;
+                //placeholder.setAttribute('src',source);
+                placeholder.src=source;
+
+                var title=whichpic.getAttribute('title')?whichpic.getAttribute('title'):'';
+                if (!document.getElementById('description')) return true;
+                var description=document.getElementById('description');
+                if (description.firstChild.nodeType==3) {
+                	description.firstChild.nodeValue=title;
+                }
+
+            	return false;
+            }
+		}
+	</script>
+</body>
+</html>

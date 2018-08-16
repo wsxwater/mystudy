@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组</title>
+	<style type="text/css">
+		body{margin: 0 20px;padding: 0;line-height: 24px;}
+	</style>
+</head>
+<body>
+	
+	//sort:排序
+	var sortArr1=['a','c','q','d']; <br>
+    sortArr1.sort();   //['a','c','d','q'] <br>
+	console.log(sortArr1); <br><br>
+
+	var sortArr2=[3,9,77,10,34,33]; <br>
+	sortArr2.sort();   //[10,3,33,34,77,9] <br>
+	console.log(sortArr2); <br><br>
+
+	var sortArr3=[3,9,77,10,34,33]; <br>
+	sortArr3.sort(function (a,b) {
+		//return a-b; //从小到大排序：a-b的结果要为负数 [3,9,10,33,34,77] <br>
+		return b-a; //从大到小排序：a-b的结果要为正数  [77,34,33,10,9,3] <br>
+		
+	}); <br>
+	console.log(sortArr3); <br><br>
+
+	var sortArr4=[{age:22},{age:12},{age:30}];<br>
+	sortArr4.sort(function (a,b) {
+		//return a.age-b.age; //从小到大排序：a-b的结果要为负数 [{age:12},{age:22},{age:30}]<br>
+		return b.age-a.age; //从大到小排序：a-b的结果要为正数 [{age:30},{age:22},{age:12}]<br>
+	});<br>
+	console.log(sortArr4);	<br><br>
+
+	sortArr4.forEach(function (item) {<br>
+		console.log('age:'+item.age); <br>
+		//age:30 <br>
+		//age:22 <br>
+		//age:12 <br>
+	});
+
+	<hr>
+
+	//concat:数组合并
+	var concatArr=[1,2]; <br>
+	concatArr.concat(3,4); <br>
+	console.log('\nconcatArr原数组:\t'+concatArr);//原数组未被修改 <br>
+	var newConcatArr1=concatArr.concat(3,4); //[1,2,3,4] <br>
+	var newConcatArr2=concatArr.concat([3,4],9); //[1,2,3,4,9] <br>
+	var newConcatArr3=concatArr.concat([3,4,[6,7]]); //[1,2,3,4,[6,7]] <br>
+	console.log('concatArr.concat(3,4)=>newConcatArr1:\t'+newConcatArr1); <br>
+	console.log('concatArr.concat([3,4],9)=>newConcatArr2:\t'+newConcatArr2); <br>
+	console.log('concatArr.concat([3,4,[6,7]])=>newConcatArr3:\t'+newConcatArr3); 
+
+	<hr>
+
+	//slice:返回部分数组
+	var sliceArr=[1,2,3,4,5]; <br>
+	sliceArr.slice(1, 3); <br>
+	console.log('\nsliceArr原数组:\t'+sliceArr);//原数组未被修改 <br>
+	var newSliceArr1=sliceArr.slice(1, 3);  //[2,3] <br>
+	var newSliceArr2=sliceArr.slice(1);  //[2,3,4,5] <br>
+	var newSliceArr3=sliceArr.slice(1,-1);  //[2,3,4] <br>
+	var newSliceArr4=sliceArr.slice(-4,-3);  //[2] <br>
+	console.log('sliceArr.slice(1, 3)=>newSliceArr1:\t'+newSliceArr1); <br>
+	console.log('sliceArr.slice(1)=>newSliceArr2:\t'+newSliceArr2); <br>
+	console.log('sliceArr.slice(1,-1)=>newSliceArr3:\t'+newSliceArr3); <br>
+	console.log('sliceArr.slice(-4,-3)=>newSliceArr4:\t'+newSliceArr4); 
+
+	<hr>
+
+	//splice:数组拼接
+	var spliceArr=[1,2,3,4,5]; <br>
+	console.log('\nspliceArr原数组:'+spliceArr); <br>
+	spliceArr.splice(2);//returns [3,4,5] <br>
+	console.log('spliceArr.splice(2):\t'+spliceArr); <br>
+	spliceArr=[1,2,3,4,5]; <br>
+	spliceArr.splice(2,2);//returns [3,4] <br>
+	console.log('spliceArr.splice(2,2):\t'+spliceArr); <br>
+	spliceArr=[1,2,3,4,5]; <br>
+	spliceArr.splice(1,1,'a','b');//returns [2] <br>
+	console.log("spliceArr.splice(1,1,'a','b'):\t"+spliceArr);
+
+	<hr>
+
+    //ES5=>ie9以上支持 <br>
+    //forEach(ES5):循环 <br>
+	var foreachArr=[44,23,10,30,26]; <br>
+	console.log('\n'); <br>
+	foreachArr.forEach(function (val,index,a) { <br>
+		//val:值 <br>
+		//index:索引 <br>
+		//a:数组本身 <br>
+		console.log(+val+' | '+index+' | '+(a===foreachArr)); <br>
+		// 44 | 0 | true <br>
+		// 23 | 1 | true <br>
+		// 10 | 2 | true <br>
+		// 30 | 3 | true <br>
+		// 26 | 4 | true <br>
+	})
+
+	<hr>
+
+	//map(ES5):数组映射 <br>
+	var mapArr=[1,2,3]; <br>
+	console.log('\n'); <br>
+	mapArr.map(function(x) { <br>
+		return x+10; <br>
+	}); <br>
+	console.log('mapArr原数组:'+mapArr); <br>
+
+	var newMapArr=mapArr.map(function(x) { <br>
+		return x+10;//[11,12,13] <br>
+	}); <br>
+	console.log("var newMapArr=mapArr.map(function(x) {return x+10;}); ："+newMapArr);
+
+	<hr>
+
+	//filter(ES5):数组过滤 <br>
+	var filterArr=[1,2,3,4,5,6,7,8,9,10]; <br>
+	filterArr.filter(function(val,index) { <br>
+		return index%3===0 || val>=8; <br>
+	}); <br>
+	console.log('\nfilterArr原数组:'+filterArr);//[1,2,3,4,5,6,7,8,9,10] <br>
+	var newFilterArr=filterArr.filter(function(val,index) { <br>
+		return index%3===0 || val>=8;//[1,4,7,8,9,10] <br>
+	}); <br>
+	console.log('var newFilterArr=filterArr.filter(function(val,index){return index%3===0 || val>=8;}); ：'+newFilterArr); 
+
+    <hr>
+
+	//reverse():反转数组，颠倒 <br>
+	var reverseArr=[1,2,3,4,5,6,7,8,9,10]; <br>
+    var newReverseArr=reverseArr.reverse(); <br>
+    console.log(newReverseArr); //[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+
+	<script type="text/javascript">
+		window.onload=function () {
+
+			//sort:排序
+			var sortArr1=['a','c','q','d'];
+            sortArr1.sort();   //['a','c','d','q']
+			console.log(sortArr1);
+
+			var sortArr2=[3,9,77,10,34,33];
+			sortArr2.sort();   //[10,3,33,34,77,9]
+
+			console.log(sortArr2);
+
+			var sortArr3=[3,9,77,10,34,33];
+			sortArr3.sort(function (a,b) {
+				//return a-b; //从小到大排序：a-b的结果要为负数 [3,9,10,33,34,77]
+				return b-a; //从大到小排序：a-b的结果要为正数  [77,34,33,10,9,3]
+				
+			});
+			console.log(sortArr3);	
+
+			var sortArr4=[{age:22},{age:12},{age:30}];
+			sortArr4.sort(function (a,b) {
+				//return a.age-b.age; //从小到大排序：a-b的结果要为负数 [{age:12},{age:22},{age:30}]
+				return b.age-a.age; //从大到小排序：a-b的结果要为正数 [{age:30},{age:22},{age:12}]
+
+			});
+			console.log(sortArr4);	
+			sortArr4.forEach(function (item) {
+				console.log('age:'+item.age);
+			});
+
+
+			//concat:数组合并
+			var concatArr=[1,2];
+			concatArr.concat(3,4);
+			console.log('\nconcatArr原数组:\t'+concatArr);//原数组未被修改
+			var newConcatArr1=concatArr.concat(3,4); //[1,2,3,4]
+			var newConcatArr2=concatArr.concat([3,4],9); //[1,2,3,4,9]
+			var newConcatArr3=concatArr.concat([3,4,[6,7]]); //[1,2,3,4,[6,7]]
+			console.log('concatArr.concat(3,4)=>newConcatArr1:\t'+newConcatArr1);
+			console.log('concatArr.concat([3,4],9)=>newConcatArr2:\t'+newConcatArr2);
+			console.log('concatArr.concat([3,4,[6,7]])=>newConcatArr3:\t'+newConcatArr3);
+
+
+			//slice:返回部分数组
+			var sliceArr=[1,2,3,4,5];
+			sliceArr.slice(1, 3);
+			console.log('\nsliceArr原数组:\t'+sliceArr);//原数组未被修改
+			var newSliceArr1=sliceArr.slice(1, 3);  //[2,3]
+			var newSliceArr2=sliceArr.slice(1);  //[2,3,4,5]
+			var newSliceArr3=sliceArr.slice(1,-1);  //[2,3,4]
+			var newSliceArr4=sliceArr.slice(-4,-3);  //[2]
+			console.log('sliceArr.slice(1, 3)=>newSliceArr1:\t'+newSliceArr1);
+			console.log('sliceArr.slice(1)=>newSliceArr2:\t'+newSliceArr2);
+			console.log('sliceArr.slice(1,-1)=>newSliceArr3:\t'+newSliceArr3);
+			console.log('sliceArr.slice(-4,-3)=>newSliceArr4:\t'+newSliceArr4);
+
+
+			//splice:数组拼接
+			var spliceArr=[1,2,3,4,5];
+			console.log('\nspliceArr原数组:'+spliceArr);
+			spliceArr.splice(2);//returns [3,4,5]
+			console.log('spliceArr.splice(2):\t'+spliceArr);
+			spliceArr=[1,2,3,4,5];
+			spliceArr.splice(2,2);//returns [3,4]
+			console.log('spliceArr.splice(2,2):\t'+spliceArr);
+			spliceArr=[1,2,3,4,5];
+			spliceArr.splice(1,1,'a','b');//returns [2]
+			console.log("spliceArr.splice(1,1,'a','b'):\t"+spliceArr);
+
+
+            //ES5=>ie9以上支持
+            //forEach(ES5):循环
+			var foreachArr=[44,23,10,30,26];
+			console.log('\n');
+			foreachArr.forEach(function (val,index,a) {
+				//val:值
+				//index:索引
+				//a:数组本身
+				console.log(+val+' | '+index+' | '+(a===foreachArr));
+				// 44 | 0 | true
+				// 23 | 1 | true
+				// 10 | 2 | true
+				// 30 | 3 | true
+				// 26 | 4 | true
+			})
+
+
+			//map(ES5):数组映射
+			var mapArr=[1,2,3];
+			console.log('\n');
+			mapArr.map(function(x) {
+				return x+10;
+			});
+			console.log('mapArr原数组:'+mapArr);
+
+			var newMapArr=mapArr.map(function(x) {
+				return x+10;//[11,12,13]
+			});
+			console.log("var newMapArr=mapArr.map(function(x) {return x+10;}); ："+newMapArr);
+
+
+			//filter(ES5):数组过滤
+			var filterArr=[1,2,3,4,5,6,7,8,9,10];
+			filterArr.filter(function(val,index) {
+				return index%3===0 || val>=8;
+			});
+			console.log('\nfilterArr原数组:'+filterArr);//[1,2,3,4,5,6,7,8,9,10]
+			var newFilterArr=filterArr.filter(function(val,index) {
+				return index%3===0 || val>=8;//[1,4,7,8,9,10]
+			});
+			console.log('var newFilterArr=filterArr.filter(function(val,index){return index%3===0 || val>=8;}); ：'+newFilterArr);
+
+
+			//reverse():反转数组，颠倒
+			var reverseArr=[1,2,3,4,5,6,7,8,9,10];
+            var newReverseArr=reverseArr.reverse();
+            console.log(newReverseArr); //[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+
+
+
+		};
+	</script>
+</body>
+</html>

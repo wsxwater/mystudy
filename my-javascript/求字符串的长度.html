@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		var str1='my world!'
+		var str2='zmy name is wsx';
+		// charAt():获取相应位置字符
+		console.log(str1.charAt(0));
+
+		// charCodeAt():获取相应位置字符的Unicode
+		console.log(str2.charCodeAt(0));
+		
+        var str3='我|是！';
+        var str4='zzz';
+        console.log(getStrLength(str3));
+        console.log(getStrLength(str4));
+        /**
+         * [getStrLength 获取字符串长度]
+         * @param  {[string]} str 
+         * @return {[type]}     [返回长度]
+         */
+		function getStrLength(str) {
+			var code=0,len=0;
+
+			for (var i = 0; i < str.length; i++) {
+				//Unicode码
+				code=str.charCodeAt();
+				console.log(code);
+
+				if (code>=0&&code<=127) {
+					len+=1;
+				}else{
+					len+=2;
+				}
+			}
+
+			return len;
+		}
+	</script>
+</body>
+</html>
