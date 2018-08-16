@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		window.onload=function () {
+            var str1='http://localhost:8888/mystudy/index.html';
+			var str2='http://localhost:8888/mystudy/my-javascript/%E5%B0%8F%E6%95%B0%E4%BD%8D%E6%95%B0.html';
+            
+            //编码
+            var encode_str=encodeURIComponent(str1);
+            console.log(encode_str);
+            
+            //解码 
+			var decode_str=decodeURIComponent(str2);
+			console.log(decode_str);
+		}
+	</script>
+</body>
+</html>

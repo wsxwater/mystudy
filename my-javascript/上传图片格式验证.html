@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="file" id="file">
+	<script type="text/javascript">
+		window.onload=function () {
+            var str='Olive';
+			console.log(str.substring(3));   //ve
+			console.log(str.substring(3,4)); //v
+			console.log(str.substring(3,2)); //i
+
+			console.log(str.substr(3));   //ve
+			console.log(str.substr(3,4)); //ve
+			console.log(str.substr(3,2)); //ve
+
+/*Substring：
+该方法可以有一个参数也可以有两个参数。
+（1）  一个参数：
+示例：var str=“Olive”；
+      str.substring(3);
+	  结果：“ve”
+	  说明：当substring只有一个参数时，参数表示从字符串的第几位开始截取，直截取到字符串结尾。
+
+（2）  两个参数：
+示例：var str=“Olive”；
+	  1) str.substring(3,4);
+	  2) str.substring(3,2);
+	  结果：1) “v”  2) “i”
+
+说明：当substring有两个参数时，第一个参数表示从字符串的第几位开始截取，第二个参数表示截取到字符串的第几位。这点是个C#中字符截取不同的一点，所以才会导致不同的结果。
+
+Substr：
+该方法也可以有一个或两个参数。
+（1）一个参数：
+    说明：substr一个参数时，作用跟substring方法一个参数时一样。
+（2）两个参数：
+ 示例：var str=“Olive”；
+	   1) Str.substr(3,2);
+	   2) Str.substr(3,4);
+	   结果：1) “ve” 2) “ve”
+
+	   说明：substr有两个参数时，第一个参数表示从字符串的第几位开始截取，第二个参数表示截取多少位字符串。这点跟C#中字符截取相同的，所以在以后的使用中，如果想要避免出现截取的问题最好还是使用substr。*/
+
+			var file=document.getElementById('file');
+
+			file.onchange=function () {
+				//获取上传图径
+				var path=this.value;
+				console.log(path);
+
+				//截取
+				var suffix=path.substr(path.lastIndexOf('.'));
+				console.log(suffix);
+
+				//转成小写
+				var low_suffix=suffix.toLowerCase();
+				console.log(low_suffix);
+
+				if (low_suffix==='.jpg'||low_suffix==='.png'||low_suffix==='.jpeg'||low_suffix==='.gif') {
+					alert('上传成功！！！');
+				}else{
+					alert('请上传图片！！！')
+				}
+			}
+		}
+	</script>
+</body>
+</html>

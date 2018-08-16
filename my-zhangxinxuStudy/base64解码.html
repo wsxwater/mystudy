@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+    <textarea style="width: 100%;height: 400px">实际上，从IE10+浏览器开始，所有浏览器就原生提供了Base64编码解码方法，不仅可以用于浏览器环境，Service Worker环境也可以使用。
+方法名就是atob和btoa，具体语法如下：
+
+1. Base64解码
+语法为（浏览器中）：
+
+var decodedData = window.atob(encodedData);或者（浏览器或js Worker线程中）：
+var decodedData = self.atob(encodedData);
+例如：window.atob('emhhbmd4aW54dQ==');
+
+记住atob
+atob这个方法名称乍一看，很奇怪，不知道这个单词什么意思。我们可以理解为 A to B，也就是从A到B。这里的B指的就是Base64吗？哈哈哈，恭喜你！猜错了！A指的才是Base64，反的，B才是普通字符，普通意思就是low，俗称low B。所以我们这么记忆，Low B，Low B，B表示很Low的普通字符，A才是Base64，和首字母对应关系是反的。
+因此，atob表示Base64字符to普通字符，也就是Base64解码。
+// 返回：'zhangxinxu'</textarea>
+<body>
+	<script type="text/javascript">
+		console.log(window.atob('d3d3'));;
+		console.log(window.btoa('www'));;
+		console.log(window.btoa(window.encodeURIComponent('嘻嘻哈哈哈哈啦啦啦啦')));
+	</script>
+</body>
+</html>
