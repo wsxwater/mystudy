@@ -20,6 +20,7 @@
 <code><a href="#wx-domo">wx-domo(微信小程序)</a></code>
 <code><a href="#my-spy-debugger">真机调试</a></code>
 <code><a href="#my-nginx">nginx</a></code>
+<code><a href="#my-json-server">my-json-server</a></code>
 <code><a href="#my-javascript">my-javascript</a></code>
 
 ***
@@ -355,8 +356,13 @@ spy-debugger -c true
 
 </pre>
 
+
+### my-json-server
+<code>安装json-server，在cmd中运行命令json-server db.json或者json-server</code>
+
 ### my-javascript
 <pre>
+    > <a href="my-javascript/READMD.md">READMD.md</a>
     > <a href="my-javascript/demo.html">demo.html</a>
     > <a href="my-javascript/demo1.html">demo1.html</a>
     > <a href="my-javascript/小数位数.html">小数位数.html</a>
@@ -367,5 +373,3 @@ spy-debugger -c true
     > <a href="my-javascript/仿淘宝图片轮播.html">仿淘宝图片轮播.html</a>
     > <a href="my-javascript/星星特效.html">星星特效.html</a>
 </pre>
-
-
