@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="js/underscore-min.js"></script>
+	<script type="text/javascript">
+		var arr=['哈哈',22,'wq',1212,'www'];
+
+		_.each(arr,function(item,index, arr) {
+			console.log(item,index,arr);
+		});
+
+		console.log(_.without(arr,'哈哈'));
+
+		console.log(_.random(-5,5));
+	</script>
+</body>
+</html>

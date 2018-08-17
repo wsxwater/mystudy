@@ -365,8 +365,10 @@ spy-debugger -c true
     > <a href="my-javascript/READMD.md">READMD.md</a>
     > <a href="my-javascript/demo.html">demo.html</a>
     > <a href="my-javascript/demo1.html">demo1.html</a>
+    > <a href="my-javascript/JS美术馆.html">JS美术馆.html</a>
     > <a href="my-javascript/小数位数.html">小数位数.html</a>
     > <a href="my-javascript/上传图片格式验证.html">上传图片格式验证.html</a>
+    > <a href="my-javascript/uri编码和解码.html">uri编码和解码.html</a>
     > <a href="my-javascript/求字符串的长度.html">求字符串的长度.html</a>
     > <a href="my-javascript/checkbox全选，全不选，反选.html">checkbox全选，全不选，反选.html</a>
     > <a href="my-javascript/微博发布框.html">微博发布框.html</a>
