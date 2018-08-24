@@ -39,8 +39,8 @@
 			var lih=parseInt(getStyle(allLis[0],'height'));
 
 			// 4.获取尺寸
-			var w=/*document.body.clientWidth||*/document.documentElement.clientWidth-liw;
-			var h=/*document.body.clientHeight||*/document.documentElement.clientHeight-lih;
+			var w=(document.body.clientWidth||document.documentElement.clientWidth)-liw;
+			var h=(document.body.clientHeight||document.documentElement.clientHeight)-lih;
 
 			//5.遍历
 			for (var j = 0; j < allLis.length; j++) {

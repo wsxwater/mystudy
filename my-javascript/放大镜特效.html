@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#box{position: relative;margin: 100px 0 0 100px;position: relative;}
+        .md-box{position: relative;background-color: #eee;width: 329px;height: 220px;cursor: pointer;} 
+        .md-box img{display: block;width: 100%;height: 100%;}
+        .mask{position: absolute;top: 0;left: 0;width: 100px;height: 100px;background-color: rgba(255, 255, 0, 0.4);display: none;}
+        .lg-box{width: 200px;height: 200px;background-color: #eee;overflow: hidden;position: absolute;top: 0;left: 400px;display: none;}
+        .lg-box img{position: absolute;top: 0;left: 0;}
+        #list{list-style: none;margin-left: 100px;margin-top: 2px;}
+        #list li{width: 60px;height: 40px;overflow: hidden;float: left;margin-right: 2px;}
+        #list li img{display: block;width: 100%;height: 100%;object-fit: cover;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div class="md-box"><img src="images/1.jpg"><span class="mask"></span></div>
+		<div class="lg-box"><img src="images/1.jpg"></div>
+	</div>
+	<ul id="list">
+		<li><img src="images/1.jpg" /></li>
+		<li><img src="images/2.jpg" /></li>
+		<li><img src="images/3.jpg" /></li>
+	</ul>
+
+
+	<script type="text/javascript">
+		window.onload=function () {
+			var box=document.getElementById('box');
+			var mdBox=box.children[0];
+			var mask=mdBox.children[1];
+			var lgBox=box.children[1];
+			var list=document.getElementById('list');
+			var item=list.children;
+
+			mdBox.onmouseover=function () {
+				lgBox.style.display='block';
+				mask.style.display='block';
+
+				this.onmousemove=function (event) {
+					var event=event||window.event;
+					var x=event.clientX-box.offsetLeft-mask.offsetWidth*0.5;
+					var y=event.clientY-box.offsetTop-mask.offsetHeight*0.5;
+					if (x<=0) {
+						x=0;
+					}else if(x>=mdBox.offsetWidth-mask.offsetWidth){
+						x=mdBox.offsetWidth-mask.offsetWidth;
+					} 
+					if (y<=0) {
+						y=0;
+					}else if(y>=mdBox.offsetHeight-mask.offsetHeight){
+						y=mdBox.offsetHeight-mask.offsetHeight;
+					} 
+                    
+					mask.style.left=x+'px';
+					mask.style.top=y+'px';
+
+					var rateX=lgBox.children[0].offsetWidth/mdBox.offsetWidth;
+					var rateY=lgBox.children[0].offsetHeight/mdBox.offsetHeight;
+					
+					lgBox.children[0].style.left=-x*rateX+'px';
+					lgBox.children[0].style.top=-y*rateY+'px';
+
+
+				}
+			}			
+			mdBox.onmouseout=function () {
+				lgBox.style.display='none';
+				mask.style.display='none';
+			}
+
+
+			for (var i = 0; i < item.length; i++) {
+				(function (i) {
+					item[i].onclick=function () {
+						lgBox.children[0].src='images/'+(i+1)+'.jpg';
+						mdBox.children[0].src='images/'+(i+1)+'.jpg';
+					}
+				})(i);
+			}
+		}
+	</script>
+</body>
+</html>

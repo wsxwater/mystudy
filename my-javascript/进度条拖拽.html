@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#progress{width: 1000px;height: 40px;line-height: 40px;margin: 100px auto;position: relative;}
+		#progress-bar{width: 90%;height: 100%;position: relative;background-color: #ddd;border-radius: 6px;}
+		#progress-bar span{width: 25px;height: 60px;position: absolute;top:-10px;left: 0;background-color: #ff5722;border-radius: 6px;cursor: pointer;}
+		#progress-bg{/* position:absolute;left:0;top:0;z-index:2;clip:rect(0,100px, 40px, 0); */height:100%;width:0;background-color: #ff5722;border-radius: 6px 0 0 6px;}
+		#progress-txt{position: absolute;top: 0;right: 0;width: 10%;text-align: center;}
+         
+	</style>
+		
+</head>
+<body>
+	
+	<div id="progress">
+		<div id="progress-bar">
+			<div id="progress-bg"></div><span></span>
+		</div>
+		<span id="progress-txt">0%</span>
+	</div>
+
+	<script type="text/javascript">
+		window.onload=function () {
+			var progress=document.getElementById('progress'),
+			    progress_bar=document.getElementById('progress-bar'),
+			    progress_slider=progress_bar.getElementsByTagName('span')[0],
+			    progress_bg=document.getElementById('progress-bg'),
+			    progress_txt=document.getElementById('progress-txt');
+            
+
+                progress_slider.onmousedown=function (event) {
+               	    var event=event||window.event;
+               	    var disX=event.clientX-progress_slider.offsetLeft;
+               	    console.log(event.clientX,progress_slider.offsetLeft);
+
+               	    document.onmousemove=function (event) {
+               	   		var event=event||window.event;
+               	   		var l=event.clientX-disX;
+               	   		var limit_w=progress_bar.offsetWidth-progress_slider.offsetWidth;
+               	   		if (l<=0) {
+               	   			l=0;
+               	   		}else if(l>=limit_w){
+               	   			l=limit_w;
+               	   		}
+               	   		console.log(event.clientX,disX,l);
+               	   		
+               	   		progress_bg.style.width=l+'px';
+               	   		progress_slider.style.left=l+'px';
+               	   		progress_txt.innerText=parseInt(l/limit_w*100)+'%';
+		               	
+		               	return false;
+               	    }
+
+               	    document.onmouseup=function () {
+               	   		document.onmouseup=null;
+               	   		document.onmousemove=null;
+               	    }
+                }
+
+		}
+	</script>
+</body>
+</html>

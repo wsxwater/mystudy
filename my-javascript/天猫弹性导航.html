@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>天猫弹性导航</title>
+	<style type="text/css">
+		*{padding: 0;margin: 0;}
+		body{background-color: pink;}
+		#nav{position: relative;width: 900px;background-color: #fff;margin: 100px auto;border-radius: 6px;padding: 0 10px;}
+		#nav span{display: block;width: 90px;height: 30px;position: absolute;background-color: red;z-index: 0;margin-top: 16px;top: 0;margin-left: 10px;border-radius: 6px;}
+		#nav ul{list-style: none;overflow: hidden;position: relative;z-index: 1;cursor: pointer;}
+		#nav ul li{width: 90px;height: 62px;line-height: 62px;float: left;text-align: center;}
+	</style>
+</head>
+<body>
+	<div id="nav">
+		<span></span>
+		<ul>
+			<li>导航01</li>
+			<li>导航02</li>
+			<li>导航03</li>
+			<li>导航04</li>
+			<li>导航05</li>
+			<li>导航06</li>
+			<li>导航07</li>
+			<li>导航08</li>
+			<li>导航09</li>
+			<li>导航10</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		window.onload=function () {
+			var nav=document.getElementById('nav');
+			var span=nav.getElementsByTagName('span')[0];
+			var ul=nav.children[1];
+			var lis=ul.children;
+			var beginX=0;
+
+			for (var i = 0; i < lis.length; i++) {
+				lis[i].onmouseover=function () {
+					end=this.offsetLeft;
+				}
+				lis[i].onmousedown=function () {
+					beginX=this.offsetLeft;
+				}
+				lis[i].onmouseout=function () {
+					end=beginX;
+				}
+			}
+
+			var begin=0,end=0;
+			setInterval(function () {
+				begin=begin+(end-begin)*0.1;
+				span.style.left=begin+'px';
+			},10)
+		}
+	</script>
+</body>
+</html>

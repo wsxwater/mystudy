@@ -371,7 +371,70 @@ spy-debugger -c true
     > <a href="my-javascript/uri编码和解码.html">uri编码和解码.html</a>
     > <a href="my-javascript/求字符串的长度.html">求字符串的长度.html</a>
     > <a href="my-javascript/checkbox全选，全不选，反选.html">checkbox全选，全不选，反选.html</a>
+    > <a href="my-javascript/定时器匀速动画.html">定时器匀速动画.html</a>
+    > <a href="my-javascript/定时器缓动动画.html">定时器缓动动画.html</a>
     > <a href="my-javascript/微博发布框.html">微博发布框.html</a>
     > <a href="my-javascript/仿淘宝图片轮播.html">仿淘宝图片轮播.html</a>
     > <a href="my-javascript/星星特效.html">星星特效.html</a>
+    > <a href="my-javascript/js常用函数库/照片墙.html">js常用函数库/照片墙.html</a>
+    > <a href="my-javascript/天猫弹性导航.html">天猫弹性导航.html</a>
+    > <a href="my-javascript/放大镜特效.html">放大镜特效.html</a>
+    > <a href="my-javascript/进度条拖拽.html">进度条拖拽.html</a>
+    > <a href="my-javascript/进度条定时器.html">进度条定时器.html</a>
+    > <a href="my-javascript/进度条_橱窗特效.html">进度条_橱窗特效.html</a>
+    
+    <img src="my-javascript/scroll家族.png">
+    > <a href="my-javascript/scrool_01瀑布流.html">scrool_01瀑布流.html</a>
+    > <a href="my-javascript/scrool_02粘性滚动.html">scrool_02粘性滚动.html</a>
+    > <a href="my-javascript/scrool_03侧边栏广告.html">scrool_03侧边栏广告.html</a>
+    > <a href="my-javascript/scrool_04返回顶部.html">scrool_04返回顶部.html</a>
+</pre>
+
+
+<pre>
+1. Ctrl+L             选择整行（按住-继续选择下行） 
+2. Ctrl+Shift+K(shhift+del)     删除整行，  ctrl + KK 从光标处删之行尾，Ctrl+K Backspace 从光标处删除至行首
+3. Ctrl+Shift+D       复制光标所在整行，插入在该行之前  
+4. Ctrl+D             选词 （按住-继续选择下个相同的字符串，再按，可跳到相应的方法定义处
+5. Ctrl+Shift+M       选择括号内的内容（按住-继续选择父括号） 
+6. Ctrl+/             注释整行（如已选择内容，同“Ctrl+Shift+/”效果）
+7. Ctrl + alt + /     取消注释 
+8. Ctrl+Shift+UP      与上行互换  ctrl + shift + up: 列模式编辑  
+9. Ctrl + R           跳转当前页的目标方法
+10. Ctrl+K + U        大写
+11. Ctrl+K + L        小写
+12. 鼠标中间           列模式编辑
+13. Ctrl+Shift+[]     代码折叠
+14. ctrl+k ctrl+1:    折叠所有代码 
+15. Ctrl + K,B        打开侧边栏
+16. ctrl + 回车：　　   光标后插入行，　Ctrl+Shift+Enter 光标前插入行
+17. ctrl + m:         匹配括号
+18. vim mode下        查找上一个下一个的快捷键是 是* #
+19. ctrl +z, y:       撤销，恢复撤销
+20. alt + .:          闭合当前标签
+21. Ctrl+F2:          设置书签
+22. F2:               下一个书签
+23. Shift+F2:         上一个书签
+24. ctrl + p:         即时的文件切换
+25. ctrl + shift + a: 选择标签内的内容 
+26. ctrl + 单击：      多行随意位置添加光标
+27. alt + F3( mac: ctrl + command + g): 选择页面中所有相同的词
+28. ctrl + F3:        跳转到下一个选中的词    
+29. Ctrl+Shift+P Set Syntax:html : 设置文件类型
+30. Shift + 右键:     连续多行光标选中 (by Gary Gauh)
+Emmet(zencoding) Keymap
+1. match_pair_outward: ctrl+,向外匹配
+2. match_pair_inward: ctrl+alt+,向内匹配
+3. matching_pair: ctrl+alt+j，快速匹配html标签(phpstorm: ctrl + [])
+4. split_join_tag: shift+ctrl+`，快速成对修改html标签
+5. remove_tag: shift+ctrl+;删除包裹的html标签(phpstorm: ctrl + shift + del)
+6. increment_number_by_1: ctrl+up,数字快速增长,步长为1
+7. decrement_number_by_1: ctrl+down,数字快速递减,步长为1
+8. increment_number_by_01: alt+up,数字快速增长,步长为0.1
+9. decrement_number_by_01: alt+down,数字快速递减,步长为0.1
+10. increment_number_by_10:shift+alt+up,数字快速增长,步长为10
+11. decrement_number_by_10: shift+alt+down,数字快速递减,步长为10
+12. select_next_item:shift+ctrl+. 选择下一个属性
+13. select_previous_item: shift+ctrl+,, 选择上一个属性 
+14. wrap_as_you_type: shift+ctrl+g,包裹内容
 </pre>

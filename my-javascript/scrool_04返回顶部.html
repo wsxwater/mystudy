@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>返回顶部</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		p{font-size: 60px;width: 300px;margin: 0 auto;}
+        #top{text-decoration: none;color: #FFF;width: 50px;height: 50px;padding: 10px;position: fixed;right: 10px;bottom: 10px;font-size: 20px;border:1px solid;text-align: center;font-weight: bold;background-color: #CCC;display: none;}
+	</style>
+</head>
+<body>
+	<a href="javascript:;" id="top">返回<br>顶部</a>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<p>我是中国人</p>
+	<script type="text/javascript" src="myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			var begin=0,end=0,timer=null;
+			var scrollTop=0;
+
+			window.onscroll=function () {
+				scrollTop=scroll().top;
+                begin=scrollTop; 
+
+                scrollTop>client().height?show($('top')):hide($('top'));
+			}
+
+
+			$('top').onclick=function () {
+				clearInterval(timer);
+
+				timer=setInterval(function () {
+					begin=begin+(end-begin)*0.2;
+
+					window.scrollTo(0,parseInt(begin));
+					console.log(begin,end);
+					if (parseInt(begin)==end) {
+						clearInterval(timer);
+					}
+				},10)
+			}
+		}
+	</script>
+</body>
+</html>
