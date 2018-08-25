@@ -116,7 +116,8 @@
     
     <script src="myfunc.js"></script>
 	<script type="text/javascript">
-		window.onload=window.onresize=function () {
+		window.onload=function () {
+			var timer1=null,timer2=null;
 			waterfall('main','box');
 
 			var dataInt=[
@@ -128,22 +129,36 @@
 				{"src":"images/6.jpg"},
 			];
 			window.onscroll=function () {
-				if (checkHasScroll) {
-					var main=document.getElementById('main');
-					for (var i = 0; i < dataInt.length; i++) {
-						var box=document.createElement('div');
-						box.className='box';
-	 					main.appendChild(box);
-	 					var pic=document.createElement('div');
-	 					pic.className='pic';
-	 					box.appendChild(pic);
-	 					var img=document.createElement('img');
-	 					img.src=dataInt[i].src;
-	 					pic.appendChild(img);
-					}
+				clearTimeout(timer1);
 
- 					waterfall('main','box');
-				}
+				timer1=setTimeout(function () {
+					if (checkHasScroll) {
+						var main=document.getElementById('main');
+						for (var i = 0; i < dataInt.length; i++) {
+							var box=document.createElement('div');
+							box.className='box';
+		 					main.appendChild(box);
+		 					var pic=document.createElement('div');
+		 					pic.className='pic';
+		 					box.appendChild(pic);
+		 					var img=document.createElement('img');
+		 					img.src=dataInt[i].src;
+		 					pic.appendChild(img);
+						}
+
+	 					waterfall('main','box');
+					}
+				},200);
+			}
+            
+            /**
+             * onresize节流，使用setTimeout来提高性能
+             */
+			window.onresize=function () {
+				clearTimeout(timer2);
+				timer2=setTimeout(function () {
+					waterfall('main','box');
+				},200)
 			}
 		}
 
@@ -163,6 +178,7 @@
             for (var i = 0; i < child.length; i++) {
             	if (i<cols) {
             		arrH.push(child[i].offsetHeight);
+            		child[i].style='';
             		// maxH=Math.max.apply(null,arrH);
             		// parent.style.height=maxH+'px';
             	}else{

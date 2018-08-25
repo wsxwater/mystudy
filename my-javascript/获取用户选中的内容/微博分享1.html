@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#word{width: 300px;margin:100px;line-height: 24px;font-size: 16px;}
+		#share{position: absolute;background-color: skyblue;color: #fff;padding: 5px;width: 100px;display: none;font-size: 12px;}
+	</style>
+</head>
+<body>
+	<div id="word">在有限的空间和电池容量下，手机厂商们开始为设备寻找更省电的办法，以提升手机的续航能力。比方说采用更低功耗的处理器、通过更大的体积放置更大容量的电池、在软件里加入省点机制等等。<br>
+而就在近日，英国调研公司 IHS 发布了一份关于苹果未来将可能会在 iPhone 和 Apple Watch 上采用 LTPO 屏幕显示技术的报告。透露了苹果将通过这项新技术来提升手机和手表的续航时长，以及屏幕的显示分辨率。</div>
+
+<div id="share">kjdkjf</div>
+
+<script type="text/javascript">
+	window.onload=function () {
+        var word=document.getElementById('word'); 
+        var share=document.getElementById('share'); 
+
+        word.onmouseup=function (event) {
+        	var event=event||window.event;
+        	var x=event.clientX;
+        	var y=event.clientY;
+			var select='';
+
+        	if(window.getSelection){
+        	  select=window.getSelection().toString();
+        	}else{
+        	  select=document.selection.createRange().text;
+        	}
+            if (select!=='') {
+	        	share.innerText=select;
+	        	share.style.display='block';
+	        	share.style.left=x+'px';
+	        	share.style.top=y+'px';
+            }  
+
+        }
+
+
+        document.onmousedown=function (event) {
+        	var event=event||window.event;
+        	var targetId=event.target?event.target.id:event.srcElement.id;
+
+        	if (targetId!=='share') {
+        		share.style.display='none';
+        	}
+
+        	window.getSelection?window.getSelection().removeAllRanges():document.selection.empty();
+        }
+	}
+</script>
+</body>
+</html>

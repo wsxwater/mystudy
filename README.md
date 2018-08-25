@@ -388,6 +388,12 @@ spy-debugger -c true
     > <a href="my-javascript/scrool_02粘性滚动.html">scrool_02粘性滚动.html</a>
     > <a href="my-javascript/scrool_03侧边栏广告.html">scrool_03侧边栏广告.html</a>
     > <a href="my-javascript/scrool_04返回顶部.html">scrool_04返回顶部.html</a>
+    > <a href="my-javascript/取消冒泡/README.md">取消冒泡/README.md</a>
+    > <a href="my-javascript/取消冒泡/test.html">取消冒泡/test.html</a>
+    > <a href="my-javascript/取消冒泡/蒙版.html">取消冒泡/蒙版.html</a>
+    > <a href="my-javascript/获取用户选中的内容/README.md">获取用户选中的内容/README.md</a>
+    > <a href="my-javascript/获取用户选中的内容/微博分享1.html">获取用户选中的内容/微博分享1.html</a>
+    > <a href="my-javascript/获取用户选中的内容/微博分享2.html">获取用户选中的内容/微博分享2.html</a>
 </pre>
 
 
