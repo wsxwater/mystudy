@@ -45,16 +45,20 @@
 					var event=event||window.event;
 					var x=event.clientX-box.offsetLeft-mask.offsetWidth*0.5;
 					var y=event.clientY-box.offsetTop-mask.offsetHeight*0.5;
-					if (x<=0) {
-						x=0;
-					}else if(x>=mdBox.offsetWidth-mask.offsetWidth){
-						x=mdBox.offsetWidth-mask.offsetWidth;
-					} 
-					if (y<=0) {
-						y=0;
-					}else if(y>=mdBox.offsetHeight-mask.offsetHeight){
-						y=mdBox.offsetHeight-mask.offsetHeight;
-					} 
+					var lim_w=mdBox.offsetWidth-mask.offsetWidth;
+					var lim_h=mdBox.offsetHeight-mask.offsetHeight;
+					x=Math.max(0,Math.min(x,lim_w));
+					y=Math.max(0,Math.min(y,lim_h));
+					// if (x<=0) {
+					// 	x=0;
+					// }else if(x>=mdBox.offsetWidth-mask.offsetWidth){
+					// 	x=mdBox.offsetWidth-mask.offsetWidth;
+					// } 
+					// if (y<=0) {
+					// 	y=0;
+					// }else if(y>=mdBox.offsetHeight-mask.offsetHeight){
+					// 	y=mdBox.offsetHeight-mask.offsetHeight;
+					// } 
                     
 					mask.style.left=x+'px';
 					mask.style.top=y+'px';
