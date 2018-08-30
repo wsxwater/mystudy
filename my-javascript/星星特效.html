@@ -30,6 +30,7 @@
 
 			var winW=document.body.clientWidth||document.documentElement.clientWidth;
 			var winH=document.body.clientHeight||document.documentElement.clientHeight;
+			var fragment = document.createDocumentFragment();  //本方法用来创建一个 DocumentFragment ，也就是文档碎片，它表示一种轻量级的文档，主要是用来存储临时节点，大量操作DOM时用它可以大大提升性能。
 			console.log(winW,winH);
 			for (var i = 0; i < 150; i++) {
 				var stars=document.createElement('span');
@@ -56,8 +57,9 @@
 				stars.style.top=t+'px';
 				stars.style.animationDelay=rate+'s';
 				stars.style.transform='scale('+scale+','+scale+')';
-                document.body.appendChild(stars);
+				fragment.appendChild(stars);
 			}
+            document.body.appendChild(fragment);
 
 		}
 	</script>

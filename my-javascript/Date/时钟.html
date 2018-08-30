@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{list-style: none;}
+		#clock{width: 200px;height: 200px;border-radius: 50%;margin: 100px auto;position: relative;background-color: #333;overflow: hidden;}
+        
+		#hour,#minutes,#seconds{position: absolute;top:50%;left: 50%;transform-origin: left center;background-color: #fff;}
+        #hour{width: 45px;height: 3px;margin-top:-1px;}
+        #minutes{width: 60px;height: 2px;margin-top:-1px;}
+        #seconds{width: 80px;height: 1px;margin-top: -1px;background-color: #f00;}
+        #line-min,#line-hour{position: absolute;top: 0;bottom: 0;left: 0;right: 0;}
+        .circle{position: absolute;top:50%;left: 50%;transform-origin: left center;width: 10px;height: 10px;margin: -5px 0 0 -5px;border-radius: 50%;background-color: #fff;z-index: 8;}
+
+        #numbers{position: absolute;top: 15%;bottom: 15%;left: 15%;right: 15%;}
+        .num{font-size: 16px;text-align: center;position: absolute;color: #FFF;transform: translate(-50%, -50%);}
+        
+        .line{width: 10px;height: 1px;background-color: #fff;position: absolute;top:50%;left: 50%;transform-origin: left top;transform: translate(-50%, -50%);}
+        #line-min .line{width: 5px;}
+        #line-hour .line{height: 3px;}
+
+	</style>
+</head>
+<body>
+	<div id="clock">
+		<ul id="line-min"></ul>
+		<ul id="line-hour"></ul>
+		<ul id="numbers"></ul>
+		<div class="pointer">
+			<div class="circle"></div>
+			<div id="hour"></div>
+			<div id="minutes"></div>
+			<div id="seconds"></div>
+		</div>
+	</div>
+
+    <script type="text/javascript">
+    	window.onload=function () {
+    		var clock=document.getElementById('clock');
+    		var numbers=document.getElementById('numbers');
+            var timer=null;
+    		function init() {
+    			drawLines(document.getElementById('line-min'),60,parseInt(clock.offsetWidth/2*0.85));
+    			drawLines(document.getElementById('line-hour'),12,parseInt(clock.offsetWidth/2*0.8));
+    			drawNumbers(numbers);
+
+                move();
+                clearInterval(timer);
+                timer=setInterval(move,1000);
+    		}
+
+    		init();
+
+    		function drawLines(wrap,total,translateX) {
+    			var gap=360/total;
+    			for (var i = 0; i < total; i++) {
+	    			var li=document.createElement('li');
+	    			li.className='line';
+	    			li.style.transform='rotate('+(i*gap)+'deg) translate('+translateX+'px,-50%)';
+
+	    			wrap.appendChild(li);
+    			}
+
+    		}
+
+
+    		function drawNumbers(wrap) {
+    			var radius=wrap.offsetWidth/2;
+    			var str='';
+    			for (var i = 1; i <= 12; i++) {
+    				var angle=(i-3)/6*Math.PI;//起始x轴指向的是3点，但是实际情况是1点
+    				var x=radius+radius*Math.cos(angle),
+    				    y=radius+radius*Math.sin(angle);
+
+                    var li=document.createElement('li');
+                    li.className='num';
+                    li.innerText=i;
+                    li.style.left=x+'px';
+                    li.style.top=y+'px';
+                    wrap.appendChild(li);
+
+    			}
+    		}
+
+            function move() {
+                var ohour=document.getElementById('hour'),
+                    ominutes=document.getElementById('minutes'),
+                    oseconds=document.getElementById('seconds');
+
+                    var now=new Date(),
+                        s=now.getSeconds(),
+                        m=now.getMinutes()+s/60, 
+                        h=now.getHours()%12+m/60, 
+                        s_angle=s*6-90,
+                        m_angle=m*6-90,
+                        h_angle=h*30-90;
+                        // console.log(h);
+
+                    ohour.style.transform='rotate('+h_angle+'deg)';
+                    ominutes.style.transform='rotate('+m_angle+'deg)';
+                    oseconds.style.transform='rotate('+s_angle+'deg)';
+                
+            }
+
+
+    	}
+    </script>	
+</body>
+</html>

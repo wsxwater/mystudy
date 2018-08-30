@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!-- <link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/iconfont.css" /> -->
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			ul{list-style: none;}
+			.pagebody{width: 600px;margin-left: auto;margin-right: auto;}
+			.cartlist li{position: relative;padding: 10px;border:1px solid #CCC;margin-top: -1px;}
+			input{width: 30px;text-align: center;}
+			.paywx{margin-top: 30px;}
+
+			#left{float: left;background-color: red;width: 150px;height: 50px;}
+			#right {float: right;background-color: yellow;width: 200px;height: 50px;}
+			#middle {margin: 0 200px 0 150px;width: 100%;background-color: #fff9ca;height: 50px;}
+
+			.parent1{display: table;height:150px;width: 150px;background-color: #FD0C70;}
+			.parent1 .child{display: table-cell;vertical-align: middle;text-align: center;color: #fff;font-size: 16px;}
+
+			.parent2{height:150px;width: 150px;text-align: center;background: #AD0C70;}
+			.parent2 span{display: inline-block;;width: 0;height: 100%;vertical-align: middle;zoom: 1;/*BFC*/*display: inline;}
+			.parent2 .child{display: inline-block;color: #fff;zoom: 1;/*BFC*/*display: inline;}
+
+			.parent3{position: relative;height:150px;width: 150px;background: #FD0C70;}
+			.parent3 .child{position: absolute;top: 50%;left: 50%;color: #fff;transform: translate(-50%, -50%);}
+
+			.parent4{display: flex;justify-content: center;align-items: center;width: 150px;height:150px;background: #AD0C70;}
+			.parent4 .child{color:#fff;}
+		</style>
+	</head>
+	<body>
+		
+		<div class="pagebody pageshopview3">
+			<div class="nb bgw">
+				<h3>订单详情</h3>
+				<ul class="cartlist">
+					<li class="cf">
+						<div class="picbox">
+							<!-- <img src="images/dynamic/shopic.png" alt=""/> -->
+						</div>
+						<div class="detail">
+							<h4>源码全能套餐（PC+H5+APP+小程序）111</h4>
+							<p>所有源码产品和服务组合套餐包，适用于搭建PC商城、H5微商城、APP移动商城、小程序商城。</p>
+						</div>
+						<div class="add-reduce">
+							<a href="javascript:void(0);" class="reduce">-</a>
+							<input type="text" value="1"/>
+							<a href="javascript:void(0);" class="add">+</a>
+						</div>
+						<div class="pricebox"><span price="7000.00">7000.00</span>元</div>
+						<a href="javascript:void(0);" class="remove">删除</a>
+					</li>
+					<li class="cf">
+						<div class="picbox">
+							<!-- <img src="images/dynamic/shopic.png" alt=""/> -->
+						</div>
+						<div class="detail">
+							<h4>源码全能套餐（PC+H5+APP+小程序）</h4>
+							<p>所有源码产品和服务组合套餐包，适用于搭建PC商城、H5微商城、APP移动商城、小程序商城。</p>
+						</div>
+						<div class="add-reduce">
+							<a href="javascript:void(0);" class="reduce">-</a>
+							<input type="text" value="1"/>
+							<a href="javascript:void(0);" class="add">+</a>
+						</div>
+						<div class="pricebox"><span price="7000.00">7000.00</span>元</div>
+						<a href="javascript:void(0);" class="remove">删除</a>
+					</li>
+				</ul>
+				<div class="w50">
+					<!--<div class="gprice">
+						<p class="pbox"><span id="price">7000.00</span>元</p>
+						<div class="buybtn">
+							<a href="#" class="rounda buynow" id="buynow">立即购买</a>
+							<a href="#" class="rounda addcart" id="addcart">加入购物车</a>
+						</div>
+					</div>-->
+					<div class="paywx">
+						
+						<p class="tit">选择支付方式</p>
+						<div class="payprice">
+							应付金额：<span class="pbox"><span id="price">0.00</span></span>元
+						</div>
+						<div class="pay-way cf">
+							<div class="w43 lside">
+								<div class="codebox">
+									<!-- <img src="images/dynamic/code.jpg" alt=""/> -->
+								</div>
+								<div class="iconfont tips icon-weixin">微信扫码付款</div>
+							</div>
+							<div class="w46 rside">
+								<a href="#" class="icon-zhifubao iconfont tips rounda">使用支付宝付款</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<ul id="list">   
+			<li id="item1" >item1</li>   
+			<li id="item2" >item2</li>   
+			<li id="item3" >item3</li>  
+		</ul>
+        <div style="overflow: hidden;">
+			<div id="left"><span>left</span></div>
+			<div id="right"><span>right</span></div>
+			<div id="middle"><span>middle</span></div>
+        </div> 
+
+
+        <div class="parent1"><div class="child">hello world-1</div></div>
+        <div class="parent2"><span></span>
+        	<div class="child">hello world-2</div></div>
+        <div class="parent3"><div class="child">hello world-3</div></div>
+        <div class="parent4"><div class="child">hello world-4</div></div>
+
+		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js" ></script>
+		<!-- <script type="text/javascript" src="js/common.js" ></script> -->
+		<script>
+			$(function(){
+				var $price=$("#price");
+                //计算
+	            var li=$(".cartlist li");
+                getSubTotal(li);
+                getTotal(li);
+
+                //reduce add remove
+        		$(".cartlist").on('click','li',function (e) {
+        			var e=e||window.e;
+        			var el = e.srcElement||e.target;
+        			var cls=el.className;
+        			var input=$(this).find('input');
+        			var val=parseInt(input.val());
+        			var reduce=$(this).find('reduce');
+        			switch(cls) {
+        				case 'reduce':
+        					if(val>1){
+        						val-=1;
+	            		        input.val(val);}else{
+	            				input.val(1);
+	           return;
+	            		    }		
+        					break;
+        				case 'add':
+        val+=1;
+        					input.val(val);
+        					break;
+        				case 'remove':
+        					var conf=confirm('确定要删除吗？');
+        					if(conf){
+            $(this).remove();
+
+            if ($('.cartlist li').length==0) {
+            	$('.cartlist').prev().append('<div style="text-align:center;">暂无订单</div>')
+            }}
+        					break;}
+					getSubTotal($(".cartlist li"));
+        			getTotal($(".cartlist li"));
+
+        			return false;
+        		});
+
+
+                /**
+                 * 输入框失去焦点时，输入框的值要是数字并且不能小于1
+                 */
+        		$(".cartlist").on('keyup','.add-reduce input',function(){
+        		    var val=parseInt($(this).val());
+	        		var li=$(this).parents('li');
+	        		if(isNaN(val)||val<1){
+	        			val=1;
+	        		}	
+	        		$(this).val(val);
+	        		getSubTotal(li);
+	        		getTotal($(".cartlist li"));
+        		});
+
+               
+                /**
+                 * [getSubTotal 计算每个li的总价==>$(".cartlist li")]
+                 * @param  {[DOM]} lis [$(".cartlist li")]
+                 */
+				function getSubTotal(lis){
+				  var sub_tol=0,price,count,lis_pri;
+				  for (var i = 0; i < lis.length; i++) {
+				  	price=parseFloat(lis.eq(i).find('.pricebox span').attr('price'));
+				  	count=parseInt(lis.eq(i).find('input').val());
+				  	lis_pri=lis.eq(i).find('.pricebox span');
+				 
+				  	sub_tol=parseFloat(price*count).toFixed(2);
+				 
+				  	lis_pri.text(sub_tol);
+				  }}
+/** * [getTotal 计算总价==>$(".cartlist")] * @param  {[DOM]} lis [$(".cartlist li")] */
+				function getTotal(lis){
+				   var prices=0;
+				   for(var i=0;i<lis.length;i++){
+						 prices+=parseFloat(lis.eq(i).find('.pricebox span').text());
+				   }
+				   $price.text(prices.toFixed(2));//toFixed(2):小数位只有两位
+				   }
+
+
+
+
+
+				var list = document.getElementById("list");    
+				document.addEventListener("click",function(event){   
+					var target = event.target;   
+					if(target.nodeName == "LI"){   
+						alert(target.innerHTML);   }  })    
+				var node=document.createElement("li");  
+				var textnode=document.createTextNode("item4");  
+				node.appendChild(textnode);  
+				list.appendChild(node);
+});
+		</script>
+	</body>
+</html>

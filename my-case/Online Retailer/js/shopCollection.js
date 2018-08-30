@@ -33,7 +33,7 @@ window.onload=function(){
 	var oSelectedViewList=document.getElementById('selectedViewList');
 	var oDeleteAll=document.getElementById('deleteAll');
 	
-	//����
+	//è®¡ç®—
 	function getTotal(){
 	   var oSel=0;
 	   var oPri=0;
@@ -43,14 +43,14 @@ window.onload=function(){
 		     oTr[x].className='on';
 		     oSel+=parseInt(oTr[x].getElementsByTagName('input')[1].value);
 			 oPri+=parseFloat(oTr[x].cells[4].innerHTML);
-			 HTMLstr+='<div><img src="'+oTr[x].getElementsByTagName('img')[0].src+'" alt="�ͻ�" /><span class="del" index="'+x+'">ȡ��ѡ��</span></div>';
+			 HTMLstr+='<div><img src="'+oTr[x].getElementsByTagName('img')[0].src+'" alt="送货" /><span class="del" index="'+x+'">取消选择</span></div>';
 		  }
 		  else{
 		     oTr[x].className='';
 		  }
 	   }
 	   oSelectedTotal.innerHTML=oSel;
-	   oPriceTotal.innerHTML=oPri.toFixed(2);//toFixed(2):С��λֻ����λ
+	   oPriceTotal.innerHTML=oPri.toFixed(2);//toFixed(2):å°æ•°ä½åªæœ‰ä¸¤ä½
 	   oSelectedViewList.innerHTML=HTMLstr;
 	   
 	   if(oSel==0){
@@ -58,7 +58,7 @@ window.onload=function(){
 	   }
 	}
 	
-	//С��
+	//å°è®¡
 	function getSubTotal(tr){
 	  var tds=tr.cells;
 	  var price=parseFloat(tds[2].innerHTML);
@@ -132,7 +132,7 @@ window.onload=function(){
 				getSubTotal(this);
 				 break;
 		   case 'delete':
-		   var conf=confirm('ȷ��Ҫɾ����');
+		   var conf=confirm('确定要删除吗？');
 		   //alert(this.parentNode);
 		        if(conf){
 				  this.parentNode.removeChild(this);
@@ -164,7 +164,7 @@ window.onload=function(){
 	
 	oDeleteAll.onclick=function(){
 	    if(oSelectedTotal.innerHTML!=0){
-		   var conf=confirm('ȷ��Ҫȫ��ɾ����');
+		   var conf=confirm('ç¡®å®šè¦å…¨éƒ¨åˆ é™¤å—ï¼Ÿ');
 		   if(conf){
 			 for(var x=0;x<oTr.length;x++){
 			   var input=oTr[x].getElementsByTagName('input')[0];

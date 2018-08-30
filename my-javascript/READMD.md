@@ -44,6 +44,70 @@
     }
 </pre>
 <pre>
+    总结：
+    　　1. window.onload=function(){}是等待所有的内容都加载完之后执行，比如图片，内容，js，css等。
+    　　2. $(function(){})，是等待DOM加载完之后执行（我的理解是标签绘制完毕之后），图片未加载完时也能执行。
+    　　3. $(function(){})是$(document).ready(function(){})的简写方式，功能是一样的。
+    　　4. $(window).load(function (){})也是等待所有的内容都加载完之后执行。
+    　　5. 不管是外链js还是页面中的js的window.onload都只执行最后的一个
+    　　6. $(window).load(function (){})可以有多个，而且都是顺序执行。
+
+    扩展：
+    如果要js实现多个window.onload的方式
+    1.在body中调用多个函数
+    <body onload="f1();f2();f3();"></body>
+    这种方式和下面这种方式是一样的。
+    function f1(){...}
+    function f2(){...}
+    window.onload=function(){
+        f1();
+        f2();
+    }　　
+    显然，这种方式不太可取。毕竟不能把所有页面的function都聚在一堆。
+
+    2. 判断window.onload是否已经执行了一次，如果是的话，就把原来执行的window.onload函数按照方式1来处理。这样就不会覆盖了
+    function f1(){...}
+    function f2(){...}
+    function moreLoad(fn) {
+        var winLoad = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = fn;
+        } else {
+            window.onload = function() {
+                winLoad ();
+                fn();
+            }
+        }
+    }
+    moreLoad(f1)
+    moreLoad(f2)
+
+    3. 采用事件监听，ie8以及ie8以下为attachEvent，其它的为addEventListener。这样也不会覆盖
+    function f3(){alert("f3")}
+    function f4(){alert("f4")}
+    function win_load(callBack){
+        if (window.attachEvent) {
+            window.attachEvent("onload", callBack);
+        } else if (window.addEventListener) {
+            window.addEventListener("load", callBack);
+        }
+    }
+    win_load(f3)
+    win_load(f4)
+    
+    注意：
+    　　1.attachEvent的第二个参数，需要在事件前面加“on”，所以这里加载事件是onload  。而addEventListener第二个参数不用再事件前面加“on”，所以这里是load；本来还有第三个参数，可选，表示指定事件是否在捕获或冒泡阶段执行。默认为false，所以这里就不用写上去。
+    　　2. ie的attachEvent里面绑定多个事件的执行顺序是不一样的，如上面的例子，IE中是先执行f4函数，再执行f3函数，倒着执行的。而addEventListener是正常的。
+    　　3. 最后说一下加载顺序：假如我在当前页面引入了两个js文件，一个a.js  一个b.js，分别都有window.onload，$(function(){})， $(window).load(function (){})
+
+    执行的顺序是：
+    　　1. 先以a.js,b.js的顺序执行a.js中未包含在window.onload与$(function(){})和$(window).load(function (){})中的代码。
+    　　2. 然后再执行$(function(){})里面的代码，
+    　　3. 然后以a.js,b.js的顺序，执行$(window).load(function (){})里面的代码，
+    　　4. 最后执行最后一个js中window.onload里面的代码 
+    　　但是！！！在火狐和IE浏览器中，window.onload的执行顺序要高于$(window).load(function (){})，其它浏览器的加载顺序都是一样的。这个我就理解不了了。。。。。。
+</pre>
+<pre>
     >innerHTML、createElement、createTextNode、appendChild、insertBefore
     createElement、createTextNode、appendChild：parent.appendChild(child)。
     createElement：创建一个元素节点。
