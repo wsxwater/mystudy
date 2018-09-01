@@ -410,6 +410,8 @@ spy-debugger -c true
     > <a href="my-javascript/轮播图/demo02.1-上下.html">demo02.1-上下.html</a>
     > <a href="my-javascript/轮播图/demo02.2-上下.html">demo02.2-上下.html</a>
     > <a href="my-javascript/轮播图/demo02.3-上下.html">demo02.3-上下.html</a>
+
+    > <a href="my-javascript/音乐导航.html">音乐导航.html</a>
 </pre>
 
 

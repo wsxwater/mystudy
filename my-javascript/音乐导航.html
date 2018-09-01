@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#box{width: 900px;margin: 100px auto;overflow: hidden;border: 1px solid #CCC;}
+		ul{list-style: none;width: 100%;}
+		ul li{position: relative;height: 40px;width: 100px;float: left;}
+		ul li a{position: relative;overflow: hidden;width: 100%;display: block;height: 100%;line-height: 40px;text-decoration: none;text-align: center;color: #333;z-index: 1;border: 1px dotted;border-color: #c9cbce #fff #54b82a #c9cbce;margin-right: -1px;border-top: none;border-bottom: none;}
+		ul li:first-child a{border-left: none;}
+		ul li span{background-color: #c0ebf7;height: 100%;position: absolute;top:40px;left: 1px;right: 0;z-index: -1;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li><a href="javascript:;">菜单1</a><span></span><audio src="audio/c4.mp3"></audio></li>
+			<li><a href="javascript:;">菜单2</a><span></span><audio src="audio/d4.mp3"></audio></li>
+			<li><a href="javascript:;">菜单3</a><span></span><audio src="audio/e4.mp3"></audio></li>
+			<li><a href="javascript:;">菜单4</a><span></span><audio src="audio/f4.mp3"></audio></li>
+			<li><a href="javascript:;">菜单5</a><span></span><audio src="audio/g4.mp3"></audio></li>
+			<li><a href="javascript:;">菜单6</a><span></span><audio src="audio/a4.mp3"></audio></li>
+			<li><a href="javascript:;">菜单7</a><span></span><audio src="audio/b4.mp3"></audio></li>
+			<li><a href="javascript:;">菜单8</a><span></span><audio src="audio/c5.mp3"></audio></li>
+			<li><a href="javascript:;">菜单9</a><span></span><audio src="audio/d5.mp3"></audio></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript" src="myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			var obox=document.getElementById('box');
+			var oul=obox.getElementsByTagName('ul')[0];
+			var lis=oul.getElementsByTagName('li');
+			var as=obox.getElementsByTagName('a');
+			var ospan=obox.getElementsByTagName('span');
+			var audios=obox.getElementsByTagName('audio');
+
+			var arr=['#b9d329','#c0ebf7','#b9d329','#69bcf3','#79d9f3','#fa5f94','#acd180','#fab4cc','#ffae5b'];
+
+			for (var j = 0; j < arr.length; j++) {
+				ospan[j].style.backgroundColor=arr[j];
+			}
+
+			for (var i = 0; i < lis.length; i++) {
+				lis[i].index=i;
+				lis[i].onmouseover=function () {
+					startMove(ospan[this.index],{"top":0});
+					audios[this.index].play();
+					audios[this.index].currentTime=0;
+				}
+				lis[i].onmouseout=function () {
+					startMove(ospan[this.index],{"top":40});
+					// audios[this.index].pause();
+					// audios[this.index].currentTime=0;
+				}
+			}
+
+
+			document.onkeydown=function (event) {
+				var e=event||window.event;
+				var j=e.keyCode-49;
+				var k=e.keyCode-97;
+				
+                
+                audioNav(j); 
+                audioNav(k); 
+				
+			}
+
+			function audioNav(keycode) {
+				
+				if (keycode>=0 && keycode<=lis.length-1) {
+					startMove(ospan[keycode],{"top":0},function () {
+						startMove(ospan[keycode],{"top":"40px"});
+						// audios[keycode].pause();
+						// audios[keycode].currentTime=0;
+					});
+
+					audios[keycode].play();
+					audios[keycode].currentTime=0;
+				}
+			}
+		}
+	</script>
+</body>
+</html>
