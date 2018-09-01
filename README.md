@@ -400,9 +400,9 @@ spy-debugger -c true
     > <a href="my-javascript/轮播图/demo01.1-左右.html">demo01.1-左右.html</a>
     > <a href="my-javascript/轮播图/demo01.2-左右.html">demo01.2-左右.html</a>
     > <a href="my-javascript/轮播图/demo01.3-左右.html">demo01.3-左右.html</a>
-    > <a href="my-javascript/轮播图/demo02.1-左右.html">demo02.1-左右.html</a>
-    > <a href="my-javascript/轮播图/demo02.2-左右.html">demo02.2-左右.html</a>
-    > <a href="my-javascript/轮播图/demo02.3-左右.html">demo02.3-左右.html</a>
+    > <a href="my-javascript/轮播图/demo02.1-上下.html">demo02.1-上下.html</a>
+    > <a href="my-javascript/轮播图/demo02.2-上下.html">demo02.2-上下.html</a>
+    > <a href="my-javascript/轮播图/demo02.3-上下.html">demo02.3-上下.html</a>
 </pre>
 
 
