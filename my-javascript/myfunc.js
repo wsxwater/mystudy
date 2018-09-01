@@ -164,7 +164,7 @@ function startMove(obj,json,fnEnd) {
 
             if (begin!=target){b_stop=false}; //target，函数设置的值，即目标值。当begin的累加值(begin+speed)不等于target时，b_stop为false
 
-            console.log(begin,target);
+            // console.log(begin,target);
     	}
 
 		if (b_stop) {
