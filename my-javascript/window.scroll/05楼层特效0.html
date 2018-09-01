@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		html,body,ul,ul li{height: 100%;width: 100%;}
+		li{list-style: none;}
+		ul li{background-color: #63C8FB;color: #FFF;font-size: 100px;text-align: center;}
+		ul li span{display: inline-block;zoom:1;*display: inline;height: 100%;width: 0;vertical-align: middle;}
+		ul li div{display: inline-block;zoom:1;*display: inline;vertical-align: middle;}
+		ol {position: fixed;top:40%;left: 10px;}
+		ol li{color: #FFF;border-bottom: 1px solid;background-color: #CCC;width: 100px;line-height: 40px;text-align: center;font-size: 16px;cursor: pointer;}
+		ol li.active{background-color: #ff6600;}
+	</style>
+</head>
+<body>
+	<ol id="ol">
+		<li class="active">第1层</li>
+		<li>第2层</li>
+		<li>第3层</li>
+		<li>第4层</li>
+	</ol>
+	<ul id="ul">
+		<li><span></span><div>我是1楼</div></li>
+		<li><span></span><div>我是2楼</div></li>
+		<li><span></span><div>我是3楼</div></li>
+		<li><span></span><div>我是4楼</div></li>
+	</ul>
+    
+	<script type="text/javascript" src="../myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			var arr_color=['#63C8FB','#F76D6D','#F89350','#A9F59F'];
+			var arr_color_len=arr_color.length;
+            var ol=$('ol');
+            var ul=$('ul');
+            var lis_ol=ol.getElementsByTagName('li');
+            var lis_ul=ul.getElementsByTagName('li');
+            var clientH=client().height;
+            var isClick=false;
+
+            var lis_ol_len=lis_ol.length;
+
+            for (var i = 0; i < arr_color_len; i++) {
+            	lis_ul[i].style.backgroundColor=arr_color[i];
+            }
+
+            
+            for (var j = 0; j < lis_ol_len; j++) {
+            	var ali_ol=lis_ol[j];
+            	ali_ol.index=j;
+            	ali_ol.onclick=function () {
+            		isClick=true;
+            		for (var j = 0; j < lis_ol_len; j++) {
+            			lis_ol[j].className='';
+            		}	
+            		this.className='active';
+            		var idx=this.index;
+            		// document.documentElement.scrollTop=clientH*idx;
+            	    startMove(document.documentElement,{"scrollTop":clientH*idx},function () {
+            	    	isClick=false;
+            	    })
+            	}
+            }
+
+            window.onscroll=function () {
+            	if (!isClick) {
+            		console.log('test');
+            		var scroll_top=Math.ceil(scroll().top);
+            		for (var i = 0; i < lis_ol_len; i++) {
+                        if (scroll_top>=lis_ul[i].offsetTop) {
+                        	for (var j = 0; j < lis_ol_len; j++) {
+                        		lis_ol[j].className='';
+                        	}	
+                        	lis_ol[i].className='active';
+                        }
+            		}	
+            	}
+            }
+
+
+
+		}
+	</script>
+</body>
+</html>

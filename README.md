@@ -388,6 +388,9 @@ spy-debugger -c true
     > <a href="my-javascript/window.scroll/02粘性滚动.html">02粘性滚动.html</a>
     > <a href="my-javascript/window.scroll/03侧边栏广告.html">03侧边栏广告.html</a>
     > <a href="my-javascript/window.scroll/04返回顶部.html">04返回顶部.html</a>
+    > <a href="my-javascript/window.scroll/05楼层特效0.html">05楼层特效0.html</a>
+    > <a href="my-javascript/window.scroll/05楼层特效1.html">05楼层特效1.html</a>
+    > <a href="my-javascript/360开机小助手.html">360开机小助手.html</a>
     > <a href="my-javascript/取消冒泡/README.md">取消冒泡/README.md</a>
     > <a href="my-javascript/取消冒泡/test.html">取消冒泡/test.html</a>
     > <a href="my-javascript/取消冒泡/蒙版.html">取消冒泡/蒙版.html</a>

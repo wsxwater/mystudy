@@ -111,13 +111,13 @@ function constant(obj,target,speed) {
 }
 
 /**
- * [getStyle 获取样式]
+ * [getStyle 获取样式的属性值]
  * @param  {[DOM]} obj  
  * @param  {[string]} name [属性，例如height、width等等]
  */
 function getStyle(obj,name){
-   if(obj.currentStyle){
-       return obj.currentStyle[name];
+   if(obj.beginrentStyle){
+       return obj.beginrentStyle[name];
    }else{
        return getComputedStyle(obj,false)[name];
    }
@@ -130,32 +130,65 @@ function getStyle(obj,name){
  * @param  {[function]} fnEnd 
  */
 function startMove(obj,json,fnEnd) {
-	
 	clearInterval(obj.timer);
-	var b_stop=true;
     
+	var begin=0,speed=0,target=0;
     obj.timer=setInterval(function () {
+		var b_stop=true;
+
     	for (attr in json) {
-	    	var cur=0;
 	    	//获取设置的最初的样式css，当属性名是opacity时要特殊处理
-            cur=attr=='opacity'?Math.round(parseFloat(getStyle(obj,attr))*100):parseInt(getStyle(obj,attr));
-	    	var speed=(json[attr]-cur)/6;//json[attr]，函数设置的值，即目标值；cur为原始值。begin+=(end-begin)*系数，系数一般为0.2
-	    	speed=speed>0?Math.ceil(speed):Math.floor(speed);//speed，速度。
-            
-            if (cur!=json[attr]) b_stop=false; //json[attr]，函数设置的值，即目标值。当cur的累加值(cur+speed)不等于json[attr]时，b_stop为false
-            
             if (attr=='opacity') {
-            	obj.style.filter='alpha(opacity:'+(cur+speed)+')';
-            	obj.style.opacity=(cur+speed)/100;
+            	begin=Math.round(parseFloat(getStyle(obj,attr))*100) || 100;
+            	target=parseInt(json[attr]*100);
+            }else if(attr=='scrollTop'){
+            	begin=Math.ceil(obj.scrollTop)||0;
+            	target=parseInt(json[attr]);
             }else{
-		    	obj.style[attr]=cur+speed+'px';
+            	begin=parseInt(getStyle(obj,attr))||0;
+	            target=parseInt(json[attr]);
             }
+
+            //(target-begin)求出步长 
+	    	speed=(target-begin)*0.2;//target，函数设置的值，即目标值；begin为原始值。begin+=(target-begin)*系数，系数一般为0.2
+	    	speed=target>begin?Math.ceil(speed):Math.floor(speed);//speed，速度。
+
+            if (attr=='opacity') {
+            	obj.style.filter='alpha(opacity:'+(begin+speed)+')';
+            	obj.style.opacity=(begin+speed)/100;
+            }else if(attr=='scrollTop'){
+                obj.scrollTop=begin+speed;
+            }else{
+		    	obj.style[attr]=begin+speed+'px';
+            }
+
+            if (begin!=target){b_stop=false}; //target，函数设置的值，即目标值。当begin的累加值(begin+speed)不等于target时，b_stop为false
+
+            console.log(begin,target);
     	}
 
 		if (b_stop) {
 			clearInterval(obj.timer);
 			if (fnEnd) fnEnd();
 		}
-    },20)
+    },30)
 }
+
+function hasClass(obj,sClass){
+    return obj.className.match(new RegExp('(\\s|^)'+sClass+'(\\s|$)'),'');
+}
+ 
+function removeClass(obj,sClass){
+    if(hasClass(obj,sClass)){
+	   var re=new RegExp('(\\s|^)'+sClass+'(\\s|$)');
+	   obj.className=obj.className.replace(re,'');
+	}
+}
+ 
+function addClass(obj,sClass){
+    if(!hasClass(obj,sClass)){
+	   obj.className+=' '+sClass;
+	}
+}
+
 

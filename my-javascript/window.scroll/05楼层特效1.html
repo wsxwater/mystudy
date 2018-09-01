@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		html,body,ul,ul li{height: 100%;width: 100%;}
+		li{list-style: none;}
+		ul li{background-color: #63C8FB;color: #FFF;font-size: 100px;text-align: center;}
+		ul li span{display: inline-block;zoom:1;*display: inline;height: 100%;width: 0;vertical-align: middle;}
+		ul li div{display: inline-block;zoom:1;*display: inline;vertical-align: middle;}
+		ol {position: fixed;top:40%;left: 10px;}
+		ol li a{display: block;color: #FFF;border-bottom: 1px solid;background-color: #CCC;width: 100px;line-height: 40px;text-align: center;font-size: 16px;cursor: pointer;text-decoration: none;}
+		ol li a.active{background-color: #ff6600;}
+	</style>
+</head>
+<body>
+	<ol id="ol">
+		<li><a href="#item1" class="active">第1层</a></li>
+		<li><a href="#item2">第2层</a></li>
+		<li><a href="#item3">第3层</a></li>
+		<li><a href="#item4">第4层</a></li>
+	</ol>
+	<ul id="ul">
+		<li id="item1"><span></span><div>我是1楼</div></li>
+		<li id="item2"><span></span><div>我是2楼</div></li>
+		<li id="item3"><span></span><div>我是3楼</div></li>
+		<li id="item4"><span></span><div>我是4楼</div></li>
+	</ul>
+    
+	<script type="text/javascript" src="../myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			var arr_color=['#63C8FB','#F76D6D','#F89350','#A9F59F'];
+			var arr_color_len=arr_color.length;
+                  var ol=$('ol');
+                  var ul=$('ul');
+                  var lis_ol=ol.getElementsByTagName('li');
+                  var as_ol=ol.getElementsByTagName('a');
+                  var lis_ul=ul.getElementsByTagName('li');
+                  var clientH=client().height;
+                  var isClick=false;
+
+                  var lis_ol_len=lis_ol.length;
+
+                  for (var i = 0; i < arr_color_len; i++) {
+                  	lis_ul[i].style.backgroundColor=arr_color[i];
+                  }
+
+
+                  window.onscroll=function () {
+                        var scroll_top=Math.ceil(scroll().top);
+                        var activeId='';
+                        for (var i = 0; i < lis_ol_len; i++) {
+                              if (scroll_top>=lis_ul[i].offsetTop) {
+                                    activeId=lis_ul[i].id;
+                              }else{
+                                    break;
+                              }
+                        }      
+
+                        // console.log(activeId);   
+
+                        if (activeId) {
+                              for (var i = 0; i < lis_ol_len; i++) {
+                                    var menus=as_ol[i];
+                                    var hrefs=menus.href.split('#');
+                                    if (activeId.indexOf(hrefs[hrefs.length-1])!=-1) {
+                                          menus.className='active';
+                                    }else{
+                                          menus.className='';
+                                    }
+                              }
+                        }
+                  }
+            
+
+
+
+		}
+	</script>
+</body>
+</html>

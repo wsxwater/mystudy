@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#box{position: fixed;bottom: 0;right: 0;}
+		#top{width: 300px;height: 300px;background-color: #f00;}
+		#bottom{width: 300px;height: 100px;background-color: #666;}
+		#close{position: absolute;top:0;right: 0;font-size: 30px;color: #FFF;display: block;cursor: pointer;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<span id="close">&times;</span>
+		<div id="top"></div>
+		<div id="bottom"></div>
+	</div>
+	<script type="text/javascript" src="myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			var box=$('box'),
+				close=$('close'),
+				top=$('top'),
+				bottom=$('bottom');
+
+            close.onclick=function () {
+				startMove(bottom,{"height":0},function () {
+					startMove(box,{"width":0},function () {
+						close.style.display='none';
+					})
+				})	
+            }
+		}
+	</script>
+</body>
+</html>
