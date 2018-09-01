@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		.pic{position: relative;width: 658px;height: 411px;border: 1px solid #CCC;margin: 10px auto;padding: 10px;}
+		.pic-lg{position: relative;width: 100%;height: 100%;overflow: hidden;}
+		ul,ol{list-style: none;}
+		ul{position: absolute;top:0;left: 0;width: auto;height: 100%;overflow-x:auto;white-space:nowrap;font-size: 0;}
+        ul li{display: inline-block;width: 658px;height: 100%;}
+        ul li img{display: block;width: 100%;height: 100%;}
+        ol{position: absolute;bottom: 10px;right: 10px;width: auto;}
+        ol li{width: 20px;height: 20px;float: left;margin:0 6px 6px 0;background-color: #eee;}
+        ol li.active{background-color: #ff6600;}
+	</style>
+</head>
+<body>
+	<div class="pic">
+		<div class="pic-lg">
+			<ul id="ul">
+				<li><img src="../images/1.jpg" alt=""></li>
+				<li><img src="../images/2.jpg" alt=""></li>
+				<li><img src="../images/3.jpg" alt=""></li>
+				<li><img src="../images/4.jpg" alt=""></li>
+				<li><img src="../images/5.jpg" alt=""></li>
+			</ul>
+		</div>
+		<ol id="ol"></ol>
+	</div>
+
+	<script type="text/javascript" src="../myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			var ul=$('ul');
+			var ol=$('ol');
+			var now=0;
+			var lis_ul=ul.getElementsByTagName('li');
+            var fragment=document.createDocumentFragment(); 
+			var len=lis_ul.length;
+			
+			for (var i = 0; i < len; i++) {
+				var o_li=document.createElement('li');
+				fragment.appendChild(o_li);
+			}
+			ol.appendChild(fragment);
+            ol.getElementsByTagName('li')[0].className='active';
+
+
+            var lis=ol.getElementsByTagName('li');
+            for (var j = 0; j < len; j++) {
+            	lis[j].index=j;
+            	lis[j].onmouseover=function () {
+            		now=this.index;
+                    tab();
+            	}
+            }
+
+            function tab() {
+            	for (var j = 0; j < len; j++) {
+            		lis[j].className='';
+            	}	
+            	lis[now].className='active';
+                var size=ul.parentNode.offsetWidth;
+            	startMove(ul,{left:-(now)*size});
+            }
+
+            function next() {
+        		now++;
+        		if (now>len-1) {
+                    ul.style.left=0;
+        			now=0;
+        		}
+
+        	    tab();
+            }
+            
+            var time=3000;
+            var timer=setInterval(next,time);
+
+            ul.parentNode.parentNode.onmouseover=function () {
+            	clearInterval(timer);
+            }
+            ul.parentNode.parentNode.onmouseout=function () {
+            	timer=setInterval(next,time);
+            }
+
+		}
+	</script>
+</body>
+</html>

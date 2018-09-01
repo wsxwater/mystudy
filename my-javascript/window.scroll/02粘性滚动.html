@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		
+		#head{height: 60px;background-color: green;}
+	    #nav{height: 40px;background-color: #eee;}
+	    .nav{width: 100%;position: fixed;top:0;left: 0;}
+	    p{font-size: 50px;}
+	</style>
+</head>
+<body>
+	<header id="head"></header>
+	<nav id="nav"></nav>
+	<p>好好学习，天天向上1</p>
+	<p>好好学习，天天向上2</p>
+	<p>好好学习，天天向上3</p>
+	<p>好好学习，天天向上4</p>
+	<p>好好学习，天天向上5</p>
+	<p>好好学习，天天向上6</p>
+	<p>好好学习，天天向上7</p>
+	<p>好好学习，天天向上8</p>
+	<p>好好学习，天天向上9</p>
+	<p>好好学习，天天向上10</p>
+	<p>好好学习，天天向上11</p>
+	<p>好好学习，天天向上12</p>
+	<p>好好学习，天天向上13</p>
+	<p>好好学习，天天向上14</p>
+	<p>好好学习，天天向上15</p>
+	<p>好好学习，天天向上16</p>
+	<p>好好学习，天天向上17</p>
+	<p>好好学习，天天向上18</p>
+	<p>好好学习，天天向上19</p>
+	<p>好好学习，天天向上20</p>
+	<script src="myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			var nav=document.getElementById('nav');
+			var offsetTop=nav.offsetTop;
+
+			window.onscroll=function () {
+				var scrollTop=scroll().top;
+				if (scrollTop>=offsetTop) {
+					nav.className='nav';
+				}else{
+					nav.className='';
+				}
+			}
+		}
+	</script>
+</body>
+</html>

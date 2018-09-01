@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>瀑布流</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#main{position: relative;overflow: hidden;}
+		.box{padding: 10px 5px 0;float: left;}
+        .pic{border:1px solid #CCC;padding: 5px;}
+        .pic img{display: block;width: 165px;}
+
+        @media screen and (max-width: 330px) and (min-width: 320px){
+        	.pic img{width: 130px;}
+        }
+        @media screen and (max-width: 340px) and (min-width: 331px){
+        	.pic img{width: 120px;}
+        }
+        @media screen and (max-width: 360px) and (min-width: 341px){
+        	.pic img{width: 125px;}
+        }
+        @media screen and (max-width: 380px) and (min-width: 361px){
+        	.pic img{width: 130px;}
+        }
+        @media screen and (max-width: 400px) and (min-width: 381px){
+        	.pic img{width: 135px;}
+        }
+        @media screen and (max-width: 420px) and (min-width: 401px){
+        	.pic img{width: 140px;}
+        }
+        @media screen and (max-width: 440px) and (min-width: 421px){
+        	.pic img{width: 145px;}
+        }
+        @media screen and (max-width: 460px) and (min-width: 441px){
+        	.pic img{width: 150px;}
+        }
+        @media screen and (max-width: 480px) and (min-width: 461px){
+        	.pic img{width: 155px;}
+        }
+        @media screen and (max-width: 500px) and (min-width: 481px){
+        	.pic img{width: 160px;}
+        }
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div class="xx box">
+			<div class="pic"><img src="images/1.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/2.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/3.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/4.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/5.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/6.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/7.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/8.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/9.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/10.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/1.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/2.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/3.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/4.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/5.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/6.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/7.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/8.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/9.jpg" alt=""></div>
+		</div>
+		<div class="box">
+			<div class="pic"><img src="images/10.jpg" alt=""></div>
+		</div>
+		
+	</div>
+    
+    <script src="myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			var timer1=null,timer2=null;
+			waterfall('main','box');
+
+			var dataInt=[
+				{"src":"images/1.jpg"},
+				{"src":"images/2.jpg"},
+				{"src":"images/3.jpg"},
+				{"src":"images/4.jpg"},
+				{"src":"images/5.jpg"},
+				{"src":"images/6.jpg"},
+			];
+			window.onscroll=function () {
+				clearTimeout(timer1);
+
+				timer1=setTimeout(function () {
+					if (checkHasScroll) {
+						var main=document.getElementById('main');
+						for (var i = 0; i < dataInt.length; i++) {
+							var box=document.createElement('div');
+							box.className='box';
+		 					main.appendChild(box);
+		 					var pic=document.createElement('div');
+		 					pic.className='pic';
+		 					box.appendChild(pic);
+		 					var img=document.createElement('img');
+		 					img.src=dataInt[i].src;
+		 					pic.appendChild(img);
+						}
+
+	 					waterfall('main','box');
+					}
+				},200);
+			}
+            
+            /**
+             * onresize节流，使用setTimeout来提高性能
+             */
+			window.onresize=function () {
+				clearTimeout(timer2);
+				timer2=setTimeout(function () {
+					waterfall('main','box');
+				},200)
+			}
+		}
+
+		function waterfall(parent,child) {
+			var parent=document.getElementById(parent);
+			var child=getByClass(parent,child);
+            // console.log(child);
+            var winW=document.documentElement.clientWidth||document.body.clientWidth;
+            var cols=0;
+            var arrH=[];
+            var minH=[];
+            var minArrIdx=0;
+            var maxH=[];
+            cols=parseInt(winW/child[0].offsetWidth);	
+            parent.style.width=cols*child[0].offsetWidth+'px';
+            parent.style.margin='0 auto';
+            for (var i = 0; i < child.length; i++) {
+            	if (i<cols) {
+            		arrH.push(child[i].offsetHeight);
+            		child[i].style='';
+            		// maxH=Math.max.apply(null,arrH);
+            		// parent.style.height=maxH+'px';
+            	}else{
+            		minH=Math.min.apply(null,arrH);
+            		minArrIdx=getIndex(arrH,minH);
+            		child[i].style.position='absolute';
+            		child[i].style.top=minH+'px';
+            		child[i].style.left=child[minArrIdx].offsetLeft+'px';
+
+            		arrH[minArrIdx]+=child[i].offsetHeight;
+
+            	}
+            }
+			maxH=Math.max.apply(null,arrH);
+    	    parent.style.height=maxH+'px';
+
+            // console.log(arrH,minH,minArrIdx);
+
+		}
+
+		
+
+		function getIndex(arr,val) {
+			for (var i = 0; i < arr.length; i++) {
+				if (arr[i]==val) {
+					return i;
+				}
+			}
+		}
+
+		function checkHasScroll() {
+			var screenH=document.documentElement.clientHeight||document.body.clientHeight;
+			var scrollTop=scroll().top;
+			var main=document.getElementById('main');
+			var lastBox=getByClass(main,'box');
+			var lastBoxH=parseInt(lastBox[lastBox.length-1].offsetHeight/2)+lastBox[lastBox.length-1].offsetTop;
+			return lastBoxH<(screenH+scrollTop)?true:false;
+		}
+	</script>
+</body>
+</html>

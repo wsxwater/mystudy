@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		p{font-size: 55px;width: 600px;margin: 0 auto;}
+		.aside{position: absolute;top:50%;left: 0;width: 100px;height: 300px;/* transform: translateY(-50%) */margin-top: -150px;}
+        .aside img{display: block;width: 100%;height: 100%;} 
+	</style>
+</head>
+<body>
+	<div class="aside" id="aside"><img src="images/1.jpg"></div>
+	<p>好好学习，天天向上1</p>
+	<p>好好学习，天天向上2</p>
+	<p>好好学习，天天向上3</p>
+	<p>好好学习，天天向上4</p>
+	<p>好好学习，天天向上5</p>
+	<p>好好学习，天天向上6</p>
+	<p>好好学习，天天向上7</p>
+	<p>好好学习，天天向上8</p>
+	<p>好好学习，天天向上9</p>
+	<p>好好学习，天天向上10</p>
+	<p>好好学习，天天向上11</p>
+	<p>好好学习，天天向上12</p>
+	<p>好好学习，天天向上13</p>
+	<p>好好学习，天天向上14</p>
+	<p>好好学习，天天向上15</p>
+	<p>好好学习，天天向上16</p>
+	<p>好好学习，天天向上17</p>
+	<p>好好学习，天天向上18</p>
+	<p>好好学习，天天向上19</p>
+	<p>好好学习，天天向上20</p>
+    <script src="myfunc.js"></script> 
+	<script type="text/javascript">
+		window.onload=function () {
+			var aside=document.getElementById('aside');
+			var offsetTop=/*aside.offsetTop*/parseInt((document.documentElement.clientHeight||document.body.clientHeight)*0.5);
+			console.log(offsetTop);
+			var timer=null,begin=0,end=0;
+
+			window.onscroll=function () {
+				clearInterval(timer);
+				var scrollTop=scroll().top;
+				console.log(scroll());
+				timer=setInterval(function () {
+					end=scrollTop+offsetTop;
+					begin=begin+(end-begin)*0.2;
+                    aside.style.top=parseInt(begin)+'px';
+
+                    if (Math.round(begin)==end) {
+                    	clearInterval(timer);
+                    }
+				},10)
+			}
+		}
+	</script>
+</body>
+</html>

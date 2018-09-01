@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>照片墙</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		#ps{list-style: none;position: relative;}
+		img{border: none;}
+		html,body,ul{width: 100%;height: 100%;overflow: hidden;}
+		li{width: 329px;height: 220px;padding: 8px;background-color: #fff;position: absolute;box-shadow: 0 0 10px #000;transition: all 1s;}
+		li>img{display: block;width: 100%;height: 100%;}
+		li.current{transform: rotate(0deg) translate(-50%, -50%) scale(2, 2)!important;left: 50%!important;top: 50%!important;z-index: 99;}
+	</style>
+</head>
+<body>
+	<ul id="ps"></ul>
+	<script type="text/javascript" src="js/underscore-min.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			//1.获取标签
+			var ps=document.getElementById('ps');
+			
+
+			//2.动态创建li
+			for (var i = 0; i < 10; i++) {
+				var lis=document.createElement('li');
+				ps.appendChild(lis);
+
+                var imgs=document.createElement('img');
+                imgs.src='../images/'+parseInt(i+1)+'.jpg';
+                lis.appendChild(imgs);
+
+			}
+
+			//3.获取所有li
+			var allLis=ps.children;
+			var liw=parseInt(getStyle(allLis[0],'width'));
+			var lih=parseInt(getStyle(allLis[0],'height'));
+
+			// 4.获取尺寸
+			var w=(document.body.clientWidth||document.documentElement.clientWidth)-liw;
+			var h=(document.body.clientHeight||document.documentElement.clientHeight)-lih;
+
+			//5.遍历
+			for (var j = 0; j < allLis.length; j++) {
+				//5.1 取出单个li
+				var li=allLis[j];
+
+				//5.2随机分布
+				li.style.left=_.random(0,w)+'px';
+				li.style.top=_.random(0,h)+'px';
+				li.style.transform='rotate('+_.random(0,360)+'deg)';
+
+				//5.4点击事件
+				li.onclick=function () {
+					for (var k = 0; k < allLis.length; k++) {
+							allLis[k].className='';
+					}	
+                    this.className='current';
+				}	
+			}
+		};
+
+		function getStyle(obj,name) {
+			if (obj.currentStyle) {
+				return obj.currentStyle[name];
+			}else{
+				return getComputedStyle(obj,false)[name];
+			}
+		}
+	</script>
+</body>
+</html>

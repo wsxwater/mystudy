@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时效果</title>
+	<style>
+	body,div{margin:0;padding:0;}
+
+	#time{width:500px;height:200px;margin:100px auto;position:relative;background:#FFF;color:#000;
+	   box-shadow:0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;
+	   -webkit-box-shadow:0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;
+	   -moz-box-shadow:0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;
+	   -o-box-shadow:0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;
+	   -ms-box-shadow:0 1px 4px rgba(0,0,0,.3),0 0 40px rgba(0,0,0,.1) inset;
+	}
+	#time:before,#time:after{position:absolute;display:block;content:"";top:50%;bottom:0;left:10px;right:10px;z-index:-1;background:#000;
+	   box-shadow:0 0 20px rgba(0,0,0,.8);
+	   -webkit-box-shadow:0 0 20px rgba(0,0,0,.8);
+	   -moz-box-shadow:0 0 20px rgba(0,0,0,.8);
+	   -o-box-shadow:0 0 20px rgba(0,0,0,.8);
+	   -ms-box-shadow:0 0 20px rgba(0,0,0,.8);
+	   border-radius:100px/10px;
+	   -webkit-border-radius:100px/10px;
+	   -moz-border-radius:100px/10px;
+	   -ms-border-radius:100px/10px;
+	   -o-border-radius:100px/10px;
+	}
+
+	#time h1{font-size:16px;line-height:80px;text-align:center;font-family:"楷体";}
+	#time h1 i{display:inline-block;*display:inline;*zoom:1;color:#F00;padding:0 10px;font-size:22px;}
+	::selection{background:#000;color:#FFF;}
+	::-webkit-selection{background:#000;color:#FFF;}
+	::-moz-selection{background:#000;color:#FFF;}
+	::-ms-selection{background:#000;color:#FFF;}
+	::-o-selection{background:#000;color:#FFF;}
+	</style>
+
+</head>
+
+<body>
+
+  <div id="time">
+     <h1>2022冬奥会还剩：<i id="show1"></i></h1>
+	 <h1>现在时间：<i id="show2"></i></h1>
+  </div>
+
+  <script>
+     window.onload=function(){
+       setInterval(showTime,1000);
+        function showTime(){
+  		 var aShow=document.getElementById('show1');
+  		 var nowTime=new Date();
+  		 var endTime=new Date('2022/2/4,00:00:00');
+  		 //getTime():获取毫秒数
+  		 //1天=24小时 1小时=60分钟 1分钟=60秒 1秒=1000毫秒
+  		 var leftTime=parseInt((endTime.getTime()-nowTime.getTime())/1000);
+
+  		 console.log(leftTime);
+  		 var d=parseInt(leftTime/(24*60*60));
+  		 var h=parseInt(leftTime/(60*60)%24);
+  		 var m=parseInt(leftTime/60%60);
+  		 var s=parseInt(leftTime%60);
+  		 aShow.innerHTML=d+'天 '+h+'小时 '+m+'分钟 '+s+'秒';
+  		 if(leftTime<=0){
+  			aShow.parentNode.innerHTML='相约冬奥会！';
+  		 }
+  		 
+  		 var oShow=document.getElementById('show2');
+  		 var year=nowTime.getFullYear();
+  		 var month=nowTime.getMonth()+1;
+  		 var day=nowTime.getDate();
+  		 var da=nowTime.getDay();
+  		 var weekend=['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+  		 
+  		 var hours=toDou(nowTime.getHours());
+  		 var minutes=toDou(nowTime.getMinutes());
+  		 var seconds=toDou(nowTime.getSeconds());
+  		 oShow.innerHTML=year+'年'+month+'月'+day+'日'+' '+weekend[da]+' '+hours+':'+minutes+':'+seconds;
+
+  	  }	
+  	  showTime(); 
+  	  function toDou(n){
+  	     if(n<10){return '0'+n;}
+  		 else{return ''+n;}
+  	  }
+     }
+  </script>
+
+</body>
+</html>

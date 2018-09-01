@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数码时钟</title>
+
+	<style>
+	   *{margin: 0;padding: 0;}
+		#clock{width:440px;;height:121px;margin:100px auto;display:block;}
+		img{width:68px;height:120px;display:block;float:left;position:relative}
+		span{height:119px;font-weight:bold;font-size:30px;line-height:110px;display:block;float:left;text-align:center;}
+	</style>
+</head>
+<body>
+	<div id="clock">
+	   <img src="../images/0.PNG">
+	   <img src="../images/0.PNG"><span>:</span>
+	   <img src="../images/0.PNG">
+	   <img src="../images/0.PNG"><span>:</span>
+	   <img src="../images/0.PNG">
+	   <img src="../images/0.PNG">
+	</div>
+    
+    <script type="text/javascript">
+    	window.onload=function () {
+    		var timer=null;
+    		clearInterval(timer);
+            clock();
+            timer=setInterval(clock,1000);
+            function clock() {
+            	var clock=document.getElementById('clock');
+            	var imgs=clock.getElementsByTagName('img');
+            	var str='';
+            	var date=new Date();
+            	var h=date.getHours();
+            	var m=date.getMinutes();
+            	var s=date.getSeconds();
+            	str=addZero(h)+addZero(m)+addZero(s);
+
+            	for (var i = 0; i < imgs.length; i++) {
+            		imgs[i].src='../images/'+str.charAt(i)+'.PNG';
+            	}
+            }
+
+
+    	}
+
+    	function addZero(n) {
+    		if (n<10) {
+    			return n='0'+n;
+    		}else{
+    			return n=''+n;
+    		}
+    	}
+    </script>
+
+</body>
+</html>

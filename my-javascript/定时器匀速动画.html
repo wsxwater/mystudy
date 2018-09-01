@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		div{width: 100px;height: 100px;background-color: #f00;}
+        
+		#div1{position: absolute;top:300px;left: 0;}
+		#div2{position: absolute;top:600px;left: 0;}
+	</style>
+</head>
+<body>
+	<button>点击</button>
+	<div id="div"></div>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<script type="text/javascript" src="myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			var div=document.getElementById('div');
+			var div1=document.getElementById('div1');
+			var div2=document.getElementById('div2');
+			var btn=document.getElementsByTagName('button')[0];
+			var timer=null,begin=0,step=10,end=599;
+
+			btn.onclick=function () {
+
+				clearInterval(timer);
+
+				timer=setInterval(function () {
+					begin+=step;
+					if (begin>=end) {
+						begin=end;
+						clearInterval(timer);
+					}
+
+					div.style.marginLeft=begin+'px';
+				},100);
+
+                constant(div1,399,10);
+
+                startMove(div2,{left:300})
+
+			}
+		}
+	</script>
+</body>
+</html>
