@@ -97,6 +97,7 @@
                          * 3、点击的 < 选中的，相当于点击了左边的按钮
                          */
                         var index=parseInt(this.innerText);
+                        console.log('index:'+index+' now:'+now);
                         if (index>now) {
                         	startMove(lis[now],{'left':-slider_w});
                         	lis[index].style.left=slider_w+'px';
