@@ -33,12 +33,8 @@
 		</div>
         <!-- 控制器 -->  
 		<div class="slider-ctrl" id="slider_ctrl">
-			<span class="slider-prev" id="slider_prev">
-				<!-- <svg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'><line stroke-linecap='round' stroke='#FFF' stroke-width='5' x1='40' y1='0' x2='5' y2='30' /><line stroke-linecap='round' stroke='#FFF' stroke-width='5' x1='40' y1='60' x2='5' y2='30' /></svg> -->
-			</span>
-			<span class="slider-next" id="slider_next">
-				<!-- <svg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'><line stroke-linecap='round' stroke='#FFF' stroke-width='5' x1='0' y1='0' x2='35' y2='30' /><line stroke-linecap='round' stroke='#FFF' stroke-width='5' x1='0' y1='60' x2='35' y2='30' /></svg> -->
-			</span>
+			<span class="slider-prev" id="slider_prev"></span>
+			<span class="slider-next" id="slider_next"></span>
 		</div>
 		<!-- 控制器 --> 
 	</div>
@@ -101,7 +97,6 @@
                          * 3、点击的 < 选中的，相当于点击了左边的按钮
                          */
                         var index=parseInt(this.innerText);
-
                         if (index>now) {
                         	startMove(lis[now],{'left':-slider_w});
                         	lis[index].style.left=slider_w+'px';
