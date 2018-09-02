@@ -405,10 +405,11 @@ spy-debugger -c true
     > <a href="my-javascript/获取用户选中的内容/微博分享1.html">获取用户选中的内容/微博分享1.html</a>
     > <a href="my-javascript/获取用户选中的内容/微博分享2.html">获取用户选中的内容/微博分享2.html</a>
     > <a href="my-javascript/轮播图/demo01.1-左右.html">demo01.1-左右.html</a>
-    > <a href="my-javascript/轮播图/demo01.2-左右.html">demo01.2-左右.html</a>
-    > <a href="my-javascript/轮播图/demo01.3-左右.html">demo01.3-左右.html</a>
+    > <a href="my-javascript/轮播图/demo01.2-左右无缝.html">demo01.2-左右无缝.html</a>
+    > <a href="my-javascript/轮播图/demo01.3-左右无缝.cloneNode.html">demo01.3-左右无缝.cloneNode.html</a>
     > <a href="my-javascript/轮播图/demo02.1-上下.html">demo02.1-上下.html</a>
-    > <a href="my-javascript/轮播图/demo02.2-上下.html">demo02.2-上下.html</a>
+    > <a href="my-javascript/轮播图/demo02.2-上下无缝.html">demo02.2-上下无缝.html</a>
+    > <a href="my-javascript/轮播图/demo02.3-上下无缝.cloneNode.html">demo02.3-上下无缝.cloneNode.html</a>
     > <a href="my-javascript/轮播图/demo02.3-上下.html">demo02.3-上下.html</a>
 
     > <a href="my-javascript/音乐导航.html">音乐导航.html</a>
