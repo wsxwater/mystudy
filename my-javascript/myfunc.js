@@ -139,10 +139,10 @@ function startMove(obj,json,fnEnd) {
     	for (attr in json) {
 	    	//获取设置的最初的样式css，当属性名是opacity时要特殊处理
             if (attr=='opacity') {
-            	begin=Math.round(parseFloat(getStyle(obj,attr))*100) || 100;
-            	target=parseInt(json[attr]*100);
+            	begin=Math.round(parseFloat(getStyle(obj,attr))*100);
+            	target=parseInt(parseFloat(json[attr])*100);
             }else if(attr=='scrollTop'){
-            	begin=Math.ceil(obj.scrollTop)||0;
+            	begin=Math.ceil(obj.scrollTop);
             	target=parseInt(json[attr]);
             }else{
             	begin=parseInt(getStyle(obj,attr))||0;
@@ -158,6 +158,8 @@ function startMove(obj,json,fnEnd) {
             	obj.style.opacity=(begin+speed)/100;
             }else if(attr=='scrollTop'){
                 obj.scrollTop=begin+speed;
+            }else if(attr=='zIndex'){
+                obj.style[attr]=json[attr];
             }else{
 		    	obj.style[attr]=begin+speed+'px';
             }
