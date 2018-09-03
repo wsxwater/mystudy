@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		img{vertical-align: top;}
+		.slider{width: 800px;height: 440px;margin:100px auto;position: relative;overflow: hidden;}
+        .slider-ctrl{opacity: 0;filter: alpha(opacity=0);}
+		.slider-prev,.slider-next{display: block;width: 40px;height: 60px;position: absolute;top:50%;margin-top: -30px;z-index: 20;cursor: pointer;}
+        .slider-prev{left: 0;background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'%3E%3Cpath stroke-linecap='round' stroke='%23FF6600' stroke-width='10' d='M40 0L10 30M40 60L10 30'/%3E%3C/svg%3E") no-repeat center;}
+        .slider-next{right: 0;background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='60' viewBox='0 0 40 60'%3E%3Cpath stroke-linecap='round' stroke='%23FF6600' stroke-width='10' d='M0 0l30 30M0 60l30-30'/%3E%3C/svg%3E") no-repeat center;}
+		.slider-main{position: relative;}
+		.slider-main li {position: absolute;top:0;left: 200px;}
+		.slider-main li img{width: 100%;height: 100%;}
+	</style>
+</head>
+<body>
+	<div class="slider" id="slider">
+		<ul class="slider-main" id="slider_main">
+			<li><img src="../images/1.jpg" /></li>
+			<li><img src="../images/2.jpg" /></li>
+			<li><img src="../images/3.jpg" /></li>
+			<li><img src="../images/4.jpg" /></li>
+			<li><img src="../images/5.jpg" /></li>
+			<li><img src="../images/6.jpg" /></li>
+			<li><img src="../images/7.jpg" /></li>
+		</ul>
+        <!-- 控制器 -->  
+		<div class="slider-ctrl" id="slider_ctrl">
+			<span class="slider-prev"></span>
+			<span class="slider-next"></span>
+		</div>
+		<!-- 控制器 --> 
+	</div>
+
+	<script type="text/javascript" src="../myfunc.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+            /**
+             * 面试题：一个数组插入另一个数组指定的位置
+             * arr1 = ['a', 'b', 'c'] 
+			   arr2 = ['1', '2', '3'] 
+			   把数组arr2插入数组arr1的第二个元素b后面； 
+			   思路： 
+			   插入特定的位置，我们首先会想到splice，但是又不能直接splice(2, 0, arr2   ，这样的结果：['a', 'b', ['1', '2', '3'], 'c']； 
+			   那我们怎么能把arr2的元素一个一个的splice到arr1中呢，有没有简单的方式呢？ 
+			   答案是肯定，有一个神奇的函数call、apply，（调用一个函数的方法用在另一个函数上） 
+			   apply的参数：第一个为所用在的函数，第二个为一个数组， 
+			   所以我们要把arr2 变成一个适合splice的数组（包含splice前2个参数的数组） 
+			   在arr2前面插入2个元素：splice前2个参数（开始位置，删除几个元素） 
+			   然后把Array的splice方法指向arr1，最重要的是把新得到的arr2整个数组做为参数传给a   r1！ 
+			   这样就完成了arr2插入arr1的具体位置。
+
+			   var arr1 = ['a', 'b', 'c']; 
+			   var arr2 = ['1', '2', '3']; 
+			   arr1.splice(2,0,'1','2','3')
+			   console.log(arr1);//["a", "b", "1", "2", "3", "c"] 
+			   
+             */
+			var arr1 = ['a', 'b', 'c']; 
+			var arr2 = ['1', '2', '3']; 
+			console.log('原数组=>'+'arr1:'+arr1+' arr2:'+arr2);
+			// 把arr2 变成一个适合splice的数组（包含splice前2个参数的数组）
+			arr2.unshift(2, 0); 
+			console.log('arr2.unshift(2, 0);=>'+'arr1:'+arr1+' arr2:'+arr2);
+			Array.prototype.splice.apply(arr1, arr2); 
+			console.log('Array.prototype.splice.apply(arr1, arr2);=>'+'arr1:'+arr1+' arr2:'+arr2);
+
+
+
+			//1、获取标签
+			var slider_main=$('slider_main');
+			var lis=slider_main.children;
+            var slider_ctrl=$('slider_ctrl');
+            var slider_ctrl_child=slider_ctrl.children;
+            
+            var time=3000;
+            var timer=setInterval(next,time);
+
+            //2、控制器的显隐 
+            slider.onmouseover=function () {
+            	startMove(slider_ctrl,{'opacity':1});
+            	clearInterval(timer);
+            }
+            slider.onmouseout=function () {
+            	startMove(slider_ctrl,{'opacity':0});
+            	timer=setInterval(next,time)
+            }
+
+            var json=[
+                    	{width:100,top:-62,left:0,zIndex:0,opacity:0.1},   
+                    	{width:200,top:157,left:0,zIndex:1,opacity:0.2},   
+                    	{width:300,top:126,left:40,zIndex:2,opacity:0.6},   
+                    	{width:600,top:32,left:100,zIndex:3,opacity:1.0},   
+                    	{width:300,top:126,left:460,zIndex:2,opacity:0.6},   
+                    	{width:200,top:157,left:600,zIndex:1,opacity:0.2}, 
+                    	{width:100,top:-62,left:700,zIndex:1,opacity:0.1} 
+                    ];
+
+            
+            jsonStartMove();
+            function jsonStartMove() {
+            	for (var i = 0; i < json.length; i++) {
+            		startMove(lis[i],json[i]);
+            	}
+            }
+
+
+            for (var j = 0; j < slider_ctrl_child.length; j++) {
+            	var ctrls=slider_ctrl_child[j];
+            	ctrls.onclick=function () {
+            		var sclass=this.className;
+
+            		if (sclass=='slider-prev') {
+            			json.push(json.shift());
+            		}else if (sclass=='slider-next') {
+            			json.unshift(json.pop());
+            		}
+
+            		jsonStartMove();
+            	}
+            }
+
+            function next() {
+            	json.unshift(json.pop());
+            	jsonStartMove();
+            }
+
+
+
+
+
+
+
+		}
+	</script>
+</body>
+</html>

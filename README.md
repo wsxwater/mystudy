@@ -411,6 +411,7 @@ spy-debugger -c true
     > <a href="my-javascript/轮播图/demo02.2-上下无缝.html">demo02.2-上下无缝.html</a>
     > <a href="my-javascript/轮播图/demo02.3-上下无缝.cloneNode.html">demo02.3-上下无缝.cloneNode.html</a>
     > <a href="my-javascript/轮播图/网易轮播图.html">网易轮播图.html</a>
+    > <a href="my-javascript/轮播图/走马灯轮播图.html">走马灯轮播图.html</a>
     
     > <a href="my-javascript/音乐导航.html">音乐导航.html</a>
 </pre>
