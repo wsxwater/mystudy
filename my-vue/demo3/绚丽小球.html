@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		canvas{display: block;margin: 100px auto;background-color: #000;}
+	</style>
+</head>
+<body>
+    
+	<canvas id="canvas">浏览器不支持Canvas,请更换浏览器或者升级浏览器！</canvas>
+	<script type="text/javascript">
+		window.onload=function () {
+            let str='中国人';
+            console.log({...str});//Object {0: "我", 1: "是", 2: "中", 3: "国", 4: "人"}
+			const canvas=document.getElementById('canvas');
+            const context=canvas.getContext('2d');
+            let colorArr=['#b9d329','#c0ebf7','#69bcf3','#79d9f3','#fa5f94','#acd180','#ffae5b'];
+            let ballArr=[];
+
+            canvas.width=800;
+            canvas.height=600;
+
+
+            class Ball{
+                constructor(x,y,color){
+                	this.x=x;
+                	this.y=y;
+                	this.color=color;
+                	this.r=40;
+                }
+
+                render(){
+                	
+                	context.save();
+                    context.beginPath();
+                    context.arc(this.x,this.y,this.r,0,2*Math.PI);  
+                    context.fillStyle=this.color;
+                    context.fill();
+                	context.restore();
+                }
+            }
+
+            class MoveBall extends Ball{
+            	constructor(x,y,color){
+            		super(x,y,color);
+            	}
+
+            	upDate(){
+            		let dx=getRandom(-5,5);
+            		let dy=getRandom(-5,5);
+            		// console.log(dx,dy);
+            		this.x+=dx;
+            		this.y+=dy;
+            		this.r-=5;
+            		if (this.r<0) {
+            			this.r=0;
+            		}
+            	}
+            }
+
+            // let ball=new MoveBall(60,60,'red');
+            // ball.render();
+            // ball.upDate();
+            // console.log(ball);
+            
+            //1、绑定事件并创建 new MoveBall(x,y,color)
+            canvas.addEventListener('mousemove',function (e) {
+
+            	ballArr.push(new MoveBall(e.offsetX,e.offsetY,colorArr[getRandom(0,(colorArr.length-1))]));
+
+            	//console.log(ballArr);
+            });
+
+            
+            //2、开启setInterval
+            setInterval(function () {
+            	context.clearRect(0,0,canvas.width,canvas.height);
+
+            	for (let i = 0; i < ballArr.length; i++) {
+	            	ballArr[i].render();
+		            ballArr[i].upDate();
+            	}
+            },50);
+
+           
+
+            /**
+             * [getRandom 获取随机数] 
+             * @param  {[Nubmber]} min [description]
+             * @param  {[Nubmber]} max [description]
+             * @return [Return a random integer between min and max (inclusive).]
+             */
+            function getRandom(min, max) {
+			    if (max == null) {
+			      max = min;
+			      min = 0;
+			    }
+			    return min + Math.floor(Math.random() * (max - min + 1));
+			};
+
+		}
+	</script>
+</body>
+</html>

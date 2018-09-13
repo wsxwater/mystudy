@@ -99,13 +99,17 @@
 		    	},
 		    	methods:{
 		    		add:function () {
-		    			this.mydata.push({
-		    				name:this.uname,
-		    				age:this.age
-		    			});
+		    			if (this.name!='' && this.age!='') {
+			    			this.mydata.push({
+			    				name:this.uname,
+			    				age:this.age
+			    			});
 
-		    			this.uname='';
- 						this.age='';
+			    			this.uname='';
+	 						this.age='';
+		    			}else{
+		    				alert('请输入用户名和年龄。。。');
+		    			}
 		    		},
 		    		delMsg:function (n) {
 		    			if (n==-2) {

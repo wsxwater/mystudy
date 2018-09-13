@@ -367,3 +367,6 @@ Generrator(生成器)
        console.log(show1.next());    
 
 
+new set([1,2]); => 类似数组      
+
+

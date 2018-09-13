@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		li{height: 20px;border:1px solid;background-color: #ccc;}
+		li.active{background-color: #ff6600;}
+	</style>
+</head>
+<body>
+	<ul>
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+	<script type="text/javascript">
+		window.onload=function () {
+			// var d=document;
+			// var lis=d.getElementsByTagName('li');
+
+			// for (var i = 0; i < lis.length; i++) {
+			// 	lis[i].onmouseover=function () {
+			// 		for (var i = 0; i < lis.length; i++) {
+			// 			lis[i].className='';
+			// 		}
+			// 		this.className='active';
+			// 	}
+			// }
+			
+
+
+			// var d=document;
+			// var lis=d.getElementsByTagName('li');
+			// var now=0;
+
+			// for (var i = 0; i < lis.length; i++) {
+			// 	lis[i].index=i;
+			// 	lis[i].onmouseover=function () {
+			// 		lis[now].className='';
+			// 		this.className='active';
+			// 		now=this.index;
+			// 	}
+			// }
+			
+			
+			var d=document;
+			var lis=d.getElementsByTagName('li');
+			var now=0;
+
+			for (var i = 0; i < lis.length; i++) {
+				(function (index) {
+					lis[index].onmouseover=function () {
+						lis[now].className='';
+						this.className='active';
+						now=index;
+					}
+				})(i);
+			}
+			
+		}
+	</script>
+</body>
+</html>
