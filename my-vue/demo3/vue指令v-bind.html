@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-bind</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		a{text-decoration: none;}
+		#app{width: 640px;margin: 0 auto;}
+		li{list-style: none;line-height: 30px;font-size: 16px;background-color: #f5f5f5;border-bottom: 1px solid #ccc;border-top: 1px solid #fff;padding: 5px 10px;}
+		.btn-del{color: #000;}
+		li.active{color: #fff;background-color: #22A131;font-size: 20px;}
+		li.active .btn-del{color: #fff;}
+		li:first-child{border-top: none;}
+		li:last-child{border-bottom: none;}
+		.pull-right{float: right;}
+
+	</style>
+</head>
+<body>
+    <div id="app">
+    	<ul>
+    		<!-- <li v-for="(college, index) in colleges" v-bind:class="index===activeIndex?'active':''" v-on:mouseover="tab(index)">{{college}}</li> -->
+    		<li v-for="(college, index) in colleges" :class="index===activeIndex?'active':''" @mouseover="tab(index)">{{college}} <a href="javascript:;" class="btn-del pull-right" @click="deleteCollege(index)">删除</a></li>
+    	</ul>
+    	<p :style="{color:fontColor,fontSize:fontSize,paddingTop:'30%'}">{{msg}}</p>	
+    	<p :style="{color:font.color,fontSize:font.size,paddingTop:'20%'}">{{msg}}</p>	
+
+    </div>
+	
+
+	<script src="js/vue.js"></script>
+	<script>
+		
+			var vm=new Vue({
+				el:'#app',
+				data:{
+					msg:'今天天气真好！',
+					colleges:['Android学院','Java学院','PHP学院','HTML5学院'],
+					activeIndex:0,
+					fontColor:'#f00',
+					fontSize:'30px',
+					font:{
+						color:'#f00',
+						size:'30px',
+					}
+				},
+				methods:{
+					tab(n){
+						this.activeIndex=n;
+					},
+					deleteCollege(n){
+						this.colleges.splice(n,1);
+					}
+				}
+			});
+			
+			
+	</script>
+</body>
+</html>
