@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-if,v-else,v-else-if</title>
+</head>
+<body>
+	<div id="app">
+		<h1 v-show="show">今天天气真好！</h1>
+		<h1 v-show="!show">今天天气真好！</h1>
+		<!-- <h1 v-hide="!show">今天天气真好！</h1> -->
+	</div>
+
+	<script src="../js/vue.js"></script>
+	<script>
+		
+		var vm=new Vue({
+			el:'#app',
+			data:{
+				show:true
+			}
+		});
+			
+			
+	</script>
+</body>
+</html>

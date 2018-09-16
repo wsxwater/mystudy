@@ -20,16 +20,17 @@
 <body>
     <div id="app">
     	<ul>
-    		<!-- <li v-for="(college, index) in colleges" v-bind:class="index===activeIndex?'active':''" v-on:mouseover="tab(index)">{{college}}</li> -->
-    		<li v-for="(college, index) in colleges" :class="index===activeIndex?'active':''" @mouseover="tab(index)">{{college}} <a href="javascript:;" class="btn-del pull-right" @click="deleteCollege(index)">删除</a></li>
+    		<!-- <li v-for="(college, index) in colleges" v-bind:class="index===activeIndex?'active':''" v-on:mouseover="tab(index)"  v-bind:key="index">{{college}}</li> -->
+    		<li v-for="(college, index) in colleges" :class="index===activeIndex?'active':''" @mouseover="tab(index)" :key="index">{{college}} <a href="javascript:;" class="btn-del pull-right" @click="deleteCollege(index)">删除</a></li>
     	</ul>
+
     	<p :style="{color:fontColor,fontSize:fontSize,paddingTop:'30%'}">{{msg}}</p>	
     	<p :style="{color:font.color,fontSize:font.size,paddingTop:'20%'}">{{msg}}</p>	
 
     </div>
 	
 
-	<script src="js/vue.js"></script>
+	<script src="../js/vue.js"></script>
 	<script>
 		
 			var vm=new Vue({

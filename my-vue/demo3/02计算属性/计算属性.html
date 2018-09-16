@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<h1>{{msg}}</h1>
+		<h1>反转：{{msg.split('').reverse().join('')}}</h1>
+		<h1>函数反转：{{reverseStr()}}</h1>
+		<h1>计算属性反转：{{reverse}}</h1>
+	</div>
+	<script src="../js/vue.js"></script>
+	<script>
+		
+			var vm=new Vue({
+				el:'#app',
+				data:{
+					msg:'my name is wsx.',
+				},
+				methods:{
+					reverseStr(){
+						return this.msg.split('').reverse().join('');
+					}
+				},
+				computed:{
+					reverse(){
+						return this.msg.split('').reverse().join('');
+					}
+				}
+			});
+			
+			
+	</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-if,v-else,v-else-if</title>
+</head>
+<body>
+	<div id="app">
+		<h1 v-if="show">今天天气真好！</h1>
+		<h1 v-if="!show">今天天气真好！</h1>
+
+		<h2 v-if="score>90">小时的成绩：优秀</h2>
+		<h2 v-else-if="score>=60">小时的成绩：优良</h2>
+		<h2 v-else="score<60">小时的成绩：不及格</h2>
+
+	</div>
+
+	<script src="../js/vue.js"></script>
+	<script>
+		
+			var vm=new Vue({
+				el:'#app',
+				data:{
+					show:true,
+					score:30
+				}
+			});
+			
+			
+	</script>
+</body>
+</html>

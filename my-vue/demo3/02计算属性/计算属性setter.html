@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		
+		<h1>{{fullName}}</h1>
+		<button @click="deal()">计算属性setter</button>
+	</div>
+	<script src="../js/vue.js"></script>
+	<script>
+		
+			var vm=new Vue({
+				el:'#app',
+				data:{
+					firstName:'zhang',
+					lastName:'shanfeng',
+				},
+				methods:{
+					deal(){
+						this.fullName='lucky day';
+					}
+				},
+				computed:{
+					//属性都有set和get方法，计算属性默认get方法
+					fullName:{
+						get(){
+							return this.firstName+' '+this.lastName;
+						},
+						set(str){
+							let nameArr=str.split(' ');
+							this.firstName=nameArr[0];
+							this.lastName=nameArr[1];
+						}
+					}
+				}
+			});
+			
+			
+	</script>
+</body>
+</html>
