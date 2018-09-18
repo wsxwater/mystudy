@@ -6,32 +6,48 @@
 </head>
 <body>
 	<div id="app">
-		<!-- props不支持驼峰式的写法 -->
-		<!-- <my-profile msg="好玩吗？" imgSrc="../images/1.jpg"></my-profile> -->
-		<my-profile msg="好玩吗？" imgsrc="../images/1.jpg"></my-profile>
-		<my-profile msg="植物大战僵尸" imgsrc="../images/2.jpg"></my-profile>
+		<!-- 多层组件通讯要动态绑定 -->
+		<my-profile :imgalt="imgalt" :imgsrc="imgsrc"></my-profile>
 	</div>
 
 	<template id="my_profile">
 		<section>
-			<h1>{{msg}}</h1>
-			<!-- <img :src="imgSrc" width="400"> -->
-			<img :src="imgsrc" width="400">
+			<my-child :src="imgsrc" :alt="imgalt"></my-child>
 		</section>
+	</template>
+
+	<template id="my_child">
+		<div>
+		   <img :src="src" width="300">
+		   <h1>{{alt}}</h1>
+		</div>
 	</template>
 
 	<script type="text/javascript" src="../js/vue.js"></script>
 	<script>
         //组件间的通讯：parent ==props==> child ==events==> parent 
+        
+        let my_child=Vue.extend({
+        	template:'#my_child',
+        	props:['src','alt']
+        });
+        
+        
 		Vue.component('my-profile',{
 			template:'#my_profile',
-			// props:['msg','imgSrc'],
-			props:['msg','imgsrc'],
+			props:['imgalt','imgsrc'],
+			components:{
+				'my-child':my_child
+			}
 		});
 
 
 		let vm=new Vue({
-			el:'#app'
+			el:'#app',
+            data:{
+            	imgalt:'好玩吗？',
+            	imgsrc:'../images/1.jpg'
+            }
 		});
 	</script>
 </body>
