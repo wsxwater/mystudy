@@ -297,6 +297,32 @@
             console.log(arrColor);// ["red", "blue", "black"]
 
 
+## vue
+1、指令
+    1.1、<a href="01指令/v-bind.html">v-bind</a>
+    1.2、<a href="01指令/v-if,v-else,v-else-if.html">v-if,v-else,v-else-if</a>
+    1.3、<a href="01指令/v-show,v-hide.html"></a>
+    1.4、<a href="01指令/v-html,v-text,v-model.html">v-html,v-text,v-model</a>
+    1.5、<a href="01指令/v-once,v-model.html">v-once,v-model</a>
+    1.6、<a href="01指令/todolist.html">todolist-综合训练</a>
+
+2、计算属性 computed
+    注：属性都有get和set方法，set方法不常用，默认方法为get方法
+    2.1、<a href="02计算属性/计算属性.html">计算属性</a>
+    2.2、<a href="02计算属性/计算属性setter.html">计算属性setter</a>
+
+3、组件
+    3.1、<a href="03组件/全局组件.html">全局组件</a>
+    3.2、<a href="03组件/局部组件.html">局部组件</a>
+    3.3、<a href="03组件/父子组件.html">父子组件</a>
+    3.4、<a href="03组件/script组件.html">script组件</a>
+    3.5、<a href="03组件/template组件.html">template组件</a>
+    3.6、<a href="03组件/组件间的通讯.html">组件间的通讯</a>
+    3.6、<a href="03组件/多组件间的通讯.html">多组件间的通讯</a>
+    
+
+
+
 
 
 
