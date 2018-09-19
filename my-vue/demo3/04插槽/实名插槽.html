@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>匿名插槽</title>
+</head>
+<body>
+	<div id="app">
+		<my-computer>
+			<div slot="cpu">酷睿i5 8代系列</div>
+			<div slot="gpu">图形处理器(英语:Graphics Processing Unit,缩写:GPU)</div>
+			<div slot="memory">64G</div>
+			<div slot="hard-drive"><img src="../images/1.jpg" width="100"></div>
+		</my-computer>
+	</div>
+
+	<template id="my_computer">
+		<div class="computer">
+			<slot name="cpu">这里是放cpu的</slot>
+			<slot name="gpu">这里是放gpu的</slot>
+			<slot name="memory">这里是放内存条的</slot>
+			<slot name="hard-drive">这里是放硬件的</slot>
+		</div>
+	</template>
+
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script>
+        //组件间的通讯：parent ==pass props==> child ==emit events==> parent 
+		Vue.component('my-computer',{
+			template:'#my_computer',
+		});
+
+
+		let vm=new Vue({
+			el:'#app'
+		});
+	</script>
+</body>
+</html>
