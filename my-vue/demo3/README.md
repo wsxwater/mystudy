@@ -352,6 +352,10 @@
             <template id="my_slot"><slot name="cpu">无内容则显示这段话</slot></template>
     </pre>
 
+5、路由——实现导航
+    5.1、<a href="05路由/路由.html">路由</a>
+    5.2、<a href="05路由/多层路由.html">多层路由</a>
+
 
     
 
