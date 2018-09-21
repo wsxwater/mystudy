@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+	<div id="app">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-3">
+					<div class="list-group">
+						<!-- 使用 router-link 组件来导航. -->
+						<!-- 通过传入 `to` 属性指定链接. -->
+						<!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+						<router-link to="/html5" class="list-group-item" active-class="active">html5</router-link>
+						<router-link to="/java" class="list-group-item" active-class="active">java</router-link>
+						<router-link to="/python" class="list-group-item" active-class="active">python</router-link>
+					</div>
+				</div>
+				<div class="col-xs-9">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<!-- 路由出口 -->
+							<!-- 路由匹配到的组件将渲染在这里 -->
+							<router-view></router-view>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<template id="html5">
+		<section>
+			<h1>HTML5</h1>
+			<img src="../images/1.jpg" width="250">
+		</section>
+	</template>
+
+	<template id="java">
+		<section>
+			<h1>Java</h1>
+			<img src="../images/2.jpg" width="250">
+		</section>
+	</template>
+
+	<template id="python">
+		<section>
+			<h1>Python</h1>
+			<img src="../images/3.jpg" width="250">
+		</section>
+	</template>
+
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script type="text/javascript" src="../js/vue-router/vue-router.js"></script>
+	<script>
+
+		// 1. 定义 (路由) 组件。
+		let html5=Vue.extend({
+			template:'#html5'
+		});
+		let java=Vue.extend({
+			template:'#java'
+		});
+		let python=Vue.extend({
+			template:'#python'
+		});
+		
+		// 2. 定义路由
+		const routes=[
+			{path:'/html5',component:html5},
+			{path:'/java',component:java},
+			{path:'/python',component:python},
+			{path: '/', redirect: '/html5'}
+		];
+
+		// 3. 创建 router 实例，然后传 `routes` 配置
+		const router=new VueRouter({
+			routes // (缩写) 相当于 routes: routes
+		});
+
+		// 4. 创建和挂载根实例。
+		// 记得要通过 router 配置参数注入路由，
+		// 从而让整个应用都有路由功能
+		const app=new Vue({
+			router
+		}).$mount('#app')
+	</script>	
+</body>
+</html>
