@@ -4,6 +4,16 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<style type="text/css">
+		.nav-pills>li>a.active{background-color: #337ab7;color: #FFF;}
+		.nav-tabs>li>a.active{
+		    color: #555;
+		    cursor: default;
+		    background-color: #fff;
+		    border: 1px solid #ddd;
+		    border-bottom-color: transparent;
+		}
+	</style>
 </head>
 <body>
 	<div id="app">
@@ -41,14 +51,18 @@
 			<p>
 				<img src="../images/1.jpg" width="250">
 			</p>
-            <div class="well">
-					<ul class="nav nav-pills">
-						<router-link to="/html5/basic">基础课程</router-link>
-						<router-link to="/html5/big">大神课程</router-link>
-					</ul>
-					<div class="tab-content">
-						<router-view></router-view>
-					</div>
+            <div>
+				<ul class="nav nav-tabs">
+					<li>
+						<router-link to="/html5/basic" active-class="active">基础课程</router-link>
+					</li>
+					<li>
+						<router-link to="/html5/big" active-class="active">大神课程</router-link>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<router-view></router-view>
+				</div>
             </div>
 		</section>
 	</template>
