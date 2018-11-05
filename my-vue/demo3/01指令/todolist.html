@@ -21,15 +21,15 @@
 			<form>
 				<div class="form-group">
 					<label for="test1">姓名：</label>
-					<input type="text" id="test1" v-model="aperson.name" class="form-control">
+					<input type="text" id="test1" v-model="person.name" class="form-control">
 				</div>
 				<div class="form-group">
 					<label for="test2">年龄：</label>
-					<input type="text" id="test2" v-model="aperson.age" class="form-control">
+					<input type="text" id="test2" v-model="person.age" class="form-control">
 				</div>
 				<div class="form-group">
 					<label for="test3">性别：</label>
-					<select id="test3" v-model="aperson.sex" class="form-control">
+					<select id="test3" v-model="person.sex" class="form-control">
 						<option>男</option>
 						<option>女</option>
 					</select>
@@ -66,6 +66,9 @@
 	<script>
 		var vm=new Vue({
 			el:'#app',
+			mounted(){
+				this.getPersonList();
+			},
 			data:{
 				persons:[
 					// {name:'www',age:12,sex:'男'},
@@ -73,28 +76,35 @@
 				name:'',
 				age:'',
 				sex:'男',
-				aperson:{name:'',age:'',sex:'男'}
+				person:{name:'',age:'',sex:'男'}
 			},
 			methods:{
+				getPersonList(){
+					var storage=window.localStorage;
+					this.persons=JSON.parse(storage.getItem('persons')||'[]');
+				},
 				addPerson(){
 					var re=/[0-9]{0,2}/ig;
-					if (this.aperson.name=='') {
+					if (this.person.name=='') {
 						alert('请输入姓名！');
 						return;
 					}
-					if (this.aperson.age=='') {
+					if (this.person.age=='') {
 						alert('请输入年龄！');
 						return;
 					}
-	    			this.persons.push(this.aperson);
+	    			this.persons.unshift(this.person);
+	    			window.localStorage.setItem('persons',JSON.stringify(this.persons));
 
-					this.aperson={name:'',age:'',sex:'男'};
+					this.person={name:'',age:'',sex:'男'};
 				},
 				delPerson(n){
 					if (n==-2) {
 						this.persons=[];
+						window.localStorage.setItem('persons',JSON.stringify(this.persons));
 					}else{
 						this.persons.splice(n,1);
+						window.localStorage.setItem('persons',JSON.stringify(this.persons));
 					}
 				}
 			}
