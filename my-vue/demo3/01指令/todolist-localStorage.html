@@ -89,10 +89,18 @@
 						return;
 					}
 
-					if (this.person.age=="" || this.person.age!=="" && !/[0-9]{1,2}/.test(this.person.age)) {
+					// if (this.person.age=="" || this.person.age!=="" && !/[0-9]{1,2}/.test(this.person.age)) {
+					// 	alert('请输入年龄！');
+					// 	return;
+					// }
+					if (this.person.age=="") {
 						alert('请输入年龄！');
 						return;
+					}else if(this.person.age!=="" && !/^[0-9]{1,3}$/.test(this.person.age)) {
+						alert('年龄请输入数字！');
+						return;
 					}
+
 	    			this.persons.unshift(this.person);
 	    			window.localStorage.setItem('persons',JSON.stringify(this.persons));
 
