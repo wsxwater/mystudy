@@ -24,7 +24,7 @@
 *   <a href="clip4.html">clip4.html</a>
 
 
-## 坐标变换所用的代数方程
+## 坐标变换所用的代数方程（详细请看：https://www.zhangxinxu.com/wordpress/2012/06/css3-transform-matrix-%E7%9F%A9%E9%98%B5/）
 <pre>
     > translate
       平移前的旧坐标记为(x,y)，平移后的坐标记为(x1,y1)，x轴平移距离记为dx，y轴平移距离记为dy。

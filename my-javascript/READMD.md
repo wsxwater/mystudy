@@ -276,6 +276,19 @@
     https://github.com/jquery/testswarn/wiki
 </pre>
 
+## Javascript高级程序设计
+<pre>
+    运用于放过和屏蔽任何输入文本框的字符。
+    EventUtil.addHandler(textbox, "keypress", function(event){ 
+        event = EventUtil.getEvent(event); 
+        var target = EventUtil.getTarget(event); 
+        var charCode = EventUtil.getCharCode(event); 
+        if (!/\d/.test(String.fromCharCode(charCode)) && charCode > 9 && !event.ctrlKey){ 
+            EventUtil.preventDefault(event); 
+        } 
+    }); 
+</pre>
+
 
 
 
