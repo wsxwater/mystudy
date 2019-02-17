@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<my-data></my-data>
+		<my-color></my-color>
+		<div is="my-color"></div>
+	</div>
+
+
+	<script src="../js/vue.js"></script>
+	<script>
+		/**
+		 * 局部组件需要注意：
+			1.属性名为components，s千万别忘了;
+			2.套路比较深，所以建议模板定义在一个全局变量里，代码看起来容易一点，如下：（模板标签比较多的时候，这样子写更加简洁规整）
+		 */
+		
+
+		//1、创建组件构造器
+		let Profile=Vue.extend({
+			template:`<p>
+						<button @click="add3">{{message}}</button>
+					 </p>`,
+			     data:function(){
+			         return {
+			             message:"hello world"
+			         }
+			     },
+			     methods:{
+			         add3:function(){
+			             alert("我是局部")
+			         }
+			     }
+		});
+        
+		
+		let vm=new Vue({
+			el:'#app',
+			data:{
+				msg:'my name is wsx.',
+			},
+			components:{
+				'my-data':Profile,
+				'my-color':{
+					template:`<div>
+								<label for="color">我的色板：</label>
+								<input type="color" id="color" />
+							  </div>`
+				}
+			}
+		});
+			
+			
+	</script>
+</body>
+</html>

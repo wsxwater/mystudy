@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<my-parent></my-parent>
+	</div>
+
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script>
+        let my_child=Vue.extend({
+        	template:`<div><h2>I'm a child.</h2></div>`,
+        });
+        
+		Vue.component('my-child',my_child);
+
+		//组件内的data是函数
+		Vue.component('my-parent',{
+			template:`<section :title="msg"><my-child></my-child></section>`,
+			components:{
+				'my-child':my_child
+			},
+			data(){
+				return {
+					msg:'I\'m a parent.'
+				}
+			}
+		});
+
+
+		let vm=new Vue({
+			el:'#app'
+		});
+	</script>
+</body>
+</html>

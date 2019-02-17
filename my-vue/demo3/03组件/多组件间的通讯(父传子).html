@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<my-parent :msg="msg" :imgsrc="src"></my-parent>
+	</div>
+  
+	<template id="my_parent">
+		<div>
+			<my-child1 :c_msg="msg"></my-child1>
+			<my-child2 :c_imgsrc="imgsrc"></my-child2>
+		</div>
+	</template>
+
+	<template id="my_child1">
+		<div>
+			<h1>{{c_msg}}</h1>
+		</div>
+	</template>
+
+	<template id="my_child2">
+		<div>
+			<img :src="c_imgsrc">
+		</div>
+	</template>
+
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script>
+        //组件间的通讯：parent ==pass props==> child ==emit events==> parent 
+        //多组件间的通讯（父传子）都是通过动态绑定
+        
+        let myChild1=Vue.extend({
+        	template:'#my_child1',
+        	props:['c_msg'],
+        });
+        let myChild2=Vue.extend({
+        	template:'#my_child2',
+        	props:['c_imgsrc'],
+        });
+		Vue.component('my-parent',{
+			template:'#my_parent',
+			props:['msg','imgsrc'],
+			components:{
+				'my-child1':myChild1,
+				'my-child2':myChild2
+			}
+		});
+
+		Vue.component('my-child1',myChild1);
+		Vue.component('my-child2',myChild2);
+
+
+		let vm=new Vue({
+			el:'#app',
+			data:{
+				msg:'好玩吗？',
+				src:'../images/1.jpg'
+			}
+		});
+	</script>
+</body>
+</html>

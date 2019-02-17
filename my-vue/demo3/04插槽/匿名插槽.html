@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>匿名插槽</title>
+</head>
+<body>
+	<div id="app">
+		<my-slot>
+			<div>好玩吗？</div>
+			<img src="../images/1.jpg" width="300">
+		</my-slot>
+	</div>
+
+	<template id="my_slot">
+		<div class="panel panel-default">
+			<div class="panel-header"><h1>我是头部</h1></div>
+			<div class="panel-body">
+				<!-- /.panel-body的内容并不确定，有可能是文字，有可能是图片，也有可能是图文，所以要用到插槽 -->
+				<slot>如果没有内容就显示这段文字</slot>
+			</div>
+			<div class="panel-footer"><h1>我是尾部</h1></div>
+		</div>
+	</template>
+
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script>
+        //组件间的通讯：parent ==pass props==> child ==emit events==> parent 
+		Vue.component('my-slot',{
+			template:'#my_slot',
+		});
+
+
+		let vm=new Vue({
+			el:'#app'
+		});
+	</script>
+</body>
+</html>

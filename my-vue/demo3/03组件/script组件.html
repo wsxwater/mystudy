@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<my-profile></my-profile>
+	</div>
+
+	<script type="text/template" id="my_profile">
+		<section :title="msg">
+			<h1>今天天气真好！</h1>
+		</section>
+	</script>
+
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script>
+        
+		Vue.component('my-profile',{
+			template:'#my_profile',
+			data(){
+				return {
+					msg:'I\'m a script tags.'
+				}
+			}
+
+		});
+
+
+		let vm=new Vue({
+			el:'#app'
+		});
+	</script>
+</body>
+</html>

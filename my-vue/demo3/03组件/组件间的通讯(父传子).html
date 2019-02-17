@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<!-- props不支持驼峰式的写法 -->
+		<!-- <my-profile msg="好玩吗？" imgSrc="../images/1.jpg"></my-profile> -->
+		<my-profile msg="好玩吗？" imgsrc="../images/1.jpg"></my-profile>
+		<my-profile msg="植物大战僵尸" imgsrc="../images/2.jpg"></my-profile>
+	</div>
+
+	<template id="my_profile">
+		<section>
+			<h1>{{msg}}</h1>
+			<!-- <img :src="imgSrc" width="400"> -->
+			<img :src="imgsrc" width="400">
+		</section>
+	</template>
+
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script>
+        //组件间的通讯：parent ==pass props==> child ==emit events==> parent 
+		Vue.component('my-profile',{
+			template:'#my_profile',
+			// props:['msg','imgSrc'],
+			props:['msg','imgsrc'],
+		});
+
+
+		let vm=new Vue({
+			el:'#app'
+		});
+	</script>
+</body>
+</html>
