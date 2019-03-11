@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS基础测试1</title>
+	<style type="text/css">
+		div,dl,dd,dt{margin: 0;padding: 0;}
+		dl{border: 1px solid #ccc;padding: 10px;line-height: 1.5;background-color: #fff;margin: 10px auto;font-size: 12px;width: 200px;}
+		dt{width: 5em;}
+		dd{word-break: break-all;text-align: right;}
+		dd:empty::before{content: '--';color: #999;}
+        
+        /* 流体特性实现 */
+		.t1 dd{margin: -1.5em 0 0 5em;}
+
+        /* float实现 */
+		.t2 dt {width: 5em;float: left;}
+		.t2 dd {overflow: hidden;}
+
+		/* absolute实现 */
+		.t3 dt {position: absolute;}
+		.t3 dd {margin-left: 5em; }
+
+		/* flex实现 */
+		dl.t4 {display: flex;flex-wrap: wrap;}
+		.t4 dt {width: 5em;}
+		.t4 dd {width: calc(100% - 5em);}
+
+		/* grid实现 */
+		dl.t5 {display: grid;grid-template-columns: auto 1fr;grid-column-gap: 1em;}
+
+	</style>
+</head>
+<body>
+	<dl class="t1" name="流体特性实现">
+		<dt>手机系统</dt><dd>Android</dd>
+		<dt>登录方式</dt><dd>QQ互联登录</dd>
+		<dt>绑定时间</dt><dd>2019-01-22 16:00:00</dd>
+		<dt>绑定状态</dt><dd>成功</dd>	
+		<dt>备注信息</dt><dd>如果需要修改绑定，请联系HR进行修改。</dd>	
+	</dl>
+
+	<dl class="t2" name="float实现">
+		<dt>手机系统</dt><dd>Android</dd>
+		<dt>登录方式</dt><dd>QQ互联登录</dd>
+		<dt>绑定时间</dt><dd>2019-01-22 16:00:00</dd>
+		<dt>绑定状态</dt><dd>成功</dd>	
+		<dt>备注信息</dt><dd>如果需要修改绑定，请联系HR进行修改。</dd>	
+	</dl>
+
+	<dl class="t3" name="absolute实现">
+		<dt>手机系统</dt><dd>Android</dd>
+		<dt>登录方式</dt><dd>QQ互联登录</dd>
+		<dt>绑定时间</dt><dd>2019-01-22 16:00:00</dd>
+		<dt>绑定状态</dt><dd>成功</dd>	
+		<dt>备注信息</dt><dd>如果需要修改绑定，请联系HR进行修改。</dd>	
+	</dl>
+
+	<dl class="t4" name="flex实现">
+		<dt>手机系统</dt><dd>Android</dd>
+		<dt>登录方式</dt><dd>QQ互联登录</dd>
+		<dt>绑定时间</dt><dd>2019-01-22 16:00:00</dd>
+		<dt>绑定状态</dt><dd>成功</dd>	
+		<dt>备注信息</dt><dd>如果需要修改绑定，请联系HR进行修改。</dd>	
+	</dl>
+
+	<dl class="t5" name="grid实现">
+		<dt>手机系统</dt><dd>Android</dd>
+		<dt>登录方式</dt><dd>QQ互联登录</dd>
+		<dt>绑定时间</dt><dd>2019-01-22 16:00:00</dd>
+		<dt>绑定状态</dt><dd>成功</dd>	
+		<dt>备注信息</dt><dd>如果需要修改绑定，请联系HR进行修改。</dd>	
+	</dl>
+</body>
+</html>
