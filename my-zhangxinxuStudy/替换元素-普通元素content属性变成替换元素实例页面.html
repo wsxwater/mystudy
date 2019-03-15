@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="robots" content="NOINDEX,NOFOLLOW,NOARCHIVE">
+	<title>替换元素-普通元素content属性变成替换元素实例页面</title>
+	<style type="text/css">
+		textarea{width: 100%;margin: 0;padding: 0;outline: none;border:1px solid #ccc;min-height: 300px;}
+		@media screen and (min-width: 767px){
+        	textarea{font-size: 24px;}
+        }
+
+        h1{content:url('images/logo.png');}
+	</style>
+</head>
+<body>
+	<p>
+		转载自：<a href="https://demo.cssworld.cn/4/1-5.php">https://demo.cssworld.cn/4/1-5.php</a>
+	</p>
+	<br>
+
+
+	<textarea>
+		使用content属性，我们还可以让普通标签元素变成替换元素。例如，官网的标志往往都会使用h1标签，里面会有网站名称和标志图片使用背景图，类似以下代码:
+		<h1>《CSS世界》</h1>
+		h1{width:180px;height:36px;background:url(logo.png);/*隐藏文字*/text-indent:-999px;}
+		下面展示一个创新的方法，还是一样的HTML代码，但CSS代码微调了下：
+		h1{content:url(logo.png);}
+	</textarea>
+
+
+	<h1>《CSS世界》</h1>
+
+
+</body>
+</html>
