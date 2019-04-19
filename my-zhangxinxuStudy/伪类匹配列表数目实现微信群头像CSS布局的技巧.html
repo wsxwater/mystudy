@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		textarea{width:100%;height:300px;box-sizing: border-box;outline: none;font-size: 16px;}
+		li{list-style: none;}
+		.container{margin:0 auto;width: 320px;}
+        ul{overflow: hidden;background: #ccc;border: 1px solid #ccc;margin: 10px 0;}
+        img{display: block;width: 100%;height: 100%;object-fit: cover;}
+        li{border: 1px solid #fff;box-sizing: border-box;}
+
+        li:first-child:nth-last-child(3),
+        li:first-child:nth-last-child(3) ~ li {
+          width: 159px; height: 159px;
+        }
+        li:first-child:nth-last-child(3) {
+          margin: auto;
+        }
+        li:first-child:nth-last-child(3) ~ li {
+          float: left;
+        }
+
+
+        li:first-child:nth-last-child(9),
+        li:first-child:nth-last-child(9) ~ li{width: 106px;height: 106px;float: left;}
+
+	</style>
+</head>
+<body>
+	<h1>转载于：<a href="https://www.zhangxinxu.com/wordpress/2019/03/nth-last-child-css-layout/">https://www.zhangxinxu.com/wordpress/2019/03/nth-last-child-css-layout/</a></h1>
+    
+    
+
+	<textarea>
+		我们可以借助伪类判断当前列表个数，示意如下：
+		li:only-child { /* 1个 */ } 
+		li:first-child:nth-last-child(2) { /* 2个 */ }
+		li:first-child:nth-last-child(3) { /* 3个 */ }
+
+		在CSS中，伪类是可以级联使用的，于是，如果列表可以匹配:first-child:nth-last-child(2)则表示当前<li>元素即是第1个子元素，又是从后往前第2个子元素，因此，我们就能判断当前总共两个<li>子元素，我们就能精准实现我们想要的布局了，只需要配合相邻兄弟选择符加号+以及兄弟选择符弯弯~即可，例如：
+
+		/* 3个li项目的第1个列表项 */
+		li:first-child:nth-last-child(3) {}
+		/* 3个li项目的第1个列表项的后一个，也就是第2项的样式 */
+		li:first-child:nth-last-child(3) + li {}
+		/* 3个li项目的第一个列表项后面两个列表项，也就是第2项和第3项的样式 */
+		li:first-child:nth-last-child(3) ~ li {}
+	</textarea>
+	<div class="container">
+
+
+		<ul>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+		</ul>
+		
+		<ul>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+			<li><img src="../my-javascript/images/1.jpg" alt=""></li>
+		</ul>
+	</div>
+
+
+
+</body>
+</html>
