@@ -111,6 +111,47 @@
 		var arrColor = unique(color);
 		console.log(arrColor);// ["red", "blue", "black"]
 
+
+		//合并数组
+		var a = [4,5,6];
+		var b = [7,8,9];
+		Array.prototype.push.apply(a, b);
+		console.log(a); // [4, 5, 6, 7, 8, 9]
+
+
+        /**
+         * 面试题：一个数组插入另一个数组指定的位置
+         * arr1 = ['a', 'b', 'c'] 
+		   arr2 = ['1', '2', '3'] 
+		   把数组arr2插入数组arr1的第二个元素b后面； 
+		   思路： 
+		   插入特定的位置，我们首先会想到splice，但是又不能直接splice(2, 0, arr2   ，这样的结果：['a', 'b', ['1', '2', '3'], 'c']； 
+		   那我们怎么能把arr2的元素一个一个的splice到arr1中呢，有没有简单的方式呢？ 
+		   答案是肯定，有一个神奇的函数call、apply，（调用一个函数的方法用在另一个函数上） 
+		   apply的参数：第一个为所用在的函数，第二个为一个数组， 
+		   所以我们要把arr2 变成一个适合splice的数组（包含splice前2个参数的数组） 
+		   在arr2前面插入2个元素：splice前2个参数（开始位置，删除几个元素） 
+		   然后把Array的splice方法指向arr1，最重要的是把新得到的arr2整个数组做为参数传给a   r1！ 
+		   这样就完成了arr2插入arr1的具体位置。
+
+		   var arr1 = ['a', 'b', 'c']; 
+		   var arr2 = ['1', '2', '3']; 
+		   arr1.splice(2,0,'1','2','3')
+		   console.log(arr1);//["a", "b", "1", "2", "3", "c"] 
+		   
+         */
+		var arrA = ['a', 'b', 'c']; 
+		var arrB = ['1', '2', '3']; 
+		console.log('原数组=>'+'arrA:'+arrA+' arrB:'+arrB);
+		// 把arrB 变成一个适合splice的数组（包含splice前2个参数的数组）
+		arrB.unshift(2, 0); 
+		console.log('arrB.unshift(2, 0);=>'+'arr1:'+arrA+' arrB:'+arrB);
+		Array.prototype.splice.apply(arrA, arrB); 
+		console.log('Array.prototype.splice.apply(arrA, arrB);=>'+'arrA:'+arrA+' arrB:'+arrB);
+		
+
+		
+
 		
 
 	</script>
