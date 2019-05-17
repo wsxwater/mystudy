@@ -20,7 +20,21 @@ function readfile(path,callback) {//异步读取
 	console.log('异步执行完毕');
 }
 
+function writefile(path,data,callback) {//异步写文件
+    fs.writeFile(path,data,function (err) {
+    	if (err) {
+    		throw err;
+    	}else{
+			console.log('It\'s saved!');//文件保存
+			callback('写文件成功！！！');
+    	}
+    });
+	
+	console.log('异步执行完毕');
+}
+
 module.exports={
 	readfileSync:readfileSync,
-	readfile:readfile
+	readfile:readfile,
+	writefile:writefile
 }
