@@ -33,8 +33,26 @@ function writefile(path,data,callback) {//异步写文件
 	console.log('异步执行完毕');
 }
 
+/**
+ * [readImg 读取图片]
+ * @param  {[type]} path [图片路径]
+ * @param  {[type]} res  [respond]
+ */
+function readImg(path,res) {
+	fs.readFile(path,'binary',function (err,filedata) {
+	    	if (err) {
+	    		throw err;
+	    		return;
+	    	}else{
+				res.write(filedata,'binary');
+				res.end();
+	    	}
+	})
+}
+
 module.exports={
 	readfileSync:readfileSync,
 	readfile:readfile,
-	writefile:writefile
+	writefile:writefile,
+	readImg:readImg
 }
