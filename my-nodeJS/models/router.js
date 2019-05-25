@@ -17,7 +17,7 @@ function login(req,res) {
 
 function reg(req,res) {
 	callback=getCallback(req,res);
-    optfile.readfile('./views/reg.html',callback);//异步
+    optfile.readfile('../views/reg.html',callback);//异步
 	//res.write('我是reg页面');
 }
 

@@ -10,7 +10,8 @@ function readfileSync(path) {//同步读取
 function readfile(path,callback) {//异步读取
     fs.readFile(path,function (err,data) {
     	if (err) {
-    		console.log(err);
+    		console.log('bbb'+err);
+    		callback('文件不存在！！！')
     	}else{
 			//console.log(data.toString());
 			callback(data);
