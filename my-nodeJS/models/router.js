@@ -38,8 +38,20 @@ function login(req,res) {
     req.on('end', function() {
     	post=querystring.parse(post);
 
-    	console.log(post);
-		callback=getCallback(req,res);
+  //   	console.log(post);
+  //   	console.log(post['uname']+post['pwd']);
+		// callback=getCallback(req,res);
+        arr=['uname','pwd'];
+        function callback(data) {
+        	res.writeHead(200,{'Content-type':'text/html;charset=utf-8;'});
+         	dataStr=data.toString();
+	        for (var i = 0; i < arr.length; i++) {
+	        	re=new RegExp('{'+arr[i]+'}','g');
+                dataStr=dataStr.replace(re,post[arr[i]]);
+	        }
+	        res.write(dataStr);
+	        res.end();
+         } 
 	    optfile.readfile('./views/login.html',callback);//异步
     });
 
