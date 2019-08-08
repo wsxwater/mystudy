@@ -1,0 +1,26 @@
+body,html
+  line-height 1
+  font-family 'STHeitiSC-Light','PingFang SC','Helvetica-Light',arial,sans-serif
+
+.clearfix
+  &:before,&:after
+    display: table
+    content: " "
+  &:after
+    clear: both
+
+@media (-webkit-min-device-pixel-radio: 1.5), (min-device-pixel-radio: 1.5)
+  .border-1px
+    $::after
+      -webkit-webkit-transform: scaleY(0.7)
+      // -moz-webkit-transform: scaleY(0.7)
+      // -ms-webkit-transform: scaleY(0.7)
+      // -o-webkit-transform: scaleY(0.7)
+      webkit-transform: scaleY(0.7)
+@media (-webkit-min-device-pixel-radio: 2), (min-device-pixel-radio: 2)
+  .border-1px
+    $::after
+      -webkit-webkit-transform: scaleY(0.5)
+      webkit-transform: scaleY(0.5)
+
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表页面</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+	<div id="app">
+		<div class="list-group">
+			<a href="javascript:;" class="list-group-item" 
+			    v-for="(list,index) in lists"
+				@click="toDetail(list.id)"
+			>
+				{{list.name}}
+			</a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+	<script type="text/javascript" src="../js/vue-router/vue-router.js"></script>
+
+	<script type="text/javascript">
+
+		// const routes=[
+		// 			{path:'/',name:'list'},
+		// 			{path:'/detail/',name:'detail'}
+		// 		];
+		// const router=new VueRouter({
+		// 			routes // (缩写) 相当于 routes: routes
+		// 		});
+		// const mapp=new Vue({
+		// 			router
+		// 		}).$mount('#app');
+
+		const app=new Vue({
+				mounted(){
+					this.getData();
+				},
+				el:'#app',
+				data:{
+					lists:[]
+				},
+				methods:{
+					getData(){
+						this.$http.get('data.json').then(response => {
+
+						  // get body data
+						  //console.log(JSON.parse(JSON.stringify(response.body.sites)));
+						  this.lists=JSON.parse(JSON.stringify(response.body.sites));
+						  
+
+						}, response => {
+							console.log('网络发生错误');
+						  // alert();
+						});
+					},
+					toDetail(id){
+						console.log(id);
+						
+						//this.$router.push({path:`/detail/{$id}`});
+
+						//console.log(this.$router);
+					}
+				}
+		});
+
+		
+	</script>
+</body>
+</html>

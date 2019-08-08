@@ -1,0 +1,7 @@
+{
+    "sites": [
+	    { "id":1,"name":"菜鸟教程" , "url":"http://www.runoob.com" }, 
+	    { "id":2,"name":"google" , "url":"http://www.google.com" }, 
+	    { "id":3,"name":"微博" , "url":"http://www.weibo.com" }
+    ]
+}

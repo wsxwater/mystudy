@@ -1,0 +1,22 @@
+border-1px($color)
+  position relative
+  &:after
+    display: block
+    content:' '
+    position: absolute
+    left: 0
+    bottom: 0
+    width: 100%
+    // border-top: 1px solid $color
+    height: 1px
+    overflow: hidden
+    background $color
+
+border-none()
+  &:after
+    background none
+
+bg-img($url)
+  background-image:url($url+'@2x.png')
+  @media (-webkit-device-pixel-radio:3),(device-pixel-radio:3)
+    background-image:url($url+'@3x.png')

@@ -10,3 +10,8 @@
       <view data-current='{{index}}' bindtap='tabsFun' class='{{currentIndex==index?"active":""}}' wx:for='{{tabArr}}' wx:key='key'>{{item}}</view>
 </view>
 
+<view>
+  <text wx:for='{{navson}}' wx:key='index'>{{item.context}}\n</text>
+</view>
+ 
+
