@@ -2,7 +2,7 @@
   <div class="tab-pane goods">
     <div class="menu-wrap" ref="menuWrap">
       <ul class="menu">
-        <li class="menu-item" v-for="(item,i) in goods" :key="i">
+        <li class="menu-item" v-for="(item,i) in goods" :key="i" :class="{'current':currentIndex===i}" @click="selectMenu(i,$event)">
           <span class="text">
             <span class="icon" v-show="item.type > 0" :class="classMap[item.type]"></span>{{item.name}}
           </span>
@@ -11,7 +11,7 @@
     </div>
     <div class="foods-wrap" ref="foodsWrap">
       <div>
-        <ul class="list-group" v-for="(item,i) in goods" :key="i">
+        <ul class="list-group food-list-hook" v-for="(item,i) in goods" :key="i">
           <h1 class="title">{{item.name}}</h1>
           <ul>
             <li class="list-group-item" v-for="(food,j) in item.foods" :key="j">
@@ -33,11 +33,13 @@
         </ul>
       </div>
     </div>
+    <shopcart></shopcart>
   </div>
 </template>
 
 <script>
   import BScroll from 'better-scroll';
+  import shopcart from '../shopcart/shopcart.vue';
   export default {
     props: {
       wsx_seller: {
@@ -46,8 +48,23 @@
     },
     data () {
       return {
-        goods: []
+        goods: [],
+        listHeight: [],
+        scrollY: 0
       };
+    },
+    computed: {
+      currentIndex () {
+        for (let i = 0; i < this.listHeight.length; i++) {
+          let h1 = this.listHeight[i];
+          let h2 = this.listHeight[i + 1];
+          if (!h2 || (this.scrollY >= h1 && this.scrollY < h2)) {
+            return i;
+          }
+        }
+        return 0;
+      }
+
     },
     created () {
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special'];
@@ -60,6 +77,7 @@
           if (this.$nextTick()) {
             this.$nextTick(() => {
               this._initScroll();
+              this._calculateHeight();
             });
           }
         }
@@ -67,9 +85,39 @@
     },
     methods: {
       _initScroll () {
-        this.menuScroll = new BScroll(this.$refs.menuWrap, {});// this.$refs.menuWrap 获取DOM
-        this.foodsScroll = new BScroll(this.$refs.foodsWrap, {});
+        this.menuScroll = new BScroll(this.$refs.menuWrap, {
+          click: true
+        });// this.$refs.menuWrap 获取DOM
+        this.foodsScroll = new BScroll(this.$refs.foodsWrap, {
+          probeType: 3 // 监听实时滚动的位置
+        });
+        this.foodsScroll.on('scroll', (pos) => {
+          this.scrollY = Math.abs(Math.round(pos.y));
+          // console.log('this.scrollY:' + this.scrollY);
+        });
+      },
+      _calculateHeight () {
+        let foodList = this.$refs.foodsWrap.getElementsByClassName('food-list-hook');
+        let height = 0;
+        this.listHeight.push(height);
+        for (let i = 0; i < foodList.length; i++) {
+          let item = foodList[i];
+          height += item.clientHeight;
+          this.listHeight.push(height);
+        }
+        // console.log(this.listHeight);
+      },
+      selectMenu (i, event) {
+        if (!event._constructed) {
+          return;
+        }
+        let foodList = this.$refs.foodsWrap.getElementsByClassName('food-list-hook');
+        let el = foodList[i];
+        this.foodsScroll.scrollToElement(el, 300);
       }
+    },
+    components: {
+      shopcart
     }
   };
 </script>
@@ -93,6 +141,13 @@
         width 56px
         height 54px
         padding 0 12px
+        &.current
+          font-weight 700
+          margin-top -1px
+          background-color #fff
+          z-index 10
+          .text
+            border-none()
         .text
           font-size 12px
           display table-cell
