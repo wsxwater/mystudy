@@ -86,7 +86,7 @@
     methods: {
       _initScroll () {
         this.menuScroll = new BScroll(this.$refs.menuWrap, {
-          click: true
+          click: true // 使用better-scroll会阻止click事件（默认事件），所以要开启
         });// this.$refs.menuWrap 获取DOM
         this.foodsScroll = new BScroll(this.$refs.foodsWrap, {
           probeType: 3 // 监听实时滚动的位置
@@ -142,6 +142,7 @@
         height 54px
         padding 0 12px
         &.current
+          position relative
           font-weight 700
           margin-top -1px
           background-color #fff

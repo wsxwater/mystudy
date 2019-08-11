@@ -54,10 +54,6 @@
   @import './common/stylus/mixin.styl';
 
   .container
-    max-width:1200px
-    min-width:320px
-    margin-left :auto
-    margin-right :auto
     .tab
       display: flex
       width: 100%
@@ -74,5 +70,4 @@
           color: rgb(77, 85 ,93)
           &.active
             color rgb(240 ,20 ,20)
-
 </style>
