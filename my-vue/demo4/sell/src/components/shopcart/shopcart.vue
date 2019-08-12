@@ -3,14 +3,19 @@
       <div class="content">
         <div class="content-left">
           <div class="logo-wrap">
-            <div class="logo">
+            <div class="logo" :class="{'active':totalCount>0}">
               <i class="icon-shopping_cart"></i>
             </div>
+            <div class="num" v-show="totalCount>0">{{totalCount}}</div>
           </div>
-          <div class="price">￥0</div>
+          <div class="price" :class="{'active':totalPrice>0}">￥{{totalPrice}}</div>
           <div class="desc">另需配送费￥{{deliveryPrice}}</div>
         </div>
-        <div class="content-right"></div>
+        <div class="content-right">
+          <div class="pay">
+            ￥{{minPrice}}起送
+          </div>
+        </div>
       </div>
   </div>
 </template>
@@ -18,6 +23,12 @@
 <script>
   export default {
     props: {
+      'select-foods': {
+        type: Array,
+        default () {
+          return [];
+        }
+      },
       'delivery-price': {
         type: Number,
         default: 0
@@ -25,6 +36,22 @@
       'min-price': {
         type: Number,
         default: 0
+      }
+    },
+    computed: {
+      totalPrice () {
+        let total = 0;
+        this.selectFoods.forEach((food) => {
+          total += food.price * food.count;
+        });
+        return total;
+      },
+      totalCount () {
+        let count = 0;
+        this.selectFoods.forEach((food) => {
+          count += food.count;
+        });
+        return count;
       }
     }
   };
@@ -37,6 +64,7 @@
     bottom 0
     width 100%
     height 48px
+    color rgba(255,255,255,0.4)
     .content
       display flex
       background-color #141d27
@@ -55,12 +83,30 @@
           background-color #141d27
           border-radius 50%
           vertical-align top
+          .num
+            position absolute
+            top 0
+            right 0
+            width 24px
+            height 16px
+            line-height 16px
+            text-align center
+            border-radius 16px
+            color #fff
+            font-weight 700
+            font-size 9px
+            background rgb(240,20,20)
+            box-shadow 0 4px 8px 0 rgba(255,255,255,0.4)
           .logo
             background-color #2b343c
             border-radius 50%
             width 100%
             height 100%
             text-align center
+            &.active
+              background-color rgb(0,120,220)
+            &.active .icon-shopping_cart
+              color #fff
             .icon-shopping_cart
               color #80858a
               font-size 24px
@@ -75,9 +121,9 @@
           padding-right 12px
           border-right 1px solid rgba(255,255,255,0.1)
           box-sizing border-box
-          color rgba(255,255,255,0.4)
+          &.active
+            color #fff
         .desc
-          color rgba(255,255,255,0.4)
           display inline-block
           vertical-align top
           line-height 24px
@@ -86,4 +132,11 @@
       .content-right
         flex 0 0 105px
         width 105px
+        .pay
+          background-color #2b333b
+          height 48px
+          line-height 48px
+          font-size 12px
+          text-align center
+          font-weight 700
 </style>
