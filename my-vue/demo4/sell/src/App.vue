@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="tab-content">
-      <router-view></router-view>
+      <router-view :wsx_seller="seller"></router-view>
     </div>
 
   </div>

@@ -33,7 +33,7 @@
         </ul>
       </div>
     </div>
-    <shopcart></shopcart>
+    <shopcart :delivery-price="wsx_seller.deliveryPrice" :min-price="wsx_seller.minPrice"></shopcart>
   </div>
 </template>
 

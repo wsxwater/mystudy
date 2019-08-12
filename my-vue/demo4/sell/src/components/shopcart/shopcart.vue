@@ -8,7 +8,7 @@
             </div>
           </div>
           <div class="price">￥0</div>
-          <div class="desc"></div>
+          <div class="desc">另需配送费￥{{deliveryPrice}}</div>
         </div>
         <div class="content-right"></div>
       </div>
@@ -17,6 +17,16 @@
 <!--  type="text/ecmascript-6" -->
 <script>
   export default {
+    props: {
+      'delivery-price': {
+        type: Number,
+        default: 0
+      },
+      'min-price': {
+        type: Number,
+        default: 0
+      }
+    }
   };
 </script>
 
@@ -65,10 +75,14 @@
           padding-right 12px
           border-right 1px solid rgba(255,255,255,0.1)
           box-sizing border-box
-          color #80858a
+          color rgba(255,255,255,0.4)
         .desc
+          color rgba(255,255,255,0.4)
           display inline-block
           vertical-align top
+          line-height 24px
+          margin 12px 0 0 12px
+          font-size 10px
       .content-right
         flex 0 0 105px
         width 105px
