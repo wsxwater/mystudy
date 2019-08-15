@@ -26,12 +26,7 @@
       'select-foods': {
         type: Array,
         default () {
-          return [
-            {
-              price: 10,
-              count: 1
-            }
-          ];
+          return [];
         }
       },
       'delivery-price': {
@@ -49,6 +44,7 @@
         this.selectFoods.forEach((food) => {
           total += food.price * food.count;
         });
+        console.log(this.selectFoods);
         return total;
       },
       totalCount () {

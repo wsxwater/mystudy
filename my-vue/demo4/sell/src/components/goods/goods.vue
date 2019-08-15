@@ -36,7 +36,7 @@
         </ul>
       </div>
     </div>
-    <shopcart :delivery-price="wsx_seller.deliveryPrice" :min-price="wsx_seller.minPrice"></shopcart>
+    <shopcart :select-foods="selectFoods" :delivery-price="wsx_seller.deliveryPrice" :min-price="wsx_seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -67,8 +67,19 @@
           }
         }
         return 0;
-      }
+      },
+      selectFoods () {
+        let foods = [];
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food);
+            }
+          });
+        });
 
+        return foods;
+      }
     },
     created () {
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special'];
