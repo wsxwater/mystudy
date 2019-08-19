@@ -1,7 +1,7 @@
 <template>
   <div class="shopcart">
-      <div class="content" @click="toggleList">
-        <div class="content-left">
+      <div class="content">
+        <div class="content-left" @click="toggleList">
           <div class="logo-wrap">
             <div class="logo" :class="{'active':totalCount>0}">
               <i class="icon-shopping_cart"></i>
@@ -102,7 +102,7 @@
         // let show = !this.fold;
         // return show;
 
-        if (this.totalCount > 0 && this.fold) {
+        if (this.totalCount > 0 && !this.fold) {
           return true;
         }
         return false;
@@ -229,10 +229,10 @@
       left 0
       width 100%
       z-index -1
-      transform translate3d(0,-100%,0)
+      transform translate3d(0,-100%,0) // 整个列表相对于当前自身的高度做一个偏移
       &.fold-enter-active, &.fold-leave-active
         transition: all .5s linear
-        transform translate3d(0, -100%, 0)
+        transform translate3d(0, -100%, 0) // 每个表项相对于当前自身的高度做一个偏移
       &.fold-enter, &.fold-leave-active
         transform translate3d(0,0,0)
       .list-header
