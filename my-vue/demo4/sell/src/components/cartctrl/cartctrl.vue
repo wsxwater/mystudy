@@ -53,13 +53,13 @@
       color rgb(0,160,220)
     .cart-decrease
       opacity 1
-      transform translate3D(0,0,0)
+      transform translate3d(0,0,0)
       transform rotate(0)
       &.fade-enter-active, &.fade-leave-active
         transition: all .4s linear
       &.fade-enter, &.fade-leave-active
         opacity: 0
-        transform translate3D(25px,0,0)
+        transform translate3d(25px,0,0)
         transform rotate(180deg)
     .cart-count
       display inline-block
