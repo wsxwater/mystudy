@@ -255,6 +255,24 @@
         overflow hidden
         background-color #fff
         .list-group-item
+          position relative
+          padding 12px 0
           box-sizing border-box
           border-1px(rgba(7,17,27,0.1))
+          .name
+            line-height 24px
+            font-size 14px
+            color rgb(7,17,27)
+          .price
+            position absolute
+            right 90px
+            bottom 12px
+            line-height 24px
+            font-size 14px
+            font-weight 700
+            color rgb(240, 20, 20)
+          .cartctrl-wrap
+            position absolute
+            right 0
+            bottom 6px
 </style>
