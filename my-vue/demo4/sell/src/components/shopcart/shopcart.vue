@@ -1,47 +1,54 @@
 <template>
-  <div class="shopcart">
-      <div class="content">
-        <div class="content-left" @click="toggleList">
-          <div class="logo-wrap">
-            <div class="logo" :class="{'active':totalCount>0}">
-              <i class="icon-shopping_cart"></i>
+  <div>
+    <div class="shopcart">
+        <div class="content" @click="toggleList">
+          <div class="content-left">
+            <div class="logo-wrap">
+              <div class="logo" :class="{'active':totalCount>0}">
+                <i class="icon-shopping_cart"></i>
+              </div>
+              <div class="num" v-show="totalCount>0">{{totalCount}}</div>
             </div>
-            <div class="num" v-show="totalCount>0">{{totalCount}}</div>
+            <div class="price" :class="{'active':totalPrice>0}">￥{{totalPrice}}</div>
+            <div class="desc">另需配送费￥{{deliveryPrice}}</div>
           </div>
-          <div class="price" :class="{'active':totalPrice>0}">￥{{totalPrice}}</div>
-          <div class="desc">另需配送费￥{{deliveryPrice}}</div>
-        </div>
-        <div class="content-right">
-          <div class="pay" :class="payClass">
-            {{payDesc}}
-          </div>
-        </div>
-      </div>
-      <transition name="fold">
-        <div class="shopcart-list" v-show="listShow">
-          <div class="list-header">
-            <h1 class="title">购物车</h1>
-            <span class="empty">清空</span>
-          </div>
-          <div class="list-body">
-            <ul class="list-group">
-              <li class="list-group-item" v-for="(food,i) in selectFoods" :key="i">
-                <span class="name">{{food.name}}</span>
-                <div>
-                  <span class="price">￥{{food.price*food.count}}</span>
-                </div>
-                <div class="cartctrl-wrap">
-                  <cartctrl :food="food"></cartctrl>
-                </div>
-              </li>
-            </ul>
+          <div class="content-right">
+            <div class="pay" :class="payClass" @click.stop.prevent="pay">
+              {{payDesc}}
+            </div>
           </div>
         </div>
-      </transition>
+        <transition name="collapsed">
+          <div class="shopcart-list" v-show="listShow">
+            <div class="list-header">
+              <h1 class="title">购物车</h1>
+              <span class="empty" @click="empty">清空</span>
+            </div>
+            <div class="list-body" ref="listBody">
+              <ul class="list-group">
+                <li class="list-group-item" v-for="(food,i) in selectFoods" :key="i">
+                  <span class="name">{{food.name}}</span>
+                  <div>
+                    <span class="price">￥{{food.price*food.count}}</span>
+                  </div>
+                  <div class="cartctrl-wrap">
+                    <cartctrl :food="food"></cartctrl>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </transition>
+    </div>
+    <transition name="fade">
+      <div class="list-mask" v-show="listShow" @click="hideList"></div>
+    </transition>
   </div>
+
 </template>
 <!--  type="text/ecmascript-6" -->
 <script>
+  import BScroll from 'better-scroll';
   import cartctrl from '../cartctrl/cartctrl.vue';
   export default {
     props: {
@@ -96,13 +103,13 @@
       listShow () {
         // Unexpected side effect in "listShow" computed property 个人理解计算属性内不应该对属性值做变更，解决这个问题的做法之一是使用watch监听
         if (!this.totalCount) {
-          // this.fold = true;
+          // this.collapsed = true;
           return false;
         }
-        // let show = !this.fold;
+        // let show = !this.collapsed;
         // return show;
 
-        if (this.totalCount > 0 && !this.fold) {
+        if (this.totalCount > 0 && !this.collapsed) {
           return true;
         }
         return false;
@@ -111,13 +118,25 @@
     watch: {
       selectFoods (newFoods, oldFoods) {
         if (newFoods.length === 0) {
-          this.fold = true;
+          this.collapsed = true;
+        }
+
+        if (this.$nextTick()) {
+          this.$nextTick(() => {
+            if (!this.scroll) {
+              this.scroll = new BScroll(this.$refs.listBody, {
+                click: true // 使用better-scroll会阻止click事件（默认事件），所以要开启
+              });// this.$refs.listBody 获取DOM
+            } else {
+              this.scroll.refresh();
+            }
+          });
         }
       }
     },
     data () {
       return {
-        fold: true
+        collapsed: true
       };
     },
     components: {
@@ -129,7 +148,22 @@
           return;
         }
         // this.show = true;
-        this.fold = !this.fold;
+        this.collapsed = !this.collapsed;
+      },
+      empty () {
+        this.selectFoods.forEach((food) => {
+          food.count = 0;
+        });
+      },
+      hideList () {
+        this.collapsed = true;
+      },
+      pay () {
+        if (this.totalPrice < this.minPrice) {
+          return;
+        }
+
+        window.alert(`支付${this.totalPrice}`);
       }
     }
   };
@@ -230,10 +264,10 @@
       width 100%
       z-index -1
       transform translate3d(0,-100%,0) // 整个列表相对于当前自身的高度做一个偏移
-      &.fold-enter-active, &.fold-leave-active
+      &.collapsed-enter-active, &.collapsed-leave-active
         transition: all .5s linear
         transform translate3d(0, -100%, 0) // 每个表项相对于当前自身的高度做一个偏移
-      &.fold-enter, &.fold-leave-active
+      &.collapsed-enter, &.collapsed-leave-active
         transform translate3d(0,0,0)
       .list-header
         height 40px
@@ -275,4 +309,18 @@
             position absolute
             right 0
             bottom 6px
+  .list-mask
+    position fixed
+    top 0
+    left 0
+    width 100%
+    height 100%
+    opacity 1
+    background-color rgba(7,17,27,0.6)
+    z-index 40
+    backdrop-filter blur(10px)
+    &.fade-enter-active, &.fade-leave-active
+      transition: all .4s linear
+    &.fade-enter, &.fade-leave-active
+      opacity: 0
 </style>
