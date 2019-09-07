@@ -1,42 +1,45 @@
 <template>
-  <div class="tab-pane goods">
-    <div class="menu-wrap" ref="menuWrap">
-      <ul class="menu">
-        <li class="menu-item" v-for="(item,i) in goods" :key="i" :class="{'current':currentIndex===i}" @click="selectMenu(i,$event)">
-          <span class="text">
-            <span class="icon" v-show="item.type > 0" :class="classMap[item.type]"></span>{{item.name}}
-          </span>
-        </li>
-      </ul>
-    </div>
-    <div class="foods-wrap" ref="foodsWrap">
-      <div>
-        <ul class="list-group food-list-hook" v-for="(item,i) in goods" :key="i">
-          <h1 class="title">{{item.name}}</h1>
-          <ul>
-            <li class="list-group-item" v-for="(food,j) in item.foods" :key="j">
-              <div>
-                <img :src="food.icon" class="icon">
-              </div>
-              <div class="content">
-                <h2 class="name">{{food.name}}</h2>
-                <p class="desc">{{food.description}}</p>
-                <div class="extra">
-                  <span class="count">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
-                </div>
-                <div class="price">
-                  <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
-                </div>
-                <div class="cartctrl-wrap">
-                  <cartctrl :food="food"></cartctrl>
-                </div>
-              </div>
-            </li>
-          </ul>
+  <div>
+    <div class="tab-pane goods">
+      <div class="menu-wrap" ref="menuWrap">
+        <ul class="menu">
+          <li class="menu-item" v-for="(item,i) in goods" :key="i" :class="{'current':currentIndex===i}" @click="selectMenu(i,$event)">
+            <span class="text">
+              <span class="icon" v-show="item.type > 0" :class="classMap[item.type]"></span>{{item.name}}
+            </span>
+          </li>
         </ul>
       </div>
+      <div class="foods-wrap" ref="foodsWrap">
+        <div>
+          <ul class="list-group food-list-hook" v-for="(item,i) in goods" :key="i">
+            <h1 class="title">{{item.name}}</h1>
+            <ul>
+              <li @click="selectedFoodFun(food,$event)" class="list-group-item" v-for="(food,j) in item.foods" :key="j">
+                <div>
+                  <img :src="food.icon" class="icon">
+                </div>
+                <div class="content">
+                  <h2 class="name">{{food.name}}</h2>
+                  <p class="desc">{{food.description}}</p>
+                  <div class="extra">
+                    <span class="count">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
+                  </div>
+                  <div class="price">
+                    <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                  </div>
+                  <div class="cartctrl-wrap">
+                    <cartctrl :food="food"></cartctrl>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+      <shopcart :select-foods="selectFoods" :delivery-price="wsx_seller.deliveryPrice" :min-price="wsx_seller.minPrice"></shopcart>
     </div>
-    <shopcart :select-foods="selectFoods" :delivery-price="wsx_seller.deliveryPrice" :min-price="wsx_seller.minPrice"></shopcart>
+    <food :food="selectedFood" :show-flag="showFlag" ref="food"></food>
   </div>
 </template>
 
@@ -44,6 +47,7 @@
   import BScroll from 'better-scroll';
   import shopcart from '../shopcart/shopcart.vue';
   import cartctrl from '../cartctrl/cartctrl.vue';
+  import food from '../food/food.vue';
   export default {
     props: {
       wsx_seller: {
@@ -54,7 +58,9 @@
       return {
         goods: [],
         listHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {},
+        showFlag: false
       };
     },
     computed: {
@@ -130,11 +136,19 @@
         let foodList = this.$refs.foodsWrap.getElementsByClassName('food-list-hook');
         let el = foodList[i];
         this.foodsScroll.scrollToElement(el, 300);
+      },
+      selectedFoodFun (food, event) {
+        if (!event._constructed) {
+          return;
+        }
+        this.selectedFood = food;
+        this.$refs.food.show(); // 调用food.vue的methods中的show()函数
       }
     },
     components: {
       shopcart,
-      cartctrl
+      cartctrl,
+      food
     }
   };
 </script>

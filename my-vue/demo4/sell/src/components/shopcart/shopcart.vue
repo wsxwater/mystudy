@@ -73,7 +73,7 @@
         this.selectFoods.forEach((food) => {
           total += food.price * food.count;
         });
-        console.log(this.selectFoods);
+        // console.log(this.selectFoods);
         return total;
       },
       totalCount () {
