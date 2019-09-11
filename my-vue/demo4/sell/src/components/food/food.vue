@@ -26,7 +26,11 @@
           <h1 class="title">商品信息</h1>
           <div class="text">{{food.info}}</div>
         </div>
-        <splits v-show="food.rating"></splits>
+        <splits></splits>
+        <div class="food-body rating">
+          <h1 class="title">商品评价</h1>
+          <ratingselect :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type="selectType"></ratingselect>
+        </div>
       </div>
     </div>
   </transition>
@@ -37,6 +41,12 @@
   import Vue from 'vue';
   import cartctrl from '../cartctrl/cartctrl.vue';
   import splits from '../split/split.vue';
+  import ratingselect from '../ratingselect/ratingselect.vue';
+
+  // const POSITIVE = 0;
+  // const NEGATIVE = 1;
+  const ALL = 2;
+
   export default {
     props: {
       food: {
@@ -45,13 +55,21 @@
     },
     data () {
       return {
-        showFlag: false
+        showFlag: false,
+        selectType: ALL,
+        onlyContent: true,
+        desc: {
+            all: '全部',
+            positive: '推荐',
+            negative: '吐槽'
+        }
       };
     },
     methods: {
       show () {
         this.showFlag = true;
-
+        this.selectType = ALL;
+        this.onlyContent = false;
         if (this.$nextTick()) {
           this.$nextTick(() => {
             if (!this.scroll) {
@@ -79,7 +97,8 @@
     },
     components: {
       cartctrl,
-      splits
+      splits,
+      ratingselect
     }
   };
 </script>
@@ -173,7 +192,7 @@
         transition all 0.4s linear
        &.fade-enter,&.fade-leave-active
         opacity 0
-   .info
+    .food-body.info
       .title
         line-height 14px
         font-size 14px
@@ -184,4 +203,9 @@
         line-height 24px
         font-size 12px
         padding 0 8px
+    .food-body.rating
+      padding 0
+      padding-top 18px
+      .title
+        margin-left 18px
 </style>
