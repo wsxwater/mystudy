@@ -49,6 +49,7 @@
           return;
         }
         this.selectType = type;
+        this.$emit('update:selectType', type);
       }
     }
   };

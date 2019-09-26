@@ -29,7 +29,7 @@
         <splits></splits>
         <div class="food-body rating">
           <h1 class="title">商品评价</h1>
-          <ratingselect :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type="selectType"></ratingselect>
+          <ratingselect :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type.sync="selectType"></ratingselect>
         </div>
       </div>
     </div>
