@@ -35,8 +35,8 @@
 			var btnColor=document.querySelectorAll('.btn-color');
 			canvas.width=400;
 			canvas.height=400;
-			function draw(color) {
-				context.globalCompositeOperation = 'source-over';
+			function draw(color,globalCompositeOperation) {
+				context.globalCompositeOperation = globalCompositeOperation;
 				var color = color || 'black';
 				context.lineWidth = 5;
 				context.strokeStyle = color;
@@ -56,7 +56,7 @@
 					}
 				}
 			}
-			draw();
+			draw('black','source-over');
 
 			document.onmouseup=function () {
 				canvas.onmousemove=null;
@@ -83,29 +83,30 @@
 							lineColor='black';
 							break;
 					};
-					draw(lineColor);
+					draw(lineColor,'source-over');
 				}
 			}
 
 			btnEaser.onclick=function () {
-				context.globalCompositeOperation = 'destination-out';
-				context.lineWidth = 5;
-				context.strokeStyle = 'red';
-				canvas.onmousedown=function (event) {
-					var e=event||window.event;
-					var x3=e.clientX-canvas.offsetLeft;
-					var y3=e.clientY-canvas.offsetTop;
-					context.beginPath();
-					context.moveTo(x3,y3);
+				draw('red','destination-out');
+				// context.globalCompositeOperation = 'destination-out';
+				// context.lineWidth = 5;
+				// context.strokeStyle = 'red';
+				// canvas.onmousedown=function (event) {
+				// 	var e=event||window.event;
+				// 	var x3=e.clientX-canvas.offsetLeft;
+				// 	var y3=e.clientY-canvas.offsetTop;
+				// 	context.beginPath();
+				// 	context.moveTo(x3,y3);
 
-					canvas.onmousemove=function (event) {
-						var e=event||window.event;
-						var x4=e.clientX-canvas.offsetLeft;
-						var y4=e.clientY-canvas.offsetTop;
-						context.lineTo(x4,y4);
-						context.stroke();
-					}
-				}
+				// 	canvas.onmousemove=function (event) {
+				// 		var e=event||window.event;
+				// 		var x4=e.clientX-canvas.offsetLeft;
+				// 		var y4=e.clientY-canvas.offsetTop;
+				// 		context.lineTo(x4,y4);
+				// 		context.stroke();
+				// 	}
+				// }
 			}
 			btnClear.onclick=function () {
 				context.clearRect(0,0,canvas.width,canvas.height);
