@@ -5,7 +5,7 @@
       <span @click="select(0,$event)" class="type positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="type-count">40</span></span>
       <span @click="select(1,$event)" class="type negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="type-count">10</span></span>
     </div>
-    <div class="switch" :class="{'on':onlyContent}">
+    <div @click="toggleContent($event)" class="switch" :class="{'on':onlyContent}">
       <i class="icon-check_circle"></i>
       <span class="text">只看有内容的评价</span>
     </div>
@@ -43,13 +43,40 @@
         }
       }
     },
+    data () {
+      return {
+        sType: this.selectType,
+        oContent: this.onlyContent
+      };
+    },
     methods: {
       select (type, event) {
         if (!event._constructed) {
           return;
         }
-        this.selectType = type;
-        this.$emit('update:selectType', type);
+        // this.selectType = type;
+        // this.$emit('update:selectType', type);// 通知父组件的selectType修改，因为子组件(ratingselect.vue)selectType的修改不会影响到父组件(food.vue)selectType的修改
+        this.sType = type;
+        this.$emit('update:selectType', this.sType);
+      },
+      // toggleContent (event) {
+      //   if (!event._constructed) {
+      //     return;
+      //   }
+      //   // this.onlyContent = !this.onlyContent;
+      //   // this.$emit('update:onlyContent', this.onlyContent);
+      //   this.oContent = !this.oContent;
+      //   this.$emit('update', 'onlyContent', this.oContent);debugger;
+      //   console.log('ratingselect.vue ' + this.onlyContent);
+      // }
+      toggleContent (event) { // toggleContent()不生效
+          if (!event._constructed) {
+            return;
+          }
+          this.oContent = !this.onlyContent;
+          this.$emit('increment:onlyContent', this.oContent);
+          console.log(this.onlyContent);
+          // this.$emit('increment', 'onlyContent', this.oContent);// onlyContent要跟food.vue中data定义的同名
       }
     }
   };
