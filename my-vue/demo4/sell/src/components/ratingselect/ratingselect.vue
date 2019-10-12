@@ -59,22 +59,12 @@
         this.sType = type;
         this.$emit('update:selectType', this.sType);
       },
-      // toggleContent (event) {
-      //   if (!event._constructed) {
-      //     return;
-      //   }
-      //   // this.onlyContent = !this.onlyContent;
-      //   // this.$emit('update:onlyContent', this.onlyContent);
-      //   this.oContent = !this.oContent;
-      //   this.$emit('update', 'onlyContent', this.oContent);debugger;
-      //   console.log('ratingselect.vue ' + this.onlyContent);
-      // }
-      toggleContent (event) { // toggleContent()不生效
+      toggleContent (event) { // 在food.vue中的<ratingselect />中添加@increment="incrementTotal"()
           if (!event._constructed) {
             return;
           }
           this.oContent = !this.onlyContent;
-          this.$emit('increment:onlyContent', this.oContent);
+          this.$emit('increment', 'onlyContent', this.oContent);
           console.log(this.onlyContent);
           // this.$emit('increment', 'onlyContent', this.oContent);// onlyContent要跟food.vue中data定义的同名
       }

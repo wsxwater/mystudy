@@ -29,7 +29,7 @@
         <splits></splits>
         <div class="food-body rating">
           <h1 class="title">商品评价</h1>
-          <ratingselect :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type.sync="selectType"></ratingselect>
+          <ratingselect @increment="incrementTotal" :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type.sync="selectType"></ratingselect>
         </div>
       </div>
     </div>
@@ -93,6 +93,9 @@
         // 这里缺少了小球飞入的动画
 
         Vue.set(this.food, 'count', 1);
+      },
+      incrementTotal () {
+        this.onlyContent = !this.onlyContent;
       }
     },
     components: {
