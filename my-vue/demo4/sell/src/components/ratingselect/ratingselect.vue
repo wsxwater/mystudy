@@ -64,7 +64,7 @@
             return;
           }
           this.oContent = !this.onlyContent;
-          this.$emit('increment', 'onlyContent', this.oContent);//  onlyContent要跟food.vue中data定义的同名
+          this.$emit('increment', 'onlyContent', this.oContent);// onlyContent要跟food.vue中data定义的同名
       }
     }
   };
