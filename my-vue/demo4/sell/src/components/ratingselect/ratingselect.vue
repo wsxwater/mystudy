@@ -1,11 +1,11 @@
 <template>
   <div class="ratingselect">
     <div class="rating-type border-1px">
-      <span @click="select(2,$event)" class="type positive" :class="{'active':selectType===2}">{{desc.all}}<span class="type-count">47</span></span>
-      <span @click="select(0,$event)" class="type positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="type-count">40</span></span>
-      <span @click="select(1,$event)" class="type negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="type-count">10</span></span>
+      <span @click.stop.prevent="select(2,$event)" class="type positive" :class="{'active':selectType===2}">{{desc.all}}<span class="type-count">47</span></span>
+      <span @click.stop.prevent="select(0,$event)" class="type positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="type-count">40</span></span>
+      <span @click.stop.prevent="select(1,$event)" class="type negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="type-count">10</span></span>
     </div>
-    <div @click="toggleContent($event)" class="switch" :class="{'on':onlyContent}">
+    <div @click.stop.prevent="toggleContent($event)" class="switch" :class="{'on':onlyContent}">
       <i class="icon-check_circle"></i>
       <span class="text">只看有内容的评价</span>
     </div>
@@ -54,10 +54,8 @@
         if (!event._constructed) {
           return;
         }
-        // this.selectType = type;
-        // this.$emit('update:selectType', type);// 通知父组件的selectType修改，因为子组件(ratingselect.vue)selectType的修改不会影响到父组件(food.vue)selectType的修改
         this.sType = type;
-        this.$emit('update:selectType', this.sType);
+        this.$emit('increment', 'selectType', this.sType);// 通知父组件的selectType修改，因为子组件(ratingselect.vue)selectType的修改不会影响到父组件(food.vue)selectType的修改
       },
       toggleContent (event) { // 在food.vue中的<ratingselect />中添加@increment="incrementTotal"()
           if (!event._constructed) {

@@ -29,7 +29,7 @@
         <splits></splits>
         <div class="food-body rating">
           <h1 class="title">商品评价</h1>
-          <ratingselect @increment="incrementTotal" :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type.sync="selectType"></ratingselect>
+          <ratingselect ref="ratingSelect" @increment="incrementTotal" :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type.sync="selectType"></ratingselect>
         </div>
       </div>
     </div>
@@ -70,17 +70,15 @@
         this.showFlag = true;
         this.selectType = ALL;
         this.onlyContent = false;
-        if (this.$nextTick()) {
-          this.$nextTick(() => {
-            if (!this.scroll) {
-              this.scroll = new BScroll(this.$refs.food, {
-                click: true // 使用better-scroll会阻止click事件（默认事件），所以要开启
-              });// this.$refs.food 获取DOM
-            } else {
-              this.scroll.refresh();
-            }
-          });
-        }
+        this.$nextTick(() => {
+          if (!this.scroll) {
+            this.scroll = new BScroll(this.$refs.food, {
+              click: true // 使用better-scroll会阻止click事件（默认事件），所以要开启
+            });// this.$refs.food 获取DOM
+          } else {
+            this.scroll.refresh();
+          }
+        });
       },
       hide () {
         this.showFlag = false;
@@ -95,7 +93,8 @@
         Vue.set(this.food, 'count', 1);
       },
       incrementTotal () {
-        this.onlyContent = !this.onlyContent;
+        this.selectType = this.$refs.ratingSelect.sType;
+        this.onlyContent = this.$refs.ratingSelect.oContent;
       }
     },
     components: {
