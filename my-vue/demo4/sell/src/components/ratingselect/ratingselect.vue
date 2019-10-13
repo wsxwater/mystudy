@@ -55,6 +55,7 @@
           return;
         }
         this.sType = type;
+        this.$emit('update:selectType', this.sType);
         this.$emit('increment', 'selectType', this.sType);// 通知父组件的selectType修改，因为子组件(ratingselect.vue)selectType的修改不会影响到父组件(food.vue)selectType的修改
       },
       toggleContent (event) { // 在food.vue中的<ratingselect />中添加@increment="incrementTotal"()
