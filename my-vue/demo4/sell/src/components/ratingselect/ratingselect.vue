@@ -1,9 +1,9 @@
 <template>
   <div class="ratingselect">
     <div class="rating-type border-1px">
-      <span @click="select(2,$event)" class="type positive" :class="{'active':selectType===2}">{{desc.all}}<span class="type-count">47</span></span>
-      <span @click="select(0,$event)" class="type positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="type-count">40</span></span>
-      <span @click="select(1,$event)" class="type negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="type-count">10</span></span>
+      <span @click="select(2,$event)" class="type positive" :class="{'active':selectType===2}">{{desc.all}}<span class="type-count">{{ratings.length}}</span></span>
+      <span @click="select(0,$event)" class="type positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="type-count">{{positives.length}}</span></span>
+      <span @click="select(1,$event)" class="type negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="type-count">{{negatives.length}}</span></span>
     </div>
     <div @click="toggleContent($event)" class="switch" :class="{'on':onlyContent}">
       <i class="icon-check_circle"></i>
@@ -13,8 +13,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  // const POSITIVE = 0;
-  // const NEGATIVE = 1;
+  const POSITIVE = 0;
+  const NEGATIVE = 1;
   const ALL = 2;
   export default {
     props: {
@@ -48,6 +48,18 @@
         sType: this.selectType,
         oContent: this.onlyContent
       };
+    },
+    computed: {
+      positives () {
+        return this.ratings.filter((rating) => {
+          return rating.rateType === POSITIVE;
+        });
+      },
+      negatives () {
+        return this.ratings.filter((rating) => {
+          return rating.rateType === NEGATIVE;
+        });
+      }
     },
     methods: {
       select (type, event) {
