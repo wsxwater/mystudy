@@ -29,8 +29,7 @@
         <splits></splits>
         <div class="food-body rating">
           <h1 class="title">商品评价</h1>
-          <ratingselect @incrementSType
-="incrementSType" @incrementOContent="incrementOContent" :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type.sync="selectType"></ratingselect>
+          <ratingselect @increment="incrementTotal" :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type.sync="selectType"></ratingselect>
         </div>
       </div>
     </div>
@@ -93,16 +92,21 @@
 
         Vue.set(this.food, 'count', 1);
       },
-      incrementSType (funName, data) {
-        this.selectType = data;
-      },
-      incrementOContent (funName, data) {
-        this.onlyContent = data;
-      }
-      // incrementTotal () {
-      //   // this.selectType = this.$refs.ratingSelect.sType;
-      //   // this.onlyContent = this.$refs.ratingSelect.oContent;
+      // incrementSType (funName, data) {
+      //   this.selectType = data;
+      // },
+      // incrementOContent (funName, data) {
+      //   this.onlyContent = data;
       // }
+      incrementTotal (funName, funData) {
+        if (funName === 'selectType') {
+          this.selectType = funData;
+        } else if (funName === 'onlyContent') {
+          this.onlyContent = funData;
+        }
+        // this.selectType = this.$refs.ratingSelect.sType;
+        // this.onlyContent = this.$refs.ratingSelect.oContent;
+      }
     },
     components: {
       cartctrl,
