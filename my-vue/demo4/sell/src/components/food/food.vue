@@ -30,6 +30,20 @@
         <div class="food-body rating">
           <h1 class="title">商品评价</h1>
           <ratingselect @increment="incrementTotal" :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type.sync="selectType"></ratingselect>
+          <div class="ratings-wrap">
+            <ul class="list-group" v-show="food.ratings && food.ratings.length">
+              <li class="list-group-item" :key="item.username" v-for="item in food.ratings">
+                  <div class="user">
+                    <span class="uname">{{item.username}}</span><img class="avatar" width="12" height="12" :src="item.avatar">
+                  </div>
+                  <div class="time">{{item.rateTime}}</div>
+                  <p class="text">
+                    <i :class="{'icon-thumb_up':item.rateType===0,'icon-thumb_down':item.rateType===1}"></i>
+                  </p>
+              </li>
+            </ul>
+            <div class="no-ratings" v-show="!food.ratings || !food.ratings.length"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -137,7 +151,7 @@
       height 0
       padding-bottom 100%
       background-color #f3f5f7
-    img
+    & > img
       position absolute
       top 0
       left 0
