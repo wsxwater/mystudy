@@ -32,17 +32,17 @@
           <ratingselect @increment="incrementTotal" :ratings="food.ratings" :desc="desc" :only-content="onlyContent" :select-type.sync="selectType"></ratingselect>
           <div class="ratings-wrap">
             <ul class="list-group" v-show="food.ratings && food.ratings.length">
-              <li class="list-group-item" :key="item.username" v-for="item in food.ratings">
+              <li v-show="needShow(item.rateType,item.text)" class="list-group-item border-1px" :key="item.username" v-for="item in food.ratings">
                   <div class="user">
-                    <span class="uname">{{item.username}}</span><img class="avatar" width="12" height="12" :src="item.avatar">
+                    <span class="uname">{{item.username}}</span><img class="avatar" :src="item.avatar">
                   </div>
-                  <div class="time">{{item.rateTime}}</div>
+                  <div class="time">{{item.rateTime | formatDate}}</div>
                   <p class="text">
-                    <i :class="{'icon-thumb_up':item.rateType===0,'icon-thumb_down':item.rateType===1}"></i>
+                    <i :class="{'icon-thumb_up':item.rateType===0,'icon-thumb_down':item.rateType===1}"></i>{{item.text}}
                   </p>
               </li>
             </ul>
-            <div class="no-ratings" v-show="!food.ratings || !food.ratings.length"></div>
+            <div class="no-ratings" v-show="!food.ratings || !food.ratings.length">暂无评价</div>
           </div>
         </div>
       </div>
@@ -56,6 +56,7 @@
   import cartctrl from '../cartctrl/cartctrl.vue';
   import splits from '../split/split.vue';
   import ratingselect from '../ratingselect/ratingselect.vue';
+  import {formatDate} from '../../common/js/date.js';
 
   // const POSITIVE = 0;
   // const NEGATIVE = 1;
@@ -83,7 +84,7 @@
       show () {
         this.showFlag = true;
         this.selectType = ALL;
-        this.onlyContent = false;
+        this.onlyContent = true;
         this.$nextTick(() => {
           if (!this.scroll) {
             this.scroll = new BScroll(this.$refs.food, {
@@ -106,32 +107,53 @@
 
         Vue.set(this.food, 'count', 1);
       },
-      // incrementSType (funName, data) {
-      //   this.selectType = data;
-      // },
-      // incrementOContent (funName, data) {
-      //   this.onlyContent = data;
-      // }
       incrementTotal (funName, funData) {
         if (funName === 'selectType') {
           this.selectType = funData;
         } else if (funName === 'onlyContent') {
           this.onlyContent = funData;
         }
+        this.$nextTick(() => {
+          this.scroll.refresh();
+        });
         // this.selectType = this.$refs.ratingSelect.sType;
         // this.onlyContent = this.$refs.ratingSelect.oContent;
+      },
+      needShow (type, text) {
+        if (this.onlyContent && !text) {
+          return false;
+        }
+        if (this.selectType === ALL) {
+          return true;
+        } else {
+          return this.selectType === type;
+        }
       }
     },
     components: {
       cartctrl,
       splits,
       ratingselect
+    },
+    filters: {
+      formatDate (time) {
+        let date = new Date(time);
+        return formatDate(date, 'yyyy-MM-dd hh:mm');
+        // let date = new Date(time);
+        // let Y = date.getFullYear() + '年';
+        // let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '月';
+        // let D = date.getDate() + '日';
+        // let h = date.getHours() + '时';
+        // let m = date.getMinutes() + '分';
+        // time = Y + M + D + '' + h + m;
+        // return time;
+      }
     }
   };
 </script>
 
 <style rel="stylesheet/stylus" lang="stylus">
-
+  @import "../../common/stylus/mixin.styl";
   .food
     position fixed
     top 0
@@ -151,7 +173,7 @@
       height 0
       padding-bottom 100%
       background-color #f3f5f7
-    & > img
+    .img-header img
       position absolute
       top 0
       left 0
@@ -235,4 +257,49 @@
       padding-top 18px
       .title
         margin-left 18px
+      .ratings-wrap
+        padding 0 18px
+        .list-group-item
+          position relative
+          padding 16px 0
+          border-1px(rgba(7,17,27,0.1))
+          .user
+            position absolute
+            right 0
+            top 16px
+            font-size 0
+            line-height 12px
+            .uname
+              display inline-block
+              vertical-align top
+              font-size 10px
+              color rgb(147,153,159)
+            .avatar
+              display inline-block
+              vertical-align top
+              width 12px
+              height 12px
+              border-radius 50%
+          .time
+            line-height 12px
+            font-size 10px
+            color rgb(147,153,159)
+            margin-bottom 6px
+          .text
+            color rgb(7,17,27)
+            line-height 16px
+            font-size 12px
+            .icon-thumb_up,.icon-thumb_down
+              margin-right 4px
+              line-height 16px
+              font-size 12px
+            .icon-thumb_up
+              color rgb(0,160,200)
+            .icon-thumb_down
+              color rgb(147,153,159)
+        .no-ratings
+          font-size 12px
+          text-align center
+          color rgb(147,153,159)
+          padding 16px 0
 </style>
