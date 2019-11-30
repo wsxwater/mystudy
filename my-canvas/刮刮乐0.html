@@ -80,6 +80,8 @@
 			    });
 
 
+
+
 			    //鼠标抬起取消事件
 			    myCanvasObject.addEventListener(tapend, function(event) {
 			        isDown = false;
@@ -126,7 +128,15 @@
 		            }
 		    }*/
 			init();
-        
+      
+
+      // 2019-11-30 
+      document.addEventListener('touchmove',function (event) {
+      	var e=window.event||event;
+      	e.preventDefault()
+      },{
+      	possive: false
+      }); 
 		}
 
 		var img1=document.getElementById('img1'); 
