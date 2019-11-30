@@ -29,6 +29,7 @@
 ### my-canvas
 <pre>
     > <a href="my-canvas/刮刮乐0.html">刮刮乐0.html</a>  
+    > <a href="my-canvas/刮刮乐0.1.html">刮刮乐0.1.html</a>  
     > <a href="my-canvas/刮刮乐1.html">刮刮乐1.html</a>  
     > <a href="my-canvas/刮刮乐2.html">刮刮乐2.html</a>  
     > <a href="my-canvas/刮刮乐3.html">刮刮乐3.html</a>  
