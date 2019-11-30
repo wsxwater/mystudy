@@ -6,7 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+<<<<<<< HEAD
     movieID:''
+=======
+    
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
   },
 
   /**
@@ -14,6 +18,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options.movieid)
+<<<<<<< HEAD
 
     this.setData({
       movieID: options.movieid
@@ -29,4 +34,8 @@ Page({
     
   }
   
+=======
+    //console.log(movieData.initData[0])
+  }
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 })

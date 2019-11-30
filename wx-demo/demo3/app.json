@@ -2,10 +2,14 @@
   "pages":[
     "pages/index/index",
     "pages/detail/detail",
+<<<<<<< HEAD
     "pages/cart/cart",
     "pages/address/address",
     "pages/address/new-address/new-address",
     "pages/hoverClass/hoverClass"
+=======
+    "pages/cart/cart"
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
     
   ],
   "window":{

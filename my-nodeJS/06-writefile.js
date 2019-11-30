@@ -10,6 +10,7 @@ http.createServer(function (req,res) {
 
 	if (req.url!=='/favicon.ico') {
                 
+<<<<<<< HEAD
             pathname=url.parse(req.url).pathname;//只获取请求的路径名
             pathname=pathname.replace(/\//,'');
             console.log(pathname);
@@ -17,6 +18,15 @@ http.createServer(function (req,res) {
 
 
             console.log('主程序执行完毕');
+=======
+                pathname=url.parse(req.url).pathname;//只获取请求的路径名
+                pathname=pathname.replace(/\//,'');
+                console.log(pathname);
+                router[pathname](req,res);
+
+
+                console.log('主程序执行完毕');
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 	}
 }).listen(8000);
 

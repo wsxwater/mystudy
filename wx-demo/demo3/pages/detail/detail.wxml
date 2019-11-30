@@ -3,9 +3,15 @@
 <view class="container">
    <text>{{newsId}}-{{authorName}}</text>
    <view class='shopcart'>
+<<<<<<< HEAD
      <button type='primary' size='mini' bindtap='goCart' data-newsid='{{newsId}}'>购物车</button>
      <button type='primary' size='mini' bindtap='addCart' data-newsid='{{newsId}}'>加入购物车</button>
   </view> 
 
+=======
+     <button type='primary' size='mini' bindtap='goCart'>购物车</button>
+     <button type='primary' size='mini' bindtap='addCart'>加入购物车</button>
+  </view> 
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
   
 </view>

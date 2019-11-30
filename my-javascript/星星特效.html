@@ -26,6 +26,7 @@
 <body>
 
 	<script type="text/javascript">
+<<<<<<< HEAD
 		window.onload=function () {
 			var timer=null;
 			starEffect();
@@ -78,6 +79,43 @@
 				document.body.innerHTML=ohtml;
 	        }
 			
+=======
+		window.onload=window.onresize=function () {
+
+			var winW=document.body.clientWidth||document.documentElement.clientWidth;
+			var winH=document.body.clientHeight||document.documentElement.clientHeight;
+			var fragment = document.createDocumentFragment();  //本方法用来创建一个 DocumentFragment ，也就是文档碎片，它表示一种轻量级的文档，主要是用来存储临时节点，大量操作DOM时用它可以大大提升性能。
+			console.log(winW,winH);
+			for (var i = 0; i < 150; i++) {
+				var stars=document.createElement('span');
+				var l=Math.round(Math.random()*winW);
+				var t=Math.round(Math.random()*winH);
+				var w=7;
+				var scale=Math.random()*1.6;
+				var rate=Math.random()*1.5;
+				// console.log(scale);
+				l=Math.max(0,Math.min(winW-w,l));
+				t=Math.max(0,Math.min(winH-w,t));
+                // if (l>=winW-w) {
+                // 	l=winW-w;
+                // }else if(l<=0){
+                // 	l=0;
+                // }
+                // if (t>=winH-w) {
+                // 	t=winH-w;
+                // }else if(t<=0){
+                // 	t=0;
+                // }
+
+				stars.style.left=l+'px';
+				stars.style.top=t+'px';
+				stars.style.animationDelay=rate+'s';
+				stars.style.transform='scale('+scale+','+scale+')';
+				fragment.appendChild(stars);
+			}
+            document.body.appendChild(fragment);
+
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 		}
 	</script>
 </body>

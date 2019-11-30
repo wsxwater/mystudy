@@ -1,6 +1,9 @@
 // pages/detail/detail.js
 var newsData = require('../data/data.js');
+<<<<<<< HEAD
 var li=[];
+=======
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 
 Page({
 
@@ -8,8 +11,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+<<<<<<< HEAD
      list:[],
      mli:[]
+=======
+     NEWSID:[]
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
   },
 
   /**
@@ -22,6 +29,7 @@ Page({
 
       this.setData({
         newsId: options.newsid
+<<<<<<< HEAD
       });
       
  
@@ -72,5 +80,53 @@ Page({
 
     return list;
 
+=======
+      })
+
+      // var newsIDF = wx.getStorageSync('newsIDF');
+
+      // if (newsIDF) {
+      //   var newIDF = newsIDF[options.newsid];
+
+      // } else {
+      //   var newsIDF = {};
+      //   newsIDF[options.newsid] = 0;
+      //   wx.setStorageSync('newsIDF', newsIDF);
+      // }
+  },
+  goCart: function () {
+    wx.navigateTo({
+      url: '../cart/cart',
+    });
+  },
+  addCart:function (event) {
+    
+    //console.log(this.data.newsId)
+    // var newsIDF = wx.getStorageSync('newsIDF');
+    // var newIDF = newsIDF[this.data.newsId] || 0;
+    // newIDF = newIDF+1;
+
+    // newsIDF[this.data.newsId] = newIDF;
+
+    // wx.setStorageSync('newsIDF', newsIDF);
+    
+    var list=this.data.NEWSID;
+
+    list.push(this.data.newsId)
+    
+    this.setData({
+      Id:list
+    })
+
+    wx.setStorage({
+      key: 'newsid',
+      data: list,
+    })
+
+    
+  },
+  onUnload:function(){
+    
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
   }
 })

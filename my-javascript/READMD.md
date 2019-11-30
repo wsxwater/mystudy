@@ -276,6 +276,7 @@
     https://github.com/jquery/testswarn/wiki
 </pre>
 
+<<<<<<< HEAD
 ## Javascript高级程序设计
 <pre>
     运用于放过和屏蔽任何输入文本框的字符。
@@ -289,6 +290,8 @@
     }); 
 </pre>
 
+=======
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 
 
 

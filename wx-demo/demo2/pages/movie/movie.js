@@ -35,7 +35,11 @@ Page({
 
     this.mycallback(movieData.initData[0],'inTheaters','正在热映');
     this.mycallback(movieData.initData[1],'Top250','排行榜');
+<<<<<<< HEAD
     //wx.hideNavigationBarLoading();
+=======
+    wx.hideNavigationBarLoading();
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 
     // this.setData({
     //   inTheaters: movieData.initData.inTheaters
@@ -58,6 +62,7 @@ Page({
     //   inTheaters: movieData.initData[0].inTheaters,
     //   Top250: movieData.initData[1].Top250
     // })
+<<<<<<< HEAD
 
     
     wx.request({
@@ -69,6 +74,9 @@ Page({
         callback(res)
       }
     })    
+=======
+        
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
   },
   movieHttp: function (url, callback, category){
         wx.request({
@@ -122,7 +130,11 @@ Page({
           movies:movies
         }
 
+<<<<<<< HEAD
         //console.log(readyData)
+=======
+        console.log(readyData)
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 
         this.setData(readyData);
 
@@ -139,7 +151,11 @@ Page({
     })
   },
   onReady:function(){
+<<<<<<< HEAD
     //wx.showNavigationBarLoading();
+=======
+    wx.showNavigationBarLoading();
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
   }
 
 

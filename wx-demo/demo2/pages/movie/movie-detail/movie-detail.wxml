@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 <view>电影ID：{{movieID}}</view>
+=======
+<view>电影详情</view>
+>>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
