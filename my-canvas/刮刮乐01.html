@@ -137,6 +137,12 @@
       },{
       	possive: false
       }); 
+      document.addEventListener('touchend',function (event) {
+      	var e=window.event||event;
+      	e.preventDefault()
+      },{
+      	possive: false
+      }); 
 		}
 
 		var img1=document.getElementById('img1'); 
