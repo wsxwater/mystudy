@@ -18,8 +18,7 @@
 
 	<script type="text/javascript">
 		window.onload=function () {
-			var myCanvasObject = document.getElementById("myCanvas");
-			var ctx = myCanvasObject.getContext("2d");
+			
 			function init() {
 			    if (!document.getElementById("myCanvas")) {
 			        var width = "";
@@ -127,7 +126,6 @@
       document.addEventListener('touchend',function (event) {
       	var e=window.event||event;
       	e.preventDefault();
-      	myCanvasObject.removeEventListener(touchend,init);
       },{
       	possive: false
       }); 
