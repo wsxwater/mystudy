@@ -112,34 +112,21 @@
 			    }
 			}
             
-            
-            /*img1.onload=function () {
-            	var imgSrc=img1.getAttribute('src');
-            	console.log(imgSrc);
-            	div1.style.backgroundImage=imgSrc;
-            	init();
-            }*/
-            /*img1.onreadystatechange =function() {
-		            if(img1.readyState=="complete"||img1.readyState=="loaded"){
-		            	var imgSrc=img1.getAttribute('src');
-		            	console.log(imgSrc);
-		            	div.style.backgroundImage=imgSrc;
-		            	init();
-		            }
-		    }*/
+           
 			init();
       
 
       // 2019-11-30 
       document.addEventListener('touchmove',function (event) {
       	var e=window.event||event;
-      	e.preventDefault()
+      	e.preventDefault();
       },{
       	possive: false
       }); 
       document.addEventListener('touchend',function (event) {
       	var e=window.event||event;
-      	e.preventDefault()
+      	e.preventDefault();
+      	myCanvasObject.removeEventListener(touchend,init);
       },{
       	possive: false
       }); 
@@ -152,6 +139,21 @@
         	console.log(imgSrc);
         	div1.style.backgroundImage='url('+imgSrc+')';
         }
+
+        /*img1.onload=function () {
+        	var imgSrc=img1.getAttribute('src');
+        	console.log(imgSrc);
+        	div1.style.backgroundImage=imgSrc;
+        	init();
+        }*/
+        /*img1.onreadystatechange =function() {
+            if(img1.readyState=="complete"||img1.readyState=="loaded"){
+            	var imgSrc=img1.getAttribute('src');
+            	console.log(imgSrc);
+            	div.style.backgroundImage=imgSrc;
+            	init();
+            }
+    }*/
 
 	</script>
 </body>
