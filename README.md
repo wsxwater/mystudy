@@ -29,10 +29,12 @@
 ### my-canvas
 <pre>
     > <a href="my-canvas/刮刮乐0.html">刮刮乐0.html</a>  
+    > <a href="my-canvas/刮刮乐0.1.html">刮刮乐0.1.html</a>  
     > <a href="my-canvas/刮刮乐1.html">刮刮乐1.html</a>  
     > <a href="my-canvas/刮刮乐2.html">刮刮乐2.html</a>  
     > <a href="my-canvas/刮刮乐3.html">刮刮乐3.html</a>  
     > <a href="my-canvas/刮刮乐4.html">刮刮乐4.html</a>  
+    > <a href="my-canvas/画板.html">画板.html</a>  
     > <a href="my-canvas/合成图片.html">合成图片.html</a>  
     > <a href="my-canvas/图形头像.html">图形头像.html</a>  
     > <a href="my-canvas/多边形.html">多边形.html</a>  
