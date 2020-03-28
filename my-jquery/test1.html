@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="copy-txt">jkjdkjfdjfsj</div>
+	<script src="jQuery2.1.1.js"></script>
+	<script type="text/javascript">
+	$(function () {
+		$(document).on('copy','.copy-txt',function () {
+			alert('success');
+			$(this).blur();
+		})
+	})
+	</script>
+</body>
+</html>
