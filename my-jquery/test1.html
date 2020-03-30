@@ -6,14 +6,13 @@
 	<title>Document</title>
 </head>
 <body>
-	<div class="copy-txt">jkjdkjfdjfsj</div>
+	<div class="copy-txt" tabindex="0">jkjdkjfdjfsj</div>
 	<script src="jQuery2.1.1.js"></script>
 	<script type="text/javascript">
 	$(function () {
 		$(document).on('copy','.copy-txt',function () {
 			console.log('success');
 			$(this).blur();
-			return false;
 		})
 	})
 	</script>
