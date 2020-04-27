@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="can" style="border: 5px solid #000;margin: 10px auto;display: block;"></canvas>
+	<script>
+		window.onload = function () {
+			var can = document.querySelector("#can");
+			var ctx = can.getContext("2d");
+			can.width = 300;
+			can.height = 300;
+
+			var r = can.width * 0.4; // 半径
+			var x = can.width * 0.5; // 圆心x轴
+			var y = can.height * 0.5; // 圆心y轴
+
+			//弧度
+			var startAngle=0;//开始
+			var endAngle=0;//结束
+
+			var data_arr=[0.1,0.25,0.6,0.05]; //各类的百分比
+			var color_arr=["#00FF21","#FFAA00","#00AABB","#FF4400"];//现实的颜色
+      for (var i = 0; i < data_arr.length; i++) {
+      	endAngle = startAngle + data_arr[i] * 2 * Math.PI;
+				ctx.beginPath();
+				ctx.moveTo(x,y);
+				ctx.arc(x,y,r,startAngle,endAngle);
+				ctx.fillStyle = color_arr[i];
+				startAngle = endAngle;
+				ctx.fill();
+				ctx.closePath();
+      }
+ 
+
+		}
+	</script>
+</body>
+</html>
