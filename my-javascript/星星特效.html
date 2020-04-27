@@ -29,14 +29,13 @@
 		window.onload=function () {
 			var timer=null;
 			starEffect();
-
-
+			
 			window.onresize=function () {
 				clearTimeout(timer);
 				setTimeout(starEffect,200);
 			}
 
-	        function starEffect() {
+	    function starEffect() {
 				var winW=document.body.clientWidth||document.documentElement.clientWidth;
 				var winH=document.body.clientHeight||document.documentElement.clientHeight;
 				var ohtml='';
@@ -52,16 +51,6 @@
 					// console.log(scale);
 					l=Math.max(0,Math.min(winW-w,l));
 					t=Math.max(0,Math.min(winH-w,t));
-	                // if (l>=winW-w) {
-	                // 	l=winW-w;
-	                // }else if(l<=0){
-	                // 	l=0;
-	                // }
-	                // if (t>=winH-w) {
-	                // 	t=winH-w;
-	                // }else if(t<=0){
-	                // 	t=0;
-	                // }
 
 					stars.style.left=l+'px';
 					stars.style.top=t+'px';
@@ -69,14 +58,13 @@
 					stars.style.transform='scale('+scale+','+scale+')';
 					//fragment.appendChild(stars);
 
-
 					ohtml+='<span style="left:'+l+'px;top:'+t+'px;animation-delay:'+rate+'s;transform:scale('+scale+','+scale+')"></span>';
 
 				}
-	            //document.body.appendChild(fragment);
-
+	      
+	      //document.body.appendChild(fragment);
 				document.body.innerHTML=ohtml;
-	        }
+	    }
 			
 		}
 	</script>
