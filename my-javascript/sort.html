@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<div>原始数据：<t></t></div>
+	<div>输出排序结果：<span></span></div>
+</head>
+<body>
+	<script type="text/javascript">
+	window.onload=function () {
+		//排序
+		var arr   = [],
+		    len   = 10,
+		    t,
+		    oT = document.getElementsByTagName("t")[0],
+				aSpan = document.getElementsByTagName("span")[0];
+				for (var i = 0; i < len; i++) {
+					var random = Math.floor(Math.random()*(122-97+1)+97);
+					arr[i] = String.fromCharCode(random);
+				}
+
+				oT.innerHTML = arr.join("");
+				aSpan.innerHTML = arr.sort().join("");
+
+	}
+	</script>
+</body>
+</html>

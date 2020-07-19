@@ -22,18 +22,37 @@
 			var startAngle=0;//开始
 			var endAngle=0;//结束
 
+			var rad = Math.PI*2/100, //将360度分成100份，那么每一份就是rad度
+			    speed = 1; //加载的快慢就靠它了
+			//动画循环
+
 			var data_arr=[0.1,0.25,0.6,0.05]; //各类的百分比
 			var color_arr=["#00FF21","#FFAA00","#00AABB","#FF4400"];//现实的颜色
-      for (var i = 0; i < data_arr.length; i++) {
-      	endAngle = startAngle + data_arr[i] * 2 * Math.PI;
-				ctx.beginPath();
-				ctx.moveTo(x,y);
-				ctx.arc(x,y,r,startAngle,endAngle);
-				ctx.fillStyle = color_arr[i];
-				startAngle = endAngle;
-				ctx.fill();
-				ctx.closePath();
-      }
+			function draw(n) {
+	      for (var i = 0; i < data_arr.length; i++) {
+	      	endAngle = startAngle + data_arr[i] * n * rad;
+					ctx.beginPath();
+					ctx.moveTo(x,y);
+					ctx.arc(x,y,r,startAngle,endAngle);
+					ctx.fillStyle = color_arr[i];
+					startAngle = endAngle;
+					ctx.fill();
+					ctx.closePath();
+	      }
+			}
+
+      var stop=null;
+      (function drawFrame(){
+      	if(speed > 100) {
+      		speed = 0;
+      	}
+      	speed += 10;
+          ctx.clearRect(0, 0, can.width, can.height);
+          draw(speed);
+          if (speed < 100) {
+              stop=requestAnimationFrame(drawFrame);
+          }
+      }());
  
 
 		}
