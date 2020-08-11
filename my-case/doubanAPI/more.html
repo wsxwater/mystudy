@@ -41,14 +41,14 @@
             if (categoryName!=undefined) {
 		        switch (categoryName) {
 		            case "in_theaters":
-		              allUrls = gobalurl+'/v2/movie/in_theaters';
+		              allUrls = gobalurl+'/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a';
 		            break;
 		            case "top250":
-		              allUrls = gobalurl+'/v2/movie/top250';
+		              allUrls = gobalurl+'/v2/movie/top250?apikey=0df993c66c0c636e29ecbb5344252a4a';
 		            break;
 		        }
             }else{
-            	allUrls=gobalurl+'/v2/movie/in_theaters';
+            	allUrls=gobalurl+'/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a';
             }
 		    
 		    httpGet(allUrls,callback,error);

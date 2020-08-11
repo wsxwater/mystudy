@@ -116,10 +116,6 @@
             }
             
             function callback(res) {
-<<<<<<< HEAD
-=======
-
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
                 //console.log(res.code);
                 if (!res) {
                     return;
@@ -161,16 +157,12 @@
                     console.log(temp,temp.id);
 
                     $('.head-bg').prop('src', temp.img);
-<<<<<<< HEAD
+
                     //$('#svgEle image').attr('xlink:href',temp.img);
 
                     $('.head-img').append('<img src="'+temp.img+'" alt="movieimg" />');
                     $('.sub-title span').empty().append(temp.country + " · "+temp.year);
-=======
-                    $('.head-img').append('<img src="'+temp.img+'" alt="movieimg" />');
-                    $('.sub-title span').empty().append(temp.country + " · "+temp.year);
-                    
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
+
                     $('.head-title').empty().append(temp.title);
                     $('.original-title').empty().append(temp.originalTitle);
                     $('.wish-count').empty().append(temp.wishCount);
@@ -189,11 +181,8 @@
                                      '<img src="'+getImages(val.avatars.large)+'" class="cast-img" >'+
                                      '<span class="cast-name">'+val.name+'</span>'+
                                     '</div>';
-<<<<<<< HEAD
                        $('.cast-imgs').append($casts);
-=======
-                        $('.cast-imgs').append($casts);
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
+
                     })
                     
                     

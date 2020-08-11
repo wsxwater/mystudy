@@ -6,8 +6,8 @@ function httpGet(url,callback,error) {
 	var xhrs=$.ajax({
 			url:url,
 			type:'GET',
-			// dataType: 'jsonp',//没有使用nginx
-	        // crossDomain: true,//没有使用nginx
+			dataType: 'jsonp',//没有使用nginx
+	        crossDomain: true,//没有使用nginx
 			success:function (res) {
 				callback(res)
 			},
