@@ -82,21 +82,13 @@ function getUrlParam(name) {
     
     var reg=new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
     var r=window.location.search.substr(1).match(reg);
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
     if (r!=null) {
         return unescape(r[2]);
     }
     return null;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 // 解决豆瓣403图片缓存问题
 // 豆瓣限制了图片的加载，可以把图片缓存下来： 只要在请求到的图片链接前面加上‘https://images.weserv.nl/?url=’即可（注：这是一个专门缓存图片的网址），可能会有点慢。
 function getImages( _url ){
