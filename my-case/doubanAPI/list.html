@@ -98,8 +98,8 @@
     		// 
             
           var start=0;
-    	  movieRequest(gobalurl+'/v2/movie/in_theaters?start=0&count=3',mcallback,'#inTheaters','in_theaters');
-    	  movieRequest(gobalurl+'/v2/movie/top250?start=0&count=3',mcallback,'#top250','top250');
+    	  movieRequest(gobalurl+'/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=3',mcallback,'#inTheaters','in_theaters');
+    	  movieRequest(gobalurl+'/v2/movie/top250?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=3',mcallback,'#top250','top250');
 
     		function movieRequest(url,mcallback,category,categoryName) {
     			$.ajax({
@@ -224,7 +224,7 @@
             });
 
             $('.more').click(function () {
-                var nextUrls = gobalurl+'/v2/movie/search?q='+$.trim($('.search-box .form-control').val()) + '&start=' + start + '&count=10';
+                var nextUrls = gobalurl+'/v2/movie/search?apikey=0df993c66c0c636e29ecbb5344252a4a&q='+$.trim($('.search-box .form-control').val()) + '&start=' + start + '&count=10';
                 httpGet(nextUrls,callback,error);
             });
             $('#returnBtn').click(function () {
