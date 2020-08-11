@@ -10,12 +10,8 @@ function readfileSync(path) {//同步读取
 function readfile(path,callback) {//异步读取
     fs.readFile(path,function (err,data) {
     	if (err) {
-<<<<<<< HEAD
     		console.log('bbb'+err);
     		callback('文件不存在！！！')
-=======
-    		console.log(err);
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
     	}else{
 			//console.log(data.toString());
 			callback(data);
@@ -38,7 +34,6 @@ function writefile(path,data,callback) {//异步写文件
 	console.log('异步执行完毕');
 }
 
-<<<<<<< HEAD
 /**
  * [readImg 读取图片]
  * @param  {[type]} path [图片路径]
@@ -61,10 +56,4 @@ module.exports={
 	readfile:readfile,
 	writefile:writefile,
 	readImg:readImg
-=======
-module.exports={
-	readfileSync:readfileSync,
-	readfile:readfile,
-	writefile:writefile
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 }

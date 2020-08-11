@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 <import src='../movie-more-temp/movie-more-temp.wxml' />
-
 <template is='movieMoreTemp' data='{{moreMovies}}' /> 
-
-
-=======
  <import src='../star-template/star-template.wxml' />
 
 <!-- <template name='movieTemp'>
@@ -27,5 +22,3 @@
       </view>
   </view>
 </view>
-
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67

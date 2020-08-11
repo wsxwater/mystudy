@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-<<<<<<< HEAD
      list:[],
      nodes: [{
        name: 'div',
@@ -20,20 +19,13 @@ Page({
          text: 'Hello&nbsp;World!'
        }]
      }]
-=======
-  
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-<<<<<<< HEAD
     var that=this;
-
-    
-
     wx.getStorage({
       key: 'list',
       success: function(res) {
@@ -45,7 +37,6 @@ Page({
         
       },
     })
-=======
     //console.log(options.idx)
 
     //this.setData(newsData.initData[options.idx])
@@ -76,8 +67,6 @@ Page({
 
       //console.log(newsData.initData[newsIDF])
     //} 
-
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 
   }
 })

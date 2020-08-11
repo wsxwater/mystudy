@@ -8,11 +8,7 @@
             <image src='../images/icon/collect3.png'></image>
             <image src='../images/icon/collect3.png'></image>
             <image src='../images/icon/collect3.png'></image> -->
-<<<<<<< HEAD
             <image wx:for='{{stars}}' wx:key='{{key}}' src='{{item?"https://wsxwater.github.io/mystudy/wx-demo/demo2/pages/images/icon/collect2.png":"https://wsxwater.github.io/mystudy/wx-demo/demo2/pages/images/icon/collect3.png"}}'></image>
-=======
-            <image wx:for='{{stars}}' wx:key='{{key}}' src='{{item?"../images/icon/collect2.png":"../images/icon/collect3.png"}}'></image>
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
             <text class='star-score'>{{average}}</text>
         </view> 
     </view>

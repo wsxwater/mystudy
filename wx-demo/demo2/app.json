@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/news/news",
     "pages/news/news-detail/news-detail",
@@ -7,27 +7,31 @@
     "pages/movie/movie-detail/movie-detail",
     "pages/movie/movie-more/movie-more"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "李白诗词",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "list": [{
-      "pagePath": "pages/news/news",
-      "text": "诗歌",
-      "iconPath": "/pages/images/icon/ico-tab1.png",
-      "selectedIconPath": "/pages/images/icon/ico-tab1.png"
-    },{
-      "pagePath": "pages/movie/movie",
-      "text": "测试",
-      "iconPath": "/pages/images/icon/ico-tab2.png",
-      "selectedIconPath": "/pages/images/icon/ico-tab2.png"
-    }],
-    "selectedColor":"#FFFFFF",
-    "color":"#FFFFFF",
-    "borderStyle":"white",
-    "backgroundColor":"#915b13"
-  }
+    "list": [
+      {
+        "pagePath": "pages/news/news",
+        "text": "诗歌",
+        "iconPath": "/pages/images/icon/ico-tab1.png",
+        "selectedIconPath": "/pages/images/icon/ico-tab1.png"
+      },
+      {
+        "pagePath": "pages/movie/movie",
+        "text": "测试",
+        "iconPath": "/pages/images/icon/ico-tab2.png",
+        "selectedIconPath": "/pages/images/icon/ico-tab2.png"
+      }
+    ],
+    "selectedColor": "#FFFFFF",
+    "color": "#FFFFFF",
+    "borderStyle": "white",
+    "backgroundColor": "#915b13"
+  },
+  "sitemapLocation": "sitemap.json"
 }

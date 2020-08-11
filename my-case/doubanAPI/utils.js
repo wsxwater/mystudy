@@ -1,23 +1,13 @@
-<<<<<<< HEAD
 //var gobalurl='https://api.douban.com';//没有使用nginx
 var gobalurl='http://b.com';  //使用了nginx代理到豆瓣api，要使用gobalurl就要启动服务器start nginx,重启服务器nginx -s reload
-=======
-var gobalurl='https://api.douban.com';//没有使用nginx
-//var gobalurl='http://b.com';  //使用了nginx代理到豆瓣api，要使用gobalurl就要启动服务器start nginx,重启服务器nginx -s reload
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 //var gobalurl='/base';  //隐藏跨域
 
 function httpGet(url,callback,error) {
 	var xhrs=$.ajax({
 			url:url,
 			type:'GET',
-<<<<<<< HEAD
 			// dataType: 'jsonp',//没有使用nginx
 	        // crossDomain: true,//没有使用nginx
-=======
-			dataType: 'jsonp',//没有使用nginx
-	        crossDomain: true,//没有使用nginx
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
 			success:function (res) {
 				callback(res)
 			},

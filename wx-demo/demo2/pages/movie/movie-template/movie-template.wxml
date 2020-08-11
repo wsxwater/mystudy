@@ -8,10 +8,6 @@
         <view>
             <template is='starTemplate' data='{{average:average,stars:star}}' />
         </view>
-<<<<<<< HEAD
-=======
-        
->>>>>>> ddc4ed0645783b77bb6c050ae019b20a64231d67
     </view>
 </template>
 
